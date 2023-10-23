@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: theme(),
       home: BookDetailPage(
-        bookId: 1,
+        bookId: 2,
       ),
     );
   }
