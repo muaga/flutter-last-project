@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/ui/widgets/custom_page_forward_button.dart';
-import 'package:flutter_blog/ui/widgets/custom_review_list_form.dart';
+import 'package:flutter_blog/ui/widgets/button/custom_page_forward_button.dart';
+import 'package:flutter_blog/ui/widgets/form/custom_review_list_form.dart';
 import 'package:flutter_blog/ui/widgets/custom_user_review_title.dart';
 
 class BookDetailOneReviewForm extends StatelessWidget {

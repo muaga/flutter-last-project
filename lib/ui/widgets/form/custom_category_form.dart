@@ -87,7 +87,7 @@ class _CustomCategoryBarState extends State<CustomCategoryForm> {
             child: IndexedStack(
               index: _pageIndex,
               children: [
-                Center(child: Text("트렌드")),
+                Center(child: Text("종합")),
                 Center(child: Text("트렌드")),
                 Center(child: Text("라이프")),
                 Center(child: Text("힐링")),

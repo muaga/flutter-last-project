@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 
-class CustomBottomBar extends StatefulWidget {
-  const CustomBottomBar({super.key});
+class BottomNavigatorBar extends StatefulWidget {
+  const BottomNavigatorBar({super.key});
 
   @override
-  State<CustomBottomBar> createState() => _CustomBottomBarState();
+  State<BottomNavigatorBar> createState() => _BottomNavigatorBarState();
 }
 
-class _CustomBottomBarState extends State<CustomBottomBar> {
+class _BottomNavigatorBarState extends State<BottomNavigatorBar> {
   int _selectedIndex = 0;
 
   @override
