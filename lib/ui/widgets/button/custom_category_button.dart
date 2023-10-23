@@ -8,9 +8,9 @@ class CustomCategoryButton extends StatelessWidget {
   final VoidCallback onPress;
   const CustomCategoryButton(
       {required this.label,
-        required this.index,
-        required this.pageIndex,
-        required this.onPress});
+      required this.index,
+      required this.pageIndex,
+      required this.onPress});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class CustomCategoryButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
             side:
-            BorderSide(color: isSelected ? Colors.transparent : kBackGray),
+                BorderSide(color: isSelected ? Colors.transparent : kBackGray),
           ),
           padding: const EdgeInsets.symmetric(horizontal: 20),
           backgroundColor: isSelected ? kBackBlack : Colors.transparent,
