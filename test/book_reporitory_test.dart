@@ -22,5 +22,4 @@ Future<void> fetch() async {
   responseDTO.data = bookList;
   print(bookList[0].content);
   print(bookList[0].title);
-  print(bookList[0].picUrl);
 }
