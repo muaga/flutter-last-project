@@ -89,6 +89,8 @@ class _CustomCategoryBarState extends State<CustomCategoryForm> {
               index: _pageIndex,
               children: [
                 CustomBookGridView(),
+
+                /// TODO 은혜 : 특정 카테고리 FindById 하기
                 Center(child: Text("트렌드")),
                 Center(child: Text("라이프")),
                 Center(child: Text("힐링")),

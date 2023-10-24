@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/model/Book.dart';
@@ -11,12 +12,14 @@ class CustomGridBookCard extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          child: Container(
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-            image: AssetImage(book.picUrl ?? ""),
+          child: CachedNetworkImage(
+            imageUrl: "http://192.168.0.40:8080/images/${book.picUrl}",
             fit: BoxFit.cover,
-          ))),
+            placeholder: (context, url) => CircularProgressIndicator(
+              strokeWidth: 5,
+            ),
+            errorWidget: (context, url, error) => Icon(Icons.error),
+          ),
         ),
         SizedBox(height: gapSmall),
         Container(

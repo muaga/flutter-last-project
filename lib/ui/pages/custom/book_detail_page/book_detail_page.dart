@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/data/model/Book.dart';
+import 'package:flutter_blog/ui/millie_bottom_navigation_bar.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/body/book_detail_body.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -37,6 +38,7 @@ class BookDetailPage extends ConsumerWidget {
           )
         ],
       ),
+      bottomNavigationBar: MillieBottomNavigationBar(),
       body: BookDetailBody(book: book),
     );
   }
