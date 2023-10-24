@@ -30,6 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  cached_network_image: ^3.1.0
   # 라이브러리 버전 문제가 발생하면 pub dev에서 최신 버전으로 업그레이드하세요
   flutter_svg: ^2.0.6
   flutter_lints: ^2.0.1
