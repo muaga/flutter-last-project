@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/color.dart';
+import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 
 class CustomReviewInsert extends StatelessWidget {
@@ -23,7 +25,7 @@ class CustomReviewInsert extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: 16),
+          SizedBox(width: gapMedium),
           Expanded(
             child: Stack(
               children: [
@@ -38,14 +40,11 @@ class CustomReviewInsert extends StatelessWidget {
                   maxLength: 50, // 최대 글자 수를 50자로 제한
                 ),
                 Positioned(
-                  top: 10,
+                  top: 5,
                   left: 12,
                   child: Text(
                     "한 줄 리뷰",
-                    style: TextStyle(
-                      fontSize: 12, // "한 줄 리뷰" 텍스트의 글꼴 크기
-                      color: Colors.grey, // 원하는 색상으로 변경
-                    ),
+                    style: body2(mColor: kFontGray),
                   ),
                 ),
               ],
