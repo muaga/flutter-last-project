@@ -1,10 +1,10 @@
 /// !! spring의 model과 변수명이 일치해야 찾아올 수 있다.
 class Book {
-  int? id;
+  final int? id;
   final String? picUrl;
   final String? title;
   final String? writer;
-  String? content;
+  final String? content;
 
   Book({this.id, this.picUrl, this.title, this.writer, this.content});
 
