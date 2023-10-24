@@ -24,6 +24,7 @@ class _MillieBottomNavigationBarState extends State<MillieBottomNavigationBar> {
       backgroundColor: kBackWhite,
       selectedItemColor: kPrimaryColor,
       unselectedItemColor: kFontGray,
+      type: BottomNavigationBarType.fixed,
       onTap: (index) {
         setState(() {
           _selectedIndex = index;

@@ -7,12 +7,12 @@ import 'package:flutter_blog/ui/widgets/custom_grid_book_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CustomBookGridView extends ConsumerWidget {
-  final int? bookId;
-  const CustomBookGridView({this.bookId});
+  final int? categoryId;
+  const CustomBookGridView({this.categoryId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    BookListModel? model = ref.read(bookListProvider);
+    BookListModel? model = ref.watch(bookListProvider);
     List<Book> books = [];
     if (model == null) {
       return Center(child: CircularProgressIndicator());
