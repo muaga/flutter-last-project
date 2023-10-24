@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
-import 'package:flutter_blog/data/dto/response.dart';
+import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/model/Book.dart';
 
 // 통신 & 파싱

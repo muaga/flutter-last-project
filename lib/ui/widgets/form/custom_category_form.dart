@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/ui/widgets/button/custom_category_button.dart';
+import 'package:flutter_blog/ui/widgets/scroll_view/Custom_book_grid_view.dart';
 
 class CustomCategoryForm extends StatefulWidget {
   const CustomCategoryForm({super.key});
@@ -10,12 +11,6 @@ class CustomCategoryForm extends StatefulWidget {
 
 class _CustomCategoryBarState extends State<CustomCategoryForm> {
   int _pageIndex = 0; // 현재 페이지 인덱스
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   BookGridView(bookId: _pageIndex); // pageIndex 번호에 따른 BookGridView 호출
-  // }
 
   void changePage(int index) {
     setState(() {
@@ -87,7 +82,9 @@ class _CustomCategoryBarState extends State<CustomCategoryForm> {
             child: IndexedStack(
               index: _pageIndex,
               children: [
-                Center(child: Text("종합")),
+                CustomBookGridView(),
+
+                /// TODO 은혜 : 특정 카테고리 FindById 하기
                 Center(child: Text("트렌드")),
                 Center(child: Text("라이프")),
                 Center(child: Text("힐링")),

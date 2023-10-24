@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
-import 'package:flutter_blog/data/dto/response.dart';
+import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/model/Book.dart';
 import 'package:logger/logger.dart';
 
@@ -20,6 +20,6 @@ Future<void> fetch() async {
   Logger().d(mapList);
   List<Book> bookList = mapList.map((e) => Book.fromJson(e)).toList();
   responseDTO.data = bookList;
-  print(bookList[0].content);
+  print(bookList[0].picUrl);
   print(bookList[0].title);
 }
