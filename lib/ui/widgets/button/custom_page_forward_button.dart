@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
 class CustomPageForwardButton extends StatelessWidget {
-  const CustomPageForwardButton({
-    super.key,
-  });
+  final Widget pageLoad;
+  const CustomPageForwardButton({required this.pageLoad});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => pageLoad));
+      },
       child: Align(
         alignment: Alignment.centerRight,
         child: Icon(

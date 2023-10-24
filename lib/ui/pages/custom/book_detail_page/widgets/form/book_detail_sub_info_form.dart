@@ -14,6 +14,7 @@ class BookDetailSubInfoForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        /// TODO 대욱 : 목차, 저자, 출판사 데이터
         BookDetailExpandableDescription(
           title: "목차",
           description: "프롤로그\n"

@@ -17,7 +17,7 @@ class BookDetailLike extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            /// (아이콘 + 설명 + 숫자) 조합
+            // (아이콘 + 설명 + 숫자) 조합
             Container(
               width: 100,
               child: Column(
@@ -32,6 +32,7 @@ class BookDetailLike extends StatelessWidget {
                   ),
                   SizedBox(height: gapSmall),
                   Text(
+                    /// TODO 대욱 : 책 좋아요! 한 유저수
                     "이 책이 담긴 서재",
                     style: body2(mColor: kFontGray),
                   ),
@@ -56,6 +57,7 @@ class BookDetailLike extends StatelessWidget {
                   ),
                   SizedBox(height: gapSmall),
                   Text(
+                    /// TODO 대욱 : 리뷰개수
                     "4개",
                     style: subTitle3(),
                   ),
@@ -64,7 +66,9 @@ class BookDetailLike extends StatelessWidget {
             ),
             Container(height: 35, width: 1, color: Colors.grey),
             TextButton(
-              onPressed: () {},
+              onPressed: () {
+                /// TODO 대욱 : 포스트 작성 페이지 이동
+              },
               child: Container(
                 width: 100,
                 child: Column(

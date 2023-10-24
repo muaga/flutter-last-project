@@ -16,6 +16,7 @@ class BookDetailDataForm extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
+          /// TODO 대욱 : 북정보 받아오기
           CustomDataInfo(dataTitle: "카테고리", dataContent: "라이프스타일"),
           Container(height: gapXlarge, width: 1, color: Colors.grey),
           CustomDataInfo(dataTitle: "페이지", dataContent: "228P"),
