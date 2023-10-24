@@ -11,13 +11,13 @@ class Book {
   // Map 형태로 받아서 Dart 객체로 변환합니다.
   Book.fromJson(Map<String, dynamic> json)
       : id = json["id"],
-        picUrl = _urlPrefix + json["picUrl"], // image 경로 + 파일명
+        picUrl = json["picUrl"],
         title = json["title"],
         writer = json["writer"],
         content = json["content"];
 }
 
-final String _urlPrefix = "assets/book_images/"; // image 경로
+// final String _urlPrefix = "assets/book_images/"; // image 경로
 
 // List<Book> books = [
 //   Book(
