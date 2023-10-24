@@ -6,9 +6,9 @@ import 'package:flutter_blog/ui/pages/today_now/now_book_list_page/widgets/view-
 import 'package:flutter_blog/ui/widgets/custom_grid_book_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BookGridView extends ConsumerWidget {
-  final int bookId;
-  const BookGridView({required this.bookId});
+class CustomBookGridView extends ConsumerWidget {
+  final int? bookId;
+  const CustomBookGridView({this.bookId});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
