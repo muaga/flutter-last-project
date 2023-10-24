@@ -12,5 +12,18 @@ ThemeData theme() {
       titleTextStyle: subTitle1(),
       centerTitle: true,
     ),
+    /// elevated 버튼
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        textStyle: subTitle2(),
+        backgroundColor: kPrimaryColor,
+        foregroundColor: kFontBlack,
+        elevation: 0.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        minimumSize: Size(double.infinity, 60),
+      ),
+    ),
   );
 }
