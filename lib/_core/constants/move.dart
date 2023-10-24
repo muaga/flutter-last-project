@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/ui/pages/auth/join_id_email_page/join_id_email_page.dart';
+import 'package:flutter_blog/ui/pages/auth/millie_splash_page/millie_splash_page.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.dart';
 import 'package:flutter_blog/ui/pages/custom/post_detail_page/post_detail_page.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_page/post_write_page.dart';
@@ -13,7 +14,7 @@ class Move {
   static String PostDetailPage = "/postDetail";
   static String PostWritePage = "/postWrite";
   static String JoinIdEmailPage = "/joinIdEmail";
-
+  static String MainSplashPage = "/mainSplash";
 }
 
 Map<String, Widget Function(BuildContext)> getRouters() {
@@ -23,6 +24,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.BookDetailPage: (context) => const BookDetailPage(bookId: 1),
     Move.PostDetailPage: (context) => const PostDetailPage(),
     Move.PostWritePage: (context) => PostWritePage(),
-    Move.JoinIdEmailPage: (context) => const JoinIdEmailPage()
+    Move.JoinIdEmailPage: (context) => const JoinIdEmailPage(),
+    Move.MainSplashPage: (context) => const MainSplashPage(),
   };
 }
