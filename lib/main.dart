@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/theme.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.dart';
-import 'package:flutter_blog/ui/pages/today_now/now_book_list_page/now_book_list_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -18,7 +17,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme(),
-      home: NowBookListPage(),
+      home: BookDetailPage(
+        bookId: 3,
+      ),
     );
   }
 }
