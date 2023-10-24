@@ -29,13 +29,12 @@ class BookDetailPage extends ConsumerWidget {
         title: Text(""),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              /// TODO 대욱 : 서버에 데이터가 존재하면 -> 노란별
+              // 서버에 데이터가 존재하지 않는다면 -> 비어있는 별
+            },
             icon: iconEmptyStar(),
           ),
-          IconButton(
-            onPressed: () {},
-            icon: iconDotMenu(),
-          )
         ],
       ),
       bottomNavigationBar: MillieBottomNavigationBar(),
