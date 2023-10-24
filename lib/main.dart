@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: theme(),
-      initialRoute: Move.PostDetailPage,
+      initialRoute: Move.JoinIdEmailPage,
       routes: getRouters(),
     );
   }

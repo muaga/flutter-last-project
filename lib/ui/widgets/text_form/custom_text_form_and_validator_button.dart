@@ -9,13 +9,14 @@ class CustomTextFormAndValidatorButton extends StatelessWidget {
   final String hintText;
   final String buttonText;
   final String? guideText;
+  final TextEditingController controller;
 
-  const CustomTextFormAndValidatorButton({
-    required this.title,
-    required this.hintText,
-    required this.buttonText,
-    this.guideText,
-  });
+  const CustomTextFormAndValidatorButton(
+      {required this.title,
+      required this.hintText,
+      required this.buttonText,
+      this.guideText,
+      required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,9 @@ class CustomTextFormAndValidatorButton extends StatelessWidget {
         Row(
           children: [
             Container(
-                width: 230, child: OutLineTextFormField(hintText: hintText)),
+                width: 230,
+                child: OutLineTextFormField(
+                    hintText: hintText, controller: controller)),
             const SizedBox(width: gapMedium),
             ElevatedButton(
                 onPressed: () {},

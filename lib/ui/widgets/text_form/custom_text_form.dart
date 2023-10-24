@@ -7,8 +7,10 @@ import 'package:flutter_blog/ui/widgets/text_form_field/out_line_text_form_field
 class CustomTextForm extends StatelessWidget {
   final String title;
   final String hintText;
+  final TextEditingController controller;
 
-  const CustomTextForm({required this.title, required this.hintText});
+  const CustomTextForm(
+      {required this.title, required this.hintText, required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class CustomTextForm extends StatelessWidget {
       children: [
         Text(title, style: subTitle1(mColor: kFontGray)),
         SizedBox(height: gapMedium),
-        OutLineTextFormField(hintText: hintText)
+        OutLineTextFormField(hintText: hintText, controller: controller)
       ],
     );
   }
