@@ -10,14 +10,15 @@ class JoinIdEmailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          onPressed: (){
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back_ios, color: kFontBlack)),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.arrow_back_ios, color: kFontLightGray)),
         title: Text("회원가입"),
-        ),
+        elevation: 0.2,
+      ),
       resizeToAvoidBottomInset: false,
       body: JoinIdEmailBody(),
-      );
+    );
   }
 }

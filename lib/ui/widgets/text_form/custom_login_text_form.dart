@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/ui/widgets/text_form_field/out_line_text_form_field.dart';
 
-class LoginTextForm extends StatelessWidget {
-  const LoginTextForm({
+class CustomLoginTextForm extends StatelessWidget {
+  const CustomLoginTextForm({
     super.key,
   });
 
