@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 
@@ -14,11 +15,15 @@ class CustomBookImage extends StatelessWidget {
       child: Container(
         height: imageHeight,
         width: imageWidth,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(picUrl),
-            fit: BoxFit.contain,
+        child: CachedNetworkImage(
+          imageUrl: "http://192.168.0.40:8080/images/${picUrl}",
+          fit: BoxFit.cover,
+          placeholder: (context, url) => CircularProgressIndicator(
+            strokeWidth: 5,
           ),
+          errorWidget: (context, url, error) => Icon(Icons.error),
+        ),
+        decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
               color: Colors.grey, // 그림자 색상
