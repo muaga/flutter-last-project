@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
-import 'package:flutter_blog/ui/pages/custom/post_detail_page/widgets/post_detail_body.dart';
+import 'package:flutter_blog/ui/pages/custom/post_detail_page/widgets/body/post_detail_body.dart';
 
 class PostDetailPage extends StatelessWidget {
   const PostDetailPage({super.key});
