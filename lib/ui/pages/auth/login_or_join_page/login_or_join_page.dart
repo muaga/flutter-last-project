@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/ui/pages/auth/login_or_sign_page/widgets/login_or_sign_body.dart';
+import 'package:flutter_blog/ui/pages/auth/login_or_join_page/widgets/body/login_or_join_body.dart';
 
-class LoginOrSignPage extends StatelessWidget {
-  const LoginOrSignPage({super.key});
+class LoginOrJoinPage extends StatelessWidget {
+  const LoginOrJoinPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class LoginOrSignPage extends StatelessWidget {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: LoginOrSignBody(),
+        body: LoginOrJoinBody(),
       ),
     );
   }

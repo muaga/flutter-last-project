@@ -12,6 +12,7 @@ ThemeData theme() {
       titleTextStyle: subTitle1(),
       centerTitle: true,
     ),
+
     /// elevated 버튼
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -25,5 +26,8 @@ ThemeData theme() {
         minimumSize: Size(double.infinity, 60),
       ),
     ),
+
+    /// Scaffold 기본 배경 컬러
+    scaffoldBackgroundColor: kBackWhite,
   );
 }
