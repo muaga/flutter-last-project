@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
-import 'package:flutter_blog/ui/pages/custom/post_write_page/widgets/post_write_body.dart';
+import 'package:flutter_blog/ui/pages/custom/post_write_page/widgets/body/post_write_body.dart';
 
 class PostWritePage extends StatefulWidget {
   @override
