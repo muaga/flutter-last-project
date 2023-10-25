@@ -39,10 +39,16 @@ class _CheckboxExampleState extends State<CheckboxExample> {
         MaterialState.hovered,
         MaterialState.focused,
       };
+      if (states.contains(MaterialState.disabled)) {
+        return kBackWhite; // 체크되지 않은 상태 배경색
+      }
+      if (states.contains(MaterialState.selected)) {
+        return kPrimaryColor; // 체크된 상태 배경색
+      }
       if (states.any(interactiveStates.contains)) {
         return kBackWhite;
       }
-      return kPrimaryColor;
+      return kBackWhite;
     }
 
     return Checkbox(

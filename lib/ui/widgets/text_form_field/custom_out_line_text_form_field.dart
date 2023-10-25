@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 
-class OutLineTextFormField extends StatelessWidget {
+class CustomOutLineTextFormField extends StatelessWidget {
   final hintText;
   final bool isPassword;
   final TextEditingController controller;
 
-  const OutLineTextFormField(
+  const CustomOutLineTextFormField(
       {required this.hintText,
       this.isPassword = false,
       required this.controller});
@@ -17,10 +17,10 @@ class OutLineTextFormField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       obscureText: isPassword,
-      style: body2(),
+      style: body1(),
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: TextStyle(color: kFontLightGray),
+        hintStyle: TextStyle(color: kFontLightGray, fontSize: 15),
         enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: kFontLightGray, width: 0.6)),
         focusedBorder: OutlineInputBorder(
