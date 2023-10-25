@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/ui/pages/auth/join_id_email_page/join_id_email_page.dart';
-import 'package:flutter_blog/ui/pages/auth/login_or_sign_page/login_or_sign_page.dart';
+import 'package:flutter_blog/ui/pages/auth/login_or_join_page/login_or_join_page.dart';
+import 'package:flutter_blog/ui/pages/auth/login_page/login_page.dart';
 import 'package:flutter_blog/ui/pages/auth/millie_splash_page/millie_splash_page.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.dart';
 import 'package:flutter_blog/ui/pages/custom/post_detail_page/post_detail_page.dart';
@@ -16,7 +17,8 @@ class Move {
   static String PostWritePage = "/postWrite";
   static String JoinIdEmailPage = "/joinIdEmail";
   static String MainSplashPage = "/mainSplash";
-  static String LoginOrSignPage = "/loginJoin";
+  static String LoginOrJoinPage = "/loginJoin";
+  static String LoginPage = "/login";
 }
 
 Map<String, Widget Function(BuildContext)> getRouters() {
@@ -28,6 +30,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.PostWritePage: (context) => PostWritePage(),
     Move.JoinIdEmailPage: (context) => const JoinIdEmailPage(),
     Move.MainSplashPage: (context) => const MainSplashPage(),
-    Move.LoginOrSignPage: (context) => const LoginOrSignPage(),
+    Move.LoginOrJoinPage: (context) => const LoginOrJoinPage(),
+    Move.LoginPage: (context) => const LoginPage(),
   };
 }

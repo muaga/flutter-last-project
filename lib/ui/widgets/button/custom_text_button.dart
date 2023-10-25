@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 
-class HyperLink extends StatelessWidget {
+class CustomTextButton extends StatelessWidget {
   final String buttonText;
   final String routerLoad;
   final TextStyle? textStyle;
   final Color? textColor;
   final FontWeight? fontWeight;
 
-  const HyperLink(
+  const CustomTextButton(
       {required this.buttonText,
       required this.routerLoad,
       this.textStyle,
