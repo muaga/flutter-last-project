@@ -7,4 +7,9 @@ class UserRepository {
     return Future.delayed(
         Duration(seconds: 5), () => ResponseDTO(1, "통신완료", Answer));
   }
+
+  Future<ResponseDTO> fetchLogin(LoginRequestDTO requestDTO) {
+    return Future.delayed(
+        Duration(seconds: 5), () => ResponseDTO(1, "통신완료", Answer));
+  }
 }

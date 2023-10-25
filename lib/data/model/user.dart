@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 class User {
   final int id;
   final String? username; // id
-  final String? password; // 비밀번호
   final String? email; // 이메일
   final String? nickname; // 닉네임
   final String? picUrl; // 이미지
@@ -12,17 +11,25 @@ class User {
   User(
       {required this.id,
       this.username,
-      this.password,
       this.email,
       this.nickname,
       this.picUrl,
       this.createdAt});
 
-  // 2. Map 형태로 받아서 Dart 객체로 변환합니다.
+  // 1. Dart -> Map(request)
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "username": username,
+        "email": email,
+        "nickname": nickname,
+        "picUrl": picUrl,
+        "createdAt": createdAt
+      };
+
+  // 2. Map -> Dart(response)
   User.fromJson(Map<String, dynamic> json)
       : id = json["id"],
         username = json["username"],
-        password = json["password"],
         email = json["email"],
         nickname = json["nickname"],
         picUrl = json["picUrl"],
@@ -33,6 +40,6 @@ class User {
 User user = User(
     id: 1,
     username: "ssar",
-    password: "1234",
+    // password: "1234",
     email: "ssar@nate.com",
     nickname: "ssar");

@@ -20,3 +20,15 @@ class JoinIdAndEmailRequestDTO {
         "email": email,
       };
 }
+
+class LoginRequestDTO {
+  final String username;
+  final String password;
+
+  LoginRequestDTO({required this.username, required this.password});
+
+  Map<String, dynamic> toJson() => {
+        "username": username,
+        "email": password,
+      };
+}
