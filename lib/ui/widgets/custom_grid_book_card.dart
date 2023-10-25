@@ -13,7 +13,7 @@ class CustomGridBookCard extends StatelessWidget {
       children: [
         Expanded(
           child: CachedNetworkImage(
-            imageUrl: "http://192.168.0.40:8080/images/${book.picUrl}",
+            imageUrl: "http://172.20.10.4:8080/images/${book.picUrl}",
             fit: BoxFit.cover,
             placeholder: (context, url) => CircularProgressIndicator(
               strokeWidth: 5,
