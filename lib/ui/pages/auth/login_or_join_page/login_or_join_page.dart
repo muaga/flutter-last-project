@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/ui/pages/auth/login_or_join_page/widgets/body/login_or_sign_body.dart';
+import 'package:flutter_blog/ui/pages/auth/login_or_join_page/widgets/body/login_or_join_body.dart';
 
 class LoginOrJoinPage extends StatelessWidget {
   const LoginOrJoinPage({super.key});

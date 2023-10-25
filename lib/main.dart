@@ -19,10 +19,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // home: MainSplashPage(),
+      home: MainSplashPage(),
       debugShowCheckedModeBanner: false,
       theme: theme(),
-      home: LoginOrJoinPage(),
+      initialRoute: Move.MainSplashPage,
       routes: getRouters(),
     );
   }
