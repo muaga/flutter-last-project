@@ -15,8 +15,8 @@ Future<void> fetch() async {
   Logger().d(response.data);
 
   ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-  //Logger().d(responseDTO.code);
-  //Logger().d(responseDTO.msg);
+  Logger().d(responseDTO.code);
+  Logger().d(responseDTO.msg);
   Logger().d(responseDTO.data);
 
   BookDetailModel model = BookDetailModel.fromJson(responseDTO.data);
