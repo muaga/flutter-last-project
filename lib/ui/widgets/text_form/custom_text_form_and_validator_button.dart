@@ -49,7 +49,7 @@ class CustomTextFormAndValidatorButton extends StatelessWidget {
                 )),
           ],
         ),
-        const SizedBox(height: gapSmall),
+        SizedBox(height: gapMedium),
         Text(guideText ?? "", style: TextStyle(color: kFontLightGray)),
       ],
     );

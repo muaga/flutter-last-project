@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/ui/pages/auth/join_id_email_page/join_id_email_page.dart';
+import 'package:flutter_blog/ui/pages/auth/join_page/join_page.dart';
 import 'package:flutter_blog/ui/pages/auth/login_or_join_page/login_or_join_page.dart';
 import 'package:flutter_blog/ui/pages/auth/login_page/login_page.dart';
 import 'package:flutter_blog/ui/pages/auth/millie_splash_page/millie_splash_page.dart';
@@ -15,7 +15,7 @@ class Move {
   static String BookDetailPage = "/bookDetail";
   static String PostDetailPage = "/postDetail";
   static String PostWritePage = "/postWrite";
-  static String JoinIdEmailPage = "/joinIdEmail";
+  static String JoinPage = "/join";
   static String MainSplashPage = "/mainSplash";
   static String LoginOrJoinPage = "/loginJoin";
   static String LoginPage = "/login";
@@ -28,7 +28,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.BookDetailPage: (context) => const BookDetailPage(bookId: 1),
     Move.PostDetailPage: (context) => const PostDetailPage(postId: 1),
     Move.PostWritePage: (context) => PostWritePage(),
-    Move.JoinIdEmailPage: (context) => const JoinIdEmailPage(),
+    Move.JoinPage: (context) => const JoinPage(),
     Move.MainSplashPage: (context) => const MainSplashPage(),
     Move.LoginOrJoinPage: (context) => const LoginOrJoinPage(),
     Move.LoginPage: (context) => const LoginPage(),

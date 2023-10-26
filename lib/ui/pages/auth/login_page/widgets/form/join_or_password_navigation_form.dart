@@ -16,7 +16,7 @@ class JoinOrPasswordNavigationForm extends StatelessWidget {
         /// TODO 은혜 : 페이지 이동 -> 회원가입
         CustomTextButton(
             buttonText: "회원가입",
-            routerLoad: Move.JoinIdEmailPage,
+            routerLoad: Move.JoinPage,
             textStyle: body1(mColor: kFontGray)),
 
         /// TODO : 3단계 = 비밀번호 찾기 시

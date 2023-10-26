@@ -24,17 +24,12 @@ class SessionUser {
   Future<void> join(JoinRequestDTO joinReqDTO) async {
     // 통신 코드
     ResponseDTO responseDTO = await UserRepository().fetchJoin(joinReqDTO);
-    Logger().d("fetch");
-    Logger().d("code : ${responseDTO.code}");
-    Logger().d("data : ${responseDTO.data}");
     // 비즈니스 로직
     if (responseDTO.code == 1) {
       Navigator.pushNamed(mContext!, Move.LoginPage);
-      Logger().d("통신결과 : ${responseDTO.code}");
     } else {
       ScaffoldMessenger.of(mContext!)
           .showSnackBar(SnackBar(content: Text(responseDTO.msg)));
-      Logger().d("통신결과 : ${responseDTO.code}");
     }
   }
 

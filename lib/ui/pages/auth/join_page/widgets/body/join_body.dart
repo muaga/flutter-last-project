@@ -5,21 +5,22 @@ import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/_core/utils/validator_util.dart';
 import 'package:flutter_blog/data/dto/request_dto/user_request_dto.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
-import 'package:flutter_blog/ui/pages/auth/join_id_email_page/widgets/form/checkBox_form.dart';
+import 'package:flutter_blog/ui/pages/auth/join_page/widgets/form/checkBox_form.dart';
 import 'package:flutter_blog/ui/widgets/button/custom_bottom_button.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
 import 'package:flutter_blog/ui/widgets/text_form/custom_text_form.dart';
 import 'package:flutter_blog/ui/widgets/text_form/custom_text_form_and_validator_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
-class JoinIdEmailBody extends ConsumerWidget {
+class JoinBody extends ConsumerWidget {
   final _formkey = GlobalKey<FormState>();
   final _username = TextEditingController();
   final _email = TextEditingController();
   final _password = TextEditingController();
   final _nickname = TextEditingController();
 
-  JoinIdEmailBody({super.key});
+  JoinBody({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -33,7 +34,7 @@ class JoinIdEmailBody extends ConsumerWidget {
               title: "아이디 입력",
               hintText: "아이디 입력",
               buttonText: "중복확인",
-              guideText: "영문 또는 영문과 숫자의 조합으로 입력해주세요",
+              guideText: "영문 또는 영문과 숫자의 조합으로 입력해 주세요",
               controller: _username,
               funValidator: validateUsername(),
             ), //id 입력
@@ -45,6 +46,7 @@ class JoinIdEmailBody extends ConsumerWidget {
               hintText: "email 입력",
               controller: _email,
               funValidator: validateEmail(),
+              guideText: "영문과 숫자를 포함하여 이메일 주소를 입력해 주세요.",
             ), //email 입력
             const SizedBox(height: gapXlarge),
             CustomThinLine(),
@@ -52,7 +54,7 @@ class JoinIdEmailBody extends ConsumerWidget {
             CustomTextForm(
               title: "로그인 시 사용할 비밀번호",
               hintText: "비밀번호 입력",
-              guideText: "영문 숫자를 포함한 8~16자 조합으로 입력해 주세요.",
+              guideText: "영문, 숫자를 포함한 4~12자 조합으로 입력해 주세요.",
               controller: _password,
               funValidator: validatePassword(),
             ), //비밀번호 입력
@@ -76,21 +78,14 @@ class JoinIdEmailBody extends ConsumerWidget {
             const SizedBox(height: gapXxlarge),
             BottomButton(
               funPageRoute: () {
-                // if (_formkey.currentState!.validate()) {
-                //   JoinRequestDTO requestDTO = JoinRequestDTO(
-                //       username: _username.text,
-                //       email: _email.text,
-                //       password: _password.text,
-                //       nickname: _nickname.text);
-                //   ref.read(sessionStore).join(requestDTO);
-                // }
-
-                JoinRequestDTO requestDTO = JoinRequestDTO(
-                    username: _username.text,
-                    email: "ssar@nate.com",
-                    password: "1234",
-                    nickname: "ssar");
-                ref.read(sessionStore).join(requestDTO);
+                if (_formkey.currentState!.validate()) {
+                  JoinRequestDTO requestDTO = JoinRequestDTO(
+                      username: _username.text,
+                      email: _email.text,
+                      password: _password.text,
+                      nickname: _nickname.text);
+                  ref.read(sessionStore).join(requestDTO);
+                }
               },
               buttonText: "회원가입완료",
             )
