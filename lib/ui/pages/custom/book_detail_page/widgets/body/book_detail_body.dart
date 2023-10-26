@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/data/model/Book.dart';
+import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_comment.dart';
-
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_like.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/form/book_detail_data_form.dart';
@@ -25,7 +24,7 @@ class BookDetailBody extends ConsumerWidget {
     if (bookDetailModel == null) {
       return Center(child: CircularProgressIndicator());
     } else {
-      book = bookDetailModel.book;
+      book = Book();
     }
     Logger().d("ListView 진입");
     return ListView(

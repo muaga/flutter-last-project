@@ -1,5 +1,5 @@
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
-import 'package:flutter_blog/data/model/Book.dart';
+import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/data/repository/book_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

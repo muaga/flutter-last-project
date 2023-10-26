@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
-import 'package:flutter_blog/data/model/Book.dart';
+import 'package:flutter_blog/data/model/book.dart';
 
 // 통신 & 파싱
 class BookRepository {

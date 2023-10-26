@@ -43,6 +43,19 @@ Function validateEmail() {
   };
 }
 
+// RegExp _validCharacters = RegExp(r'^[a-zA-Z가-힣]+$');
+Function validateNickname() {
+  return (String? value) {
+    if (value!.isEmpty) {
+      return "닉네임에 공백이 들어갈 수 없습니다.";
+    } else if (!isAlphanumeric(value)) {
+      return "닉네임 형식에 맞지 않습니다. 알파벳 대/소문자와 한글만 허용됩니다.";
+    } else {
+      return null;
+    }
+  };
+}
+
 Function validateTitle() {
   return (String? value) {
     if (value!.isEmpty) {
