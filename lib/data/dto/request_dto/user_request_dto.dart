@@ -35,6 +35,11 @@ class JoinRequestDTO {
         "password": password,
         "nickname": nickname,
       };
+
+  @override
+  String toString() {
+    return 'JoinRequestDTO{username: $username, email: $email, password: $password, nickname: $nickname}';
+  }
 }
 
 class LoginRequestDTO {

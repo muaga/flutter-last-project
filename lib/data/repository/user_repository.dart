@@ -3,9 +3,12 @@ import 'package:flutter_blog/data/delayed_reponse.dart';
 import 'package:flutter_blog/data/dto/request_dto/user_request_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/model/user.dart';
+import 'package:logger/logger.dart';
 
 class UserRepository {
   Future<ResponseDTO> fetchJoin(JoinRequestDTO requestDTO) async {
+    Logger().d("fetchJoin", requestDTO);
+
     // ★ 통신은 무조건 try 해야 한다.
     // dio는 200 외에 내부적으로 터져서 try-catch 해야한다.
     try {
