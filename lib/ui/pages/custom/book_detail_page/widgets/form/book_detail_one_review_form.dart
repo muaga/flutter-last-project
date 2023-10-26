@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.dart';
+import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
 import 'package:flutter_blog/ui/widgets/button/custom_page_forward_button.dart';
 import 'package:flutter_blog/ui/widgets/custom_user_review_title.dart';
 import 'package:flutter_blog/ui/widgets/form/custom_review_list_form.dart';
 
 class BookDetailOneReviewForm extends StatelessWidget {
-  const BookDetailOneReviewForm({
-    super.key,
-  });
+  const BookDetailOneReviewForm({required this.book});
+  final BookDetailModel book;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,9 @@ class BookDetailOneReviewForm extends StatelessWidget {
                 ),
 
                 /// TODO 대욱 : 페이지 경로 넣기
-                CustomPageForwardButton(pageLoad: BookDetailPage(bookId: 1)),
+                CustomPageForwardButton(
+                  pageLoad: BookDetailPage(bookId: book.bookId),
+                ),
               ],
             ),
           ),

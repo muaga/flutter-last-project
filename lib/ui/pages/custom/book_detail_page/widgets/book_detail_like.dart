@@ -3,12 +3,12 @@ import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
+import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
 
 class BookDetailLike extends StatelessWidget {
-  const BookDetailLike({
-    super.key,
-  });
+  const BookDetailLike({required this.book});
 
+  final BookDetailModel book;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,7 +17,6 @@ class BookDetailLike extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            // (아이콘 + 설명 + 숫자) 조합
             Container(
               width: 100,
               child: Column(
@@ -38,7 +37,7 @@ class BookDetailLike extends StatelessWidget {
                   ),
                   SizedBox(height: gapSmall),
                   Text(
-                    "2,380개",
+                    "${book.bookLikeCount}",
                     style: subTitle3(),
                   ),
                 ],
@@ -58,7 +57,7 @@ class BookDetailLike extends StatelessWidget {
                   SizedBox(height: gapSmall),
                   Text(
                     /// TODO 대욱 : 리뷰개수
-                    "4개",
+                    "${book.bookReplyCount}",
                     style: subTitle3(),
                   ),
                 ],

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_comment.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_like.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
@@ -19,27 +18,32 @@ class BookDetailBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final bookDetailModel = ref.watch(bookDetailProvider(bookId));
-    Book book;
+    final bookDetailModel = ref.watch(bookDetailProvider(1));
+    // Logger().d(bookDetailModel);
+    BookDetailModel book;
+    Logger().d(bookDetailModel);
+
     if (bookDetailModel == null) {
       return Center(child: CircularProgressIndicator());
     } else {
-      book = Book();
+      Logger().d(bookDetailModel);
+
+      book = bookDetailModel; // book 변수를 초기화
     }
     Logger().d("ListView 진입");
     return ListView(
       children: [
         BookDetailInfoForm(book: book),
-        BookDetailLike(),
+        BookDetailLike(book: book),
         SizedBox(height: gapMain),
         CustomThickLine(),
-        BookDetailComment(),
+        BookDetailComment(book: book),
         CustomThickLine(),
         BookDetailIntroduceForm(book: book),
-        BookDetailDataForm(),
+        BookDetailDataForm(book: book), // "book" 변수를 전달
         BookDetailSubInfoForm(book: book),
         CustomThickLine(),
-        BookDetailOneReviewForm(),
+        BookDetailOneReviewForm(book: book),
       ],
     );
   }
