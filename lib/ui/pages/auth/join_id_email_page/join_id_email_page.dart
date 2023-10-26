@@ -17,8 +17,8 @@ class JoinIdEmailPage extends StatelessWidget {
         title: Text("회원가입"),
         elevation: 0.2,
       ),
-      resizeToAvoidBottomInset: false,
       body: JoinIdEmailBody(),
+      // extendBody: true,
     );
   }
 }

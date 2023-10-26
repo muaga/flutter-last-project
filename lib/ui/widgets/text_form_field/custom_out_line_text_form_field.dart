@@ -5,13 +5,13 @@ import 'package:flutter_blog/_core/constants/font.dart';
 class CustomOutLineTextFormField extends StatelessWidget {
   final hintText;
   final bool obscureText;
-  final funValidator;
+  final dynamic? funValidator;
   final TextEditingController controller;
 
   const CustomOutLineTextFormField(
       {required this.hintText,
       this.obscureText = false,
-      required this.funValidator,
+      this.funValidator,
       required this.controller});
 
   @override

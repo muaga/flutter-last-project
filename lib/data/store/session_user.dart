@@ -6,6 +6,7 @@ import 'package:flutter_blog/data/model/user.dart';
 import 'package:flutter_blog/data/repository/user_repository.dart';
 import 'package:flutter_blog/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 /// 창고 데이터
 class SessionUser {
@@ -19,21 +20,26 @@ class SessionUser {
   SessionUser({this.user, this.jwt, this.isLogin = false});
 
   /// fetchJoin
-  Future<void> join(JoinIdAndEmailRequestDTO joinReqDTO) async {
+  Future<void> join(JoinRequestDTO joinReqDTO) async {
     // 통신 코드
     ResponseDTO responseDTO = await UserRepository().fetchJoin(joinReqDTO);
-
+    Logger().d("fetch");
+    Logger().d("code : ${responseDTO.code}");
+    Logger().d("code : ${responseDTO.data}");
     // 비즈니스 로직
     if (responseDTO.code == 1) {
       Navigator.pushNamed(mContext!, Move.LoginPage);
+      Logger().d("통신결과 : ${responseDTO.code}");
     } else {
       ScaffoldMessenger.of(mContext!)
           .showSnackBar(SnackBar(content: Text(responseDTO.msg)));
+      Logger().d("통신결과 : ${responseDTO.code}");
     }
   }
 
   /// fetchLogin
   Future<void> login(LoginRequestDTO loginReqDTO) async {
+    Logger().d("store : ${loginReqDTO}");
     // 통신 코드
     ResponseDTO responseDTO = await UserRepository().fetchLogin(loginReqDTO);
 
