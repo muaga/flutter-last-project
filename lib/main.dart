@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       // home: MainSplashPage(),
       debugShowCheckedModeBanner: false,
       theme: theme(),
-      initialRoute: Move.LoginPage,
+      initialRoute: Move.MySettingMainPage,
       routes: getRouters(),
     );
   }

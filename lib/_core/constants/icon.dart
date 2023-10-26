@@ -66,6 +66,10 @@ Icon iconBookMark({Color mColor = kFontBlack, double mSize = 25}) {
   return Icon(Icons.bookmark, color: mColor, size: mSize);
 }
 
+Icon iconPhone({Color mColor = kFontBlack, double mSize = 25}) {
+  return Icon(Icons.phone_iphone, color: mColor, size: mSize);
+}
+
 Icon iconBottomSearch({Color mColor = kFontBlack, double mSize = 25}) {
   return Icon(Icons.manage_search, color: mColor, size: mSize);
 }
