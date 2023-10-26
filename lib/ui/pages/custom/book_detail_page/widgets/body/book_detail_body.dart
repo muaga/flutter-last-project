@@ -24,7 +24,7 @@ class BookDetailBody extends ConsumerWidget {
     if (bookDetailModel == null) {
       return Center(child: CircularProgressIndicator());
     } else {
-      book = bookDetailModel.book;
+      book = Book();
     }
     Logger().d("ListView 진입");
     return ListView(
