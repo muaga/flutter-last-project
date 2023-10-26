@@ -1,61 +1,65 @@
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/repository/book_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 // 창고 데이터
 class BookDetailModel {
   late int bookId;
+  late String bookPicUrl;
   late String bookTitle;
   late String bookWriter;
-  late int bookLikes;
-  late int bookReplys;
+  late int bookLikeCount;
+  late int bookReplyCount;
   late String bookSubTitle;
-  late String introduction;
+  late String bookIntroduction;
   late BookCategory bookCategory; // Map
   late String totalPage;
   late DateTime publicationDate;
   late String sequence;
   late String writerIntroduction;
   late String review;
-  late List<BookDetailReplyDTO> bookDetailReplyDTO; // List
+  late List<BookDetailReplyList> bookDetailReplyList; // List
 
   BookDetailModel({
     required this.bookId,
+    required this.bookPicUrl,
     required this.bookTitle,
     required this.bookWriter,
-    required this.bookLikes,
-    required this.bookReplys,
+    required this.bookLikeCount,
+    required this.bookReplyCount,
     required this.bookSubTitle,
-    required this.introduction,
+    required this.bookIntroduction,
     required this.bookCategory,
     required this.totalPage,
     required this.publicationDate,
     required this.sequence,
     required this.writerIntroduction,
     required this.review,
-    required this.bookDetailReplyDTO,
+    required this.bookDetailReplyList,
   });
 
   factory BookDetailModel.fromJson(Map<String, dynamic> json) {
-    List<dynamic> temp = json["bookDetailReplyDTO"];
-    List<BookDetailReplyDTO> bookDetailReplyDTO =
-        temp.map((e) => BookDetailReplyDTO.fromJson(e)).toList();
+    List<dynamic> temp = json["bookDetailReplyList"];
+    List<BookDetailReplyList> bookDetailReplyList =
+        temp.map((e) => BookDetailReplyList.fromJson(e)).toList();
 
     return BookDetailModel(
       bookId: json["bookId"],
+      bookPicUrl: json["bookPicUrl"],
       bookTitle: json["bookTitle"],
       bookWriter: json["bookWriter"],
-      bookLikes: json["bookLikes"],
-      bookReplys: json["bookReplys"],
+      bookLikeCount: json["bookLikeCount"],
+      bookReplyCount: json["bookReplyCount"],
       bookSubTitle: json["bookSubTitle"],
-      introduction: json["introduction"],
+      bookIntroduction: json["bookIntroduction"],
       bookCategory: BookCategory.fromJson(json["bookCategory"]), // Object
       totalPage: json["totalPage"],
       publicationDate: DateTime.parse(json["publicationDate"]),
       sequence: json["sequence"],
       writerIntroduction: json["writerIntroduction"],
       review: json["review"],
-      bookDetailReplyDTO: bookDetailReplyDTO, // Object
+      bookDetailReplyList: bookDetailReplyList, // Object
     );
   }
 }
@@ -75,21 +79,21 @@ class BookCategory {
       );
 }
 
-class BookDetailReplyDTO {
+class BookDetailReplyList {
   String? nickname;
   String? userPicUrl;
   DateTime? replyCreatedAt;
   String? replyContent;
 
-  BookDetailReplyDTO({
+  BookDetailReplyList({
     this.nickname,
     this.userPicUrl,
     this.replyCreatedAt,
     this.replyContent,
   });
 
-  factory BookDetailReplyDTO.fromJson(Map<String, dynamic> json) =>
-      BookDetailReplyDTO(
+  factory BookDetailReplyList.fromJson(Map<String, dynamic> json) =>
+      BookDetailReplyList(
         nickname: json["nickname"],
         userPicUrl: json["userPicUrl"],
         replyCreatedAt: DateTime.parse(json["replyCreatedAt"]),
@@ -108,11 +112,27 @@ class BookDetailViewModel extends StateNotifier<BookDetailModel?> {
   BookDetailViewModel(super._state, this.ref);
   Ref ref;
 
-  Future<void> notifyInit(int id) async {
-    ResponseDTO responseDTO = await BookRepository().fetchBookDetail(id);
-    BookDetailModel model = BookDetailModel.fromJson(responseDTO.data);
-    // BookCategory category = BookCategory.fromJson(model.bookCategory);
-    // state = BookDetailModel(responseDTO.data);
+  Future<void> notifyInit(int bookId) async {
+    ResponseDTO responseDTO = await BookRepository().fetchBookDetail(bookId);
+    BookDetailModel model = responseDTO.data;
+    Logger().d("model : ${model}");
+    Logger().d("model.bookTitle : ${model.bookTitle}");
+    state = BookDetailModel(
+        bookId: model.bookId,
+        bookPicUrl: model.bookPicUrl,
+        bookTitle: model.bookTitle,
+        bookWriter: model.bookWriter,
+        bookLikeCount: model.bookLikeCount,
+        bookReplyCount: model.bookReplyCount,
+        bookSubTitle: model.bookSubTitle,
+        bookIntroduction: model.bookIntroduction,
+        bookCategory: model.bookCategory,
+        totalPage: model.totalPage,
+        publicationDate: model.publicationDate,
+        sequence: model.sequence,
+        writerIntroduction: model.writerIntroduction,
+        review: model.review,
+        bookDetailReplyList: model.bookDetailReplyList);
   }
 }
 

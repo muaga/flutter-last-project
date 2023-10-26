@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/model/book.dart';
+import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
 
 // 통신 & 파싱
 class BookRepository {
@@ -9,10 +10,11 @@ class BookRepository {
   Future<ResponseDTO> fetchBookDetail(int id) async {
     try {
       // 통신
-      Response response = await dio.get("/books/$id");
+      Response response = await dio.get("/book/detail/$id");
+
       // 파싱
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-      Book book = Book.fromJson(responseDTO.data);
+      BookDetailModel book = BookDetailModel.fromJson(responseDTO.data);
       responseDTO.data = book;
 
       return responseDTO;

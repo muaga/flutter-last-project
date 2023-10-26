@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
+import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
 import 'package:flutter_blog/ui/widgets/custom_data_info.dart';
 
 class BookDetailDataForm extends StatelessWidget {
-  const BookDetailDataForm({
-    super.key,
-  });
+  const BookDetailDataForm({required this.book});
+
+  final BookDetailModel book;
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +18,15 @@ class BookDetailDataForm extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           /// TODO 대욱 : 북정보 받아오기
-          CustomDataInfo(dataTitle: "카테고리", dataContent: "라이프스타일"),
+          CustomDataInfo(
+              dataTitle: "카테고리",
+              dataContent: book.bookCategory?.categoryName ?? "카테고리 정보 없음"),
           Container(height: gapXlarge, width: 1, color: Colors.grey),
-          CustomDataInfo(dataTitle: "페이지", dataContent: "228P"),
+          CustomDataInfo(dataTitle: "페이지", dataContent: book.totalPage),
           Container(height: gapXlarge, width: 1, color: Colors.grey),
-          CustomDataInfo(dataTitle: "출간일", dataContent: "2023.09.03"),
+          CustomDataInfo(
+              dataTitle: "출간일",
+              dataContent: book.publicationDate.toLocal().toString()),
         ],
       ),
     );

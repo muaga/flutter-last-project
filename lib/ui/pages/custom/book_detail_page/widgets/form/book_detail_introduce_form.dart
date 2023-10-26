@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_plus.dart';
+import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
 
 class BookDetailIntroduceForm extends StatelessWidget {
   const BookDetailIntroduceForm({
@@ -8,7 +8,7 @@ class BookDetailIntroduceForm extends StatelessWidget {
     required this.book,
   });
 
-  final Book book;
+  final BookDetailModel book;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class BookDetailIntroduceForm extends StatelessWidget {
       children: [
         BookDetailPlus(
           title: "책 소개",
-          description: "${book.content}",
+          description: "${book.bookIntroduction}",
         ),
       ],
     );

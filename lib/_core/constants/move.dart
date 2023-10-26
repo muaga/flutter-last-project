@@ -12,7 +12,7 @@ class Move {
   // TODO : 서버 측 엔드포인트 확인 -> 변경하기
 
   static String NowBookListPage = "/nowBooks";
-  static String BookDetailPage = "/bookDetail";
+  static String BookDetailPage = "/bookDetail/1";
   static String PostDetailPage = "/postDetail";
   static String PostWritePage = "/postWrite";
   static String JoinIdEmailPage = "/joinIdEmail";

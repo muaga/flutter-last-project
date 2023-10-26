@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
+import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
 
 class BookDetailComment extends StatelessWidget {
-  const BookDetailComment({
-    super.key,
-  });
+  const BookDetailComment({required this.book});
 
+  final BookDetailModel book;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -17,8 +17,7 @@ class BookDetailComment extends StatelessWidget {
           children: [
             Text(
               /// TODO 대욱 : 머릿말
-              "에르메스 조향사가 안내하는 향수 식물학 세계\n"
-              "식물의 향과 향수에 관한 다채로운 이야기",
+              book.bookSubTitle,
               style: subTitle2(),
             ),
           ],
