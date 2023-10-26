@@ -25,7 +25,7 @@ class SessionUser {
     ResponseDTO responseDTO = await UserRepository().fetchJoin(joinReqDTO);
     Logger().d("fetch");
     Logger().d("code : ${responseDTO.code}");
-    Logger().d("code : ${responseDTO.data}");
+    Logger().d("data : ${responseDTO.data}");
     // 비즈니스 로직
     if (responseDTO.code == 1) {
       Navigator.pushNamed(mContext!, Move.LoginPage);

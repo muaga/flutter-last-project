@@ -9,6 +9,11 @@ class ResponseDTO {
   ResponseDTO(this.code, this.msg, this.data);
   ResponseDTO.fromJson(Map<String, dynamic> json)
       : code = json["code"],
-        msg = json["msg"],
+        msg = json["msg"] ?? "성공",
         data = json["data"];
+
+  @override
+  String toString() {
+    return 'ResponseDTO{code: $code, msg: $msg, token: $token, data: $data}';
+  }
 }

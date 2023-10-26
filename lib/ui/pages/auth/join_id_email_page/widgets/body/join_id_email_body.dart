@@ -76,14 +76,21 @@ class JoinIdEmailBody extends ConsumerWidget {
             const SizedBox(height: gapXxlarge),
             BottomButton(
               funPageRoute: () {
-                if (_formkey.currentState!.validate()) {
-                  JoinRequestDTO requestDTO = JoinRequestDTO(
-                      username: _username.text,
-                      email: _email.text,
-                      password: _password.text,
-                      nickname: _nickname.text);
-                  ref.read(sessionStore).join(requestDTO);
-                }
+                // if (_formkey.currentState!.validate()) {
+                //   JoinRequestDTO requestDTO = JoinRequestDTO(
+                //       username: _username.text,
+                //       email: _email.text,
+                //       password: _password.text,
+                //       nickname: _nickname.text);
+                //   ref.read(sessionStore).join(requestDTO);
+                // }
+
+                JoinRequestDTO requestDTO = JoinRequestDTO(
+                    username: _username.text,
+                    email: "ssar@nate.com",
+                    password: "1234",
+                    nickname: "ssar");
+                ref.read(sessionStore).join(requestDTO);
               },
               buttonText: "회원가입완료",
             )
