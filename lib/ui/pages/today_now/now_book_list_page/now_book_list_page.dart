@@ -10,7 +10,11 @@ class NowBookListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: IconButton(onPressed: () {}, icon: iconArrowBack()),
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: iconArrowBack()),
           title: Text("한 달 이내에 출간된 책"),
         ),
         // bottomNavigationBar: MillieBottomNavigationBar(),

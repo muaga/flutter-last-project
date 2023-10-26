@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/_core/constants/move.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/_core/utils/validator_util.dart';
+import 'package:flutter_blog/data/dto/request_dto/user_request_dto.dart';
+import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:flutter_blog/ui/widgets/button/custom_radius_color_button.dart';
 import 'package:flutter_blog/ui/widgets/text_form_field/custom_out_line_text_form_field.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
-class LoginTextForm extends StatelessWidget {
+class LoginTextForm extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>();
   final _username = TextEditingController();
   final _password = TextEditingController();
@@ -13,7 +16,7 @@ class LoginTextForm extends StatelessWidget {
   LoginTextForm({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Form(
       key: _formKey,
       child: Column(children: [
@@ -30,7 +33,15 @@ class LoginTextForm extends StatelessWidget {
             funValidator: validatePassword()),
         SizedBox(height: gapLarge),
         CustomRadiusColorButton(
-            buttonText: "로그인", routerLoad: Move.LoginPage, borderRadius: 5),
+          buttonText: "로그인",
+          borderRadius: 5,
+          funPageRoute: () {
+            if (_formKey.currentState!.validate()) {}
+            LoginRequestDTO loginReqDTO = LoginRequestDTO(
+                username: _username.text, password: _password.text);
+            ref.read(sessionStore).login(loginReqDTO);
+          },
+        ),
         SizedBox(height: gapXlarge),
       ]),
     );

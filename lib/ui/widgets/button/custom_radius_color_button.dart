@@ -4,7 +4,7 @@ import 'package:flutter_blog/_core/constants/font.dart';
 
 class CustomRadiusColorButton extends StatelessWidget {
   final String buttonText;
-  final String routerLoad;
+  final funPageRoute;
   final double? buttonWidth;
   final double? buttonHeight;
   final double? borderRadius;
@@ -14,7 +14,7 @@ class CustomRadiusColorButton extends StatelessWidget {
 
   const CustomRadiusColorButton(
       {required this.buttonText,
-      required this.routerLoad,
+      required this.funPageRoute,
       this.buttonWidth,
       this.buttonHeight,
       this.borderRadius,
@@ -25,9 +25,7 @@ class CustomRadiusColorButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        Navigator.pushNamed(context, routerLoad);
-      },
+      onPressed: funPageRoute,
       child: Text(
         "${buttonText}",
         style: textStyle ?? subTitle2(mColor: textColor ?? kFontBlack),

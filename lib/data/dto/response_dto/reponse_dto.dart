@@ -11,4 +11,9 @@ class ResponseDTO {
       : code = json["code"],
         msg = json["msg"],
         data = json["data"];
+
+  @override
+  String toString() {
+    return 'ResponseDTO{code: $code, msg: $msg, token: $token, data: $data}';
+  }
 }

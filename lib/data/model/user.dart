@@ -1,5 +1,3 @@
-import 'package:intl/intl.dart';
-
 class User {
   final int id;
   final String? username; // id
@@ -22,8 +20,7 @@ class User {
         "username": username,
         "email": email,
         "nickname": nickname,
-        "picUrl": picUrl,
-        "createdAt": createdAt
+        "picUrl": picUrl
       };
 
   // 2. Map -> Dart(response)
@@ -33,7 +30,8 @@ class User {
         email = json["email"],
         nickname = json["nickname"],
         picUrl = json["picUrl"],
-        createdAt = DateFormat("yyyy-mm-dd").parse(json["created"]); // 3
+        createdAt = DateTime.parse(json["createdAt"]);
+  // 3
 }
 
 /// mock 데이터
