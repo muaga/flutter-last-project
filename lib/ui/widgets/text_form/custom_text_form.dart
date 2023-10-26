@@ -9,12 +9,16 @@ class CustomTextForm extends StatelessWidget {
   final String hintText;
   final String? guideText;
   final TextEditingController controller;
+  final bool obscureText;
+  final funValidator;
 
   const CustomTextForm(
-      {this.title,
+      {required this.title,
       required this.hintText,
       this.guideText,
-      required this.controller});
+      required this.controller,
+      required this.funValidator,
+      this.obscureText = false});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +27,11 @@ class CustomTextForm extends StatelessWidget {
       children: [
         Text(title ?? "", style: subTitle1(mColor: kFontGray)),
         SizedBox(height: gapMedium),
-        CustomOutLineTextFormField(hintText: hintText, controller: controller),
+        CustomOutLineTextFormField(
+            hintText: hintText,
+            controller: controller,
+            funValidator: funValidator,
+            obscureText: obscureText),
         SizedBox(height: gapMedium),
         Text(guideText ?? "", style: TextStyle(color: kFontLightGray)),
       ],

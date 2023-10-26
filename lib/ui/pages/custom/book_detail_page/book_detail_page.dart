@@ -5,20 +5,15 @@ import 'package:flutter_blog/ui/millie_bottom_navigation_bar.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/body/book_detail_body.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
-class BookDetailPage extends ConsumerWidget {
+class BookDetailPage extends StatelessWidget {
   final int bookId;
   const BookDetailPage({required this.bookId});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final bookDetailModel = ref.watch(bookDetailProvider(bookId));
-    Book book;
-    if (bookDetailModel == null) {
-      return Center(child: CircularProgressIndicator());
-    } else {
-      book = bookDetailModel.book;
-    }
+  Widget build(BuildContext context) {
+    Logger().d("scaffold 진입");
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -38,7 +33,7 @@ class BookDetailPage extends ConsumerWidget {
         ],
       ),
       bottomNavigationBar: MillieBottomNavigationBar(),
-      body: BookDetailBody(book: book),
+      body: BookDetailBody(bookId: bookId),
     );
   }
 }

@@ -4,13 +4,13 @@ import 'package:validators/validators.dart';
 Function validateUsername() {
   return (String? value) {
     if (value!.isEmpty) {
-      return "유저네임에 들어갈 수 없습니다.";
+      return "이미 존재하는 id입니다.";
     } else if (!isAlphanumeric(value)) {
-      return "유저네임에 한글이나 특수 문자가 들어갈 수 없습니다.";
+      return "id에 한글이나 특수 문자가 들어갈 수 없습니다.";
     } else if (value.length > 12) {
-      return "유저네임의 길이를 초과하였습니다.";
+      return "id의 길이를 초과하였습니다.";
     } else if (value.length < 3) {
-      return "유저네임의 최소 길이는 3자입니다.";
+      return "id의 최소 길이는 3자입니다.";
     } else {
       return null;
     }
@@ -37,6 +37,19 @@ Function validateEmail() {
       return "이메일은 공백이 들어갈 수 없습니다.";
     } else if (!isEmail(value)) {
       return "이메일 형식에 맞지 않습니다.";
+    } else {
+      return null;
+    }
+  };
+}
+
+// RegExp _validCharacters = RegExp(r'^[a-zA-Z가-힣]+$');
+Function validateNickname() {
+  return (String? value) {
+    if (value!.isEmpty) {
+      return "닉네임에 공백이 들어갈 수 없습니다.";
+    } else if (!isAlphanumeric(value)) {
+      return "닉네임 형식에 맞지 않습니다. 알파벳 대/소문자와 한글만 허용됩니다.";
     } else {
       return null;
     }

@@ -13,7 +13,7 @@ class CustomLoginTextForm extends StatelessWidget {
       CustomOutLineTextFormField(hintText: "아이디 입력", controller: controller),
       SizedBox(height: gapMedium),
       CustomOutLineTextFormField(
-          hintText: "비밀번호", isPassword: true, controller: controller),
+          hintText: "비밀번호", obscureText: true, controller: controller),
       SizedBox(height: gapMedium),
       ElevatedButton(onPressed: () {}, child: Text("로그인"))
     ]);

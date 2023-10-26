@@ -10,11 +10,15 @@ class CustomTextFormAndValidatorButton extends StatelessWidget {
   final String buttonText;
   final String? guideText;
   final TextEditingController controller;
+  final bool obscureText;
+  final funValidator;
 
   const CustomTextFormAndValidatorButton(
       {required this.title,
       required this.hintText,
       required this.buttonText,
+      required this.funValidator,
+      this.obscureText = false,
       this.guideText,
       required this.controller});
 
@@ -30,7 +34,10 @@ class CustomTextFormAndValidatorButton extends StatelessWidget {
             Container(
                 width: 230,
                 child: CustomOutLineTextFormField(
-                    hintText: hintText, controller: controller)),
+                    hintText: hintText,
+                    controller: controller,
+                    funValidator: funValidator,
+                    obscureText: obscureText)),
             const SizedBox(width: gapMedium),
             ElevatedButton(
                 onPressed: () {},

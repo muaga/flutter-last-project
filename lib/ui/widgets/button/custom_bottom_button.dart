@@ -3,23 +3,21 @@ import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 
 class BottomButton extends StatelessWidget {
-  const BottomButton({
-    super.key,
-  });
+  final funPageRoute;
+  final String buttonText;
+  const BottomButton({required this.funPageRoute, required this.buttonText});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        // 버튼 클릭 시 수행할 작업
-      },
+      onPressed: funPageRoute,
       style: ElevatedButton.styleFrom(
         backgroundColor: kPrimaryColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero), // 버튼 색상
         padding: EdgeInsets.symmetric(vertical: 20),
       ),
       child: Text(
-        '회원가입완료',
+        buttonText,
         style: subTitle1(),
       ),
     );

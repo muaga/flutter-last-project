@@ -4,19 +4,22 @@ import 'package:flutter_blog/_core/constants/font.dart';
 
 class CustomOutLineTextFormField extends StatelessWidget {
   final hintText;
-  final bool isPassword;
+  final bool obscureText;
+  final dynamic? funValidator;
   final TextEditingController controller;
 
   const CustomOutLineTextFormField(
       {required this.hintText,
-      this.isPassword = false,
+      this.obscureText = false,
+      this.funValidator,
       required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      obscureText: isPassword,
+      validator: funValidator,
+      obscureText: obscureText,
       style: body1(),
       decoration: InputDecoration(
         hintText: hintText,

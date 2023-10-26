@@ -3,8 +3,10 @@ import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/ui/pages/custom/post_detail_page/widgets/body/post_detail_body.dart';
 
 class PostDetailPage extends StatelessWidget {
-  const PostDetailPage({super.key});
+  final int postId;
+  const PostDetailPage({required this.postId});
 
+  /// TODO 대욱 :
   @override
   Widget build(BuildContext context) {
     return Scaffold(
