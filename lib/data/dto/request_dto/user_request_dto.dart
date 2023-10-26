@@ -43,13 +43,13 @@ class JoinRequestDTO {
 }
 
 class LoginRequestDTO {
-  final String username;
+  final String uesrname;
   final String password;
 
-  LoginRequestDTO({required this.username, required this.password});
+  LoginRequestDTO({required this.uesrname, required this.password});
 
   Map<String, dynamic> toJson() => {
-        "username": username,
-        "email": password,
+        "uesrname": uesrname,
+        "password": password,
       };
 }

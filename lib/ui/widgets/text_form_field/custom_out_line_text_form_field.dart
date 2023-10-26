@@ -20,6 +20,7 @@ class CustomOutLineTextFormField extends StatelessWidget {
       controller: controller,
       validator: funValidator,
       obscureText: obscureText,
+      obscuringCharacter: "●",
       style: body1(),
       decoration: InputDecoration(
         hintText: hintText,
