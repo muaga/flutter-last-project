@@ -3,9 +3,9 @@ import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 
 class CustomUserReviewTitle extends StatelessWidget {
-  const CustomUserReviewTitle({
-    super.key,
-  });
+  final int? bookReplyCount;
+
+  const CustomUserReviewTitle({this.bookReplyCount});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,8 @@ class CustomUserReviewTitle extends StatelessWidget {
         ),
         SizedBox(width: gapMedium),
         Text(
-          "350",
+          "${bookReplyCount ?? ""}",
+          // 댓글이 없으면 공백처리
           style: subTitle1(),
         ),
       ],

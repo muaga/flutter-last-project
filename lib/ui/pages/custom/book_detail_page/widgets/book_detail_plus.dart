@@ -39,7 +39,7 @@ class _BookDetailPlus extends State<BookDetailPlus> {
                 Text(
                   isExpanded ? widget.description : _getShortenedDescription(),
                   softWrap: true,
-                  style: body1(),
+                  style: body1(mFontWeight: FontWeight.w300),
                 ),
               ],
             ),

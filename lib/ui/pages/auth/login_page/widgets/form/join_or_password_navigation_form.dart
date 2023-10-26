@@ -13,7 +13,6 @@ class JoinOrPasswordNavigationForm extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        /// TODO 은혜 : 페이지 이동 -> 회원가입
         CustomTextButton(
             buttonText: "회원가입",
             routerLoad: Move.JoinPage,

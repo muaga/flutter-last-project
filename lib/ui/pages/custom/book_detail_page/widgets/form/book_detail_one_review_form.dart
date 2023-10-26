@@ -21,10 +21,9 @@ class BookDetailOneReviewForm extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  child: CustomUserReviewTitle(),
+                  child: CustomUserReviewTitle(
+                      bookReplyCount: book.bookDetailReplyList.length),
                 ),
-
-                /// TODO 대욱 : 페이지 경로 넣기
                 CustomPageForwardButton(
                   pageLoad: BookDetailPage(bookId: book.bookId),
                 ),
@@ -32,7 +31,7 @@ class BookDetailOneReviewForm extends StatelessWidget {
             ),
           ),
         ),
-        CustomReviewListForm(),
+        CustomReviewListForm(bookDetailReplyList: book.bookDetailReplyList),
       ],
     );
   }

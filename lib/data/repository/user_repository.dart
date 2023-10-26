@@ -1,5 +1,4 @@
 import 'package:flutter_blog/_core/constants/http.dart';
-import 'package:flutter_blog/data/delayed_reponse.dart';
 import 'package:flutter_blog/data/dto/request_dto/user_request_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/model/user.dart';
@@ -28,13 +27,18 @@ class UserRepository {
     try {
       final response = await dio.post("/login", data: requestDTO.toJson());
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-      responseDTO.data = User.fromJson(responseDTO.data);
+
+      User user = User.fromJson(responseDTO.data);
+
+      // 파싱한 user 데이터 다시 responseDTO.data에 담기
+      responseDTO.data = user;
 
       // 토큰 세션값 변경을 위해 response의 헤더의 jwt를 가져와서 등록하기
       final jwt = response.headers["Authorization"];
       if (jwt != null) {
         responseDTO.token = jwt.first; // = jwt[0]
       }
+
       return responseDTO;
     } catch (e) {
       return ResponseDTO(-1, "유저네임 혹은 비밀번호가 틀렸습니다.", null);

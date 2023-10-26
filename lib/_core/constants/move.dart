@@ -12,14 +12,21 @@ import 'package:flutter_blog/ui/pages/today_now/now_book_list_page/now_book_list
 class Move {
   // TODO : 서버 측 엔드포인트 확인 -> 변경하기
 
-  static String NowBookListPage = "/nowBooks";
-  static String BookDetailPage = "/bookDetail/1";
-  static String PostDetailPage = "/postDetail";
-  static String PostWritePage = "/postWrite";
-  static String JoinPage = "/join";
+  // auth
   static String MainSplashPage = "/mainSplash";
   static String LoginOrJoinPage = "/loginJoin";
+  static String JoinPage = "/join";
   static String LoginPage = "/login";
+
+  // custom
+  static String BookDetailPage = "/book/Detail";
+  static String PostDetailPage = "/post/Detail";
+  static String PostWritePage = "/post/Write";
+
+  // today-now
+  static String NowBookListPage = "/nowBooks";
+
+  // mySetting
   static String MySettingMainPage = "/mySettingMain";
 }
 
@@ -28,7 +35,16 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     // 예시
     Move.NowBookListPage: (context) => const NowBookListPage(),
     Move.BookDetailPage: (context) => const BookDetailPage(bookId: 1),
-    Move.PostDetailPage: (context) => const PostDetailPage(postId: 1),
+
+    // Move.BookDetailPage: (context) {
+    //   final bookId = ModalRoute.of(context)!.settings.arguments as int;
+    //   // 현재 경로에서 전달되는 인수
+    //   return BookDetailPage(bookId: bookId);
+    // },
+    Move.PostDetailPage: (context) {
+      // final postId = ModalRoute.of(context)!.settings.arguments as int;
+      return PostDetailPage(postId: 1);
+    },
     Move.PostWritePage: (context) => PostWritePage(),
     Move.JoinPage: (context) => const JoinPage(),
     Move.MainSplashPage: (context) => const MainSplashPage(),

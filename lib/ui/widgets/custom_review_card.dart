@@ -1,13 +1,18 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 
 class CustomReviewCard extends StatelessWidget {
+  final String userPicUrl;
   final String username;
   final String writeAt;
   final String review;
   const CustomReviewCard(
-      {required this.username, required this.writeAt, required this.review});
+      {required this.userPicUrl,
+      required this.username,
+      required this.writeAt,
+      required this.review});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +20,9 @@ class CustomReviewCard extends StatelessWidget {
       contentPadding: EdgeInsets.all(gapMain),
       leading: CircleAvatar(
         radius: 20,
-        backgroundImage: AssetImage("assets/user_images/avatar.png"),
+        backgroundImage: CachedNetworkImageProvider(
+          "http://172.20.10.4:8080/images/${userPicUrl}", // 이미지 URL
+        ),
       ),
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

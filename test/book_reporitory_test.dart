@@ -17,15 +17,15 @@ Future<void> fetch() async {
   ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
   // Logger().d(responseDTO.code);
   // Logger().d(responseDTO.msg);
-  Logger().d(responseDTO.data);
+  // Logger().d(responseDTO.data);
 
   BookDetailModel model = BookDetailModel.fromJson(responseDTO.data);
 
-  Logger().d(model.bookCategory.categoryName);
-  Logger().d(model.bookDetailReplyList[0]);
-  Logger().d(model.bookDetailReplyList[1]);
-  Logger().d(model.bookDetailReplyList[2]);
   Logger().d(model.bookId);
+  Logger().d(model.bookDetailReplyList[0]);
+  // Logger().d(model.bookDetailReplyList[1]);
+  // Logger().d(model.bookDetailReplyList[2]);
+  // Logger().d(model.bookId);
 
 // Future<void> fetch() async {
 //   try {
