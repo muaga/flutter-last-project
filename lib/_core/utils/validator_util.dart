@@ -4,7 +4,7 @@ import 'package:validators/validators.dart';
 Function validateUsername() {
   return (String? value) {
     if (value!.isEmpty) {
-      return "이미 존재하는 id입니다.";
+      return "id에 공백이 들어갈 수 없습니다.";
     } else if (!isAlphanumeric(value)) {
       return "id에 한글이나 특수 문자가 들어갈 수 없습니다.";
     } else if (value.length > 12) {
