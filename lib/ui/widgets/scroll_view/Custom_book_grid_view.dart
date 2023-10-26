@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/data/model/Book.dart';
+import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.dart';
 import 'package:flutter_blog/ui/pages/today_now/now_book_list_page/widgets/view-model/now_book_list_view_model.dart';
 import 'package:flutter_blog/ui/widgets/custom_grid_book_card.dart';

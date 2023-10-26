@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/data/model/Book.dart';
+import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/widgets/custom_book_image.dart';
 import 'package:flutter_blog/ui/widgets/custom_book_title_and_writer.dart';
 
