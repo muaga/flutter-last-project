@@ -17,7 +17,7 @@ class LoginOrJoinForm extends StatelessWidget {
       CustomRadiusColorButton(
           buttonText: "첫 달 무료로 시작하기",
           funPageRoute: () {
-            Move.JoinIdEmailPage;
+            Navigator.pushNamed(context, Move.JoinPage);
           },
           buttonHeight: 50),
       SizedBox(height: gapLarge),

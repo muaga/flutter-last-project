@@ -19,16 +19,13 @@ class UserRepository {
       // 정상응답이면 1
     } catch (e) {
       // 200이 아니면 catch로 감
-      return ResponseDTO(-1, "중복되는 유저명입니다.", null);
+      return ResponseDTO(-1, "모두 입력되지 않았습니다.", null);
     }
   }
 
   /// fetchLogin
   Future<ResponseDTO> fetchLogin(LoginRequestDTO requestDTO) async {
-    Logger().d("requestDTO : ${requestDTO.uesrname}");
-    Logger().d("requestDTO : ${requestDTO.password}");
     try {
-      Logger().d("1");
       final response = await dio.post("/login", data: requestDTO.toJson());
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
       responseDTO.data = User.fromJson(responseDTO.data);
