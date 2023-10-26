@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: theme(),
 
-      initialRoute: Move.JoinIdEmailPage,
+      initialRoute: Move.MySettingMainPage,
 
       routes: getRouters(),
     );
