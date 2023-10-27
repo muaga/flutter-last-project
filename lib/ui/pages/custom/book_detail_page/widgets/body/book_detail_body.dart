@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
+import 'package:flutter_blog/data/model/book.dart';
+import 'package:flutter_blog/data/model/user.dart';
+import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_comment.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_like.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
@@ -12,25 +15,13 @@ import 'package:flutter_blog/ui/widgets/line/custom_thick_line.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
-class BookDetailBody extends ConsumerWidget {
-  final int bookId;
-  const BookDetailBody({required this.bookId});
+class BookDetailBody extends StatelessWidget {
+  final BookDetailModel book;
+  final SessionUser sessionUser;
+  const BookDetailBody({required this.book, required this.sessionUser});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final bookDetailModel = ref.watch(bookDetailProvider(bookId));
-    Logger().d("book : ${bookDetailModel}");
-    BookDetailModel book;
-    Logger().d(bookDetailModel);
-
-    if (bookDetailModel == null) {
-      return Center(child: CircularProgressIndicator());
-    } else {
-      Logger().d(bookDetailModel);
-
-      book = bookDetailModel; // book 변수를 초기화
-    }
-    Logger().d("ListView 진입");
+  Widget build(BuildContext context) {
     return ListView(
       children: [
         BookDetailInfoForm(book: book),
@@ -43,7 +34,7 @@ class BookDetailBody extends ConsumerWidget {
         BookDetailDataForm(book: book), // "book" 변수를 전달
         BookDetailSubInfoForm(book: book),
         CustomThickLine(),
-        BookDetailOneReviewForm(book: book),
+        BookDetailOneReviewForm(book: book, sessionUser: sessionUser),
       ],
     );
   }

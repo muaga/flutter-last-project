@@ -8,7 +8,7 @@ import 'package:flutter_blog/data/repository/user_repository.dart';
 import 'package:flutter_blog/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-/// 창고 데이터
+/// 창고
 class SessionUser {
   // context 접근
   final mContext = navigatorKey.currentContext;
@@ -50,7 +50,7 @@ class SessionUser {
 
       // 메인으로 화면 이동
       // TODO 은혜 : 메인 페이지 완성 시 이동
-      Navigator.pushNamed(mContext!, Move.NowBookListPage);
+      Navigator.pushNamed(mContext!, Move.BookDetailPage);
     } else {
       ScaffoldMessenger.of(mContext!)
           .showSnackBar(SnackBar(content: Text(responseDTO.msg)));

@@ -1,14 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
+import 'package:flutter_blog/data/dto/request_dto/book_like_request_dto.dart';
+import 'package:flutter_blog/data/model/book_like.dart';
 import 'package:flutter_blog/ui/millie_bottom_navigation_bar.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/body/book_detail_body.dart';
+import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
-class BookDetailPage extends StatelessWidget {
+import '../../../../data/store/session_user.dart';
+
+class BookDetailPage extends ConsumerWidget {
   final int bookId;
   const BookDetailPage({required this.bookId});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    // 로그인 유무
+    final SessionUser sessionUser = ref.read(sessionStore);
+
+    // 책 정보 검색
+    final bookDetailModel = ref.watch(bookDetailProvider(bookId));
+
+    BookDetailModel book;
+    if (bookDetailModel == null) {
+      Logger().d("bookDetailModel : ${bookDetailModel}");
+      return Center(child: CircularProgressIndicator());
+    } else {
+      book = bookDetailModel; // book 변수를 초기화
+    }
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -20,15 +40,26 @@ class BookDetailPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              /// TODO 대욱 : 서버에 데이터가 존재하면 -> 노란별
-              // 서버에 데이터가 존재하지 않는다면 -> 비어있는 별
+              if (sessionUser.isLogin = true) {
+                if (book.bookLike == -1) {
+                  BookLikeRequestDTO dto = BookLikeRequestDTO(
+                      userId: sessionUser.user!.id, bookId: bookId);
+                  ref
+                      .read(bookDetailProvider(book.bookId).notifier)
+                      .bookLikeWrite(dto);
+                } else if (book.bookLike == 1) {
+                  ref
+                      .read(bookDetailProvider(book.bookId).notifier)
+                      .bookLikeDelete();
+                }
+              }
             },
-            icon: iconEmptyStar(),
+            icon: bookLike == 1 ? iconFullStar() : iconEmptyStar(),
           ),
         ],
       ),
       bottomNavigationBar: MillieBottomNavigationBar(),
-      body: BookDetailBody(bookId: bookId),
+      body: BookDetailBody(book: book, sessionUser: sessionUser),
     );
   }
 }

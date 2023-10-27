@@ -1,11 +1,16 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_blog/data/dto/request_dto/book_like_request_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
+import 'package:flutter_blog/data/repository/book_like_repository.dart';
 import 'package:flutter_blog/data/repository/book_repository.dart';
+import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
 // 창고 데이터
 class BookDetailModel {
   late int bookId;
+  late int bookLike;
   late String bookPicUrl;
   late String bookTitle;
   late String bookWriter;
@@ -21,8 +26,13 @@ class BookDetailModel {
   late String review;
   late List<BookDetailReplyList> bookDetailReplyList; // List
 
+  BookDetailModel.copy(BookDetailModel model)
+      : this.bookId = model.bookId,
+        this.bookLike = model.bookLike;
+
   BookDetailModel({
     required this.bookId,
+    required this.bookLike,
     required this.bookPicUrl,
     required this.bookTitle,
     required this.bookWriter,
@@ -46,6 +56,7 @@ class BookDetailModel {
 
     return BookDetailModel(
       bookId: json["bookId"],
+      bookLike: json["bookLike"],
       bookPicUrl: json["bookPicUrl"],
       bookTitle: json["bookTitle"],
       bookWriter: json["bookWriter"],
@@ -116,10 +127,9 @@ class BookDetailViewModel extends StateNotifier<BookDetailModel?> {
   Future<void> notifyInit(int bookId) async {
     ResponseDTO responseDTO = await BookRepository().fetchBookDetail(bookId);
     BookDetailModel model = responseDTO.data;
-    Logger().d("model : ${model}");
-    Logger().d("model.bookTitle : ${model.bookTitle}");
     state = BookDetailModel(
         bookId: model.bookId,
+        bookLike: model.bookLike,
         bookPicUrl: model.bookPicUrl,
         bookTitle: model.bookTitle,
         bookWriter: model.bookWriter,
@@ -134,6 +144,37 @@ class BookDetailViewModel extends StateNotifier<BookDetailModel?> {
         writerIntroduction: model.writerIntroduction,
         review: model.review,
         bookDetailReplyList: model.bookDetailReplyList);
+  }
+
+  // 북마크 등록
+  Future<void> bookLikeWrite(BookLikeRequestDTO requestDTO) async {
+    SessionUser sessionUser = ref.read(sessionStore);
+
+    // BookLikeRequestDTO와 sessionUser.jwt를 fetchBookLikeWrite 메서드로 전달
+    ResponseDTO responseDTO = await BookLikeRepository()
+        .fetchBookLikeWrite(requestDTO, sessionUser.jwt!);
+
+    // 데이터 갱신
+    if (responseDTO.code == 1) {
+      BookDetailModel model = this.state!; // 777
+
+      model.bookLike = model.bookLike * -1;
+
+      this.state = BookDetailModel.copy(model); // 790
+    }
+  }
+
+  // 북마크 삭제
+  Future<void> bookLikeDelete() async {
+    SessionUser sessionUser = ref.read(sessionStore);
+    ResponseDTO responseDTO =
+        await BookLikeRepository().fetchBookLikeDelete(sessionUser.jwt!);
+
+    // 데이터 갱신
+    if (responseDTO.code == 1) {
+      this.state?.bookLike = 1;
+      // 2 => 데이터 존재
+    }
   }
 }
 
