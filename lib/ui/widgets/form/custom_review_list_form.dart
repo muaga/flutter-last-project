@@ -1,30 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
 import 'package:flutter_blog/ui/widgets/custom_review_card.dart';
 import 'package:flutter_blog/ui/widgets/custom_review_insert.dart';
 
-class CustomReviewListForm extends StatelessWidget {
-  const CustomReviewListForm({
-    super.key,
-  });
+class CustomReviewListForm extends StatefulWidget {
+  final List<BookDetailReplyList>? bookDetailReplyList;
 
+  const CustomReviewListForm({this.bookDetailReplyList});
+
+  @override
+  State<CustomReviewListForm> createState() => _CustomReviewListFormState();
+}
+
+class _CustomReviewListFormState extends State<CustomReviewListForm> {
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        if (widget.bookDetailReplyList != null &&
+            widget.bookDetailReplyList!.isNotEmpty)
+          CustomReviewCard(
+            userPicUrl: "${widget.bookDetailReplyList![0].userPicUrl}",
+            username: "${widget.bookDetailReplyList![0].nickname}",
+            writeAt: "${widget.bookDetailReplyList![0].replyCreatedAt}",
+            review: "${widget.bookDetailReplyList![0].replyContent}",
+          ),
         CustomReviewCard(
-          username: "ssar",
-          writeAt: "2023.10.19",
-          review: "향수에 관심이 생겼어요",
+          userPicUrl: "${widget.bookDetailReplyList![1].userPicUrl}",
+          username: "${widget.bookDetailReplyList![1].nickname}",
+          writeAt: "${widget.bookDetailReplyList![1].replyCreatedAt}",
+          review: "${widget.bookDetailReplyList![1].replyContent}",
         ),
         CustomReviewCard(
-          username: "cos",
-          writeAt: "2023.10.18",
-          review: "책을 읽으며 힐링되는 시간",
-        ),
-        CustomReviewCard(
-          username: "love",
-          writeAt: "2023.10.07",
-          review: "다양한 식물에서 이런 향을 낼 수 있다는게 신기해요",
+          userPicUrl: "${widget.bookDetailReplyList![2].userPicUrl}",
+          username: "${widget.bookDetailReplyList![2].nickname}",
+          writeAt: "${widget.bookDetailReplyList![2].replyCreatedAt}",
+          review: "${widget.bookDetailReplyList![2].replyContent}",
         ),
         CustomReviewInsert(),
       ],

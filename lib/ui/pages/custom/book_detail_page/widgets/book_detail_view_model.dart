@@ -15,7 +15,7 @@ class BookDetailModel {
   late String bookIntroduction;
   late BookCategory bookCategory; // Map
   late String totalPage;
-  late DateTime publicationDate;
+  late String publicationDate;
   late String sequence;
   late String writerIntroduction;
   late String review;
@@ -55,7 +55,8 @@ class BookDetailModel {
       bookIntroduction: json["bookIntroduction"],
       bookCategory: BookCategory.fromJson(json["bookCategory"]), // Object
       totalPage: json["totalPage"],
-      publicationDate: DateTime.parse(json["publicationDate"]),
+      // publicationDate: DateTime.parse(json["publicationDate"]),
+      publicationDate: json["publicationDate"],
       sequence: json["sequence"],
       writerIntroduction: json["writerIntroduction"],
       review: json["review"],
@@ -82,7 +83,7 @@ class BookCategory {
 class BookDetailReplyList {
   String? nickname;
   String? userPicUrl;
-  DateTime? replyCreatedAt;
+  String? replyCreatedAt;
   String? replyContent;
 
   BookDetailReplyList({
@@ -96,7 +97,7 @@ class BookDetailReplyList {
       BookDetailReplyList(
         nickname: json["nickname"],
         userPicUrl: json["userPicUrl"],
-        replyCreatedAt: DateTime.parse(json["replyCreatedAt"]),
+        replyCreatedAt: json["replyCreatedAt"],
         replyContent: json["replyContent"],
       );
 

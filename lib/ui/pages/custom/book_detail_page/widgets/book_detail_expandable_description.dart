@@ -44,7 +44,7 @@ class _BookDetailExpandableDescriptionState
           padding: EdgeInsets.all(gapMain),
           child: Text(
             widget.description,
-            style: body1(),
+            style: body1(mFontWeight: FontWeight.w300),
             textAlign: TextAlign.left,
           ),
         ),

@@ -18,9 +18,9 @@ Future<void> fetch(LoginRequestDTO dto) async {
   // Logger().d(responseDTO.msg);
   // Logger().d(responseDTO.data);
   //
-  responseDTO.data = User.fromJson(responseDTO.data);
+  User user = User.fromJson(responseDTO.data);
   //
-  Logger().d(responseDTO.code);
+  Logger().d(user.username);
   // Logger().d(responseDTO.msg);
   // Logger().d(responseDTO.data);
 }

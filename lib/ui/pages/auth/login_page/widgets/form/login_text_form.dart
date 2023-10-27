@@ -6,7 +6,6 @@ import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:flutter_blog/ui/widgets/button/custom_radius_color_button.dart';
 import 'package:flutter_blog/ui/widgets/text_form_field/custom_out_line_text_form_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 
 class LoginTextForm extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>();

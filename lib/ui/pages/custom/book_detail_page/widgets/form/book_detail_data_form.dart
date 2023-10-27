@@ -17,16 +17,22 @@ class BookDetailDataForm extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          /// TODO 대욱 : 북정보 받아오기
-          CustomDataInfo(
-              dataTitle: "카테고리",
-              dataContent: book.bookCategory?.categoryName ?? "카테고리 정보 없음"),
+          Expanded(
+            child: CustomDataInfo(
+                dataTitle: "카테고리",
+                dataContent: book.bookCategory?.categoryName ?? "카테고리 정보 없음"),
+          ),
           Container(height: gapXlarge, width: 1, color: Colors.grey),
-          CustomDataInfo(dataTitle: "페이지", dataContent: book.totalPage),
+          Expanded(
+              child: CustomDataInfo(
+                  dataTitle: "페이지", dataContent: book.totalPage)),
           Container(height: gapXlarge, width: 1, color: Colors.grey),
-          CustomDataInfo(
-              dataTitle: "출간일",
-              dataContent: book.publicationDate.toLocal().toString()),
+          Expanded(
+            child: CustomDataInfo(
+                dataTitle: "출간일",
+                // dataContent: book.publicationDate.toLocal().toString()),
+                dataContent: "${book.publicationDate}"),
+          ),
         ],
       ),
     );

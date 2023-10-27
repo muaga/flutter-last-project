@@ -18,8 +18,8 @@ class BookDetailBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final bookDetailModel = ref.watch(bookDetailProvider(1));
-    // Logger().d(bookDetailModel);
+    final bookDetailModel = ref.watch(bookDetailProvider(bookId));
+    Logger().d("book : ${bookDetailModel}");
     BookDetailModel book;
     Logger().d(bookDetailModel);
 
