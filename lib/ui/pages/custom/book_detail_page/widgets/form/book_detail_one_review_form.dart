@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
+import 'package:flutter_blog/ui/pages/custom/book_reply_list/book_reply_list_page.dart';
 import 'package:flutter_blog/ui/widgets/button/custom_page_forward_button.dart';
 import 'package:flutter_blog/ui/widgets/custom_user_review_title.dart';
 import 'package:flutter_blog/ui/widgets/form/custom_review_list_form.dart';
@@ -25,7 +25,10 @@ class BookDetailOneReviewForm extends StatelessWidget {
                       bookReplyCount: book.bookDetailReplyList.length),
                 ),
                 CustomPageForwardButton(
-                  pageLoad: BookDetailPage(bookId: book.bookId),
+                  pageLoad: BookReplyListPage(
+                    bookId: book.bookId,
+                    bookDetailReplyList: [],
+                  ),
                 ),
               ],
             ),
