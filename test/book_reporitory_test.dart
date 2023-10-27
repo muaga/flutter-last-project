@@ -11,18 +11,18 @@ void main() async {
 /// TODO : 통신 테스트
 Future<void> fetch() async {
   Response<dynamic> response = await dio.get("/book/detail/1");
-  // Logger().d(response.headers);
+  Logger().d(response.headers);
   // Logger().d(response.data);
 
   ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-  // Logger().d(responseDTO.code);
+  Logger().d(responseDTO.code);
   // Logger().d(responseDTO.msg);
-  // Logger().d(responseDTO.data);
+  Logger().d(responseDTO.data);
 
   BookDetailModel model = BookDetailModel.fromJson(responseDTO.data);
 
-  Logger().d(model.bookId);
-  Logger().d(model.bookDetailReplyList[0]);
+  // Logger().d(model.bookLike);
+  // Logger().d(model.bookDetailReplyList[0]);
   // Logger().d(model.bookDetailReplyList[1]);
   // Logger().d(model.bookDetailReplyList[2]);
   // Logger().d(model.bookId);

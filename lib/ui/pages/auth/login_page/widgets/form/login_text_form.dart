@@ -37,7 +37,9 @@ class LoginTextForm extends ConsumerWidget {
           funPageRoute: () {
             if (_formKey.currentState!.validate()) {}
             LoginRequestDTO loginReqDTO = LoginRequestDTO(
-                username: _username.text, password: _password.text);
+                // username: _username.text, password: _password.text);
+                username: "ssar",
+                password: "1234");
             ref.read(sessionStore).login(loginReqDTO);
           },
         ),
