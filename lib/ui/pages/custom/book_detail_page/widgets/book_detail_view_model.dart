@@ -178,6 +178,10 @@ class BookDetailViewModel extends StateNotifier<BookDetailModel?> {
   }
 }
 
+// 댓글 등록
+
+// 댓글 삭제
+
 final bookDetailProvider = StateNotifierProvider.autoDispose
     .family<BookDetailViewModel, BookDetailModel?, int>((ref, bookId) {
   return BookDetailViewModel(null, ref)..notifyInit(bookId);
