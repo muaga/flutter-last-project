@@ -21,7 +21,7 @@ class CustomReviewCard extends StatelessWidget {
       leading: CircleAvatar(
         radius: 20,
         backgroundImage: CachedNetworkImageProvider(
-          "http://172.20.10.4:8080/images/${userPicUrl}", // 이미지 URL
+          "http://192.168.0.35:8080/images/${userPicUrl}", // 이미지 URL
         ),
       ),
       title: Column(
