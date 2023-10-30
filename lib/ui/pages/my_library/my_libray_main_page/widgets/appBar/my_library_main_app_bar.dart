@@ -14,7 +14,7 @@ class MyLibraryMainAppBar extends StatelessWidget {
       snap: false,
       floating: false,
       pinned: true,
-      expandedHeight: 250,
+      expandedHeight: 100,
       toolbarHeight: 100,
       bottom: PreferredSize(
         preferredSize: Size.fromHeight(40), // 탭바의 높이 설정

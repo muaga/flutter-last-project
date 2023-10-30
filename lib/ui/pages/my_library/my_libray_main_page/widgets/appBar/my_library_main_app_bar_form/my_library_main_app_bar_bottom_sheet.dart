@@ -33,7 +33,7 @@ class MtLibraryMainAppbarBottomSheet extends StatelessWidget {
                     child: Column(
                       children: [
                         MyLibraryMainAppBarBottomSheetButton(
-                            buttonText: "좋아하는 책",
+                            buttonText: "포스트 ",
                             destination: MyLibraryMainLikeBooks()),
                         MyLibraryMainAppBarBottomSheetButton(
                             buttonText: "책장",
