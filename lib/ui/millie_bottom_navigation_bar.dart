@@ -37,7 +37,7 @@ class _MillieBottomNavigationBarState extends State<MillieBottomNavigationBar> {
           /// TODO 은혜 : 검색 페이지 이동 주소 입력
         }
         if (index == 3) {
-          /// TODO 은혜 : 내서재 페이지 이동 주소 입력
+          Navigator.pushNamed(context, "/myLibraryMain");
         }
         if (index == 4) {
           /// TODO 은혜 : 관리 페이지 이동 주소 입력

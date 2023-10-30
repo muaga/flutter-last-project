@@ -6,6 +6,7 @@ import 'package:flutter_blog/ui/pages/auth/millie_splash_page/millie_splash_page
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.dart';
 import 'package:flutter_blog/ui/pages/custom/post_detail_page/post_detail_page.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_page/post_write_page.dart';
+import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_page.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_main_page/my_setting_main_page.dart';
 import 'package:flutter_blog/ui/pages/search/search_main_page/search_main_page.dart';
 import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/one_month_press_book_list_page.dart';
@@ -32,9 +33,20 @@ class Move {
   // today-now
   static String BookStoreBestBookListPage = "/bookStoreBestList";
   static String OneMonthPressBookListPage = "/oneMonthPressBookList";
+  // feed
+
+  // myLibrary
+  static String MyLibraryMainPage = "/myLibraryMain";
 
   // mySetting
   static String MySettingMainPage = "/mySettingMain";
+
+  // serch
+
+  // today-now
+  static String NowBookListPage = "/nowBooks";
+
+  // today-story
 }
 
 Map<String, Widget Function(BuildContext)> getRouters() {
@@ -70,10 +82,13 @@ Map<String, Widget Function(BuildContext)> getRouters() {
 
     // my-settiing
     Move.MySettingMainPage: (context) => const MySettingMainPage(),
+
+    // my-library
+    Move.MyLibraryMainPage: (context) => MyLibraryMainPage()
   };
 }
 
-/// 인수로 전달해야하는 페이지잉ㄹ 때
+/// 인수로 전달해야하는 페이지일 때
 // Move.BookDetailPage: (context) {
 //   final bookId = ModalRoute.of(context)!.settings.arguments as int;
 //   // 현재 경로에서 전달되는 인수

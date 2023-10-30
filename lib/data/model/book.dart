@@ -73,20 +73,20 @@ class Book {
 }
 
 Book book = Book(
-    id: 2,
-    picUrl: "book2.png",
-    title: "퓨처셀프",
-    writer: "벤저민",
-    totalPage: "100",
-    publicationDate: "2023-10-05",
-    createdAt: "2023-10-05",
-    subTitle: "현재와 미래가 달라지는 놀라운 혁명",
-    introduction: "퓨처셀프 소개",
-    sequence: "퓨처셀프 목차",
-    writerIntroductoin: "퓨처셀프 작가 소개",
-    review: "퓨처셀프 출판사 서평",
-    ranking: 2,
-    bookCategoryId: 2,
+    id: 1,
+    picUrl: "book1.png",
+    title: "트렌드코리아 2024",
+    writer: "김난도",
+    totalPage: "410",
+    publicationDate: "2023-10-01",
+    createdAt: "2023-10-01",
+    subTitle: "2024 대한민국 소비트렌드 전망",
+    introduction: "트렌드코리아 소개",
+    sequence: "트렌드코리아 목차",
+    writerIntroductoin: "트렌드코리아 작가 소개",
+    review: "트렌드코리아 출판사 서평",
+    ranking: 1,
+    bookCategoryId: 1,
     bookDataId: 1);
 
 List<Book> books = [
