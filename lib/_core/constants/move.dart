@@ -6,6 +6,7 @@ import 'package:flutter_blog/ui/pages/auth/millie_splash_page/millie_splash_page
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.dart';
 import 'package:flutter_blog/ui/pages/custom/post_detail_page/post_detail_page.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_page/post_write_page.dart';
+import 'package:flutter_blog/ui/pages/custom/reply_write_and_list_page/reply_write_and_list_page.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_page.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_main_page/my_setting_main_page.dart';
 import 'package:flutter_blog/ui/pages/today_now/now_book_list_page/now_book_list_page.dart';
@@ -38,6 +39,9 @@ class Move {
   static String NowBookListPage = "/nowBooks";
 
   // today-story
+
+  /// 테스트
+  static String ReplyWriteAndListPage = "/reply";
 }
 
 Map<String, Widget Function(BuildContext)> getRouters() {
@@ -61,6 +65,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.LoginOrJoinPage: (context) => const LoginOrJoinPage(),
     Move.LoginPage: (context) => const LoginPage(),
     Move.MySettingMainPage: (context) => const MySettingMainPage(),
-    Move.MyLibraryMainPage: (context) => MyLibraryMainPage()
+    Move.MyLibraryMainPage: (context) => MyLibraryMainPage(),
+    Move.ReplyWriteAndListPage: (context) => ReplyWriteAndListPage(),
   };
 }

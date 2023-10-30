@@ -56,7 +56,7 @@ class BookDetailPage extends ConsumerWidget {
                 }
               }
             },
-            icon: book.bookLike == 1 ? iconFullStar() : iconEmptyStar(),
+            icon: book.bookLike == -1 ? iconFullStar() : iconEmptyStar(),
           ),
         ],
       ),

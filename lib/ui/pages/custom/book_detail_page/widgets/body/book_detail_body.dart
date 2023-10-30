@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/data/model/book.dart';
-import 'package:flutter_blog/data/model/user.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_comment.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_like.dart';
@@ -12,8 +10,6 @@ import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/form/book_
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/form/book_detail_one_review_form.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/form/book_detail_sub_info_form.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thick_line.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 
 class BookDetailBody extends StatelessWidget {
   final BookDetailModel book;

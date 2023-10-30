@@ -21,7 +21,7 @@ Future<void> fetch() async {
 
   BookDetailModel model = BookDetailModel.fromJson(responseDTO.data);
 
-  // Logger().d(model.bookLike);
+  Logger().d(model.bookLike);
   // Logger().d(model.bookDetailReplyList[0]);
   // Logger().d(model.bookDetailReplyList[1]);
   // Logger().d(model.bookDetailReplyList[2]);
