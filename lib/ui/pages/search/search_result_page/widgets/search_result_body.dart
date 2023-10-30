@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/ui/pages/search/search_result_page/widgets/search_result_tab_bar.dart';
 import 'package:flutter_blog/ui/pages/search/search_result_page/widgets/search_result_tab_bar_view.dart';
 import 'package:flutter_blog/ui/widgets/bar/custom_text_form_field_search_bar.dart';
+import 'package:logger/logger.dart';
 
 class SearchResultBody extends StatelessWidget {
   const SearchResultBody({
@@ -15,6 +16,7 @@ class SearchResultBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Logger().d("searchText : ${searchText}");
     return NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [

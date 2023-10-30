@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
+import 'package:logger/logger.dart';
 
 /// 바텀 네비게이션 바
 class MillieBottomNavigationBar extends StatefulWidget {
@@ -12,6 +14,7 @@ class MillieBottomNavigationBar extends StatefulWidget {
 
 class _MillieBottomNavigationBarState extends State<MillieBottomNavigationBar> {
   int _selectedIndex = 0;
+  int _previousIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -25,31 +28,55 @@ class _MillieBottomNavigationBarState extends State<MillieBottomNavigationBar> {
       type: BottomNavigationBarType.fixed,
       onTap: (index) {
         setState(() {
+          _previousIndex = _selectedIndex;
           _selectedIndex = index;
+          if (_selectedIndex == 0) {
+            if (_selectedIndex != _previousIndex) {
+              setState(() {
+                _previousIndex = _selectedIndex;
+              });
+            }
+          }
+          if (_selectedIndex == 1) {
+            if (_selectedIndex != _previousIndex) {
+              setState(() {
+                _previousIndex = _selectedIndex;
+              });
+            }
+          }
+          if (_selectedIndex == 2) {
+            if (_selectedIndex != _previousIndex) {
+              Navigator.popAndPushNamed(context, "/searchMain");
+              setState(() {
+                _previousIndex = _selectedIndex;
+              });
+            }
+          }
+          if (_selectedIndex == 3) {
+            if (_selectedIndex != _previousIndex) {
+              Navigator.popAndPushNamed(context, "/myLibraryMain");
+              setState(() {
+                _previousIndex = _selectedIndex;
+              });
+            }
+          }
+          if (_selectedIndex == 4) {
+            if (_selectedIndex != _previousIndex) {
+              setState(() {
+                _previousIndex = _selectedIndex;
+              });
+            }
+          }
         });
-        if (index == 0) {
-          // Navigator.pushNamed(context, "/nowBooks");
-        }
-        if (index == 1) {
-          /// TODO 은혜 : 피드 페이지 이동 주소 입력
-        }
-        if (index == 2) {
-          /// TODO 은혜 : 검색 페이지 이동 주소 입력
-        }
-        if (index == 3) {
-          Navigator.pushNamed(context, "/myLibraryMain");
-        }
-        if (index == 4) {
-          /// TODO 은혜 : 관리 페이지 이동 주소 입력
-        }
       },
       items: const [
         BottomNavigationBarItem(
             icon: Icon(Icons.settings_accessibility), label: "투데이"),
-        BottomNavigationBarItem(icon: Icon(Icons.forum), label: "피드"),
-        BottomNavigationBarItem(icon: Icon(Icons.search), label: "검색"),
-        BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: "내서재"),
-        BottomNavigationBarItem(icon: Icon(Icons.manage_accounts), label: "관리"),
+        BottomNavigationBarItem(icon: Icon(CupertinoIcons.today), label: "피드"),
+        BottomNavigationBarItem(icon: Icon(Icons.manage_search), label: "검색"),
+        BottomNavigationBarItem(icon: Icon(Icons.shelves), label: "내서재"),
+        BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.profile_circled), label: "관리"),
       ],
     );
   }

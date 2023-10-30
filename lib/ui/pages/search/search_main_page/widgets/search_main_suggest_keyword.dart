@@ -29,7 +29,6 @@ class SearchMainSuggestKeyword extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     String value = suggestKeyword[index];
-                    Logger().d("value : ${value}");
                     Navigator.push(
                         context,
                         MaterialPageRoute(

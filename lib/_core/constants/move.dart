@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/ui/millie_IndexStack_navigation_bar.dart';
+import 'package:flutter_blog/ui/millie_bottom_navigation_bar.dart';
 import 'package:flutter_blog/ui/pages/auth/join_page/join_page.dart';
 import 'package:flutter_blog/ui/pages/auth/login_or_join_page/login_or_join_page.dart';
 import 'package:flutter_blog/ui/pages/auth/login_page/login_page.dart';
@@ -9,6 +11,7 @@ import 'package:flutter_blog/ui/pages/custom/post_write_page/post_write_page.dar
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_page.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_main_page/my_setting_main_page.dart';
 import 'package:flutter_blog/ui/pages/search/search_main_page/search_main_page.dart';
+import 'package:flutter_blog/ui/pages/search/search_result_page/search_result_page.dart';
 import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/one_month_press_book_list_page.dart';
 
 import '../../ui/pages/today_now/book_store_best_book_list_page/book_store_best_book_list_page.dart';
@@ -24,6 +27,7 @@ class Move {
 
   // search
   static String SearchMainPage = "/searchMain";
+  static String SearchResultPage = "/searchResult";
 
   // custom
   static String BookDetailPage = "/book/Detail";
@@ -43,14 +47,18 @@ class Move {
 
   // serch
 
-  // today-now
-  static String NowBookListPage = "/nowBooks";
-
   // today-story
+
+  ///
+  static String MillieIndexStackNavigationBar = "/indexStack";
 }
 
 Map<String, Widget Function(BuildContext)> getRouters() {
   return {
+    ///
+    Move.MillieIndexStackNavigationBar: (context) =>
+        const MillieIndexStackNavigationBar(),
+
     // auth
     Move.MainSplashPage: (context) => const MainSplashPage(),
     Move.LoginOrJoinPage: (context) => const LoginOrJoinPage(),
@@ -59,6 +67,12 @@ Map<String, Widget Function(BuildContext)> getRouters() {
 
     // search
     Move.SearchMainPage: (context) => const SearchMainPage(),
+    Move.SearchResultPage: (context) =>
+        const SearchResultPage(searchText: "안녕"),
+    // Move.SearchResultPage: (context) {
+    //   final searchText = ModalRoute.of(context)!.settings.arguments as String;
+    //   return SearchResultPage(searchText: searchText);
+    // },
 
     // custom
     Move.BookDetailPage: (context) {
@@ -84,7 +98,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.MySettingMainPage: (context) => const MySettingMainPage(),
 
     // my-library
-    Move.MyLibraryMainPage: (context) => MyLibraryMainPage()
+    Move.MyLibraryMainPage: (context) => const MyLibraryMainPage()
   };
 }
 
