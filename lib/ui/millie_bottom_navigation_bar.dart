@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
-import 'package:flutter_blog/main.dart';
-import 'package:flutter_blog/ui/pages/today_now/now_book_list_page/now_book_list_page.dart';
 
 /// 바텀 네비게이션 바
 class MillieBottomNavigationBar extends StatefulWidget {
@@ -30,7 +28,7 @@ class _MillieBottomNavigationBarState extends State<MillieBottomNavigationBar> {
           _selectedIndex = index;
         });
         if (index == 0) {
-          Navigator.pushNamed(context, "/nowBooks");
+          // Navigator.pushNamed(context, "/nowBooks");
         }
         if (index == 1) {
           /// TODO 은혜 : 피드 페이지 이동 주소 입력

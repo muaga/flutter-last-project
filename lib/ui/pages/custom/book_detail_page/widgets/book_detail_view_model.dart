@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/data/dto/request_dto/book_like_request_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
+import 'package:flutter_blog/data/model/book_category.dart';
 import 'package:flutter_blog/data/repository/book_like_repository.dart';
 import 'package:flutter_blog/data/repository/book_repository.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
@@ -74,21 +75,6 @@ class BookDetailModel {
       bookDetailReplyList: bookDetailReplyList, // Object
     );
   }
-}
-
-class BookCategory {
-  int? id;
-  String? categoryName;
-
-  BookCategory({
-    this.id,
-    this.categoryName,
-  });
-
-  factory BookCategory.fromJson(Map<String, dynamic> json) => BookCategory(
-        id: json["id"],
-        categoryName: json["categoryName"],
-      );
 }
 
 class BookDetailReplyList {

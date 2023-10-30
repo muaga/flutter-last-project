@@ -23,11 +23,12 @@ class BookDetailPage extends ConsumerWidget {
 
     BookDetailModel book;
     if (bookDetailModel == null) {
-      Logger().d("bookDetailModel : ${bookDetailModel}");
       return Center(child: CircularProgressIndicator());
     } else {
       book = bookDetailModel; // book 변수를 초기화
     }
+    Logger().d("bookDetailModel : ${bookDetailModel.bookTitle}");
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(

@@ -72,6 +72,23 @@ class Book {
         bookDataId = json["bookDataId"];
 }
 
+Book book = Book(
+    id: 2,
+    picUrl: "book2.png",
+    title: "퓨처셀프",
+    writer: "벤저민",
+    totalPage: "100",
+    publicationDate: "2023-10-05",
+    createdAt: "2023-10-05",
+    subTitle: "현재와 미래가 달라지는 놀라운 혁명",
+    introduction: "퓨처셀프 소개",
+    sequence: "퓨처셀프 목차",
+    writerIntroductoin: "퓨처셀프 작가 소개",
+    review: "퓨처셀프 출판사 서평",
+    ranking: 2,
+    bookCategoryId: 2,
+    bookDataId: 1);
+
 List<Book> books = [
   Book(
       id: 1,
