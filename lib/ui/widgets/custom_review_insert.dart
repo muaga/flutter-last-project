@@ -3,7 +3,7 @@ import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/dto/request_dto/book_reply_request_dto.dart';
-import 'package:flutter_blog/ui/pages/custom/book_reply_list/book_reply_list_view_model.dart';
+import 'package:flutter_blog/ui/pages/custom/reply_write_and_list_page/reply_write_and_list_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CustomReviewInsert extends ConsumerWidget {

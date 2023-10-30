@@ -8,6 +8,7 @@ ThemeData theme() {
     appBarTheme: AppBarTheme(
       // 앱의 AppBar 공통 테마
       backgroundColor: kBackWhite,
+      foregroundColor: kFontBlack,
       elevation: 0.0,
       titleTextStyle: subTitle1(),
       centerTitle: true,
