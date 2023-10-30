@@ -28,7 +28,7 @@ class _MillieBottomNavigationBarState extends State<MillieBottomNavigationBar> {
           _selectedIndex = index;
         });
         if (index == 0) {
-          Navigator.pushNamed(context, "/nowBooks");
+          // Navigator.pushNamed(context, "/nowBooks");
         }
         if (index == 1) {
           /// TODO 은혜 : 피드 페이지 이동 주소 입력
