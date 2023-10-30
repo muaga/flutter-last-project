@@ -34,6 +34,15 @@ class User {
 }
 
 /// mock 데이터
+
+User user = User(
+    id: 1,
+    username: "ssar",
+    email: "ssar@nate.com",
+    nickname: "유재석",
+    picUrl: "user1.png",
+    createdAt: "2023-10-10");
+
 List<User> users = [
   User(
       id: 1,

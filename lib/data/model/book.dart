@@ -72,6 +72,23 @@ class Book {
         bookDataId = json["bookDataId"];
 }
 
+Book book = Book(
+    id: 1,
+    picUrl: "book1.png",
+    title: "트렌드코리아 2024",
+    writer: "김난도",
+    totalPage: "410",
+    publicationDate: "2023-10-01",
+    createdAt: "2023-10-01",
+    subTitle: "2024 대한민국 소비트렌드 전망",
+    introduction: "트렌드코리아 소개",
+    sequence: "트렌드코리아 목차",
+    writerIntroductoin: "트렌드코리아 작가 소개",
+    review: "트렌드코리아 출판사 서평",
+    ranking: 1,
+    bookCategoryId: 1,
+    bookDataId: 1);
+
 List<Book> books = [
   Book(
       id: 1,

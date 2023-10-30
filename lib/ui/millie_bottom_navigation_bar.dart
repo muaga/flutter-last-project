@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
-import 'package:flutter_blog/main.dart';
-import 'package:flutter_blog/ui/pages/today_now/now_book_list_page/now_book_list_page.dart';
 
 /// 바텀 네비게이션 바
 class MillieBottomNavigationBar extends StatefulWidget {
@@ -39,7 +37,7 @@ class _MillieBottomNavigationBarState extends State<MillieBottomNavigationBar> {
           /// TODO 은혜 : 검색 페이지 이동 주소 입력
         }
         if (index == 3) {
-          /// TODO 은혜 : 내서재 페이지 이동 주소 입력
+          Navigator.pushNamed(context, "/myLibraryMain");
         }
         if (index == 4) {
           /// TODO 은혜 : 관리 페이지 이동 주소 입력
