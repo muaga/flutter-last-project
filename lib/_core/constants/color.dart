@@ -9,6 +9,7 @@ const Color kFontBlack = Color(0xFF222222);
 const Color kFontWhite = Color(0xFFFFFFFF);
 const Color kFontGray = Color(0xFF6F6F6F);
 const Color kFontLightGray = Color(0xFFC8C8C9);
+const Color kFontRed = Color(0xFFF43131);
 
 /// background color
 const Color kBackWhite = Color(0xFFFFFFFF);

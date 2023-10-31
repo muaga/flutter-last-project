@@ -17,7 +17,6 @@ class BookStoreBestBookListPage extends StatelessWidget {
             icon: iconArrowBack()),
         title: Text("지금! 서점 베스트"),
       ),
-      bottomNavigationBar: MillieBottomNavigationBar(),
       body: BookStoreBestBookListBody(),
     );
   }

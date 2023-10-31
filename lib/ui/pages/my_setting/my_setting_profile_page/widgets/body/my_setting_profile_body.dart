@@ -4,6 +4,7 @@ import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/_core/utils/validator_util.dart';
 import 'package:flutter_blog/ui/widgets/button/custom_bottom_button.dart';
 import 'package:flutter_blog/ui/widgets/custom_check_box.dart';
+import 'package:flutter_blog/ui/widgets/form/custom_check_box_and_title_form.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
 import 'package:flutter_blog/ui/widgets/text_form/custom_text_form_and_validator_button.dart';
 
@@ -59,17 +60,9 @@ class MySettingProfileBody extends StatelessWidget {
           ),
           SliverToBoxAdapter(child: SizedBox(height: gapLarge)),
           SliverToBoxAdapter(
-            child: Row(
-              children: [
-                Transform.scale(
-                  scale: 0.8,
-                  child: CustomCheckBox(
-                    color: Colors.transparent,
-                  ),
-                ),
-                Text("개인 정보 수집 및 이용 동의",
-                    style: subTitle3(mFontWeight: FontWeight.w600)),
-              ],
+            child: CustomCheckBoxAndTitleForm(
+              title: "개인정보 수집 및 이용 동의",
+              color: Colors.transparent,
             ),
           ),
           SliverToBoxAdapter(
@@ -78,8 +71,10 @@ class MySettingProfileBody extends StatelessWidget {
               children: [
                 Text("· 개인정보 수집 목적 : 원활한 밀리의 서재 서비스 이용을 위해 수집합니다.",
                     style: body4()),
+                SizedBox(height: gapSmall),
                 Text("· 개인정보 수집 항목 : [필수] 프로필 이미지, 필명, 휴대폰 번호, 이메일",
                     style: body4()),
+                SizedBox(height: gapSmall),
                 Text("· 개인정보 이용 기간 : 회원 탈퇴 시 또는 개인정보처리방침에 따라 보유 및 파기 됩니다.",
                     style: body4()),
               ],
