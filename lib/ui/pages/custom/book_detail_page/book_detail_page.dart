@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/data/dto/request_dto/book_like_request_dto.dart';
-import 'package:flutter_blog/data/model/book_like.dart';
 import 'package:flutter_blog/ui/millie_bottom_navigation_bar.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/body/book_detail_body.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
@@ -54,7 +53,7 @@ class BookDetailPage extends ConsumerWidget {
                 }
               }
             },
-            icon: bookLike == 1 ? iconFullStar() : iconEmptyStar(),
+            icon: book.bookLike == 1 ? iconFullStar() : iconEmptyStar(),
           ),
         ],
       ),

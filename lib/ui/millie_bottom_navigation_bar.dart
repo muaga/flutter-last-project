@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
-import 'package:flutter_blog/main.dart';
-import 'package:flutter_blog/ui/pages/today_now/now_book_list_page/now_book_list_page.dart';
 
 /// 바텀 네비게이션 바
 class MillieBottomNavigationBar extends StatefulWidget {

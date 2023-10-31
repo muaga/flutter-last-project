@@ -27,12 +27,12 @@ class CustomTextFormAndValidatorButton extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: subTitle1(mColor: kFontGray)),
+        Text(title, style: subTitle1()),
         SizedBox(height: gapMedium),
         Row(
           children: [
             Container(
-                width: 230,
+                width: 250,
                 child: CustomOutLineTextFormField(
                     hintText: hintText,
                     controller: controller,
@@ -45,7 +45,7 @@ class CustomTextFormAndValidatorButton extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5)),
-                  minimumSize: Size(120, 60),
+                  minimumSize: Size(100, 60),
                 )),
           ],
         ),

@@ -11,7 +11,6 @@ import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
 import 'package:flutter_blog/ui/widgets/text_form/custom_text_form.dart';
 import 'package:flutter_blog/ui/widgets/text_form/custom_text_form_and_validator_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 
 class JoinBody extends ConsumerWidget {
   final _formkey = GlobalKey<FormState>();
@@ -76,7 +75,7 @@ class JoinBody extends ConsumerWidget {
             const SizedBox(height: gapLarge),
             CheckBoxGroup(),
             const SizedBox(height: gapXxlarge),
-            BottomButton(
+            CustomBottomButton(
               funPageRoute: () {
                 if (_formkey.currentState!.validate()) {
                   JoinRequestDTO requestDTO = JoinRequestDTO(

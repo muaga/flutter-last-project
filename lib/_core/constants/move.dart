@@ -7,6 +7,7 @@ import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.d
 import 'package:flutter_blog/ui/pages/custom/post_detail_page/post_detail_page.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_page/post_write_page.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_main_page/my_setting_main_page.dart';
+import 'package:flutter_blog/ui/pages/my_setting/my_setting_profile_page/my_setting_profile_page.dart';
 import 'package:flutter_blog/ui/pages/today_now/now_book_list_page/now_book_list_page.dart';
 
 class Move {
@@ -28,6 +29,7 @@ class Move {
 
   // mySetting
   static String MySettingMainPage = "/mySettingMain";
+  static String MySettingProfilePage = "/mySettingProfile";
 }
 
 Map<String, Widget Function(BuildContext)> getRouters() {
@@ -51,5 +53,6 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.LoginOrJoinPage: (context) => const LoginOrJoinPage(),
     Move.LoginPage: (context) => const LoginPage(),
     Move.MySettingMainPage: (context) => const MySettingMainPage(),
+    Move.MySettingProfilePage: (context) => const MySettingProfilePage(),
   };
 }
