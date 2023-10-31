@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         // home: MainSplashPage(),
         debugShowCheckedModeBanner: false,
         theme: theme(),
-        initialRoute: Move.MillieIndexStackNavigationBar,
+        initialRoute: Move.MySettingResignationPage,
         routes: getRouters(),
       ),
     );

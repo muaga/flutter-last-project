@@ -9,8 +9,11 @@ import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.d
 import 'package:flutter_blog/ui/pages/custom/post_detail_page/post_detail_page.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_page/post_write_page.dart';
 import 'package:flutter_blog/ui/pages/custom/reply_write_and_list_page/reply_write_and_list_page.dart';
+import 'package:flutter_blog/ui/pages/custom/reply_write_and_list_page/reply_write_and_list_page.dart';
+import 'package:flutter_blog/ui/pages/custom/reply_write_and_list_page/reply_write_and_list_page.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_page.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_main_page/my_setting_main_page.dart';
+import 'package:flutter_blog/ui/pages/my_setting/my_setting_resignation_page/my_setting_resignation_page.dart';
 import 'package:flutter_blog/ui/pages/search/search_main_page/search_main_page.dart';
 import 'package:flutter_blog/ui/pages/search/search_result_page/search_result_page.dart';
 import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/one_month_press_book_list_page.dart';
@@ -20,64 +23,61 @@ import '../../ui/pages/today_now/book_store_best_book_list_page/book_store_best_
 class Move {
   // TODO : 서버 측 엔드포인트 확인 -> 변경하기
 
-  // auth
+  /// auth
   static String MainSplashPage = "/mainSplash";
   static String LoginOrJoinPage = "/loginJoin";
   static String JoinPage = "/join";
   static String LoginPage = "/login";
 
-  // search
+  /// search
   static String SearchMainPage = "/searchMain";
   static String SearchResultPage = "/searchResult";
 
-  // custom
+  /// custom
   static String BookDetailPage = "/book/Detail";
   static String PostDetailPage = "/post/Detail";
   static String PostWritePage = "/post/Write";
+  static String ReplyWriteAndListPage = "/replyWriteAndList";
 
-  // today-now
+  /// today-now
   static String BookStoreBestBookListPage = "/bookStoreBestList";
   static String OneMonthPressBookListPage = "/oneMonthPressBookList";
-  // feed
 
-  // myLibrary
+  /// today-story
+
+  /// feed
+
+  /// myLibrary
   static String MyLibraryMainPage = "/myLibraryMain";
 
-  // mySetting
+  /// mySetting
   static String MySettingMainPage = "/mySettingMain";
+  static String MySettingResignationPage = "/mySettingResignation";
 
-  // serch
-
-  // today-story
-
-  ///
+  /// bottom
   static String MillieIndexStackNavigationBar = "/indexStack";
-
-  static String ReplyWriteAndListPage = "/reply";
 }
 
 Map<String, Widget Function(BuildContext)> getRouters() {
   return {
-    ///
+    /// bottom
     Move.MillieIndexStackNavigationBar: (context) =>
         const MillieIndexStackNavigationBar(),
 
-    // auth
+    /// auth
     Move.MainSplashPage: (context) => const MainSplashPage(),
     Move.LoginOrJoinPage: (context) => const LoginOrJoinPage(),
     Move.JoinPage: (context) => const JoinPage(),
     Move.LoginPage: (context) => const LoginPage(),
 
-    // search
+    /// search
     Move.SearchMainPage: (context) => const SearchMainPage(),
-    Move.SearchResultPage: (context) =>
-        const SearchResultPage(searchText: "안녕"),
-    // Move.SearchResultPage: (context) {
-    //   final searchText = ModalRoute.of(context)!.settings.arguments as String;
-    //   return SearchResultPage(searchText: searchText);
-    // },
+    Move.SearchResultPage: (context) {
+      final searchText = ModalRoute.of(context)!.settings.arguments as String;
+      return SearchResultPage(searchText: searchText);
+    },
 
-    // custom
+    /// custom
     Move.BookDetailPage: (context) {
       final bookId = ModalRoute.of(context)!.settings.arguments as int;
       // 현재 경로에서 전달되는 인수
@@ -88,8 +88,9 @@ Map<String, Widget Function(BuildContext)> getRouters() {
       return PostDetailPage(postId: 1);
     },
     Move.PostWritePage: (context) => PostWritePage(),
+    Move.ReplyWriteAndListPage: (context) => ReplyWriteAndListPage(),
 
-    // today-now
+    /// today-now
     // 한달 이내에 출간한 책 목록 페이지
     Move.BookStoreBestBookListPage: (context) =>
         const BookStoreBestBookListPage(),
@@ -97,11 +98,11 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.OneMonthPressBookListPage: (context) =>
         const OneMonthPressBookListPage(),
 
-    // my-settiing
+    /// my-settiing
     Move.MySettingMainPage: (context) => const MySettingMainPage(),
-    Move.ReplyWriteAndListPage: (context) => ReplyWriteAndListPage(),
+    Move.MySettingResignationPage: (context) => MySettingResignationPage(),
 
-    // my-library
+    /// my-library
     Move.MyLibraryMainPage: (context) => const MyLibraryMainPage()
   };
 }
