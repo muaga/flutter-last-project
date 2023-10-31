@@ -10,10 +10,18 @@ class MyLibraryMainBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    User user = User(
+        id: 1,
+        username: "ssar",
+        email: "ssar@nate.com",
+        nickname: "유재석",
+        picUrl: "user1.png",
+        createdAt: "2023-10-10");
+
     return NestedScrollView(
       headerSliverBuilder: (context, innerBoxIsScrolled) {
         return [
-          MyLibraryMainAppBar(),
+          MyLibraryMainAppBar(user: user),
         ];
       },
       body: MyLibraryMainTabBarView(user: user),
