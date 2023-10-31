@@ -82,14 +82,12 @@ class _CustomCategoryBarState extends State<CustomCategoryForm> {
             child: IndexedStack(
               index: _pageIndex,
               children: [
-                CustomBookGridView(),
-
-                /// TODO 은혜 : 특정 카테고리 FindById 하기
-                Center(child: Text("트렌드")),
-                Center(child: Text("라이프")),
-                Center(child: Text("힐링")),
-                Center(child: Text("지적교양")),
-                Center(child: Text("소설")),
+                CustomBookGridView(categoryId: 0),
+                CustomBookGridView(categoryId: 1),
+                CustomBookGridView(categoryId: 2),
+                CustomBookGridView(categoryId: 3),
+                CustomBookGridView(categoryId: 4),
+                CustomBookGridView(categoryId: 5),
               ],
             ),
           )

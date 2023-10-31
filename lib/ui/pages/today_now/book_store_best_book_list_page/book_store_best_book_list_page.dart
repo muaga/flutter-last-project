@@ -9,26 +9,16 @@ class BookStoreBestBookListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: iconArrowBack()),
-          title: Text("한 달 이내에 출간된 책"),
-        ),
-        // bottomNavigationBar: MillieBottomNavigationBar(),
-        body: Stack(
-          children: [
-            // 책 목록 화면
-            BookStoreBestBookListBody(),
-            Positioned(
-              right: 0,
-              left: 0,
-              bottom: 0,
-              child: MillieBottomNavigationBar(),
-            ),
-          ],
-        ));
+      appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: iconArrowBack()),
+        title: Text("지금! 서점 베스트"),
+      ),
+      bottomNavigationBar: MillieBottomNavigationBar(),
+      body: BookStoreBestBookListBody(),
+    );
   }
 }
