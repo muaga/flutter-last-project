@@ -21,7 +21,6 @@ import '../../ui/pages/today_now/book_store_best_book_list_page/book_store_best_
 
 class Move {
   // TODO : 서버 측 엔드포인트 확인 -> 변경하기
-
   /// auth
   static String MainSplashPage = "/mainSplash";
   static String LoginOrJoinPage = "/loginJoin";
