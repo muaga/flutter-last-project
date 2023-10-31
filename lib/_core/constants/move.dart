@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/ui/millie_IndexStack_navigation_bar.dart';
-import 'package:flutter_blog/ui/millie_bottom_navigation_bar.dart';
 import 'package:flutter_blog/ui/pages/auth/join_page/join_page.dart';
 import 'package:flutter_blog/ui/pages/auth/login_or_join_page/login_or_join_page.dart';
 import 'package:flutter_blog/ui/pages/auth/login_page/login_page.dart';
@@ -9,11 +8,10 @@ import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.d
 import 'package:flutter_blog/ui/pages/custom/post_detail_page/post_detail_page.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_page/post_write_page.dart';
 import 'package:flutter_blog/ui/pages/custom/reply_write_and_list_page/reply_write_and_list_page.dart';
-import 'package:flutter_blog/ui/pages/custom/reply_write_and_list_page/reply_write_and_list_page.dart';
-import 'package:flutter_blog/ui/pages/custom/reply_write_and_list_page/reply_write_and_list_page.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_page.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_main_page/my_setting_main_page.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_resignation_page/my_setting_resignation_page.dart';
+import 'package:flutter_blog/ui/pages/my_setting/my_setting_profile_page/my_setting_profile_page.dart';
 import 'package:flutter_blog/ui/pages/search/search_main_page/search_main_page.dart';
 import 'package:flutter_blog/ui/pages/search/search_result_page/search_result_page.dart';
 import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/one_month_press_book_list_page.dart';
@@ -53,6 +51,7 @@ class Move {
   /// mySetting
   static String MySettingMainPage = "/mySettingMain";
   static String MySettingResignationPage = "/mySettingResignation";
+  static String MySettingProfilePage = "/mySettingProfile";
 
   /// bottom
   static String MillieIndexStackNavigationBar = "/indexStack";
@@ -101,6 +100,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     /// my-settiing
     Move.MySettingMainPage: (context) => const MySettingMainPage(),
     Move.MySettingResignationPage: (context) => MySettingResignationPage(),
+    Move.MySettingProfilePage: (context) => const MySettingProfilePage(),
 
     /// my-library
     Move.MyLibraryMainPage: (context) => const MyLibraryMainPage()
