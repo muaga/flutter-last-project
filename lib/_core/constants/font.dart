@@ -49,5 +49,5 @@ TextStyle body3(
 TextStyle body4(
     {Color mColor = kFontBlack, FontWeight mFontWeight = FontWeight.normal}) {
   return TextStyle(
-      fontSize: 11, fontWeight: mFontWeight, color: mColor, height: 1.4);
+      fontSize: 11.5, fontWeight: mFontWeight, color: mColor, height: 1.4);
 }

@@ -10,6 +10,7 @@ import 'package:flutter_blog/ui/pages/custom/post_write_page/post_write_page.dar
 import 'package:flutter_blog/ui/pages/custom/reply_write_and_list_page/reply_write_and_list_page.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_page.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_main_page/my_setting_main_page.dart';
+import 'package:flutter_blog/ui/pages/my_setting/my_setting_resignation_choice_page/my_setting_resignation_choice_page.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_resignation_page/my_setting_resignation_page.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_profile_page/my_setting_profile_page.dart';
 import 'package:flutter_blog/ui/pages/search/search_main_page/search_main_page.dart';
@@ -51,6 +52,7 @@ class Move {
   /// mySetting
   static String MySettingMainPage = "/mySettingMain";
   static String MySettingResignationPage = "/mySettingResignation";
+  static String MySettingResignationChoicePage = "/mySettingResignationChoice";
   static String MySettingProfilePage = "/mySettingProfile";
 
   /// bottom
@@ -84,6 +86,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     },
     Move.PostDetailPage: (context) {
       final postId = ModalRoute.of(context)!.settings.arguments as int;
+      // TODO 은혜 : 포스트상세페이지 완료시 번호->postId
       return PostDetailPage(postId: 1);
     },
     Move.PostWritePage: (context) => PostWritePage(),
@@ -100,6 +103,12 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     /// my-settiing
     Move.MySettingMainPage: (context) => const MySettingMainPage(),
     Move.MySettingResignationPage: (context) => MySettingResignationPage(),
+    Move.MySettingResignationChoicePage: (context) {
+      final userId = ModalRoute.of(context)!.settings.arguments as int;
+      // 현재 경로에서 전달되는 인수
+      // TODO 은혜 : 번호->postId
+      return MySettingResignationChoicePage(userId: 1);
+    },
     Move.MySettingProfilePage: (context) => const MySettingProfilePage(),
 
     /// my-library

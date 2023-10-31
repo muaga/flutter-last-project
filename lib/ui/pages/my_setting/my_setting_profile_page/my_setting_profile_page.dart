@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
-import 'package:flutter_blog/ui/pages/my_setting/my_setting_profile_page/my_setting_profile_body.dart';
+import 'package:flutter_blog/ui/pages/my_setting/my_setting_profile_page/widgets/body/my_setting_profile_body.dart';
 
 class MySettingProfilePage extends StatelessWidget {
   const MySettingProfilePage({super.key});

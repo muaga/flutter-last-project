@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
-import 'package:flutter_blog/ui/pages/my_setting/my_setting_resignation_page/body/my_setting_resignation_body.dart';
+import 'package:flutter_blog/ui/pages/my_setting/my_setting_resignation_page/widgets/body/my_setting_resignation_body.dart';
 
 class MySettingResignationPage extends StatelessWidget {
   const MySettingResignationPage({super.key});
