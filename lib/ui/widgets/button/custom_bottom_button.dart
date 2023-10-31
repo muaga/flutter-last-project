@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 
-class BottomButton extends StatelessWidget {
+class CustomBottomButton extends StatelessWidget {
   final funPageRoute;
   final String buttonText;
-  const BottomButton({required this.funPageRoute, required this.buttonText});
+  const CustomBottomButton(
+      {required this.funPageRoute, required this.buttonText});
 
   @override
   Widget build(BuildContext context) {

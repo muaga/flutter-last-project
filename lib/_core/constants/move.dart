@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/ui/millie_IndexStack_navigation_bar.dart';
-import 'package:flutter_blog/ui/millie_bottom_navigation_bar.dart';
 import 'package:flutter_blog/ui/pages/auth/join_page/join_page.dart';
 import 'package:flutter_blog/ui/pages/auth/login_or_join_page/login_or_join_page.dart';
 import 'package:flutter_blog/ui/pages/auth/login_page/login_page.dart';
@@ -11,6 +10,7 @@ import 'package:flutter_blog/ui/pages/custom/post_write_page/post_write_page.dar
 import 'package:flutter_blog/ui/pages/custom/reply_write_and_list_page/reply_write_and_list_page.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_page.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_main_page/my_setting_main_page.dart';
+import 'package:flutter_blog/ui/pages/my_setting/my_setting_profile_page/my_setting_profile_page.dart';
 import 'package:flutter_blog/ui/pages/search/search_main_page/search_main_page.dart';
 import 'package:flutter_blog/ui/pages/search/search_result_page/search_result_page.dart';
 import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/one_month_press_book_list_page.dart';
@@ -34,6 +34,7 @@ class Move {
   static String BookDetailPage = "/book/Detail";
   static String PostDetailPage = "/post/Detail";
   static String PostWritePage = "/post/Write";
+  static String ReplyWriteAndListPage = "/reply";
 
   // today-now
   static String BookStoreBestBookListPage = "/bookStoreBestList";
@@ -45,6 +46,7 @@ class Move {
 
   // mySetting
   static String MySettingMainPage = "/mySettingMain";
+  static String MySettingProfilePage = "/mySettingProfile";
 
   // serch
 
@@ -52,8 +54,6 @@ class Move {
 
   ///
   static String MillieIndexStackNavigationBar = "/indexStack";
-
-  static String ReplyWriteAndListPage = "/reply";
 }
 
 Map<String, Widget Function(BuildContext)> getRouters() {
@@ -99,6 +99,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
 
     // my-settiing
     Move.MySettingMainPage: (context) => const MySettingMainPage(),
+    Move.MySettingProfilePage: (context) => const MySettingProfilePage(),
     Move.ReplyWriteAndListPage: (context) => ReplyWriteAndListPage(),
 
     // my-library

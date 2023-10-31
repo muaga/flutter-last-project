@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
-import 'package:logger/logger.dart';
 
 /// 바텀 네비게이션 바
 class MillieBottomNavigationBar extends StatefulWidget {
