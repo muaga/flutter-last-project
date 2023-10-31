@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/ui/millie_bottom_navigation_bar.dart';
-import 'package:flutter_blog/ui/pages/today_now/now_book_list_page/widgets/body/now_book_list_body.dart';
+import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/widgets/body/one_month_press_book_list_body.dart';
 
-class NowBookListPage extends StatelessWidget {
-  const NowBookListPage({super.key});
+class OneMonthPressBookListPage extends StatelessWidget {
+  const OneMonthPressBookListPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class NowBookListPage extends StatelessWidget {
         body: Stack(
           children: [
             // 책 목록 화면
-            NowBookListBody(),
+            OneMonthPressBookListBody(),
             Positioned(
               right: 0,
               left: 0,

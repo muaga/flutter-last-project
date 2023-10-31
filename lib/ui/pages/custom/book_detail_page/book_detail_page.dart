@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/color.dart';
+import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/data/dto/request_dto/book_like_request_dto.dart';
 import 'package:flutter_blog/ui/millie_bottom_navigation_bar.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/body/book_detail_body.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
+import 'package:flutter_blog/ui/pages/custom/book_read_page/book_read_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
@@ -23,11 +26,12 @@ class BookDetailPage extends ConsumerWidget {
 
     BookDetailModel book;
     if (bookDetailModel == null) {
-      Logger().d("bookDetailModel : ${bookDetailModel}");
       return Center(child: CircularProgressIndicator());
     } else {
       book = bookDetailModel; // book 변수를 초기화
     }
+    Logger().d("bookDetailModel : ${bookDetailModel.bookTitle}");
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -57,7 +61,39 @@ class BookDetailPage extends ConsumerWidget {
           ),
         ],
       ),
-      bottomNavigationBar: MillieBottomNavigationBar(),
+      bottomNavigationBar: BottomAppBar(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                width: 250,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const BookReadPage()),
+                    );
+                  },
+                  child: Text(
+                    "바로읽기",
+                    style: subTitle1(mColor: kFontWhite),
+                  ),
+                ),
+              ),
+            ),
+            Flexible(
+              child: MillieBottomNavigationBar(),
+            ),
+          ],
+        ),
+      ),
       body: BookDetailBody(book: book, sessionUser: sessionUser),
     );
   }
