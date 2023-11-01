@@ -6,6 +6,7 @@ import 'package:flutter_blog/ui/widgets/button/custom_bottom_button.dart';
 import 'package:flutter_blog/ui/widgets/custom_check_box.dart';
 import 'package:flutter_blog/ui/widgets/form/custom_check_box_and_title_form.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
+import 'package:flutter_blog/ui/widgets/text_form/custom_text_form.dart';
 import 'package:flutter_blog/ui/widgets/text_form/custom_text_form_and_validator_button.dart';
 
 class MySettingProfileBody extends StatelessWidget {
@@ -36,20 +37,18 @@ class MySettingProfileBody extends StatelessWidget {
           ),
           SliverToBoxAdapter(child: SizedBox(height: gapLarge)),
           SliverToBoxAdapter(
-            child: CustomTextFormAndValidatorButton(
+            child: CustomTextForm(
               title: "비밀번호",
               obscureText: true,
               hintText: "●●●●●●●●●",
-              buttonText: "수정하기",
               funValidator: validatePassword(),
               controller: _password,
             ),
           ),
           SliverToBoxAdapter(
-            child: CustomTextFormAndValidatorButton(
+            child: CustomTextForm(
               title: "이메일",
               hintText: "이메일 주소 입력",
-              buttonText: "수정하기",
               funValidator: validateEmail(),
               controller: _email,
             ),
