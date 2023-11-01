@@ -30,7 +30,7 @@ class MyLibraryMainReadingNoteContent extends StatelessWidget {
             child: PopupMenuButton<String>(
               onSelected: (String choice) {
                 if (choice == "delete") {
-                  // 삭제 작업을 수행하거나 삭제 다이얼로그를 표시할 수 있습니다.
+                  // 작업을 수행하거나 다이얼로그를 표시할 수 있습니다.
                   // 예를 들어 showDialog()를 사용하여 삭제 확인 대화상자를 표시할 수 있습니다.
                 }
               },
