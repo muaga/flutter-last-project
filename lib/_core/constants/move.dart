@@ -10,9 +10,11 @@ import 'package:flutter_blog/ui/pages/custom/post_write_page/post_write_page.dar
 import 'package:flutter_blog/ui/pages/custom/reply_write_and_list_page/reply_write_and_list_page.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_page.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_main_page/my_setting_main_page.dart';
+import 'package:flutter_blog/ui/pages/my_setting/my_setting_profile_page/my_setting_profile_page.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_resignation_choice_page/my_setting_resignation_choice_page.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_resignation_page/my_setting_resignation_page.dart';
-import 'package:flutter_blog/ui/pages/my_setting/my_setting_profile_page/my_setting_profile_page.dart';
+import 'package:flutter_blog/ui/pages/my_setting/my_setting_sub_scription_list_page/my_setting_sub_scription_list_page.dart';
+import 'package:flutter_blog/ui/pages/my_setting/my_setting_sub_scription_page/my_setting_sub_scription_page.dart';
 import 'package:flutter_blog/ui/pages/search/search_main_page/search_main_page.dart';
 import 'package:flutter_blog/ui/pages/search/search_result_page/search_result_page.dart';
 import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/one_month_press_book_list_page.dart';
@@ -53,6 +55,8 @@ class Move {
   static String MySettingResignationPage = "/mySettingResignation";
   static String MySettingResignationChoicePage = "/mySettingResignationChoice";
   static String MySettingProfilePage = "/mySettingProfile";
+  static String MySettingSubScriptionPage = "/mySettingSubScription";
+  static String MySettingSubScriptionListPage = "/mySettingSubScriptionList";
 
   /// bottom
   static String MillieIndexStackNavigationBar = "/indexStack";
@@ -109,6 +113,10 @@ Map<String, Widget Function(BuildContext)> getRouters() {
       return MySettingResignationChoicePage(userId: 1);
     },
     Move.MySettingProfilePage: (context) => const MySettingProfilePage(),
+    Move.MySettingSubScriptionPage: (context) =>
+        const MySettingSubScriptionPage(),
+    Move.MySettingSubScriptionListPage: (context) =>
+        const MySettingSubScriptionListPage(),
 
     /// my-library
     Move.MyLibraryMainPage: (context) => const MyLibraryMainPage()

@@ -6,9 +6,11 @@ class CustomTitleInsert extends StatelessWidget {
   const CustomTitleInsert({
     super.key,
     required this.titleController,
+    this.hintText,
   });
 
   final TextEditingController titleController;
+  final String? hintText;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class CustomTitleInsert extends StatelessWidget {
       style: title1(),
       controller: titleController,
       decoration: InputDecoration(
-          hintText: "제목을 입력하세요.", hintStyle: title1(mColor: kFontGray)),
+          hintText: "${hintText}", hintStyle: title1(mColor: kFontGray)),
       maxLines: null,
       maxLength: 80,
     );

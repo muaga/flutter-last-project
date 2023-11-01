@@ -42,6 +42,14 @@ Icon iconDotMenu({Color mColor = kFontBlack, double mSize = 25}) {
   return Icon(Icons.more_vert_sharp, color: mColor, size: mSize);
 }
 
+Icon iconPriceCheck({Color mColor = kFontBlack, double mSize = 25}) {
+  return Icon(Icons.price_check, color: mColor, size: mSize);
+}
+
+Icon iconRefund({Color mColor = kFontBlack, double mSize = 25}) {
+  return Icon(CupertinoIcons.gobackward, color: mColor, size: mSize);
+}
+
 Icon iconHamburgerMenu({Color mColor = kFontBlack, double mSize = 25}) {
   return Icon(Icons.density_medium_rounded, color: mColor, size: mSize);
 }

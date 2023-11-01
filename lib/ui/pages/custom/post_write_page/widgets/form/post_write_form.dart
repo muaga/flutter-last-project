@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/ui/widgets/custom_summernote.dart';
 import 'package:flutter_blog/ui/widgets/custom_title_insert.dart';
 import 'package:flutter_summernote/flutter_summernote.dart';
 
@@ -23,7 +22,6 @@ class PostWriteForm extends StatelessWidget {
           // 제목 입력란
           CustomTitleInsert(titleController: titleController),
           // Summernote 에디터
-          CustomSummernote(keyEditor: _keyEditor),
         ],
       ),
     );

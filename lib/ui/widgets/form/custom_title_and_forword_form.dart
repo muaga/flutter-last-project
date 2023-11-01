@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 
-class CustomTitleAndForwordButton extends StatelessWidget {
-  const CustomTitleAndForwordButton({
-    super.key,
-    required this.title,
-    this.count,
-    required this.animeTo,
-    required TabController? tabController,
-  }) : _tabController = tabController;
+class CustomTitleAndForwordForm extends StatelessWidget {
+  const CustomTitleAndForwordForm(
+      {super.key,
+      required this.title,
+      required this.funPageRoute,
+      this.textStyle,
+      this.fontWeight,
+      this.fontColor});
 
-  final TabController? _tabController;
   final String title;
-  final int? count;
-  final int animeTo;
+  final Color? fontColor;
+  final TextStyle? textStyle;
+  final FontWeight? fontWeight;
+  final funPageRoute;
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +29,14 @@ class CustomTitleAndForwordButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "${title}  ${count}",
-                style: subTitle2(),
+                "${title}",
+                style: textStyle ??
+                    subTitle2(
+                        mColor: fontColor ?? kFontBlack,
+                        mFontWeight: fontWeight ?? FontWeight.bold),
               ),
               IconButton(
-                onPressed: () {
-                  _tabController?.animateTo(animeTo);
-                },
+                onPressed: funPageRoute,
                 icon: iconArrowForward(),
               ),
             ],
