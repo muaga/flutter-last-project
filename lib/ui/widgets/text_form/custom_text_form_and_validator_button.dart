@@ -27,7 +27,7 @@ class CustomTextFormAndValidatorButton extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title, style: subTitle1()),
+        Text(title, style: subTitle1(mColor: kFontGray)),
         SizedBox(height: gapMedium),
         Row(
           children: [

@@ -4,7 +4,7 @@ import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/ui/pages/auth/login_page/widgets/form/custom_title_and_subtitle_form.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_main_page/widgets/form/my_setting_main_no_sub_scription_form.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_main_page/widgets/form/my_setting_main_yes_sub_scription_form.dart';
-import 'package:flutter_blog/ui/pages/my_setting/my_setting_main_page/widgets/form/my_setting_member_type_form.dart';
+import 'package:flutter_blog/ui/pages/my_setting/my_setting_main_page/widgets/form/my_setting_main_member_type_form.dart';
 import 'package:flutter_blog/ui/widgets/button/custom_radius_color_button.dart';
 import 'package:flutter_blog/ui/widgets/form/custom_title_and_forword_form.dart';
 import 'package:flutter_blog/ui/widgets/form/custom_title_gray_form.dart';
@@ -14,12 +14,12 @@ class MySettingMainBody extends StatelessWidget {
 
   /// 구독권의 유무
   // TODO 은혜 : 구독권을 bool로 할 지 결정
-  final bool subScription = true;
+  final bool subScriptionState = true;
 
   @override
   Widget build(BuildContext context) {
     /// 구독권이 있을 때
-    if (subScription == true) {
+    if (subScriptionState == true) {
       return ListView(
         children: [
           Padding(
