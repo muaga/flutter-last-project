@@ -6,11 +6,13 @@ class CustomCategoryButton extends StatelessWidget {
   final int index;
   final int pageIndex;
   final VoidCallback onPress;
+  final FontWeight? fontWeight;
   const CustomCategoryButton(
       {required this.label,
       required this.index,
       required this.pageIndex,
-      required this.onPress});
+      required this.onPress,
+      this.fontWeight});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,9 @@ class CustomCategoryButton extends StatelessWidget {
           backgroundColor: isSelected ? kBackBlack : Colors.transparent,
         ),
         child: Text(label,
-            style: TextStyle(color: isSelected ? kFontWhite : kFontBlack)),
+            style: TextStyle(
+                color: isSelected ? kFontWhite : kFontBlack,
+                fontWeight: fontWeight ?? FontWeight.normal)),
       ),
     );
   }

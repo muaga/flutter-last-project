@@ -33,7 +33,7 @@ class MyLibraryMainAppBarBottomSheetButton extends StatelessWidget {
               SizedBox(width: gapMedium),
               Text(
                 buttonText, // 받은 텍스트 사용
-                style: subTitle1(mFontWeight: FontWeight.normal),
+                style: subTitle2(mFontWeight: FontWeight.normal),
               ),
             ],
           ),
