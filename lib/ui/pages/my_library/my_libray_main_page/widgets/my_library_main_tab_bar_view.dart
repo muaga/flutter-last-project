@@ -4,6 +4,7 @@ import 'package:flutter_blog/data/model/board.dart';
 import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/data/model/book_reply.dart';
 import 'package:flutter_blog/data/model/user.dart';
+import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_reading_note/my_library_main_reading_note_form/my_library_main_reading_note_content.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_reading_note/my_library_main_reading_note_form/my_library_main_reading_note_form.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/widgets/my_library_main_bookcase.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/widgets/my_library_main_like_books.dart';
@@ -130,6 +131,7 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
                                 label: "한 줄 리뷰",
                                 index: 0,
                                 pageIndex: _pageIndex,
+                                fontWeight: FontWeight.bold,
                                 onPress: () {
                                   changePage(0);
                                 }),
@@ -137,6 +139,7 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
                                 label: "포스트",
                                 index: 1,
                                 pageIndex: _pageIndex,
+                                fontWeight: FontWeight.bold,
                                 onPress: () {
                                   changePage(1);
                                 }),
@@ -176,7 +179,7 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
 
                               return Column(
                                 children: [
-                                  MyLibraryMainReadingNoteForm(
+                                  MyLibraryMainReadingNoteContent(
                                     book: book,
                                     oneReviewComent:
                                         "${bookReplys[index].content}",

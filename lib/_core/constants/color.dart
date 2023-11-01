@@ -18,6 +18,7 @@ const Color kBackIbory = Color(0xFFFAFAF6);
 const Color kBackIbory2 = Color(0xFFF4F5F8);
 const Color kBackIbory3 = Color(0xFFFAFDDC);
 const Color kBackLightGray = Color(0xFFF4F5F8);
+const Color kBackLight2Gray = Color(0xFFCECECE);
 const Color kBackLightBlue = Color(0xFFBEC4D0);
 const Color kBackGray = Color(0xFFC1C1C1);
 

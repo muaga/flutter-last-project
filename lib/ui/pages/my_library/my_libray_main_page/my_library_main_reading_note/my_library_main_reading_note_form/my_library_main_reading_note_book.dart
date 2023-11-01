@@ -12,24 +12,24 @@ class MyLibraryMainReadingNoteBook extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
+      width: MediaQuery.of(context).size.width * 0.85, // 화면 너비의 80%
       height: MediaQuery.of(context).size.height / 6,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        color: kBackGray,
+        color: kBackLight2Gray,
       ),
       child: Row(
         children: [
           SizedBox(width: gapLarge),
           Container(
-            height: MediaQuery.of(context).size.height / 6 * 0.8,
-            width: MediaQuery.of(context).size.width / 0.9 * 0.2,
+            height: MediaQuery.of(context).size.height / 7 * 0.8,
+            width: MediaQuery.of(context).size.width / 6 * 0.95,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
             ),
             child: CachedNetworkImage(
               imageUrl: "http://192.168.0.40:8080/images/${book.picUrl}",
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
               placeholder: (context, url) => CircularProgressIndicator(
                 strokeWidth: 5,
               ),
@@ -43,10 +43,10 @@ class MyLibraryMainReadingNoteBook extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(book.title, style: subTitle1()),
+                  Text(book.title, style: subTitle2()),
                   SizedBox(height: gapSmall),
                   Text(book.writer,
-                      style: subTitle2(mFontWeight: FontWeight.normal)),
+                      style: subTitle3(mFontWeight: FontWeight.normal)),
                 ],
               ),
             ),
