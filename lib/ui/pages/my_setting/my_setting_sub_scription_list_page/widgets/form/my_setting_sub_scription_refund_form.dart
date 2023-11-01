@@ -6,22 +6,16 @@ import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
 
 import '../../../../../../_core/constants/color.dart';
 
-class MySettingSubSciptionForm extends StatelessWidget {
-  const MySettingSubSciptionForm(
+class MySettingSubSciptionReFundForm extends StatelessWidget {
+  const MySettingSubSciptionReFundForm(
       {super.key,
-      required this.startDuration,
-      required this.endDuration,
-      required this.paymentDate,
+      required this.reFundDate,
       required this.price,
-      required this.subScriptionNumber,
-      required this.payment});
+      required this.reFund});
 
-  final String startDuration;
-  final String endDuration;
-  final String paymentDate;
-  final String subScriptionNumber;
+  final String reFundDate;
   final String price;
-  final String payment;
+  final String reFund;
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +32,7 @@ class MySettingSubSciptionForm extends StatelessWidget {
           children: [
             Text("월 정기 구독", style: subTitle2(mFontWeight: FontWeight.w600)),
             const SizedBox(height: gapSmall),
-            Text("${startDuration} ~ ${endDuration}",
-                style: body1(mColor: kFontGray)),
-            Text("결제일 : ${paymentDate}", style: body1(mColor: kFontGray)),
-            Text("정기구독 이용권 : ${subScriptionNumber ?? ""}",
-                style: body1(mColor: kFontGray)),
+            Text("취소 완료일 : ${reFundDate}", style: body1(mColor: kFontGray)),
             const SizedBox(height: gapMain),
             CustomThinLine(),
             const SizedBox(height: gapMain),
@@ -52,23 +42,23 @@ class MySettingSubSciptionForm extends StatelessWidget {
                 Text("상품금액",
                     style: subTitle3(
                         mColor: kFontGray, mFontWeight: FontWeight.w500)),
-                Text("${price}원", style: subTitle3()),
+                Text("${price}원", style: subTitle3(mColor: kFontGray)),
               ],
             ),
             const SizedBox(height: gapMain),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text("결제금액",
+                Text("취소금액",
                     style: subTitle3(
                         mColor: kFontGray, mFontWeight: FontWeight.w500)),
-                Text("${price}원", style: subTitle2(mColor: kPointColor)),
+                Text("- ${reFund}원", style: subTitle2(mColor: kFontGray)),
               ],
             ),
             const SizedBox(height: gapMain),
             CustomThinLine(),
             const SizedBox(height: gapMain),
-            MySettingSubScriptionPayCheckIcon(subScriptionState: true)
+            MySettingSubScriptionPayCheckIcon(subScriptionState: false)
           ],
         ),
       ),

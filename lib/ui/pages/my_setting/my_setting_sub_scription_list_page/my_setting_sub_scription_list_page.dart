@@ -18,7 +18,7 @@ class MySettingSubScriptionListPage extends StatelessWidget {
         title: Text("구독 내역 확인"),
         elevation: 0.5,
       ),
-      body: MySettingSubScriptionListBody(),
+      body: MySettingSubScriptionListBody(subScriptionState: false),
     );
   }
 }
