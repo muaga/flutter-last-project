@@ -5,10 +5,9 @@ import 'package:flutter_blog/ui/pages/my_setting/my_setting_sub_scription_list_p
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_sub_scription_list_page/widgets/form/my_setting_sub_scription_refund_form.dart';
 
 class MySettingSubScriptionListBody extends StatelessWidget {
-  const MySettingSubScriptionListBody(
-      {super.key, required this.subScriptionState});
+  const MySettingSubScriptionListBody({super.key, required this.paymentState});
 
-  final subScriptionState;
+  final paymentState;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,7 @@ class MySettingSubScriptionListBody extends StatelessWidget {
             child: ListView.builder(
               itemCount: 1,
               itemBuilder: (context, index) {
-                if (subScriptionState == true) {
+                if (paymentState == true) {
                   return MySettingSubSciptionForm(
                       startDuration: "2021.06.18",
                       endDuration: "2023.08.16",
