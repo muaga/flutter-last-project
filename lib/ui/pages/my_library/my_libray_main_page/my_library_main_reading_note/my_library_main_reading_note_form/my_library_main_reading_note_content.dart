@@ -3,6 +3,7 @@ import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/model/book.dart';
+import 'package:logger/logger.dart';
 
 class MyLibraryMainReadingNoteContent extends StatelessWidget {
   final String oneReviewComent;
@@ -37,6 +38,7 @@ class MyLibraryMainReadingNoteContent extends StatelessWidget {
                 onSelected: (String choice) {
                   if (choice == "삭제하기") {
                     // 삭제 동작 수행
+                    Logger().d("여기는 버튼이야");
                   }
                 },
                 itemBuilder: (BuildContext context) {

@@ -177,16 +177,22 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
                             itemBuilder: (BuildContext context, int index) {
                               final book = books[index];
 
-                              return Column(
-                                children: [
-                                  MyLibraryMainReadingNoteContent(
-                                    book: book,
-                                    oneReviewComent:
-                                        "${bookReplys[index].content}",
-                                    oneReviewDate:
-                                        "${bookReplys[index].createdAt}",
-                                  ),
-                                ],
+                              return InkWell(
+                                onTap: (){
+                                  /// TODO 대욱 : 임시주소 -> 포스트디테일 페이지로 연결
+                                  Navigator.pushNamed(context, "/searchMain");
+                                },
+                                child: Column(
+                                  children: [
+                                    MyLibraryMainReadingNoteContent(
+                                      book: book,
+                                      oneReviewComent:
+                                          "${bookReplys[index].content}",
+                                      oneReviewDate:
+                                          "${bookReplys[index].createdAt}",
+                                    ),
+                                  ],
+                                ),
                               );
                             },
                           ),

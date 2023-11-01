@@ -18,7 +18,7 @@ class _MyLibraryMainLikeBooksState extends State<MyLibraryMainLikeBooks> {
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
-        title: Text("좋아하는 책"),
+        title: Text("포스트"),
       ),
       body: Container(
         width: getScreenWidth(context),
@@ -36,56 +36,8 @@ class _MyLibraryMainLikeBooksState extends State<MyLibraryMainLikeBooks> {
             return InkWell(
               onTap: () {
                 int? bookId = books[index].id;
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      title: Center(
-                        child: Text(
-                          '알림',
-                          style: subTitle1(mFontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      content: Text(
-                        "책 목록에서 삭제할까요?",
-                        style: body1(mColor: kFontGray),
-                        textAlign: TextAlign.center,
-                      ),
-                      actions: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            TextButton(
-                              style: TextButton.styleFrom(
-                                  backgroundColor: kBackGray, // 배경색
-                                  minimumSize: Size(130, 50)),
-                              onPressed: () {
-                                Navigator.of(context).pop(); // 알림창 닫기
-                              },
-                              child: Text(
-                                '취소',
-                                style: subTitle3(mColor: kFontBlack),
-                              ),
-                            ),
-                            TextButton(
-                              style: TextButton.styleFrom(
-                                  backgroundColor: kRed, // 배경색
-                                  minimumSize: Size(130, 50)),
-                              onPressed: () {
-                                // 삭제 동작을 수행하거나 필요한 작업을 추가
-                                Navigator.of(context).pop(); // 알림창 닫기
-                              },
-                              child: Text(
-                                '삭제',
-                                style: subTitle3(mColor: kFontWhite),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    );
-                  },
-                );
+                /// TODO 대욱 : 포스트 쓰는 주소로 연결
+                Navigator.pushNamed(context, "/searchMain");
               },
               child: CustomGridBookCard(books[index]),
             );
