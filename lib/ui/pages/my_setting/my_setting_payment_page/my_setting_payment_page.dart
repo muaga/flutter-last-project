@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
-import 'package:flutter_blog/ui/pages/auth/join_page/widgets/body/join_body.dart';
+import 'package:flutter_blog/ui/pages/my_setting/my_setting_payment_page/body/my_setting_payment_body.dart';
 
-class JoinPage extends StatelessWidget {
-  const JoinPage({super.key});
+class MySettingPaymentPage extends StatelessWidget {
+  const MySettingPaymentPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kPrimaryColor,
       appBar: AppBar(
+        backgroundColor: kPrimaryColor,
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
             icon: iconArrowBack()),
-        title: Text("회원가입"),
-        elevation: 0.2,
       ),
-      body: JoinBody(),
-      // extendBody: true,
+      body: MySettingPaymentBody(),
     );
   }
 }

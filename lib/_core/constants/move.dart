@@ -10,6 +10,7 @@ import 'package:flutter_blog/ui/pages/custom/post_write_page/post_write_page.dar
 import 'package:flutter_blog/ui/pages/custom/reply_write_and_list_page/reply_write_and_list_page.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_page.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_main_page/my_setting_main_page.dart';
+import 'package:flutter_blog/ui/pages/my_setting/my_setting_payment_page/my_setting_payment_page.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_profile_page/my_setting_profile_page.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_resignation_choice_page/my_setting_resignation_choice_page.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_resignation_page/my_setting_resignation_page.dart';
@@ -57,6 +58,7 @@ class Move {
   static String MySettingProfilePage = "/mySettingProfile";
   static String MySettingSubScriptionPage = "/mySettingSubScription";
   static String MySettingSubScriptionListPage = "/mySettingSubScriptionList";
+  static String MySettingPaymentPage = "/mySettingPayment";
 
   /// bottom
   static String MillieIndexStackNavigationBar = "/indexStack";
@@ -85,7 +87,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.BookDetailPage: (context) {
       final bookId = ModalRoute.of(context)!.settings.arguments as int;
       // 현재 경로에서 전달되는 인수
-      return BookDetailPage(bookId: bookId);
+      return BookDetailPage(bookId: 1);
     },
     Move.PostDetailPage: (context) {
       final postId = ModalRoute.of(context)!.settings.arguments as int;
@@ -103,7 +105,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.OneMonthPressBookListPage: (context) =>
         const OneMonthPressBookListPage(),
 
-    /// my-settiing
+    /// my-setting
     Move.MySettingMainPage: (context) => const MySettingMainPage(),
     Move.MySettingResignationPage: (context) => MySettingResignationPage(),
     Move.MySettingResignationChoicePage: (context) {
@@ -117,6 +119,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
         const MySettingSubScriptionPage(),
     Move.MySettingSubScriptionListPage: (context) =>
         const MySettingSubScriptionListPage(),
+    Move.MySettingPaymentPage: (context) => const MySettingPaymentPage(),
 
     /// my-library
     Move.MyLibraryMainPage: (context) => const MyLibraryMainPage()

@@ -15,7 +15,7 @@ class SearchResultBookForm extends StatelessWidget {
     return Column(
       children: [
         SearchResultTitle(title: "검색결과", count: 2),
-        Expanded(child: CustomBookGridView()),
+        Expanded(child: CustomBookGridView(books: books)),
       ],
     );
   }

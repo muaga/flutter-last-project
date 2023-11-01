@@ -42,6 +42,7 @@ class MySettingResignationBody extends StatelessWidget {
             ],
           ),
           MySettingResignationTwoButton(
+            yellowButtonText: "계속 진행하기",
             funPageRoute: () {
               Navigator.push(
                 context,

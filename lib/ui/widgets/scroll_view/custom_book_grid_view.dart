@@ -5,20 +5,13 @@ import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.d
 import 'package:flutter_blog/ui/widgets/custom_grid_book_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CustomBookGridView extends ConsumerWidget {
+class CustomBookGridView extends StatelessWidget {
   final int? categoryId;
-  const CustomBookGridView({this.categoryId});
+  final List<Book> books;
+  const CustomBookGridView({this.categoryId, required this.books});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    // BookListModel? model = ref.watch(bookListProvider);
-    // List<Book> books = [];
-    // if (model == null) {
-    //   return Center(child: CircularProgressIndicator());
-    // } else {
-    //   books = model.books;
-    // }
-
+  Widget build(BuildContext context) {
     return Container(
       width: getScreenWidth(context),
       height: getScreenHeight(context),

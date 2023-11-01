@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
+import 'package:flutter_blog/data/dto/request_dto/book_request_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
@@ -7,10 +8,13 @@ import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detai
 // 통신 & 파싱
 class BookRepository {
   // 책 상세보기
-  Future<ResponseDTO> fetchBookDetail(int id) async {
+  Future<ResponseDTO> fetchBookDetail(int bookId, String jwt) async {
     try {
       // 통신
-      Response response = await dio.get("/book/detail/$id");
+      Response response = await dio.get(
+        "/book/detail/$bookId",
+        options: Options(headers: {"Authorization": jwt}),
+      );
 
       // 파싱
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
@@ -24,10 +28,11 @@ class BookRepository {
   }
 
   // 책 목록보기
-  Future<ResponseDTO> fetchBookList() async {
+  Future<ResponseDTO> fetchBookList(BookRequestDTO dto) async {
     try {
       // 통신
-      Response<dynamic> response = await dio.get("/books");
+      Response<dynamic> response =
+          await dio.post("/book/monthList", data: dto.toJson());
 
       // 파싱
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);

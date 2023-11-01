@@ -396,7 +396,7 @@ List<Book> books = [
       bookDataId: 1),
   Book(
       id: 20,
-      picUrl: "book18.png",
+      picUrl: "book20.png",
       title: "힐링 토크",
       writer: "JKSC 편집부",
       totalPage: "100",
@@ -588,7 +588,7 @@ List<Book> books = [
       bookDataId: 1),
   Book(
       id: 32,
-      picUrl: "book33.png",
+      picUrl: "book32.png",
       title: "아침 그리고 저녁",
       writer: "욘 포세",
       totalPage: "100",
@@ -604,7 +604,7 @@ List<Book> books = [
       bookDataId: 1),
   Book(
       id: 33,
-      picUrl: "book18.png",
+      picUrl: "book33.png",
       title: "모순",
       writer: "양귀자",
       totalPage: "100",

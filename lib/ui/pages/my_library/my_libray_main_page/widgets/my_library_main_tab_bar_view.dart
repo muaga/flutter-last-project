@@ -77,7 +77,7 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
                 },
               ),
             ),
-            Expanded(child: CustomBookGridView()),
+            Expanded(child: CustomBookGridView(books: books)),
           ],
         ),
         Column(
@@ -112,7 +112,7 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
                 },
               ),
             ),
-            Expanded(child: CustomBookGridView()),
+            Expanded(child: CustomBookGridView(books: books)),
           ],
         ),
         Padding(

@@ -6,8 +6,10 @@ import 'package:flutter_blog/ui/pages/my_setting/my_setting_resignation_choice_p
 import 'package:flutter_blog/ui/widgets/button/custom_radius_color_button.dart';
 
 class MySettingResignationTwoButton extends StatelessWidget {
-  const MySettingResignationTwoButton({super.key, required this.funPageRoute});
+  const MySettingResignationTwoButton(
+      {super.key, required this.funPageRoute, required this.yellowButtonText});
 
+  final String yellowButtonText;
   final funPageRoute;
 
   @override
@@ -27,7 +29,7 @@ class MySettingResignationTwoButton extends StatelessWidget {
         SizedBox(width: gapMedium),
         Expanded(
           child: CustomRadiusColorButton(
-            buttonText: "계속 진행하기",
+            buttonText: yellowButtonText,
             funPageRoute: funPageRoute,
             backgroundColor: kPrimaryColor,
             borderRadius: 10,
