@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         // home: MainSplashPage(),
         debugShowCheckedModeBanner: false,
         theme: theme(),
-        initialRoute: Move.OneMonthPressBookListPage,
+        initialRoute: Move.MyLibraryMainPage,
 
         routes: getRouters(),
       ),
