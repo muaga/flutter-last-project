@@ -82,6 +82,7 @@ class _CheckBoxGroupState extends State<CheckBoxGroup> {
                         onChanged: (value) {
                           updateSubCheckBox(0, value ?? false);
                         },
+                        activeColor: kPrimaryColor,
                       ),
                       Text('(필수) 만14세 이상'),
                     ],

@@ -21,8 +21,10 @@ class MySettingResignationChoiceBody extends StatelessWidget {
           ),
           SizedBox(height: gapXlarge),
           MySettingResignationTwoButton(
+            yellowButtonText: "탈퇴하기",
             funPageRoute: () {
-              Navigator.popAndPushNamed(context, "/loginJoin");
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil('/loginJoin', (route) => false);
             },
           ),
         ],

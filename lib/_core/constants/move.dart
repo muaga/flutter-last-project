@@ -87,7 +87,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.BookDetailPage: (context) {
       final bookId = ModalRoute.of(context)!.settings.arguments as int;
       // 현재 경로에서 전달되는 인수
-      return BookDetailPage(bookId: bookId);
+      return BookDetailPage(bookId: 1);
     },
     Move.PostDetailPage: (context) {
       final postId = ModalRoute.of(context)!.settings.arguments as int;
@@ -105,7 +105,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.OneMonthPressBookListPage: (context) =>
         const OneMonthPressBookListPage(),
 
-    /// my-settiing
+    /// my-setting
     Move.MySettingMainPage: (context) => const MySettingMainPage(),
     Move.MySettingResignationPage: (context) => MySettingResignationPage(),
     Move.MySettingResignationChoicePage: (context) {

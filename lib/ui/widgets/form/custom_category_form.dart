@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/widgets/button/custom_category_button.dart';
 import 'package:flutter_blog/ui/widgets/scroll_view/custom_book_grid_view.dart';
 
 class CustomCategoryForm extends StatefulWidget {
-  const CustomCategoryForm({super.key});
+  CustomCategoryForm({super.key, required this.books});
+  List<Book> books;
 
   @override
   State<CustomCategoryForm> createState() => _CustomCategoryBarState();
@@ -82,12 +84,12 @@ class _CustomCategoryBarState extends State<CustomCategoryForm> {
             child: IndexedStack(
               index: _pageIndex,
               children: [
-                CustomBookGridView(categoryId: 0),
-                CustomBookGridView(categoryId: 1),
-                CustomBookGridView(categoryId: 2),
-                CustomBookGridView(categoryId: 3),
-                CustomBookGridView(categoryId: 4),
-                CustomBookGridView(categoryId: 5),
+                CustomBookGridView(categoryId: 0, books: widget.books),
+                CustomBookGridView(categoryId: 1, books: widget.books),
+                CustomBookGridView(categoryId: 2, books: widget.books),
+                CustomBookGridView(categoryId: 3, books: widget.books),
+                CustomBookGridView(categoryId: 4, books: widget.books),
+                CustomBookGridView(categoryId: 5, books: widget.books),
               ],
             ),
           )

@@ -29,52 +29,50 @@ class JoinBody extends ConsumerWidget {
         padding: const EdgeInsets.all(gapMain),
         child: ListView(
           children: [
-            CustomTextFormAndValidatorButton(
+            CustomTextForm(
               title: "아이디 입력",
               hintText: "아이디 입력",
-              buttonText: "중복확인",
-              guideText: "영문 또는 영문과 숫자의 조합으로 입력해 주세요",
               controller: _username,
               funValidator: validateUsername(),
-            ), //id 입력
-            const SizedBox(height: gapXxlarge),
+              guideText: "영문 또는 영문과 숫자의 조합으로 입력해 주세요.",
+            ),
+            const SizedBox(height: gapLarge),
             CustomThinLine(),
-            const SizedBox(height: gapXxlarge),
+            const SizedBox(height: gapLarge),
             CustomTextForm(
               title: "email 입력",
               hintText: "email 입력",
               controller: _email,
               funValidator: validateEmail(),
               guideText: "영문과 숫자를 포함하여 이메일 주소를 입력해 주세요.",
-            ), //email 입력
-            const SizedBox(height: gapXlarge),
+            ),
+            const SizedBox(height: gapLarge),
             CustomThinLine(),
-            const SizedBox(height: gapXxlarge),
+            const SizedBox(height: gapLarge),
             CustomTextForm(
               title: "로그인 시 사용할 비밀번호",
               hintText: "비밀번호 입력",
               guideText: "영문, 숫자를 포함한 4~12자 조합으로 입력해 주세요.",
               controller: _password,
               funValidator: validatePassword(),
-            ), //비밀번호 입력
-            const SizedBox(height: gapXxlarge),
+            ),
+            const SizedBox(height: gapLarge),
             CustomThinLine(),
-            const SizedBox(height: gapXxlarge),
-            CustomTextFormAndValidatorButton(
+            const SizedBox(height: gapLarge),
+            CustomTextForm(
               title: "닉네임",
               hintText: "닉네임 입력",
-              buttonText: "중복확인",
               guideText: "닉네임 설정한 회원이 독서 습관 갖기에 성공할 확률이 높아요.",
               controller: _nickname,
               funValidator: validateNickname(),
-            ), //닉네임 입력
-            const SizedBox(height: gapXxlarge),
+            ),
+            const SizedBox(height: gapLarge),
             CustomThinLine(),
-            const SizedBox(height: gapXxlarge),
-            Text("약관 동의", style: subTitle1(mColor: kFontGray)),
+            const SizedBox(height: gapLarge),
+            Text("약관 동의", style: subTitle2(mColor: kFontGray)),
             const SizedBox(height: gapLarge),
             CheckBoxGroup(),
-            const SizedBox(height: gapXxlarge),
+            const SizedBox(height: gapLarge),
             CustomBottomButton(
               funPageRoute: () {
                 if (_formkey.currentState!.validate()) {

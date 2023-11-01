@@ -25,7 +25,7 @@ class CustomTextForm extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title ?? "", style: subTitle1(mColor: kFontGray)),
+        Text(title ?? "", style: subTitle2(mColor: kFontGray)),
         SizedBox(height: gapMedium),
         CustomOutLineTextFormField(
             hintText: hintText,
@@ -33,7 +33,8 @@ class CustomTextForm extends StatelessWidget {
             funValidator: funValidator,
             obscureText: obscureText),
         SizedBox(height: gapMedium),
-        Text(guideText ?? "", style: TextStyle(color: kFontLightGray)),
+        Text(guideText ?? "",
+            style: body2(mColor: kFontGray, mFontWeight: FontWeight.normal)),
       ],
     );
   }

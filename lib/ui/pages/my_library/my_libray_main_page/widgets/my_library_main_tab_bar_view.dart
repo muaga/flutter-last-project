@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/data/model/user.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_reading_note/my_library_main_reading_note.dart';
 import 'package:flutter_blog/ui/widgets/scroll_view/custom_book_grid_view.dart';
@@ -35,7 +36,7 @@ class MyLibraryMainTabBarView extends StatelessWidget {
                 },
               ),
             ),
-            Expanded(child: CustomBookGridView()),
+            Expanded(child: CustomBookGridView(books: books)),
           ],
         ),
         Column(
@@ -63,7 +64,7 @@ class MyLibraryMainTabBarView extends StatelessWidget {
                 },
               ),
             ),
-            Expanded(child: CustomBookGridView()),
+            Expanded(child: CustomBookGridView(books: books)),
           ],
         ),
         Column(

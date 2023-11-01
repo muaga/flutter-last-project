@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
+import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/ui/pages/auth/join_page/widgets/body/join_body.dart';
 
 class JoinPage extends StatelessWidget {
@@ -13,7 +14,7 @@ class JoinPage extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(Icons.arrow_back_ios, color: kFontLightGray)),
+            icon: iconArrowBack()),
         title: Text("회원가입"),
         elevation: 0.2,
       ),

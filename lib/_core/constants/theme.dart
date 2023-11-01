@@ -29,6 +29,6 @@ ThemeData theme() {
     ),
 
     /// Scaffold 기본 배경 컬러
-    // scaffoldBackgroundColor: kBackWhite,
+    scaffoldBackgroundColor: kBackWhite,
   );
 }

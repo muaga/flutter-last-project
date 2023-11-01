@@ -24,15 +24,16 @@ class CustomOutLineTextFormField extends StatelessWidget {
       style: body1(),
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: TextStyle(color: kFontLightGray, fontSize: 15),
+        hintStyle:
+            body1(mColor: kFontLightGray, mFontWeight: FontWeight.normal),
         enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: kFontLightGray, width: 0.6)),
+            borderSide: BorderSide(color: kFontLightGray, width: 0.8)),
         focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: kFontBlack, width: 0.6)),
+            borderSide: BorderSide(color: kPrimaryColor, width: 0.8)),
         errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: kFontLightGray, width: 0.6)),
+            borderSide: BorderSide(color: kFontLightGray, width: 0.8)),
         focusedErrorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: kFontLightGray, width: 0.6)),
+            borderSide: BorderSide(color: kFontLightGray, width: 0.8)),
       ),
     );
   }

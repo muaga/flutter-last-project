@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/model/book.dart';
+import 'package:logger/logger.dart';
 
 class CustomGridBookCard extends StatelessWidget {
   final Book book;
@@ -9,6 +10,7 @@ class CustomGridBookCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Logger().d("book 이미지 : ${book.id} - ${book.picUrl}");
     return Column(
       children: [
         Expanded(

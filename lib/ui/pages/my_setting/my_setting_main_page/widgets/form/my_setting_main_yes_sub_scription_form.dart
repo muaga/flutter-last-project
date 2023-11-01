@@ -29,7 +29,7 @@ class MySettingMainYesSubScriptionForm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomSubScriptionForm(title: "정기구독을 시작하세요.", buttonText: "구독관리"),
+            CustomSubScriptionForm(title: "월 정기구독 이용", buttonText: "구독관리"),
             const SizedBox(height: gapSmall),
             Row(
               children: [

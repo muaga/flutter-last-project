@@ -18,17 +18,6 @@ class OneMonthPressBookListPage extends StatelessWidget {
           title: Text("한 달 이내에 출간된 책"),
         ),
         // bottomNavigationBar: MillieBottomNavigationBar(),
-        body: Stack(
-          children: [
-            // 책 목록 화면
-            OneMonthPressBookListBody(),
-            Positioned(
-              right: 0,
-              left: 0,
-              bottom: 0,
-              child: MillieBottomNavigationBar(),
-            ),
-          ],
-        ));
+        body: OneMonthPressBookListBody());
   }
 }

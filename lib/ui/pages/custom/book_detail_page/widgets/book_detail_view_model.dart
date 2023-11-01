@@ -109,7 +109,10 @@ class BookDetailViewModel extends StateNotifier<BookDetailModel?> {
   Ref ref;
 
   Future<void> notifyInit(int bookId) async {
-    ResponseDTO responseDTO = await BookRepository().fetchBookDetail(bookId);
+    SessionUser sessionUser = ref.read(sessionStore);
+
+    ResponseDTO responseDTO =
+        await BookRepository().fetchBookDetail(bookId, sessionUser.jwt!);
     BookDetailModel model = responseDTO.data;
     state = BookDetailModel(
         bookId: model.bookId,

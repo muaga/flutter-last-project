@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/move.dart';
 import 'package:flutter_blog/_core/constants/theme.dart';
+import 'package:flutter_blog/ui/pages/auth/millie_splash_page/millie_splash_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -24,8 +25,7 @@ class MyApp extends StatelessWidget {
         // home: MainSplashPage(),
         debugShowCheckedModeBanner: false,
         theme: theme(),
-        initialRoute: Move.MySettingProfilePage,
-
+        initialRoute: Move.OneMonthPressBookListPage,
         routes: getRouters(),
       ),
     );

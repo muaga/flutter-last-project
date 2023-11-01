@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
-import 'package:flutter_blog/_core/constants/move.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/ui/widgets/button/custom_radius_color_button.dart';
 import 'package:flutter_blog/ui/widgets/form/custom_text_and_text_button.dart';
@@ -17,7 +16,7 @@ class LoginOrJoinForm extends StatelessWidget {
       CustomRadiusColorButton(
           buttonText: "첫 달 무료로 시작하기",
           funPageRoute: () {
-            Navigator.pushNamed(context, Move.JoinPage);
+            Navigator.pushNamed(context, "/join");
           },
           buttonHeight: 50),
       SizedBox(height: gapLarge),
@@ -28,7 +27,7 @@ class LoginOrJoinForm extends StatelessWidget {
         buttonTextStyle: body1(
           mColor: kFontWhite,
         ),
-        routerLoad: Move.LoginPage,
+        routerLoad: "/login",
       ),
     ]);
   }
