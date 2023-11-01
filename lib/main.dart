@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: theme(),
         initialRoute: Move.OneMonthPressBookListPage,
+
         routes: getRouters(),
       ),
     );

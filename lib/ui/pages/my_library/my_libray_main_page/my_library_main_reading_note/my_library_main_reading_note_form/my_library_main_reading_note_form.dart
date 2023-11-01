@@ -3,6 +3,7 @@ import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_reading_note/my_library_main_reading_note_form/my_library_main_reading_note_book.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_reading_note/my_library_main_reading_note_form/my_library_main_reading_note_content.dart';
+import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
 
 class MyLibraryMainReadingNoteForm extends StatelessWidget {
   final String oneReviewComent;
@@ -25,6 +26,8 @@ class MyLibraryMainReadingNoteForm extends StatelessWidget {
           SizedBox(height: gapLarge),
           MyLibraryMainReadingNoteBook(book: book),
           SizedBox(height: gapXlarge),
+          CustomThinLine(),
+          SizedBox(height: gapLarge),
         ],
       ),
     );

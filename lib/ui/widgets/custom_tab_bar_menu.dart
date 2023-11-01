@@ -11,7 +11,7 @@ class CustomTabBarMenu extends StatelessWidget {
     return Tab(
       child: Text(
         tabBarText,
-        style: subTitle1(mColor: kFontBlack, mFontWeight: FontWeight.normal),
+        style: subTitle2(mColor: kFontBlack, mFontWeight: FontWeight.normal),
       ),
     );
   }

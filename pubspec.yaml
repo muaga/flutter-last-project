@@ -46,8 +46,9 @@ dependencies:
   font_awesome_flutter: ^10.6.0
   flutter_summernote: ^1.1.1
   flutter_gif: ^0.0.4
-
-
+  slide_to_act: ^2.0.2
+  
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
