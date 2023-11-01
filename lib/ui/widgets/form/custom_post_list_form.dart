@@ -178,6 +178,8 @@ class CustomPostListForm extends StatelessWidget {
                           ),
                         ),
                         CustomThinLine(),
+
+                        /// TODO 은혜 : 게시물 조회해서 넣기
                         ListTile(
                           contentPadding: EdgeInsets.only(left: 0),
                           leading: CircleAvatar(

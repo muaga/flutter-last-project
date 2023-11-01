@@ -3,9 +3,15 @@ import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 
 class CustomDeleteAlertDialog extends StatelessWidget {
-  const CustomDeleteAlertDialog({
-    super.key,
-  });
+  const CustomDeleteAlertDialog(
+      {super.key,
+      required this.title,
+      required this.content,
+      required this.buttonText});
+
+  final String title;
+  final String content;
+  final String buttonText;
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +34,14 @@ class CustomDeleteAlertDialog extends StatelessWidget {
               Container(
                 width: 100,
                 height: 100,
-                color: Colors.black,
+                color: kFontBlack,
               ),
               Expanded(
                 child: Container(
                   child: TextButton(
                     style: TextButton.styleFrom(
                       side: BorderSide(
-                        color: Colors.red, // 빨간색 테두리
+                        color: kFontRed, // 빨간색 테두리
                       ),
                     ),
                     child: Text("삭제"),
