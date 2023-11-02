@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
-import 'package:flutter_blog/ui/pages/my_setting/my_setting_payment_page/body/my_setting_payment_body.dart';
+import 'package:flutter_blog/ui/pages/my_setting/my_setting_payment_page/widgets/body/my_setting_payment_body.dart';
 
 class MySettingPaymentPage extends StatelessWidget {
   const MySettingPaymentPage({super.key});
@@ -11,7 +11,7 @@ class MySettingPaymentPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: kPrimaryColor,
       appBar: AppBar(
-        backgroundColor: kPrimaryColor,
+        backgroundColor: Colors.transparent,
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);

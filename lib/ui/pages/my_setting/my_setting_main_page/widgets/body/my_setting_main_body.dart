@@ -3,9 +3,9 @@ import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/move.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/ui/pages/auth/login_page/widgets/form/custom_title_and_subtitle_form.dart';
+import 'package:flutter_blog/ui/pages/my_setting/my_setting_main_page/widgets/form/my_setting_main_member_type_form.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_main_page/widgets/form/my_setting_main_no_sub_scription_form.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_main_page/widgets/form/my_setting_main_yes_sub_scription_form.dart';
-import 'package:flutter_blog/ui/pages/my_setting/my_setting_main_page/widgets/form/my_setting_main_member_type_form.dart';
 import 'package:flutter_blog/ui/widgets/button/custom_radius_color_button.dart';
 import 'package:flutter_blog/ui/widgets/form/custom_title_and_forword_form.dart';
 import 'package:flutter_blog/ui/widgets/form/custom_title_gray_form.dart';
@@ -100,14 +100,18 @@ class MySettingMainBody extends StatelessWidget {
             child: Column(
               children: [
                 CustomTitleAndForwordForm(
-                  title: "내 정보 관리",
-                  textStyle: subTitle2(),
-                  funPageRoute: () {},
-                ),
+                    title: "내 정보 관리",
+                    textStyle: subTitle2(),
+                    funPageRoute: () {
+                      Navigator.pushNamed(context, Move.MySettingProfilePage);
+                      Logger().d("이동");
+                    }),
                 CustomTitleAndForwordForm(
                   title: "회원 탈퇴",
                   textStyle: subTitle2(),
-                  funPageRoute: () {},
+                  funPageRoute: () {
+                    Navigator.pushNamed(context, Move.MySettingResignationPage);
+                  },
                 ),
               ],
             ),
