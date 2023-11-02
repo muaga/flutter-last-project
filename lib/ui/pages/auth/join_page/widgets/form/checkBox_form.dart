@@ -70,6 +70,7 @@ class _CheckBoxGroupState extends State<CheckBoxGroup> {
                       Checkbox(
                         value: isAllChecked,
                         onChanged: updateAllCheckBox,
+                        activeColor: kPrimaryColor,
                       ),
                       Text('전체 동의하기'),
                     ],
@@ -94,6 +95,7 @@ class _CheckBoxGroupState extends State<CheckBoxGroup> {
                         onChanged: (value) {
                           updateSubCheckBox(1, value ?? false);
                         },
+                        activeColor: kPrimaryColor,
                       ),
                       Text('(필수) 밀리의 서재 이용약관 동의'),
                     ],
@@ -105,6 +107,7 @@ class _CheckBoxGroupState extends State<CheckBoxGroup> {
                         onChanged: (value) {
                           updateSubCheckBox(2, value ?? false);
                         },
+                        activeColor: kPrimaryColor,
                       ),
                       Text('(필수) 개인정보 처리방침 동의'),
                     ],
@@ -116,6 +119,7 @@ class _CheckBoxGroupState extends State<CheckBoxGroup> {
                         onChanged: (value) {
                           updateSubCheckBox(3, value ?? false);
                         },
+                        activeColor: kPrimaryColor,
                       ),
                       Text('(선택) 도서추천, 신간도식 등 알림 수신'),
                     ],
