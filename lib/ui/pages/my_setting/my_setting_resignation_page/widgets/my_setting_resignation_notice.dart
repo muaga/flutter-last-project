@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 
-class CustomNoticeForm extends StatelessWidget {
-  const CustomNoticeForm({
+class MySettingResignationNotice extends StatelessWidget {
+  const MySettingResignationNotice({
     super.key,
   });
 
@@ -19,7 +19,7 @@ class CustomNoticeForm extends StatelessWidget {
               style: body4()),
           SizedBox(height: gapSmall),
           Text(
-              "· 탈퇴를 하실 경우 기 결제하신 서비스 이용 권한과 구매 내역을 포기하는 것으로 간주됩니다. 원치 않으실 경우, 탈퇴를 보류해주세요.",
+              "· 탈퇴를 하실 경우 결제하신 서비스 이용 권한과 구매 내역을 포기하는 것으로 간주됩니다. 원치 않으실 경우, 탈퇴를 보류해주세요.",
               style: body4()),
           SizedBox(height: gapSmall),
           Text("· 정기결제 상품을 이용 중인 경우 결제수단을 등록 해지해야 회원 탈퇴가 가능합니다.",

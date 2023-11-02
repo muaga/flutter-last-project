@@ -31,7 +31,7 @@ TextStyle subTitle3(
 TextStyle body1(
     {Color mColor = kFontBlack, FontWeight mFontWeight = FontWeight.bold}) {
   return TextStyle(
-      fontSize: 14, fontWeight: mFontWeight, color: mColor, height: 1.4);
+      fontSize: 13, fontWeight: mFontWeight, color: mColor, height: 1.4);
 }
 
 TextStyle body2(

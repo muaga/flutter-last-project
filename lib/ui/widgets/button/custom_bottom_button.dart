@@ -14,7 +14,8 @@ class CustomBottomButton extends StatelessWidget {
       onPressed: funPageRoute,
       style: ElevatedButton.styleFrom(
         backgroundColor: kPrimaryColor,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero), // 버튼 색상
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5)), // 버튼 색상
         padding: EdgeInsets.symmetric(vertical: 20),
       ),
       child: Text(
