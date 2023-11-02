@@ -5,9 +5,9 @@ import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/model/user.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_resignation_choice_page/my_setting_resignation_choice_page.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_resignation_page/widgets/form/my_setting_resignation_all_state_form.dart';
+import 'package:flutter_blog/ui/pages/my_setting/my_setting_resignation_page/widgets/form/my_setting_resignation_notice_form.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_resignation_page/widgets/my_setting_resignation_two_button.dart';
 import 'package:flutter_blog/ui/widgets/form/custom_check_box_and_title_form.dart';
-import 'package:flutter_blog/ui/widgets/form/custom_notice_form.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
 
 class MySettingResignationBody extends StatelessWidget {
@@ -29,8 +29,7 @@ class MySettingResignationBody extends StatelessWidget {
               SizedBox(height: gapXlarge),
               CustomThinLine(),
               SizedBox(height: gapXlarge),
-              Text("탈퇴 회원 유의 사항", style: subTitle3(mColor: kFontRed)),
-              CustomNoticeForm(),
+              MySettingResignationNoticeForm(), // 탈퇴 유의사항
               SizedBox(height: gapLarge),
               CustomCheckBoxAndTitleForm(
                 color: Colors.transparent,

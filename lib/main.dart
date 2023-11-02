@@ -3,6 +3,8 @@ import 'package:flutter_blog/_core/constants/move.dart';
 import 'package:flutter_blog/_core/constants/theme.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'ui/pages/auth/millie_splash_page/millie_splash_page.dart';
+
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() {
@@ -21,11 +23,10 @@ class MyApp extends StatelessWidget {
       },
       child: MaterialApp(
         navigatorKey: navigatorKey,
-        // home: MainSplashPage(),
+        home: MainSplashPage(),
         debugShowCheckedModeBanner: false,
         theme: theme(),
-        initialRoute: Move.MySettingPaymentPage,
-
+        // initialRoute: Move.MySettingMainPage,
         routes: getRouters(),
       ),
     );

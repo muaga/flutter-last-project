@@ -87,9 +87,11 @@ class MySettingMainBody extends StatelessWidget {
                   CustomRadiusColorButton(
                     buttonText: "구독 시작하기",
                     textStyle: subTitle2(mFontWeight: FontWeight.w500),
-                    funPageRoute: () {},
+                    funPageRoute: () {
+                      Navigator.pushNamed(context, Move.MySettingPaymentPage);
+                    },
                     borderRadius: 5,
-                    buttonHeight: 50,
+                    buttonHeight: 60,
                   )
                 ],
               )),

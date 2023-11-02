@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/data/model/user.dart';
-import 'package:flutter_blog/ui/pages/my_setting/my_setting_resignation_choice_page/my_setting_resignation_choice_page.dart';
 import 'package:flutter_blog/ui/widgets/button/custom_radius_color_button.dart';
 
 class MySettingResignationTwoButton extends StatelessWidget {
@@ -23,7 +21,7 @@ class MySettingResignationTwoButton extends StatelessWidget {
               Navigator.pop(context);
             },
             backgroundColor: kBackGray,
-            borderRadius: 10,
+            borderRadius: 5,
           ),
         ),
         SizedBox(width: gapMedium),
@@ -32,7 +30,7 @@ class MySettingResignationTwoButton extends StatelessWidget {
             buttonText: yellowButtonText,
             funPageRoute: funPageRoute,
             backgroundColor: kPrimaryColor,
-            borderRadius: 10,
+            borderRadius: 5,
           ),
         ),
       ],
