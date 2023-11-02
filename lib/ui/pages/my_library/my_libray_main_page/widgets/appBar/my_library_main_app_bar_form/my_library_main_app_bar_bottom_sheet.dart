@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
+import 'package:flutter_blog/ui/pages/custom/post_write_page/post_write_page.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/widgets/appBar/my_library_main_app_bar_form/my_library_main_app_bar_bottom_sheet_button.dart';
-import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/widgets/my_library_main_bookcase.dart';
-import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/widgets/my_library_main_like_books.dart';
+import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/widgets/my_library_main_one_review.dart';
 
 class MtLibraryMainAppbarBottomSheet extends StatelessWidget {
   const MtLibraryMainAppbarBottomSheet({
@@ -32,11 +32,10 @@ class MtLibraryMainAppbarBottomSheet extends StatelessWidget {
                     child: Column(
                       children: [
                         MyLibraryMainAppBarBottomSheetButton(
-                            buttonText: "포스트 쓰기",
-                            destination: MyLibraryMainLikeBooks()),
+                            buttonText: "포스트 쓰기", destination: PostWritePage()),
                         MyLibraryMainAppBarBottomSheetButton(
                             buttonText: "한 줄 리뷰쓰기",
-                            destination: MyLibraryMainBookcase()),
+                            destination: MyLibraryOneReview()),
                         // MyLibraryMainAppBarBottomSheetButton(
                         //     buttonText: "독서노트",
                         //     destination: MyLibraryMainReadingNote(

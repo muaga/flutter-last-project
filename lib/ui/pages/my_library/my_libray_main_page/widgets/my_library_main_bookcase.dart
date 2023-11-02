@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
+import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/widgets/custom_grid_book_card.dart';
@@ -17,6 +18,12 @@ class _MyLibraryMainBookcaseState extends State<MyLibraryMainBookcase> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: iconArrowBack(),
+        ),
         iconTheme: IconThemeData(color: Colors.black),
         title: Text("책장"),
       ),
@@ -76,7 +83,7 @@ class _MyLibraryMainBookcaseState extends State<MyLibraryMainBookcase> {
                                 Navigator.of(context).pop(); // 알림창 닫기
                               },
                               child: Text(
-                                '정리',
+                                '해제',
                                 style: subTitle3(mColor: kFontWhite),
                               ),
                             ),
