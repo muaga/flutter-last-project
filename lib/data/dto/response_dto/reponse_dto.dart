@@ -10,6 +10,7 @@ class ResponseDTO {
   ResponseDTO.fromJson(Map<String, dynamic> json)
       : code = json["code"],
         msg = json["msg"],
+        token = json["token"],
         data = json["data"];
 
   @override

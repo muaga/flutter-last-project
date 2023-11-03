@@ -5,7 +5,6 @@ import 'package:flutter_blog/ui/pages/auth/login_or_join_page/login_or_join_page
 import 'package:flutter_blog/ui/pages/auth/login_page/login_page.dart';
 import 'package:flutter_blog/ui/pages/auth/millie_splash_page/millie_splash_page.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.dart';
-import 'package:flutter_blog/ui/pages/custom/post_detail_page/post_detail_page.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_page/post_write_page.dart';
 import 'package:flutter_blog/ui/pages/custom/reply_write_and_list_page/reply_write_and_list_page.dart';
 import 'package:flutter_blog/ui/pages/feed/feed_main_page/feed_main_page.dart';
@@ -87,16 +86,18 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     },
 
     /// custom
-    Move.BookDetailPage: (context) {
-      final bookId = ModalRoute.of(context)!.settings.arguments as int;
-      // 현재 경로에서 전달되는 인수
-      return BookDetailPage(bookId: 1);
-    },
-    Move.PostDetailPage: (context) {
-      final postId = ModalRoute.of(context)!.settings.arguments as int;
-      // TODO 은혜 : 포스트상세페이지 완료시 번호->postId
-      return PostDetailPage(postId: 1);
-    },
+    // Move.BookDetailPage: (context) {
+    //   final bookId = ModalRoute.of(context)!.settings.arguments as int;
+    //   // 현재 경로에서 전달되는 인수
+    //   return BookDetailPage(bookId: bookId);
+    // },
+    Move.BookDetailPage: (context) => BookDetailPage(bookId: 1),
+
+    // Move.PostDetailPage: (context) {
+    //   final postId = ModalRoute.of(context)!.settings.arguments as int;
+    //   // TODO 은혜 : 포스트상세페이지 완료시 번호->postId
+    //   return PostDetailPage(postId: 1);
+    // },
     Move.PostWritePage: (context) => PostWritePage(),
     Move.ReplyWriteAndListPage: (context) => ReplyWriteAndListPage(),
 
