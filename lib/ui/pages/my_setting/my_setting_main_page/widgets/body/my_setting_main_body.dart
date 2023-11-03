@@ -56,8 +56,17 @@ class MySettingMainBody extends StatelessWidget {
           ),
         ),
         const SizedBox(height: gapMedium),
-        MySettingServiceSettingList(),
-        MySettingServiceAboutList() // 서비스 설정 목록
+        MySettingServiceSettingList(), // 서비스 설정 목록
+        MySettingServiceAboutList(), // 서비스 안내 목록
+        Padding(
+            padding: const EdgeInsets.all(gapMain),
+            child: CustomRadiusColorButton(
+              funPageRoute: () {},
+              buttonText: "로그아웃",
+              textColor: kFontWhite,
+              borderRadius: 5,
+              backgroundColor: kBackGray,
+            ))
       ],
     );
   }
@@ -129,7 +138,14 @@ class MySettingServiceAboutList extends StatelessWidget {
                     text: TextSpan(
                         text: "버전정보",
                         style: subTitle2(mColor: kFontBlack),
-                        children: [TextSpan(text: "2.1.0")]),
+                        children: [
+                          TextSpan(text: "  "),
+                          TextSpan(
+                              text: "2.1.0",
+                              style: subTitle2(
+                                  mColor: kFontGray,
+                                  mFontWeight: FontWeight.w500))
+                        ]),
                   ),
                 ),
               ),
