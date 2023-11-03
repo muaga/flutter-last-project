@@ -4,6 +4,7 @@ import 'package:flutter_blog/_core/utils/validator_util.dart';
 import 'package:flutter_blog/data/dto/request_dto/user_request_dto.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.dart';
+import 'package:flutter_blog/ui/pages/feed/feed_main_page/feed_main_page.dart';
 import 'package:flutter_blog/ui/widgets/button/custom_radius_color_button.dart';
 import 'package:flutter_blog/ui/widgets/text_form_field/custom_out_line_text_form_field.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -42,10 +43,8 @@ class LoginTextForm extends ConsumerWidget {
                   username: _username.text,
                   password: _password.text);
               ref.read(sessionStore).login(loginReqDTO);
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => BookDetailPage(bookId: 1)));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => FeedMainPage()));
             }
           },
         ),

@@ -152,7 +152,7 @@ class CustomPostListForm extends StatelessWidget {
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey, // 그림자의 색상
+                            color: kFontLightGray, // 그림자의 색상
                             offset: Offset(0, 1), // 그림자의 위치 (x, y)
                             blurRadius: 5.0, // 그림자의 흐림 정도
                             spreadRadius: 1.0, // 그림자의 확산 정도
