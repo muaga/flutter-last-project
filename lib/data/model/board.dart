@@ -5,7 +5,7 @@ class Board {
   final String? picUrl;
   final String? createdAt;
   late int userId;
-  late int bookId;
+  final int? bookId;
 
   Board(
       {required this.id,
@@ -14,7 +14,7 @@ class Board {
       this.picUrl,
       required this.createdAt,
       required this.userId,
-      required this.bookId});
+      this.bookId});
 
   // 1. Dart -> Map(request)
   Map<String, dynamic> toJson() => {

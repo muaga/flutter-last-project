@@ -42,6 +42,33 @@ class CustomPostListForm extends StatelessWidget {
           picUrl: "book6.png",
           userId: 3,
           bookId: 6),
+      Board(
+          id: 3,
+          title: "너무 행복했던 독서 모임",
+          content:
+              "그동안 주춤했던 뇌를 깨우고 싶거나, 나를 성장시키고 싶으신 분들, 또는 자기 계발의 실질적 행동 지침이 필요하신 분들!! 이 책을 추천드립니다",
+          createdAt: "2023-10-10",
+          picUrl: null,
+          userId: 3,
+          bookId: null),
+      Board(
+          id: 3,
+          title: "재미있었던 책",
+          content: "정말 유용한 에세이였다. 워낙 최재천 교수님의 책을 좋아했던 나였기에 더 그랬을 지도 모르겠다."
+              "동식물의 이야기를 통해 인간의 삶을 되돌아 보게 하는 마력이 있는 내용이였다. 그리고 교수님은 그동안 많이 봐오던 여성 혐오와는 전혀 관계가 없었다. 아니 여성 우월주의를 가지ㄴ신 분은 아닐까 생각이 들기까지 했다.",
+          createdAt: "2023-10-10",
+          picUrl: null,
+          userId: 3,
+          bookId: null),
+      Board(
+          id: 3,
+          title: "엄마의 마음",
+          content:
+              "그동안 주춤했던 뇌를 깨우고 싶거나, 나를 성장시키고 싶으신 분들, 또는 자기 계발의 실질적 행동 지침이 필요하신 분들!! 이 책을 추천드립니다. ",
+          createdAt: "2023-10-10",
+          picUrl: "book18.png",
+          userId: 5,
+          bookId: 18),
     ];
 
     List<User> users = [
@@ -86,117 +113,231 @@ class CustomPostListForm extends StatelessWidget {
       shrinkWrap: true,
       itemCount: boards.length,
       itemBuilder: (context, index) {
-        return InkWell(
-          onTap: () {
-            int? boardId = boards[index].id;
+        /// bookId의 유무
+        final hasPicUrl = boards[index].bookId != null; // true(존재)
 
-            /// TODO 은혜 : 게시물 상세보기로 이동 경로 짜기
-          },
-          child: Container(
+        /// 만약 존재한다면,
+        if (hasPicUrl) {
+          return InkWell(
+            onTap: () {
+              int? boardId = boards[index].id;
+
+              /// TODO 은혜 : 게시물 상세보기로 이동 경로 짜기
+            },
+            child: Container(
               child: Padding(
-            padding:
-                EdgeInsets.symmetric(horizontal: gapXlarge, vertical: gapMain),
-            child: Column(
-              children: [
-                Container(
-                  width: double.infinity,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    border: Border.all(color: Colors.transparent),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15),
-                    ),
-                    image: DecorationImage(
-                      image: CachedNetworkImageProvider(
-                        "http://192.168.0.37:8080/images/${boards[index].picUrl}",
-                      ),
-                      colorFilter: ColorFilter.mode(
-                        Colors.white.withOpacity(0.8),
-                        BlendMode.srcATop,
-                      ),
-                      fit: BoxFit.cover,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey, // 그림자의 색상
-                        offset: Offset(0, 1), // 그림자의 위치 (x, y)
-                        blurRadius: 5.0, // 그림자의 흐림 정도
-                        spreadRadius: 1.0, // 그림자의 확산 정도
-                      )
-                    ],
-                  ),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                        vertical: gapMain, horizontal: gapLarge),
-                    child: CachedNetworkImage(
-                      imageUrl:
-                          "http://192.168.0.37:8080/images/${boards[index].picUrl}",
-                      fit: BoxFit.contain,
-                      placeholder: (context, url) => CircularProgressIndicator(
-                        strokeWidth: 5,
-                      ),
-                      errorWidget: (context, url, error) => Icon(Icons.error),
-                    ),
-                  ),
-                ),
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: kBackWhite,
-                    border: Border.all(color: Colors.transparent),
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(15),
-                      bottomRight: Radius.circular(15),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: kBackGray, // 그림자의 색상
-                        offset: Offset(0, 1), // 그림자의 위치 (x, y)
-                        blurRadius: 5.0, // 그림자의 흐림 정도
-                        spreadRadius: 1.0, // 그림자의 확산 정도
-                      )
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(gapMain),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: gapMain),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(boards[index].title,
-                                  style: subTitle3(),
-                                  overflow: TextOverflow.ellipsis),
-                              SizedBox(height: gapSmall),
-                              Text(boards[index].content,
-                                  maxLines: 2, overflow: TextOverflow.ellipsis),
-                            ],
+                padding: EdgeInsets.symmetric(
+                    horizontal: gapXlarge, vertical: gapMain),
+                child: Column(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: 200,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.transparent),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15),
+                        ),
+                        image: DecorationImage(
+                          image: CachedNetworkImageProvider(
+                            "http://192.168.0.37:8080/images/${boards[index].picUrl}",
                           ),
+                          colorFilter: ColorFilter.mode(
+                            Colors.white.withOpacity(0.8),
+                            BlendMode.srcATop,
+                          ),
+                          fit: BoxFit.cover,
                         ),
-                        CustomThinLine(),
-
-                        /// TODO 은혜 : 게시물 조회해서 넣기
-                        ListTile(
-                          contentPadding: EdgeInsets.only(left: 0),
-                          leading: CircleAvatar(
-                              backgroundImage: AssetImage("assets/book8.png")),
-                          title: Text("yuns의 서재"),
-                          titleTextStyle:
-                              subTitle3(mFontWeight: FontWeight.w500),
-                          subtitle: Text("${boards[index].createdAt}"),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey, // 그림자의 색상
+                            offset: Offset(0, 1), // 그림자의 위치 (x, y)
+                            blurRadius: 5.0, // 그림자의 흐림 정도
+                            spreadRadius: 1.0, // 그림자의 확산 정도
+                          )
+                        ],
+                      ),
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            vertical: gapMain, horizontal: gapLarge),
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              "http://192.168.0.37:8080/images/${boards[index].picUrl}",
+                          fit: BoxFit.contain,
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(
+                            strokeWidth: 5,
+                          ),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
                         ),
-                      ],
+                      ),
                     ),
-                  ),
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: kBackWhite,
+                        border: Border.all(color: Colors.transparent),
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(15),
+                          bottomRight: Radius.circular(15),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: kBackGray, // 그림자의 색상
+                            offset: Offset(0, 1), // 그림자의 위치 (x, y)
+                            blurRadius: 5.0, // 그림자의 흐림 정도
+                            spreadRadius: 1.0, // 그림자의 확산 정도
+                          )
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(gapMain),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: gapMain),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(boards[index].title,
+                                      style: subTitle3(),
+                                      overflow: TextOverflow.ellipsis),
+                                  SizedBox(height: gapSmall),
+                                  Text(boards[index].content,
+                                      style:
+                                          body1(mFontWeight: FontWeight.normal),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis),
+                                ],
+                              ),
+                            ),
+                            CustomThinLine(),
+
+                            // TODO 은혜 : 게시물 조회해서 넣기
+                            ListTile(
+                              contentPadding: EdgeInsets.only(left: 0),
+                              leading: CircleAvatar(
+                                backgroundImage: CachedNetworkImageProvider(
+                                  // TODO 은혜 : 게시글 유저 이미지 넣기
+                                  "http://192.168.0.37:8080/images/user3.png",
+                                ),
+                              ),
+                              title: Text("yuns의 서재"),
+                              titleTextStyle:
+                                  subTitle3(mFontWeight: FontWeight.w500),
+                              subtitle: Text("${boards[index].createdAt}"),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          )),
-        );
+          );
+        } else {
+          /// bookId가 없을 때
+          return InkWell(
+            onTap: () {
+              // TODO 은혜 : 게시물 상세보기로 이동 경로 짜기
+            },
+            child: Container(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: gapXlarge, vertical: gapMain),
+                child: Column(
+                  children: [
+                    Container(
+                        width: double.infinity,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(color: Colors.transparent),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(15),
+                          ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey, // 그림자의 색상
+                              offset: Offset(0, 1), // 그림자의 위치 (x, y)
+                              blurRadius: 5.0, // 그림자의 흐림 정도
+                              spreadRadius: 1.0, // 그림자의 확산 정도
+                            )
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(gapMain),
+                          child: Text(
+                            boards[index].title,
+                            style: subTitle2(),
+                          ),
+                        )),
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: kBackWhite,
+                        border: Border.all(color: Colors.transparent),
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(15),
+                          bottomRight: Radius.circular(15),
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: kBackGray, // 그림자의 색상
+                            offset: Offset(0, 1), // 그림자의 위치 (x, y)
+                            blurRadius: 5.0, // 그림자의 흐림 정도
+                            spreadRadius: 1.0, // 그림자의 확산 정도
+                          )
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(gapMain),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: gapMain),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(boards[index].content,
+                                      style:
+                                          body1(mFontWeight: FontWeight.normal),
+                                      maxLines: 5,
+                                      overflow: TextOverflow.ellipsis),
+                                ],
+                              ),
+                            ),
+                            CustomThinLine(),
+
+                            // TODO 은혜 : 게시물 조회해서 넣기
+                            ListTile(
+                              contentPadding: EdgeInsets.only(left: 0),
+                              leading: CircleAvatar(
+                                backgroundImage: CachedNetworkImageProvider(
+                                  // TODO 은혜 : 게시글 유저 이미지 넣기
+                                  "http://192.168.0.37:8080/images/user3.png",
+                                ),
+                              ),
+                              title: Text("yuns의 서재"),
+                              titleTextStyle:
+                                  subTitle3(mFontWeight: FontWeight.w500),
+                              subtitle: Text("${boards[index].createdAt}"),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
       },
     );
   }

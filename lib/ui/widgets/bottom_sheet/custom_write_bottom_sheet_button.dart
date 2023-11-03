@@ -3,11 +3,11 @@ import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 
-class MyLibraryMainAppBarBottomSheetButton extends StatelessWidget {
+class CustomWriteBottomSheetButton extends StatelessWidget {
   final String buttonText; // 다른 텍스트를 받을 변수
   final Widget destination; // 다른 페이지로 이동할 위젯을 받을 변수
 
-  MyLibraryMainAppBarBottomSheetButton({
+  CustomWriteBottomSheetButton({
     required this.buttonText,
     required this.destination,
   });
