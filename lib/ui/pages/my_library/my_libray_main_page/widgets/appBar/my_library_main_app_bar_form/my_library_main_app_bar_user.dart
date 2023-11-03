@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
-import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/widgets/appBar/my_library_main_app_bar_form/my_library_main_app_bar_bottom_sheet.dart';
+import 'package:flutter_blog/ui/widgets/bottom_sheet/custom_write_bottom_sheet.dart';
 
 class MyLibraryMainAppBarUser extends StatelessWidget {
   final String username;
@@ -35,7 +35,7 @@ class MyLibraryMainAppBarUser extends StatelessWidget {
               ],
             ),
           ),
-          MtLibraryMainAppbarBottomSheet()
+          CustomWriteBottomSheet()
         ],
       ),
     );

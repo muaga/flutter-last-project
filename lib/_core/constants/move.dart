@@ -8,6 +8,7 @@ import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.d
 import 'package:flutter_blog/ui/pages/custom/post_detail_page/post_detail_page.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_page/post_write_page.dart';
 import 'package:flutter_blog/ui/pages/custom/reply_write_and_list_page/reply_write_and_list_page.dart';
+import 'package:flutter_blog/ui/pages/feed/feed_main_page/feed_main_page.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_page.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_main_page/my_setting_main_page.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_payment_page/my_setting_payment_page.dart';
@@ -47,6 +48,7 @@ class Move {
   /// today-story
 
   /// feed
+  static String FeedMainPage = "/feedMain";
 
   /// myLibrary
   static String MyLibraryMainPage = "/myLibraryMain";
@@ -61,6 +63,7 @@ class Move {
   static String MySettingPaymentPage = "/mySettingPayment";
 
   /// bottom
+  ///
   static String MillieIndexStackNavigationBar = "/indexStack";
 }
 
@@ -122,7 +125,10 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.MySettingPaymentPage: (context) => const MySettingPaymentPage(),
 
     /// my-library
-    Move.MyLibraryMainPage: (context) => const MyLibraryMainPage()
+    Move.MyLibraryMainPage: (context) => const MyLibraryMainPage(),
+
+    /// feed
+    Move.FeedMainPage: (context) => const FeedMainPage(),
   };
 }
 

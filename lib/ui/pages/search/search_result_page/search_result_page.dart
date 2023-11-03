@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
-import 'package:flutter_blog/ui/millie_IndexStack_navigation_bar.dart';
-import 'package:flutter_blog/ui/pages/search/search_result_page/widgets/search_result_body.dart';
+import 'package:flutter_blog/ui/pages/search/search_result_page/widgets/body/search_result_body.dart';
 
 class SearchResultPage extends StatefulWidget {
   final String searchText;
