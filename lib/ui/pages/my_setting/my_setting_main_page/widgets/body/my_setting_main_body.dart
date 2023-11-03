@@ -85,14 +85,14 @@ class MySettingServiceSettingList extends StatelessWidget {
         padding: const EdgeInsets.all(gapMain),
         child: Column(
           children: [
-            CustomTitleAndForwordForm(
+            CustomTitleAndForwardForm(
               title: "내 정보 관리",
               textStyle: subTitle2(),
               funPageRoute: () {
                 Navigator.pushNamed(context, Move.MySettingProfilePage);
               },
             ),
-            CustomTitleAndForwordForm(
+            CustomTitleAndForwardForm(
               title: "회원 탈퇴",
               textStyle: subTitle2(),
               funPageRoute: () {
@@ -121,7 +121,7 @@ class MySettingServiceAboutList extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CustomTitleAndForwordForm(
+              CustomTitleAndForwardForm(
                 title: "고객센터",
                 textStyle: subTitle2(),
                 funPageRoute: () {
