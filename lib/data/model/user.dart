@@ -3,7 +3,7 @@ class User {
   late String username; // id
   late String email; // 이메일
   late String nickname; // 닉네임
-  late String picUrl; // 이미지
+  late String? picUrl; // 이미지
   final String? createdAt; // 등록일
 
   User(
