@@ -1,0 +1,97 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/color.dart';
+import 'package:flutter_blog/_core/constants/font.dart';
+import 'package:flutter_blog/_core/constants/size.dart';
+import 'package:flutter_blog/data/model/book.dart';
+import 'package:flutter_blog/ui/pages/custom/post_write_page/post_write_page.dart';
+import 'package:flutter_blog/ui/widgets/custom_grid_book_card.dart';
+import 'package:logger/logger.dart';
+
+class PostWriteBookRecommendPage extends StatefulWidget {
+  Book? selectedBook; // 선택한 책을 저장하는 프로퍼티
+
+  PostWriteBookRecommendPage({this.selectedBook, Key? key}) : super(key: key);
+
+  @override
+  _PostWriteBookRecommendPageState createState() =>
+      _PostWriteBookRecommendPageState();
+}
+
+class _PostWriteBookRecommendPageState
+    extends State<PostWriteBookRecommendPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
+        title: Text("책 추천하기"),
+      ),
+      body: Container(
+        width: getScreenWidth(context),
+        height: getScreenHeight(context),
+        child: GridView.builder(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: 1 / 2,
+          ),
+          itemCount: books.length,
+          itemBuilder: (context, index) {
+            return InkWell(
+              onTap: () {
+                if (widget.selectedBook == books[index]) {
+                  // 이미 선택한 책을 다시 탭하면 선택 해제
+                  widget.selectedBook = null;
+                } else {
+                  // 새로운 책 선택
+                  widget.selectedBook = books[index];
+                }
+                setState(() {});
+              },
+              child: CustomGridBookCard(books[index]),
+            );
+          },
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                width: 130,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: kPrimaryColor,
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => PostWritePage(
+                                selectedBook: widget.selectedBook)));
+                    Logger().d("나됨?${widget.selectedBook!.id}");
+                  },
+                  child: Text(
+                    "책 추천하기",
+                    style: subTitle1(mColor: kFontBlack),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

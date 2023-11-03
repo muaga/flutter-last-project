@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/ui/widgets/custom_title_insert.dart';
+import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
 import 'package:flutter_summernote/flutter_summernote.dart';
 
 class PostWriteForm extends StatelessWidget {
@@ -20,8 +22,15 @@ class PostWriteForm extends StatelessWidget {
       child: Column(
         children: [
           // 제목 입력란
-          CustomTitleInsert(titleController: titleController),
-          // Summernote 에디터
+          CustomTitleInsert(
+              titleController: titleController, hintText: "제목을 입력하세요"),
+          CustomThinLine(),
+          TextFormField(
+            decoration: InputDecoration(
+                border: InputBorder.none, hintText: "내용을 입력하세요"),
+            maxLines: 10,
+            style: subTitle1(),
+          ),
         ],
       ),
     );

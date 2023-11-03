@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/move.dart';
 import 'package:flutter_blog/_core/constants/theme.dart';
+import 'package:flutter_blog/ui/pages/custom/post_write_page/post_write_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -21,9 +22,10 @@ class MyApp extends StatelessWidget {
       },
       child: MaterialApp(
         navigatorKey: navigatorKey,
-        // home: MainSplashPage(),
+        home: PostWritePage(),
         debugShowCheckedModeBanner: false,
         theme: theme(),
+        // initialRoute: Move.MyLibraryMainPage,
         initialRoute: Move.NowMainPage,
         routes: getRouters(),
       ),
