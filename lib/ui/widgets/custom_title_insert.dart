@@ -18,7 +18,9 @@ class CustomTitleInsert extends StatelessWidget {
       style: title1(),
       controller: titleController,
       decoration: InputDecoration(
-          hintText: "${hintText}", hintStyle: title1(mColor: kFontGray)),
+          border: InputBorder.none,
+          hintText: "${hintText}",
+          hintStyle: title1(mColor: kFontGray)),
       maxLines: null,
       maxLength: 80,
     );

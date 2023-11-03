@@ -3,8 +3,7 @@ import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/ui/pages/custom/post_detail_page/widgets/body/post_detail_body.dart';
 
 class PostDetailPage extends StatelessWidget {
-  final int postId;
-  const PostDetailPage({required this.postId});
+  const PostDetailPage({Key? key}) : super(key: key);
 
   /// TODO 대욱 :
   @override

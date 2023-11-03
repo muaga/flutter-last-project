@@ -6,6 +6,7 @@ import 'package:flutter_blog/ui/pages/auth/login_page/login_page.dart';
 import 'package:flutter_blog/ui/pages/auth/millie_splash_page/millie_splash_page.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.dart';
 import 'package:flutter_blog/ui/pages/custom/post_detail_page/post_detail_page.dart';
+import 'package:flutter_blog/ui/pages/custom/post_list_page/post_list_page.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_page/post_write_page.dart';
 import 'package:flutter_blog/ui/pages/custom/reply_write_and_list_page/reply_write_and_list_page.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_page.dart';
@@ -38,6 +39,7 @@ class Move {
   static String BookDetailPage = "/book/Detail";
   static String PostDetailPage = "/post/Detail";
   static String PostWritePage = "/post/Write";
+  static String PostListPage = "/post/list";
   static String ReplyWriteAndListPage = "/replyWriteAndList";
 
   /// today-now
@@ -92,9 +94,10 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.PostDetailPage: (context) {
       final postId = ModalRoute.of(context)!.settings.arguments as int;
       // TODO 은혜 : 포스트상세페이지 완료시 번호->postId
-      return PostDetailPage(postId: 1);
+      return PostDetailPage();
     },
     Move.PostWritePage: (context) => PostWritePage(),
+    Move.PostListPage: (context) => PostListPage(),
     Move.ReplyWriteAndListPage: (context) => ReplyWriteAndListPage(),
 
     /// today-now
