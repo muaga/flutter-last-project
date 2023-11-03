@@ -86,6 +86,18 @@ Icon iconBottomSearch({Color mColor = kFontBlack, double mSize = 25}) {
   return Icon(Icons.manage_search, color: mColor, size: mSize);
 }
 
+Icon iconUnchanged({Color mColor = kFontBlack, double mSize = 25}) {
+  return Icon(Icons.remove, color: mColor, size: mSize);
+}
+
+Icon iconUp({Color mColor = kFontBlack, double mSize = 25}) {
+  return Icon(Icons.arrow_drop_up, color: mColor, size: mSize);
+}
+
+Icon iconDown({Color mColor = kFontBlack, double mSize = 25}) {
+  return Icon(Icons.arrow_drop_down, color: mColor, size: mSize);
+}
+
 Icon iconBottomSetting({Color mColor = kFontBlack, double mSize = 25}) {
   return Icon(CupertinoIcons.profile_circled, color: mColor, size: mSize);
 }

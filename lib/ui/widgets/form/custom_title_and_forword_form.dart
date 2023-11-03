@@ -4,8 +4,8 @@ import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 
-class CustomTitleAndForwordForm extends StatelessWidget {
-  const CustomTitleAndForwordForm(
+class CustomTitleAndForwardForm extends StatelessWidget {
+  const CustomTitleAndForwardForm(
       {super.key,
       required this.title,
       required this.funPageRoute,

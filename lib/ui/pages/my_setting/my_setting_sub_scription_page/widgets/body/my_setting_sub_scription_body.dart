@@ -8,13 +8,13 @@ class MysettingsubScriptionBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CustomTitleAndForwordForm(
+        CustomTitleAndForwardForm(
             title: "결재 내역 확인",
             funPageRoute: () {
               Navigator.pushNamed(context, "/mySettingSubScriptionList");
             }),
-        CustomTitleAndForwordForm(title: "결제 해지 신청", funPageRoute: () {}),
-        CustomTitleAndForwordForm(title: "결제 관리", funPageRoute: () {}),
+        CustomTitleAndForwardForm(title: "결제 해지 신청", funPageRoute: () {}),
+        CustomTitleAndForwardForm(title: "결제 관리", funPageRoute: () {}),
       ],
     );
   }

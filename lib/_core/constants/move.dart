@@ -18,6 +18,7 @@ import 'package:flutter_blog/ui/pages/my_setting/my_setting_sub_scription_list_p
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_sub_scription_page/my_setting_sub_scription_page.dart';
 import 'package:flutter_blog/ui/pages/search/search_main_page/search_main_page.dart';
 import 'package:flutter_blog/ui/pages/search/search_result_page/search_result_page.dart';
+import 'package:flutter_blog/ui/pages/today_now/now_main_page/now_main_page.dart';
 import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/one_month_press_book_list_page.dart';
 
 import '../../ui/pages/today_now/book_store_best_book_list_page/book_store_best_book_list_page.dart';
@@ -45,6 +46,7 @@ class Move {
   static String OneMonthPressBookListPage = "/oneMonthPressBookList";
 
   /// today-story
+  static String NowMainPage = "/nowMain";
 
   /// feed
   static String FeedMainPage = "/feedMain";
@@ -62,7 +64,6 @@ class Move {
   static String MySettingPaymentPage = "/mySettingPayment";
 
   /// bottom
-  ///
   static String MillieIndexStackNavigationBar = "/indexStack";
 }
 
@@ -108,6 +109,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     // 지금 서점 베스트 책 목록 페이지
     Move.OneMonthPressBookListPage: (context) =>
         const OneMonthPressBookListPage(),
+    Move.NowMainPage: (context) => const NowMainPage(),
 
     /// my-setting
     Move.MySettingMainPage: (context) => const MySettingMainPage(),
