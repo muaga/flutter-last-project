@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/form/now_title_and_forward_form.dart';
-import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/form/now_image_slider_form.dart';
-import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/form/now_text_slider_form.dart';
-import 'package:logger/logger.dart';
+import 'package:flutter_blog/ui/pages/today_now/now_main_page/best_book_response_dto_test.dart';
+import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/banner_slider/now_image_slider_form.dart';
+import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/banner_slider/now_text_slider_form.dart';
+import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/best_slider/now_book_slider.dart';
+import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/best_slider/now_slider_indicator.dart';
+import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/best_slider/now_title_and_forward_form.dart';
 
 class NowMainBody extends StatefulWidget {
   const NowMainBody({super.key});
@@ -17,13 +19,17 @@ class NowMainBody extends StatefulWidget {
 
 class _NowMainBodyState extends State<NowMainBody> {
   // 슬라이더 초기 번호
-  int current = 0;
+  int _bannerCurrent = 0;
+  int _bestCurrent = 0;
+
   // AppBar 초기 아이템 컬러
   Color currentColor = kFontWhite;
+
   // 컨트롤러
   final CarouselController _imageController = CarouselController();
   final CarouselController _textController = CarouselController();
   final ScrollController _scrollController = ScrollController();
+  final CarouselController _carouselController = CarouselController();
 
   List<String> imageList = [
     "ad_moon.jpg",
@@ -41,6 +47,73 @@ class _NowMainBodyState extends State<NowMainBody> {
     // "입대전 마지막으로 떠난 여행\n난 각성자가 되었다",
     // "조직에 배신당한 히트맨\n암살 당해 죽고 회귀했다",
     // "뚱보 김병장이 재능 만랩\n엔터테이너로 거듭난다"
+  ];
+
+  List<testBook> rankingBooks = [
+    testBook(
+        id: 1,
+        rankingId: 1,
+        title: "트렌드 코리아 2024",
+        writer: "김난도, 전미영, 최지혜, 이수진, 권정윤, 한다혜, 이준영, 이향은, 이혜원, 추예린, 전다현",
+        titleIntro: "국내 최고 트렌드 전망서",
+        intro: "청룡의 해, 2024년을 분석하다",
+        bookPicUrl: "book1.png",
+        state: "up"),
+    testBook(
+        id: 2,
+        rankingId: 2,
+        title: "퓨처셀프",
+        writer: "벤저민 하디",
+        bookPicUrl: "book2.png"),
+    testBook(
+        id: 3,
+        rankingId: 3,
+        title: "시대예보:핵개인의 시대",
+        writer: "송길영",
+        bookPicUrl: "book3.png"),
+    testBook(
+        id: 4,
+        rankingId: 4,
+        title: "설자은, 금성으로 돌아오다",
+        writer: "정세랑",
+        bookPicUrl: "book4.png",
+        state: "down"),
+    testBook(
+        id: 5,
+        rankingId: 5,
+        title: "책으로 가는 문",
+        writer: "미야자키 하야오",
+        bookPicUrl: "book5.png",
+        titleIntro: "상상력의 거장, 미야자키 하야오의 독서 에세이",
+        intro: "그의 판타지 세계를 이끌어낸 50권의 책"),
+    testBook(
+        id: 6,
+        rankingId: 6,
+        title: "로마 이야기",
+        writer: "줌파 라히리",
+        bookPicUrl: "book6.png",
+        state: "up"),
+    testBook(
+        id: 7,
+        rankingId: 7,
+        title: "문과 남자의 과학 공부",
+        writer: "유시민",
+        bookPicUrl: "book7.png",
+        titleIntro: "나는 무엇이고 왜 존재하며 어디로 가는가"),
+    testBook(
+        id: 8,
+        rankingId: 8,
+        title: "아주 희미한 빛으로",
+        writer: "최은영",
+        bookPicUrl: "book8.png",
+        state: "down"),
+    testBook(
+        id: 9,
+        rankingId: 9,
+        title: "역행자",
+        writer: "자청",
+        bookPicUrl: "book9.png",
+        state: "up"),
   ];
 
   @override
@@ -112,27 +185,51 @@ class _NowMainBodyState extends State<NowMainBody> {
                 // ),
                 child: Stack(
                   children: [
-                    ImageSliderForm(
+                    NowImageSliderForm(
                         imageController: _imageController,
                         imageList: imageList,
-                        current: current),
-                    TextSliderForm(
+                        current: _bannerCurrent,
+                        funPageChanged: (index, reason) {
+                          setState(() {
+                            _bannerCurrent = index;
+                          });
+                        }),
+                    NowTextSliderForm(
                         textController: _textController,
                         textList: textList,
-                        current: current)
+                        current: _bannerCurrent,
+                        funPageChanged: (index, reason) {
+                          setState(() {
+                            _bannerCurrent = index;
+                          });
+                        }),
                     // sliderIndicator(),
                   ],
                 ),
               ),
             ),
           ),
-          SliverToBoxAdapter(child: SizedBox(height: gapMedium)),
+          SliverToBoxAdapter(child: SizedBox(height: gapLarge)),
           SliverToBoxAdapter(
               child: Column(
             children: [
               NowTitleAndForwardForm(),
+              NowBookSlider(
+                  controller: _carouselController,
+                  rankingBooks: rankingBooks,
+                  funPageChanged: (index, reason) {
+                    setState(() {
+                      _bestCurrent = index;
+                    });
+                  }),
+              SizedBox(height: gapLarge),
+              NowSliderIndicator(
+                  controller: _carouselController,
+                  current: _bestCurrent,
+                  rankingBooks: rankingBooks),
             ],
-          ))
+          )),
+          SliverToBoxAdapter(child: SizedBox(height: gapLarge)),
         ],
       ),
     );

@@ -90,11 +90,11 @@ Icon iconUnchanged({Color mColor = kFontBlack, double mSize = 25}) {
   return Icon(Icons.remove, color: mColor, size: mSize);
 }
 
-Icon iconUp({Color mColor = kFontBlack, double mSize = 25}) {
+Icon iconUp({Color mColor = kFontRed, double mSize = 25}) {
   return Icon(Icons.arrow_drop_up, color: mColor, size: mSize);
 }
 
-Icon iconDown({Color mColor = kFontBlack, double mSize = 25}) {
+Icon iconDown({Color mColor = kBlue, double mSize = 25}) {
   return Icon(Icons.arrow_drop_down, color: mColor, size: mSize);
 }
 

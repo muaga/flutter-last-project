@@ -4,22 +4,19 @@ import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 
-class TextSliderForm extends StatefulWidget {
-  TextSliderForm(
+class NowTextSliderForm extends StatelessWidget {
+  NowTextSliderForm(
       {super.key,
       required this.textController,
       required this.textList,
-      required this.current});
+      required this.current,
+      required this.funPageChanged});
 
   final CarouselController textController;
   final List<String> textList;
   int current;
+  final funPageChanged;
 
-  @override
-  State<TextSliderForm> createState() => _TextSliderFormState();
-}
-
-class _TextSliderFormState extends State<TextSliderForm> {
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -28,8 +25,8 @@ class _TextSliderFormState extends State<TextSliderForm> {
       // CustomScrollWidget은 계속 width때문에 오류가 났다.
       // 해결방법은 해당 위젯에 직접 위치를 주는 것
       child: CarouselSlider(
-        carouselController: widget.textController,
-        items: widget.textList.map(
+        carouselController: textController,
+        items: textList.map(
           (text) {
             return Builder(
               builder: (context) {
@@ -75,20 +72,15 @@ class _TextSliderFormState extends State<TextSliderForm> {
           },
         ).toList(),
         options: CarouselOptions(
-          height: 90,
-          viewportFraction: 1.0,
-          autoPlay: true,
-          scrollPhysics: NeverScrollableScrollPhysics(),
-          // 슬라이드 비활성화
-          autoPlayAnimationDuration: Duration(seconds: 2),
-          autoPlayInterval: const Duration(seconds: 6),
-          enlargeCenterPage: false,
-          onPageChanged: (index, reason) {
-            setState(() {
-              widget.current = index;
-            });
-          },
-        ),
+            height: 90,
+            viewportFraction: 1.0,
+            autoPlay: true,
+            scrollPhysics: NeverScrollableScrollPhysics(),
+            // 슬라이드 비활성화
+            autoPlayAnimationDuration: Duration(seconds: 2),
+            autoPlayInterval: const Duration(seconds: 6),
+            enlargeCenterPage: false,
+            onPageChanged: funPageChanged),
       ),
     );
   }
