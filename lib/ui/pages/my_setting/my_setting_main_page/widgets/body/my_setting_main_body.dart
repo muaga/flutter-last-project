@@ -126,7 +126,7 @@ class MySettingServiceAboutList extends StatelessWidget {
                 textStyle: subTitle2(),
                 funPageRoute: () {
                   // TODO 대욱 : 고객센터로 페이지 이동
-                  // Navigator.pushNamed(context, Move.MySettingProfilePage);
+                  Navigator.pushNamed(context, "/mySettingCustomer");
                 },
               ),
               SizedBox(height: gapMain),
