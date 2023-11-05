@@ -72,19 +72,15 @@ class _StoryRecommendFormState extends State<StoryRecommendForm> {
               child: IndexedStack(
                 index: _pageIndex,
                 children: [
-                  Column(
-                    children: [
-                      StoryCategorySlider(
-                        storyCategoryId: 1,
-                        current: _bookCurrent,
-                        imageController: _carouselController,
-                        funPageChanged: (index, reason) {
-                          setState(() {
-                            _bookCurrent = index;
-                          });
-                        },
-                      ),
-                    ],
+                  StoryCategorySlider(
+                    storyCategoryId: 1,
+                    current: _bookCurrent,
+                    imageController: _carouselController,
+                    funPageChanged: (index, reason) {
+                      setState(() {
+                        _bookCurrent = index;
+                      });
+                    },
                   ),
                   StoryCategorySlider(
                     storyCategoryId: 2,

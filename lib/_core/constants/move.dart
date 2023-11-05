@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/millie_IndexStack_navigation_bar.dart';
 import 'package:flutter_blog/ui/pages/auth/join_page/join_page.dart';
 import 'package:flutter_blog/ui/pages/auth/login_or_join_page/login_or_join_page.dart';
@@ -22,6 +23,7 @@ import 'package:flutter_blog/ui/pages/search/search_main_page/search_main_page.d
 import 'package:flutter_blog/ui/pages/search/search_result_page/search_result_page.dart';
 import 'package:flutter_blog/ui/pages/today_now/now_main_page/now_main_page.dart';
 import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/one_month_press_book_list_page.dart';
+import 'package:flutter_blog/ui/pages/today_story/story_book_list_page/story_book_list_page.dart';
 import 'package:flutter_blog/ui/pages/today_story/story_main_page/story_main_page.dart';
 
 import '../../ui/pages/today_now/book_store_best_book_list_page/book_store_best_book_list_page.dart';
@@ -52,6 +54,7 @@ class Move {
 
   /// today-story
   static String StoryMainPage = "/storyMain";
+  static String StoryBookListPage = "/storyBookList";
 
   /// feed
   static String FeedMainPage = "/feedMain";
@@ -131,6 +134,14 @@ Map<String, Widget Function(BuildContext)> getRouters() {
 
     /// today-story
     Move.StoryMainPage: (context) => const StoryMainPage(),
+    Move.StoryBookListPage: (context) {
+      final title = ModalRoute.of(context)!.settings.arguments as String;
+      final books = ModalRoute.of(context)!.settings.arguments as List<Book>;
+      return StoryBookListPage(
+        title: title,
+        books: books,
+      );
+    },
 
     /// my-setting
     Move.MySettingMainPage: (context) => const MySettingMainPage(),

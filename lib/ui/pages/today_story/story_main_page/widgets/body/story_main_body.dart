@@ -7,8 +7,11 @@ import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/banner_slider/now_image_slider_form.dart';
 import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/banner_slider/now_text_slider_form.dart';
+import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/now_book_card.dart';
+import 'package:flutter_blog/ui/pages/today_story/story_book_list_page/story_book_list_page.dart';
 import 'package:flutter_blog/ui/pages/today_story/story_main_page/widgets/recommend/story_recommend_form.dart';
 import 'package:flutter_blog/ui/widgets/form/custom_footer_form.dart';
+import 'package:flutter_blog/ui/widgets/form/custom_title_and_forword_form.dart';
 
 class StoryMainBody extends StatefulWidget {
   const StoryMainBody({super.key});
@@ -137,11 +140,125 @@ class _StoryMainBodyState extends State<StoryMainBody> {
               ),
             ),
           ),
-          SliverToBoxAdapter(child: SizedBox(height: gapXxlarge)),
+          SliverToBoxAdapter(child: SizedBox(height: gapLarge)),
 
           /// 카테고리별 추천 책
           SliverToBoxAdapter(
             child: StoryRecommendForm(books: books),
+          ),
+
+          SliverToBoxAdapter(child: SizedBox(height: gapXxlarge)),
+
+          /// # 헌터 # 각성자
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                CustomTitleAndForwardForm(
+                  title: "# 헌터 # 각성자",
+                  funPageRoute: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => StoryBookListPage(
+                          title: "# 헌터 # 각성자",
+                          books: books,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                Padding(
+                  padding: EdgeInsets.all(gapMain),
+                  child: Container(
+                    height: getScreenWidth(context) * 0.7,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 8,
+                      itemExtent: 150,
+                      itemBuilder: (context, index) {
+                        return NowBookCard(book: books[index]);
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          SliverToBoxAdapter(child: SizedBox(height: gapLarge)),
+
+          /// # 스포츠물
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                CustomTitleAndForwardForm(
+                  title: "# 스포츠물",
+                  funPageRoute: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => StoryBookListPage(
+                          title: "# 스포츠물",
+                          books: books,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                Padding(
+                  padding: EdgeInsets.all(gapMain),
+                  child: Container(
+                    height: getScreenWidth(context) * 0.7,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 8,
+                      itemExtent: 150,
+                      itemBuilder: (context, index) {
+                        return NowBookCard(book: books[index]);
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          SliverToBoxAdapter(child: SizedBox(height: gapLarge)),
+
+          /// # 이 무렵, 내가 사랑하는 이야기
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                CustomTitleAndForwardForm(
+                  title: "# 이 무렵, 내가 사랑하는 이야기",
+                  funPageRoute: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => StoryBookListPage(
+                          title: "# 이 무렵, 내가 사랑하는 이야기",
+                          books: books,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                Padding(
+                  padding: EdgeInsets.all(gapMain),
+                  child: Container(
+                    height: getScreenWidth(context) * 0.7,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 8,
+                      itemExtent: 150,
+                      itemBuilder: (context, index) {
+                        return NowBookCard(book: books[index]);
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
 
           /// footer
