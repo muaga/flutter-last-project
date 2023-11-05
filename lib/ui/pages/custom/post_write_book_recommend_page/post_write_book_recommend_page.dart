@@ -55,7 +55,7 @@ class _PostWriteBookRecommendPageState
                 }
                 setState(() {});
               },
-              child: CustomGridBookCard(books[index]),
+              child: CustomGridBookCard(book: books[index]),
             );
           },
         ),

@@ -45,7 +45,7 @@ class _MyLibraryOneReview extends State<MyLibraryOneReview> {
                 /// TODO 대욱 : 책 한줄리뷰 리스트 페이지로 가야합니다
                 Navigator.pushNamed(context, "/searchMain");
               },
-              child: CustomGridBookCard(books[index]),
+              child: CustomGridBookCard(book: books[index]),
             );
           },
           // 더 많은 리스트 아이템을 추가할 수 있습니다.

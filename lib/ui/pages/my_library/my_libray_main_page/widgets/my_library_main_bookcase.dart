@@ -94,7 +94,7 @@ class _MyLibraryMainBookcaseState extends State<MyLibraryMainBookcase> {
                   },
                 );
               },
-              child: CustomGridBookCard(books[index]),
+              child: CustomGridBookCard(book: books[index]),
             );
           },
           // 더 많은 리스트 아이템을 추가할 수 있습니다.

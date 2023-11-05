@@ -4,6 +4,7 @@ import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
+import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.dart';
 
 class NowRankingBookDetail extends StatelessWidget {
   const NowRankingBookDetail(
@@ -28,83 +29,91 @@ class NowRankingBookDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        /// 순위 바
-        Row(
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              width: getScreenWidth(context) * 0.12,
-              height: getScreenWidth(context) * 0.13,
-              decoration: BoxDecoration(
-                border: Border.all(color: kBackLight2Gray),
-                borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(
-                    image: CachedNetworkImageProvider(
-                      "http://192.168.0.37:8080/images/${bookPicUrl}",
-                    ),
-                    fit: BoxFit.cover),
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => BookDetailPage(bookId: id)));
+      },
+      child: Column(
+        children: [
+          /// 순위 바
+          Row(
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: getScreenWidth(context) * 0.12,
+                height: getScreenWidth(context) * 0.13,
+                decoration: BoxDecoration(
+                  border: Border.all(color: kBackLight2Gray),
+                  borderRadius: BorderRadius.circular(10),
+                  image: DecorationImage(
+                      image: CachedNetworkImageProvider(
+                        "http://192.168.0.37:8080/images/${bookPicUrl}",
+                      ),
+                      fit: BoxFit.cover),
+                ),
               ),
-            ),
-            const SizedBox(width: gapMedium),
-            Column(
-              children: [
-                Text("${rankingId}", style: title1()),
-                if (state == "up") iconUp(),
-                if (state == "down") iconDown(),
-                if (state == null) iconUnchanged(),
-              ],
-            ),
-            const SizedBox(width: gapMedium),
-            Container(
-              width: getScreenWidth(context) * 0.5,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              const SizedBox(width: gapMedium),
+              Column(
                 children: [
-                  Text("${title}",
-                      style: subTitle3(mFontWeight: FontWeight.w400),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1),
-                  Text("${writer}",
-                      style: body2(
-                          mColor: kFontGray, mFontWeight: FontWeight.normal),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1),
+                  Text("${rankingId}", style: title1()),
+                  if (state == "up") iconUp(),
+                  if (state == "down") iconDown(),
+                  if (state == null) iconUnchanged(),
                 ],
               ),
-            )
-          ],
-        ),
-        const SizedBox(height: gapMedium),
-
-        /// 책 보기
-        Container(
-          width: double.infinity,
-          height: 300,
-          decoration: BoxDecoration(
-            color: kBackLightGray,
-            borderRadius: BorderRadius.circular(5),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("${titleIntro}",
-                  style: subTitle3(), textAlign: TextAlign.center),
-              Text("${intro}",
-                  style: subTitle3(
-                      mColor: kFontGray, mFontWeight: FontWeight.normal)),
-              const SizedBox(height: gapMedium),
-              Image(
-                image: CachedNetworkImageProvider(
-                  "http://192.168.0.37:8080/images/${bookPicUrl}",
+              const SizedBox(width: gapMedium),
+              Container(
+                width: getScreenWidth(context) * 0.5,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("${title}",
+                        style: subTitle3(mFontWeight: FontWeight.w400),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1),
+                    Text("${writer}",
+                        style: body2(
+                            mColor: kFontGray, mFontWeight: FontWeight.normal),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1),
+                  ],
                 ),
-                height: getScreenWidth(context) * 0.5,
               )
             ],
           ),
-        )
-      ],
+          const SizedBox(height: gapMedium),
+
+          /// 책 보기
+          Container(
+            width: double.infinity,
+            height: 300,
+            decoration: BoxDecoration(
+              color: kBackLightGray,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("${titleIntro}",
+                    style: subTitle3(), textAlign: TextAlign.center),
+                Text("${intro}",
+                    style: subTitle3(
+                        mColor: kFontGray, mFontWeight: FontWeight.normal)),
+                const SizedBox(height: gapMedium),
+                Image(
+                  image: CachedNetworkImageProvider(
+                    "http://192.168.0.37:8080/images/${bookPicUrl}",
+                  ),
+                  height: getScreenWidth(context) * 0.5,
+                )
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }

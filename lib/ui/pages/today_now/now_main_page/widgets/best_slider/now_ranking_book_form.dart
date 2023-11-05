@@ -4,6 +4,7 @@ import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
+import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.dart';
 
 class NowRankingBookForm extends StatelessWidget {
   const NowRankingBookForm(
@@ -25,7 +26,12 @@ class NowRankingBookForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => BookDetailPage(bookId: id)));
+      },
       child: Container(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: gapSmall),
