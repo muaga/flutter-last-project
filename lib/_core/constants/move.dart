@@ -22,6 +22,7 @@ import 'package:flutter_blog/ui/pages/search/search_main_page/search_main_page.d
 import 'package:flutter_blog/ui/pages/search/search_result_page/search_result_page.dart';
 import 'package:flutter_blog/ui/pages/today_now/now_main_page/now_main_page.dart';
 import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/one_month_press_book_list_page.dart';
+import 'package:flutter_blog/ui/pages/today_story/story_main_page/story_main_page.dart';
 
 import '../../ui/pages/today_now/book_store_best_book_list_page/book_store_best_book_list_page.dart';
 
@@ -47,9 +48,10 @@ class Move {
   /// today-now
   static String BookStoreBestBookListPage = "/bookStoreBestList";
   static String OneMonthPressBookListPage = "/oneMonthPressBookList";
+  static String NowMainPage = "/nowMain";
 
   /// today-story
-  static String NowMainPage = "/nowMain";
+  static String StoryMainPage = "/storyMain";
 
   /// feed
   static String FeedMainPage = "/feedMain";
@@ -126,6 +128,9 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.OneMonthPressBookListPage: (context) =>
         const OneMonthPressBookListPage(),
     Move.NowMainPage: (context) => const NowMainPage(),
+
+    /// today-story
+    Move.StoryMainPage: (context) => const StoryMainPage(),
 
     /// my-setting
     Move.MySettingMainPage: (context) => const MySettingMainPage(),

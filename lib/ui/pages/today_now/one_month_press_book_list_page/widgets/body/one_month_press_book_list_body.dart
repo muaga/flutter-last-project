@@ -25,7 +25,6 @@ class OneMonthPressBookListBody extends ConsumerWidget {
     } else {
       books = model.books;
     }
-
     return CustomCategoryForm(books: books);
   }
 }

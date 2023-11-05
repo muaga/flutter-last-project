@@ -30,7 +30,7 @@ class CustomCategoryButton extends StatelessWidget {
             side:
                 BorderSide(color: isSelected ? Colors.transparent : kBackGray),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           backgroundColor: isSelected ? kBackBlack : Colors.transparent,
         ),
         child: Text(label,

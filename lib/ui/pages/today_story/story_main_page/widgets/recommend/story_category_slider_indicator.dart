@@ -1,10 +1,8 @@
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/reponse_dto/best_book_response_dto_test.dart';
 
-class NowSliderIndicator extends StatelessWidget {
-  NowSliderIndicator(
+class StoryCategorySliderIndicator extends StatelessWidget {
+  StoryCategorySliderIndicator(
       {super.key,
       required this.controller,
       required this.current,
@@ -12,11 +10,11 @@ class NowSliderIndicator extends StatelessWidget {
 
   final CarouselController controller;
   int current;
-  List<testBook> rankingBooks;
+  List<Book> rankingBooks;
 
   @override
   Widget build(BuildContext context) {
-    List<List<testBook>> dividedBooks = [
+    List<List<Book>> dividedBooks = [
       rankingBooks.sublist(0, 3), // 첫 번째 슬라이드에 표시할 책
       rankingBooks.sublist(3, 6),
       rankingBooks.sublist(6) // 두 번째 슬라이드에 표시할 책
@@ -34,7 +32,7 @@ class NowSliderIndicator extends StatelessWidget {
               }
             },
             child: Container(
-              width: getScreenWidth(context) * 0.25,
+              width: getScreenWidth(context) * 0.15,
               height: 2,
               decoration: BoxDecoration(
                 // shape: BoxShape.circle,

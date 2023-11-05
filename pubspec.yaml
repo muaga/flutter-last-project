@@ -48,6 +48,10 @@ dependencies:
   flutter_gif: ^0.0.4
   slide_to_act: ^2.0.2
   carousel_slider: ^4.2.1 # 이미지 슬라이더
+  footer: ^0.0.4 #footer
+  webview_flutter: ^4.4.2 #webView 이동
+
+
 
 
 
