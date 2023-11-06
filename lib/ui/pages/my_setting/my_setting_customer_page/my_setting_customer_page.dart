@@ -72,15 +72,17 @@ class _MySettingCustomerPageState extends State<MySettingCustomerPage> {
                                   onPress: () {
                                     changePage(0);
                                   },
+                                  icon: iconRefund(),
                                 ),
                                 MySettingCategoryButton(
-                                    label: "회원/비회원",
-                                    index: 1,
-                                    pageIndex: _pageIndex,
-                                    fontWeight: FontWeight.bold,
-                                    onPress: () {
-                                      changePage(1);
-                                    },
+                                  label: "회원/비회원",
+                                  index: 1,
+                                  pageIndex: _pageIndex,
+                                  fontWeight: FontWeight.bold,
+                                  onPress: () {
+                                    changePage(1);
+                                  },
+                                  icon: iconBookMark(),
                                 ),
                               ],
                             ),
