@@ -50,7 +50,7 @@ class NowRankingBookDetail extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
                       image: CachedNetworkImageProvider(
-                        "http://192.168.0.37:8080/images/${bookPicUrl}",
+                        "http://172.30.56.249:8080/images/${bookPicUrl}",
                       ),
                       fit: BoxFit.cover),
                 ),
@@ -105,7 +105,7 @@ class NowRankingBookDetail extends StatelessWidget {
                 const SizedBox(height: gapMedium),
                 Image(
                   image: CachedNetworkImageProvider(
-                    "http://192.168.0.37:8080/images/${bookPicUrl}",
+                    "http://172.30.56.249:8080/images/${bookPicUrl}",
                   ),
                   height: getScreenWidth(context) * 0.5,
                 )

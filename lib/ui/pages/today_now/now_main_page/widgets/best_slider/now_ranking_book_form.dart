@@ -61,7 +61,7 @@ class NowRankingBookForm extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       image: DecorationImage(
                           image: CachedNetworkImageProvider(
-                            "http://192.168.0.37:8080/images/${bookPicUrl}",
+                            "http://172.30.56.249:8080/images/${bookPicUrl}",
                           ),
                           fit: BoxFit.cover),
                     ),

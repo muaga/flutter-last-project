@@ -5,15 +5,21 @@ import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/move.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/model/book.dart';
-import 'package:flutter_blog/ui/pages/today_now/now_main_page/best_book_response_dto_test.dart';
 import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/banner_slider/now_image_slider_form.dart';
 import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/banner_slider/now_text_slider_form.dart';
 import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/best_slider/now_book_slider.dart';
 import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/best_slider/now_slider_indicator.dart';
 import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/best_slider/now_title_and_forward_form.dart';
-import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/now_book_card.dart';
-import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/now_small_book_card.dart';
-import 'package:flutter_blog/ui/widgets/form/custom_title_and_forword_form.dart';
+import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/daily/now_daily_form.dart';
+import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/daily/now_daily_title_and_forward_form.dart';
+import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/event/now_event_slider.dart';
+import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/event/now_title_form.dart';
+import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/month/now_month_book_form.dart';
+import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/month/now_month_book_small_form.dart';
+import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/month/now_month_title_and_forward_form.dart';
+import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/reponse_dto/best_book_response_dto_test.dart';
+import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/reponse_dto/event_response_dto_test.dart';
+import 'package:flutter_blog/ui/widgets/form/custom_footer_form.dart';
 
 class NowMainBody extends StatefulWidget {
   const NowMainBody({super.key});
@@ -26,6 +32,7 @@ class _NowMainBodyState extends State<NowMainBody> {
   // 슬라이더 초기 번호
   int _bannerCurrent = 0;
   int _bestCurrent = 0;
+  int _eventCurrent = 0;
 
   // AppBar 초기 아이템 컬러
   Color currentColor = kFontWhite;
@@ -35,23 +42,18 @@ class _NowMainBodyState extends State<NowMainBody> {
   final CarouselController _textController = CarouselController();
   final ScrollController _scrollController = ScrollController();
   final CarouselController _carouselController = CarouselController();
+  final CarouselController _eventController = CarouselController();
 
   List<String> imageList = [
     "ad_moon.jpg",
     "ad_november.jpg",
     "ad_higasino_geigo.jpg",
-    // "ad_story_1.jpg",
-    // "ad_story_2.jpg",
-    // "ad_story_3.jpg"
   ];
 
   List<String> textList = [
     "내 딸이 달에게 납치되었다?\n상상력을 자극하는 '달의 아이' 공개",
     "11월에는 어떤 책을 읽지?\n추천 맛집! 에디터의 선택",
     "히가시노 게이고 뭐부터 읽지?\n나의 소설 취향 소설보기",
-    // "입대전 마지막으로 떠난 여행\n난 각성자가 되었다",
-    // "조직에 배신당한 히트맨\n암살 당해 죽고 회귀했다",
-    // "뚱보 김병장이 재능 만랩\n엔터테이너로 거듭난다"
   ];
 
   List<testBook> rankingBooks = [
@@ -155,6 +157,8 @@ class _NowMainBodyState extends State<NowMainBody> {
       body: CustomScrollView(
         controller: _scrollController,
         slivers: [
+          /// 배너
+
           SliverAppBar(
             leading: Padding(
               padding: EdgeInsets.only(left: 16),
@@ -165,14 +169,14 @@ class _NowMainBodyState extends State<NowMainBody> {
             actions: [
               TextButton(
                   onPressed: () {
-                    // TODO 은혜 : Now 화면으로 넘어오기
+                    Navigator.popAndPushNamed(context, Move.NowMainPage);
                   },
                   child: Text("NOW",
                       style: title1(
                           mFontWeight: FontWeight.bold, mColor: currentColor))),
               TextButton(
                   onPressed: () {
-                    // TODO 은혜 : 스토리 화면으로 넘어가기
+                    Navigator.popAndPushNamed(context, Move.StoryMainPage);
                   },
                   child: Text("스토리",
                       style: subTitle2(
@@ -214,6 +218,7 @@ class _NowMainBodyState extends State<NowMainBody> {
               ),
             ),
           ),
+
           SliverToBoxAdapter(child: SizedBox(height: gapXxlarge)),
 
           /// 지금 서점 베스트
@@ -237,108 +242,41 @@ class _NowMainBodyState extends State<NowMainBody> {
             ],
           )),
 
+          SliverToBoxAdapter(child: SizedBox(height: gapXxlarge)),
+
+          /// 놓치기 아쉬운 소식!
+          SliverToBoxAdapter(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                NowTitleForm(),
+                NowEventSlider(
+                  controller: _eventController,
+                  events: events,
+                  funPageChanged: (index, reason) {
+                    setState(() {
+                      _eventCurrent = index;
+                    });
+                  },
+                )
+              ],
+            ),
+          ),
+
           /// 한달 이내에 출간된 책
           SliverToBoxAdapter(child: SizedBox(height: gapXxlarge)),
-          SliverToBoxAdapter(
-            child: CustomTitleAndForwardForm(
-              title: "한 달 이내에 출간된 책",
-              funPageRoute: () {
-                Navigator.pushNamed(context, Move.OneMonthPressBookListPage);
-              },
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: gapMain),
-              child: Container(
-                height: getScreenWidth(context) * 0.7,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 8,
-                  itemExtent: 150,
-                  itemBuilder: (context, index) {
-                    return NowBookCard(book: books[index]);
-                  },
-                ),
-              ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: gapMain),
-              child: Container(
-                height: getScreenWidth(context) * 0.55,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 8,
-                  itemExtent: 120,
-                  itemBuilder: (context, index) {
-                    index += 8;
-                    return NowSmallBookCard(book: books[index]);
-                  },
-                ),
-              ),
-            ),
-          ),
+          NowMonthTitleAndForwardForm(),
+          NowMonthBookForm(books: books),
+          NowMonthBookSmallForm(books: books),
           SliverToBoxAdapter(child: SizedBox(height: gapLarge)),
 
           /// 오늘의 한 문장
+          NowDailyTitleAndForwardForm(),
+          NowDailyForm(),
+
+          /// footer
           SliverToBoxAdapter(
-            child: CustomTitleAndForwardForm(
-                title: "오늘의 한 문장", funPageRoute: () {}),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              height: getScreenWidth(context) * 1.1,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/lemon.jpg"),
-                  colorFilter: ColorFilter.mode(
-                    Colors.white.withOpacity(0.6),
-                    BlendMode.srcATop,
-                  ),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("삶이란,", style: subTitle1()),
-                  SizedBox(height: gapXlarge),
-                  Container(
-                    height: getScreenWidth(context) * 0.65,
-                    width: getScreenWidth(context) * 0.55,
-                    decoration: BoxDecoration(
-                      color: kBackWhite,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: kFontLightGray, // 그림자의 색상
-                          offset: Offset(1, 1), // 그림자의 위치 (x, y)
-                          blurRadius: 8.0, // 그림자의 흐림 정도
-                          spreadRadius: 2.0, // 그림자의 확산 정도
-                        )
-                      ],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(gapLarge),
-                      child: Column(
-                        children: [
-                          Image(
-                            image: AssetImage("assets/images/sign2.png"),
-                            color: kFontGray,
-                            height: 15,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: gapLarge),
-                  Text("노재희, <나무와 함께 정처 없음>")
-                ],
-              ),
-            ),
+            child: CustomFooterForm(),
           ),
         ],
       ),

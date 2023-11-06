@@ -20,7 +20,7 @@ class NowBookCard extends StatelessWidget {
       child: Column(
         children: [
           CachedNetworkImage(
-            imageUrl: "http://192.168.0.37:8080/images/${book?.picUrl ?? ""}",
+            imageUrl: "http://172.30.56.249:8080/images/${book?.picUrl ?? ""}",
             height: getScreenWidth(context) * 0.5,
             width: getScreenWidth(context) * 0.35,
             fit: BoxFit.fill,

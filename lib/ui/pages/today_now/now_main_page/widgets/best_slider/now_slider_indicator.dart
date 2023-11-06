@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/ui/pages/today_now/now_main_page/best_book_response_dto_test.dart';
+import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/reponse_dto/best_book_response_dto_test.dart';
 
 class NowSliderIndicator extends StatelessWidget {
   NowSliderIndicator(

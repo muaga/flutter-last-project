@@ -6,6 +6,7 @@ import 'package:flutter_blog/ui/widgets/custom_grid_book_card.dart';
 
 class CustomBookGridView extends StatelessWidget {
   final int? categoryId;
+  // TODO 은혜 : 여기서 카테고리 Id로 알아오기
   final List<Book> books;
   const CustomBookGridView({this.categoryId, required this.books});
 

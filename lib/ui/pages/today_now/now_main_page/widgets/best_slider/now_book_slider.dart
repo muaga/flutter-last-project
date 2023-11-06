@@ -1,9 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/ui/pages/today_now/now_main_page/best_book_response_dto_test.dart';
 import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/best_slider/now_ranking_book_detail_form.dart';
 import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/best_slider/now_ranking_book_form.dart';
+import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/reponse_dto/best_book_response_dto_test.dart';
 
 class NowBookSlider extends StatelessWidget {
   NowBookSlider(
