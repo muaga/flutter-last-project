@@ -7,12 +7,14 @@ class MySettingCategoryButton extends StatelessWidget {
   final int pageIndex;
   final VoidCallback onPress;
   final FontWeight? fontWeight;
+  final icon;
   const MySettingCategoryButton(
       {required this.label,
-        required this.index,
-        required this.pageIndex,
-        required this.onPress,
-        this.fontWeight});
+      required this.index,
+      required this.pageIndex,
+      required this.onPress,
+      this.fontWeight,
+      required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -23,17 +25,30 @@ class MySettingCategoryButton extends StatelessWidget {
         onPress();
       },
       style: TextButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        backgroundColor: isSelected ? kBackBlack : Colors.transparent, // 선택한 상태에 따라 배경색 변경
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        backgroundColor:
+            isSelected ? kBackBlack : Colors.transparent, // 선택한 상태에 따라 배경색 변경
         side: BorderSide(color: Colors.black),
       ),
-      child: Text(
-        label,
-        style: TextStyle(
-          fontSize: 20,
-          color: isSelected ? kFontWhite : kFontGray, // 선택한 상태에 따라 색상 변경
-          fontWeight: isSelected ? FontWeight.bold : (fontWeight ?? FontWeight.normal),
-        ),
+      child: Row(
+        children: [
+          Icon(
+            icon.icon,
+            color: isSelected ? Colors.white : kFontBlack, // 아이콘의 색상 변경
+            size: 20,
+          ),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 20,
+              color: isSelected ? kFontWhite : kFontBlack, // 선택한 상태에 따라 색상 변경
+              fontWeight: isSelected
+                  ? FontWeight.bold
+                  : (fontWeight ?? FontWeight.normal),
+            ),
+          ),
+        ],
       ),
     );
   }
