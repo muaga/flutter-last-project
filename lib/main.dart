@@ -24,11 +24,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: theme(),
         // initialRoute: Move.MyLibraryMainPage,
-<<<<<<< HEAD
         initialRoute: Move.StoryMainPage,
-=======
-        initialRoute: Move.MySettingMainPage,
->>>>>>> dev
         routes: getRouters(),
       ),
     );
