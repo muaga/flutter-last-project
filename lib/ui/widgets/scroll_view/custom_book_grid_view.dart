@@ -3,7 +3,6 @@ import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.dart';
 import 'package:flutter_blog/ui/widgets/custom_grid_book_card.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class CustomBookGridView extends StatelessWidget {
   final int? categoryId;
@@ -36,7 +35,7 @@ class CustomBookGridView extends StatelessWidget {
 
                 /// ?가 붙는 변수는 꼭 null일 때의 디폴트값을 명시해줄것
               },
-              child: CustomGridBookCard(books[index]));
+              child: CustomGridBookCard(book: books[index]));
         },
         // 더 많은 리스트 아이템을 추가할 수 있습니다.
       ),

@@ -31,7 +31,7 @@ class CustomTitleAndForwardForm extends StatelessWidget {
               Text(
                 "${title}",
                 style: textStyle ??
-                    subTitle2(
+                    subTitle1(
                         mColor: fontColor ?? kFontBlack,
                         mFontWeight: fontWeight ?? FontWeight.bold),
               ),

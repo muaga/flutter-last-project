@@ -23,7 +23,7 @@ class NowTitleAndForwardForm extends StatelessWidget {
               children: [
                 Text(
                   "지금! 서점 베스트",
-                  style: subTitle2(
+                  style: subTitle1(
                       mColor: kFontBlack, mFontWeight: FontWeight.bold),
                 ),
                 Text("서점 3사 100위 내, 72권을 밀리에서 만나보세요",
