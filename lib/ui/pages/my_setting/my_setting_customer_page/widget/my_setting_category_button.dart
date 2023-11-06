@@ -24,15 +24,15 @@ class MySettingCategoryButton extends StatelessWidget {
       },
       style: TextButton.styleFrom(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        backgroundColor: Colors.transparent,
+        backgroundColor: isSelected ? kBackBlack : Colors.transparent, // 선택한 상태에 따라 배경색 변경
+        side: BorderSide(color: Colors.black),
       ),
       child: Text(
         label,
         style: TextStyle(
           fontSize: 20,
-          color: isSelected ? kFontBlack : kFontGray, // 선택한 상태에 따라 색상 변경
+          color: isSelected ? kFontWhite : kFontGray, // 선택한 상태에 따라 색상 변경
           fontWeight: isSelected ? FontWeight.bold : (fontWeight ?? FontWeight.normal),
-          decoration: isSelected ? TextDecoration.underline : TextDecoration.none, // 밑줄 설정
         ),
       ),
     );
