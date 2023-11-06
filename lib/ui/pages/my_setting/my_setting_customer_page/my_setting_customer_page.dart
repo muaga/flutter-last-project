@@ -51,58 +51,86 @@ class _MySettingCustomerPageState extends State<MySettingCustomerPage> {
         body: TabBarView(
           children: [
             // FAQ 탭
-            ListView(
-              children: [
-                // FAQ 컨테이너 추가
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: gapMain),
-                  child: Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        MySettingCategoryButton(
-                          label: "결제/환불",
-                          index: 0,
-                          pageIndex: _pageIndex,
-                          fontWeight: FontWeight.bold,
-                          onPress: () {
-                            changePage(0);
-                          },
+            Padding(
+              padding: const EdgeInsets.all(gapMain),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: CustomScrollView(
+                      slivers: [
+                        SliverToBoxAdapter(
+                          child: Container(
+                            height: 80,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                MySettingCategoryButton(
+                                  label: "결제/환불",
+                                  index: 0,
+                                  pageIndex: _pageIndex,
+                                  fontWeight: FontWeight.bold,
+                                  onPress: () {
+                                    changePage(0);
+                                  },
+                                ),
+                                MySettingCategoryButton(
+                                    label: "회원/비회원",
+                                    index: 1,
+                                    pageIndex: _pageIndex,
+                                    fontWeight: FontWeight.bold,
+                                    onPress: () {
+                                      changePage(1);
+                                    },
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
-                        MySettingCategoryButton(
-                            label: "회원/비회원",
-                            index: 1,
-                            pageIndex: _pageIndex,
-                            fontWeight: FontWeight.bold,
-                            onPress: () {
-                              changePage(1);
-                            }),
+                        SliverFillRemaining(
+                          child: IndexedStack(
+                            index: _pageIndex,
+                            children: [
+                              /// 결제/환불
+                              ListView.builder(
+                                itemCount: bookReplys.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  final book = books[index];
+
+                                  return Column(
+                                    children: [
+                                      MySettingExpandableDescription(
+                                          title: "결제/환불",
+                                          description: "결제/환불 문의사항"),
+                                      SizedBox(height: gapLarge),
+                                    ],
+                                  );
+                                },
+                              ),
+
+                              /// 회원/비회원
+                              ListView.builder(
+                                itemCount: bookReplys.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  final book = books[index];
+
+                                  return Column(
+                                    children: [
+                                      MySettingExpandableDescription(
+                                          title: "회원/비회원",
+                                          description: "회원/비회원 문의사항"),
+                                      SizedBox(height: gapLarge),
+                                    ],
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   ),
-                ),
-
-                // FAQ 항목들 추가
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: bookReplys.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final bookReply = bookReplys[index];
-
-                    return Padding(
-                      padding: const EdgeInsets.all(gapMain),
-                      child: Column(
-                        children: [
-                          MySettingExpandableDescription(
-                              title: "title", description: "description"),
-                          SizedBox(height: gapLarge),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-              ],
+                ],
+              ),
             ),
 
             // 공지사항 탭
