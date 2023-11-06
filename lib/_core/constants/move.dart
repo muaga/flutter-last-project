@@ -6,13 +6,13 @@ import 'package:flutter_blog/ui/pages/auth/login_or_join_page/login_or_join_page
 import 'package:flutter_blog/ui/pages/auth/login_page/login_page.dart';
 import 'package:flutter_blog/ui/pages/auth/millie_splash_page/millie_splash_page.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.dart';
+import 'package:flutter_blog/ui/pages/custom/book_read_page/book_read_page.dart';
 import 'package:flutter_blog/ui/pages/custom/post_detail_page/post_detail_page.dart';
 import 'package:flutter_blog/ui/pages/custom/post_list_page/post_list_page.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_page/post_write_page.dart';
 import 'package:flutter_blog/ui/pages/custom/reply_write_and_list_page/reply_write_and_list_page.dart';
 import 'package:flutter_blog/ui/pages/feed/feed_main_page/feed_main_page.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_page.dart';
-import 'package:flutter_blog/ui/pages/my_setting/my_setting_customer_page/my_setting_customer_page.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_customer_page/my_setting_customer_page.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_main_page/my_setting_main_page.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_payment_page/my_setting_payment_page.dart';
@@ -48,6 +48,7 @@ class Move {
   static String PostWritePage = "/post/Write";
   static String PostListPage = "/post/list";
   static String ReplyWriteAndListPage = "/replyWriteAndList";
+  static String BookReadPage = "/book/read";
 
   /// today-now
   static String BookStoreBestBookListPage = "/bookStoreBestList";
@@ -115,6 +116,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     //   return BookDetailPage(bookId: bookId);
     // },
     Move.BookDetailPage: (context) => BookDetailPage(bookId: 1),
+    Move.BookReadPage: (context) => BookReadPage(),
 
     // Move.PostDetailPage: (context) {
     //   final postId = ModalRoute.of(context)!.settings.arguments as int;

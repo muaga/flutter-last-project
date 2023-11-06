@@ -9,13 +9,14 @@ class MySettingCustomerNotice extends StatefulWidget {
   final noticeDate;
   final noticeComent;
 
-  const MySettingCustomerNotice({
-    required this.noticeTitle, required this.noticeDate, required this.noticeComent
-  });
+  const MySettingCustomerNotice(
+      {required this.noticeTitle,
+      required this.noticeDate,
+      required this.noticeComent});
 
   @override
-  State<MySettingCustomerNotice> createState() => _MySettingCustomerNoticeState();
-
+  State<MySettingCustomerNotice> createState() =>
+      _MySettingCustomerNoticeState();
 }
 
 class _MySettingCustomerNoticeState extends State<MySettingCustomerNotice> {
@@ -41,7 +42,6 @@ class _MySettingCustomerNoticeState extends State<MySettingCustomerNotice> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start, // 가로 정렬을 왼쪽으로 설정
               children: [
-                SizedBox(height: gapLarge),
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
@@ -51,30 +51,37 @@ class _MySettingCustomerNoticeState extends State<MySettingCustomerNotice> {
                     ),
                   ),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: gapSmall, vertical: 3),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: gapSmall, vertical: 3),
                     child: Text("공지"),
                   ),
                 ),
                 Container(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start, // 가로 정렬을 왼쪽으로 설정
+                    crossAxisAlignment:
+                        CrossAxisAlignment.start, // 가로 정렬을 왼쪽으로 설정
                     children: [
                       Text(widget.noticeTitle, style: title1()),
                       SizedBox(height: gapSmall),
                       Text(widget.noticeDate, style: body2(mColor: kFontGray)),
-                      SizedBox(height: gapLarge),
                     ],
                   ),
                 ),
+                SizedBox(height: 10),
+                CustomThinLine(),
               ],
             ),
           ),
         ),
         if (isExpanded)
           Container(
+            decoration: BoxDecoration(color: kBackIbory),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(height: 20),
                 Text(widget.noticeComent, style: body1()),
+                SizedBox(height: 20),
                 CustomThinLine(),
               ],
             ),
