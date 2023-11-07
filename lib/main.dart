@@ -23,8 +23,9 @@ class MyApp extends StatelessWidget {
         navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
         theme: theme(),
-        // initialRoute: Move.MyLibraryMainPage,
-        initialRoute: Move.PostWritePage,
+
+        initialRoute: Move.MyLibraryMainPage,
+        // initialRoute: Move.MainSplashPage,
         routes: getRouters(),
       ),
     );
