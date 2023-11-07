@@ -101,32 +101,21 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     /// custom
     Move.BookDetailPage: (context) {
       final bookId = ModalRoute.of(context)!.settings.arguments as int;
-      // 현재 경로에서 전달되는 인수
-      return BookDetailPage(bookId: 1);
+      return BookDetailPage(bookId: bookId);
     },
     Move.PostDetailPage: (context) {
       final postId = ModalRoute.of(context)!.settings.arguments as int;
-      // TODO 은혜 : 포스트상세페이지 완료시 번호->postId
-      return PostDetailPage();
+      return PostDetailPage(postId: postId);
     },
 
-    // Move.BookDetailPage: (context) {
-    //   final bookId = ModalRoute.of(context)!.settings.arguments as int;
-    //   // 현재 경로에서 전달되는 인수
-    //   return BookDetailPage(bookId: bookId);
-    // },
-    Move.BookDetailPage: (context) => BookDetailPage(bookId: 1),
+    Move.ReplyWriteAndListPage: (context) {
+      final bookId = ModalRoute.of(context)!.settings.arguments as int;
+      return ReplyWriteAndListPage(bookId: bookId);
+    },
+
     Move.BookReadPage: (context) => BookReadPage(),
-
-    // Move.PostDetailPage: (context) {
-    //   final postId = ModalRoute.of(context)!.settings.arguments as int;
-    //   // TODO 은혜 : 포스트상세페이지 완료시 번호->postId
-    //   return PostDetailPage(postId: 1);
-    // },
-
     Move.PostWritePage: (context) => PostWritePage(),
     Move.PostListPage: (context) => PostListPage(),
-    Move.ReplyWriteAndListPage: (context) => ReplyWriteAndListPage(),
 
     /// today-now
     // 한달 이내에 출간한 책 목록 페이지

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 
+import '../../_core/constants/http.dart';
+
 class CustomReviewCard extends StatelessWidget {
   final String userPicUrl;
   final String username;
@@ -17,11 +19,11 @@ class CustomReviewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: EdgeInsets.all(gapMain),
+      contentPadding: EdgeInsets.all(gapMedium),
       leading: CircleAvatar(
         radius: 20,
         backgroundImage: CachedNetworkImageProvider(
-          "http://192.168.0.35:8080/images/${userPicUrl}", // 이미지 URL
+          dio.options.baseUrl + "/images/${userPicUrl}", // 이미지 URL
         ),
       ),
       title: Column(

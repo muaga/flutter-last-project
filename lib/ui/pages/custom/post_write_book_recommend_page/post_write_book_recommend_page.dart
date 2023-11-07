@@ -7,6 +7,7 @@ import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_page/post_write_page.dart';
 import 'package:flutter_blog/ui/widgets/custom_grid_book_card.dart';
 import 'package:logger/logger.dart';
+import 'package:toast/toast.dart';
 
 class PostWriteBookRecommendPage extends StatefulWidget {
   Book? selectedBook; // 선택한 책을 저장하는 프로퍼티
@@ -50,11 +51,12 @@ class _PostWriteBookRecommendPageState
                 if (widget.selectedBook == books[index]) {
                   // 이미 선택한 책을 다시 탭하면 선택 해제
                   widget.selectedBook = null;
+                  setState(() {});
                 } else {
                   // 새로운 책 선택
                   widget.selectedBook = books[index];
+                  setState(() {});
                 }
-                setState(() {});
               },
               child: CustomGridBookCard(book: books[index]),
             );
@@ -65,11 +67,25 @@ class _PostWriteBookRecommendPageState
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
+            if (widget.selectedBook != null)
+              Padding(
+                padding: EdgeInsets.only(top: gapMain),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("선택한 책 : ",
+                        style: subTitle2(mFontWeight: FontWeight.normal)),
+                    Text("${widget.selectedBook?.title}",
+                        style: subTitle2(
+                            mColor: kPointColor,
+                            mFontWeight: FontWeight.normal)),
+                  ],
+                ),
+              ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(gapMain),
               child: Container(
                 width: 130,
-                height: 40,
                 decoration: BoxDecoration(
                   color: kPrimaryColor,
                   borderRadius: BorderRadius.circular(5),
@@ -81,7 +97,6 @@ class _PostWriteBookRecommendPageState
                         MaterialPageRoute(
                             builder: (context) => PostWritePage(
                                 selectedBook: widget.selectedBook)));
-                    Logger().d("나됨?${widget.selectedBook!.id}");
                   },
                   child: Text(
                     "책 추천하기",
