@@ -9,7 +9,7 @@ class CustomTitleInsert extends StatelessWidget {
     this.hintText,
   });
 
-  final TextEditingController titleController;
+  final titleController;
   final String? hintText;
 
   @override

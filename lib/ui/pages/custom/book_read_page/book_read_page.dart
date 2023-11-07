@@ -5,6 +5,7 @@ import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thick_line.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
+import 'package:logger/logger.dart';
 
 class BookReadPage extends StatefulWidget {
   const BookReadPage({Key? key}) : super(key: key);
@@ -139,6 +140,7 @@ class _BookReadPageState extends State<BookReadPage> {
                 onPressed: () {
                   // 현재 페이지를 북마크로 저장
                   savedPage = currentPage;
+                  Logger().d(savedPage);
 
                   setState(() {
                     // 슬라이더 값을 초기화합니다.

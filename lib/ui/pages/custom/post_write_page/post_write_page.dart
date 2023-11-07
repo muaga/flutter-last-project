@@ -2,156 +2,167 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
+import 'package:flutter_blog/_core/constants/move.dart';
+import 'package:flutter_blog/_core/constants/size.dart';
+import 'package:flutter_blog/_core/utils/validator_util.dart';
 import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_book_recommend_page/post_write_book_recommend_page.dart';
-import 'package:flutter_blog/ui/pages/custom/post_write_page/widgets/body/post_write_body.dart';
+import 'package:flutter_blog/ui/pages/custom/post_write_book_recommend_page/post_write_recommend-book-card.dart';
+import 'package:flutter_blog/ui/pages/custom/post_write_page/widgets/app_bar/post_write_show_dialog.dart';
+import 'package:flutter_blog/ui/widgets/custom_text_area.dart';
+import 'package:flutter_blog/ui/widgets/custom_title_insert.dart';
+import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
-class PostWritePage extends StatefulWidget {
-  Book? selectedBook;
+class PostWritePage extends ConsumerWidget {
+  final formKey = GlobalKey<FormState>();
+  final title = TextEditingController();
+  final content = TextEditingController();
+  late Book? selectedBook;
 
   PostWritePage({this.selectedBook, Key? key}) : super(key: key);
 
-  @override
-  _PostWritePageState createState() => _PostWritePageState();
-}
-
-class _PostWritePageState extends State<PostWritePage> {
   // Book? selectedBook; // 변수를 추가하여 선택한 책을 추적
 
   @override
-  Widget build(BuildContext context) {
-    Logger().d("도착?${widget.selectedBook}");
-
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  title: Center(
-                    child: Text(
-                      '포스트 작성중',
-                      style: subTitle1(mFontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  content: Text(
-                    "작성 중인 포스트가 지워 집니다.\n"
-                    "그래도 이동하시겠습니까?",
-                    style: body1(mColor: kFontGray),
-                    textAlign: TextAlign.center,
-                  ),
-                  actions: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        TextButton(
-                          style: TextButton.styleFrom(
-                              backgroundColor: kBackGray,
-                              minimumSize: Size(130, 50)),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text(
-                            '취소',
-                            style: subTitle3(mColor: kFontBlack),
-                          ),
-                        ),
-                        TextButton(
-                          style: TextButton.styleFrom(
-                              backgroundColor: kPrimaryColor,
-                              minimumSize: Size(130, 50)),
-                          onPressed: () {
-                            Navigator.pop(context); // alter 창 종료
-                            Navigator.pop(context); // 바텀시트 창 종료
-                            Navigator.pop(context);
-                          },
-                          child: Text(
-                            '확인',
-                            style: subTitle3(mColor: kFontBlack),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                );
-              },
-            );
-          },
-          icon: iconArrowBack(),
-        ),
-        title: Text("일반 포스트", style: subTitle1()),
-        actions: [
-          TextButton(
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Form(
+      key: formKey,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, "/post/list");
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return PostWriteShowDialog();
+                },
+              );
             },
-            child: Text(
-              "발행",
-              style: subTitle1(mColor: kPointColor),
-            ),
+            icon: iconArrowBack(),
           ),
-        ],
-      ),
-      body: PostWriteBody(selectedBook: widget.selectedBook),
-      bottomNavigationBar: Builder(
-        builder: (BuildContext context) {
-          return Padding(
-            padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-            ),
-            child: BottomAppBar(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                          "좋아하는 책을 추천해주세요",
-                          style: body1(),
-                        ),
-                        Container(
-                          width: 130,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(5),
-                          ),
-                          child: TextButton(
-                            onPressed: () async {
-                              widget.selectedBook = await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      PostWriteBookRecommendPage(
-                                          selectedBook: null), // 선택한 책 정보를 초기화
-                                ),
-                              );
-
-                              if (widget.selectedBook != null) {
-                                // 선택한 책을 사용하여 원하는 작업을 수행
-                                // selectedBook를 사용하여 처리
-                              }
-                            },
-                            child: Text(
-                              "책 추천하기",
-                              style: subTitle1(mColor: kFontWhite),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+          title: Text("일반 포스트", style: subTitle1()),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Logger().d("selectedId : ${selectedBook!.id}");
+                Logger().d("title : ${title.text}");
+                Logger().d("content : ${content.text}");
+                // TODO - 통신코드 처리하세요 : )
+                Navigator.popAndPushNamed(context, Move.MyLibraryMainPage);
+              },
+              child: Text(
+                "발행",
+                style: subTitle1(mColor: kPointColor),
               ),
             ),
-          );
-        },
+          ],
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(gapMain),
+            child: Column(
+              children: [
+                CustomTitleInsert(
+                    titleController: title, hintText: "제목을 입력하세요"),
+                CustomThinLine(),
+                CustomTextArea(
+                  controller: content,
+                  hint: "내용을 입력하세요",
+                  funValidator: validateContent(),
+                ),
+                Container(
+                  width: getScreenWidth(context),
+                  height: 600,
+                  padding: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "선택한 책 정보:",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Container(
+                        width: getScreenWidth(context) / 3,
+                        height: 300,
+                        child: selectedBook != null
+                            ? PostWriteRecommendBookCard(selectedBook)
+                            : Text(""),
+                      )
+                      // 여기에 선택한 책의 추가 정보를 표시할 수 있습니다.
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        bottomNavigationBar: Builder(
+          builder: (BuildContext context) {
+            return Padding(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom,
+              ),
+              child: BottomAppBar(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Text(
+                            "좋아하는 책을 추천해주세요",
+                            style: body1(),
+                          ),
+                          Container(
+                            width: 130,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: TextButton(
+                              onPressed: () async {
+                                selectedBook = await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        PostWriteBookRecommendPage(
+                                            selectedBook:
+                                                null), // 선택한 책 정보를 초기화
+                                  ),
+                                );
+
+                                if (selectedBook != null) {
+                                  // 선택한 책을 사용하여 원하는 작업을 수행
+                                  // selectedBook를 사용하여 처리
+                                }
+                              },
+                              child: Text(
+                                "책 추천하기",
+                                style: subTitle1(mColor: kFontWhite),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

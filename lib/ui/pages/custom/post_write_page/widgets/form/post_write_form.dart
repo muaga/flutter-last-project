@@ -1,37 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
+import 'package:flutter_blog/_core/utils/validator_util.dart';
+import 'package:flutter_blog/ui/widgets/custom_text_area.dart';
 import 'package:flutter_blog/ui/widgets/custom_title_insert.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
-import 'package:flutter_summernote/flutter_summernote.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PostWriteForm extends StatelessWidget {
-  const PostWriteForm({
-    super.key,
-    required this.titleController,
-    required GlobalKey<FlutterSummernoteState> keyEditor,
-  }) : _keyEditor = keyEditor;
+class PostWriteForm extends ConsumerWidget {
+  final formKey = GlobalKey<FormState>();
+  final title = TextEditingController();
+  final content = TextEditingController();
 
-  final TextEditingController titleController;
-  final GlobalKey<FlutterSummernoteState> _keyEditor;
+  PostWriteForm({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(gapMain),
-      child: Column(
-        children: [
-          // 제목 입력란
-          CustomTitleInsert(
-              titleController: titleController, hintText: "제목을 입력하세요"),
-          CustomThinLine(),
-          TextFormField(
-            decoration: InputDecoration(
-                border: InputBorder.none, hintText: "내용을 입력하세요"),
-            maxLines: 10,
-            style: subTitle1(),
-          ),
-        ],
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Form(
+      key: formKey,
+      child: Padding(
+        padding: const EdgeInsets.all(gapMain),
+        child: Column(
+          children: [
+            // 제목 입력란
+            CustomTitleInsert(titleController: title, hintText: "제목을 입력하세요"),
+            CustomThinLine(),
+            CustomTextArea(
+              controller: content,
+              hint: "내용을 입력하세요",
+              funValidator: validateContent(),
+            ),
+          ],
+        ),
       ),
     );
   }

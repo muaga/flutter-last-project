@@ -10,11 +10,11 @@
 //   Widget build(BuildContext context) {
 //     return Form(
 //       key: _formkey,
-//         child: ListView(
-//           children: [
-//             PostDetailTitle(),
-//           ],
-//         ),
+//       child: ListView(
+//         children: [
+//           PostDetailTitle(),
+//         ],
+//       ),
 //     );
 //   }
 // }
