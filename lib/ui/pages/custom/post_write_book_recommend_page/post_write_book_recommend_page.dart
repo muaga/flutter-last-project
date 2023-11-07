@@ -11,8 +11,14 @@ import 'package:toast/toast.dart';
 
 class PostWriteBookRecommendPage extends StatefulWidget {
   Book? selectedBook; // 선택한 책을 저장하는 프로퍼티
+  final String? writingTitle;
+  final String? writingContent;
+  final title = TextEditingController();
+  final content = TextEditingController();
 
-  PostWriteBookRecommendPage({this.selectedBook, Key? key}) : super(key: key);
+  PostWriteBookRecommendPage(
+      {this.selectedBook, this.writingTitle, this.writingContent, Key? key})
+      : super(key: key);
 
   @override
   _PostWriteBookRecommendPageState createState() =>
@@ -21,6 +27,13 @@ class PostWriteBookRecommendPage extends StatefulWidget {
 
 class _PostWriteBookRecommendPageState
     extends State<PostWriteBookRecommendPage> {
+  @override
+  void initState() {
+    super.initState();
+    widget.title.text = widget.writingTitle!; // 이전 페이지에서 받은 텍스트 설정
+    widget.content.text = widget.writingContent!; // 이전 페이지에서 받은 텍스트 설정
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,11 +105,10 @@ class _PostWriteBookRecommendPageState
                 ),
                 child: TextButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => PostWritePage(
-                                selectedBook: widget.selectedBook)));
+                    Navigator.pop(context, {
+                      "title": widget.title.text,
+                      "content": widget.content.text
+                    });
                   },
                   child: Text(
                     "책 추천하기",

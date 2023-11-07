@@ -5,9 +5,11 @@ class CustomTextArea extends StatelessWidget {
   final funValidator;
   final controller;
   final String initValue;
+  final onChanged;
 
   const CustomTextArea({
     Key? key,
+    required this.onChanged,
     required this.hint,
     required this.funValidator,
     required this.controller,
@@ -26,6 +28,7 @@ class CustomTextArea extends StatelessWidget {
         validator: funValidator,
         decoration:
             InputDecoration(hintText: "$hint", border: InputBorder.none),
+        onChanged: onChanged,
       ),
     );
   }

@@ -12,23 +12,37 @@ import 'package:flutter_blog/ui/pages/custom/post_write_page/widgets/app_bar/pos
 import 'package:flutter_blog/ui/widgets/custom_text_area.dart';
 import 'package:flutter_blog/ui/widgets/custom_title_insert.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
-class PostWritePage extends ConsumerWidget {
+class PostWritePage extends StatefulWidget {
   final formKey = GlobalKey<FormState>();
   final title = TextEditingController();
   final content = TextEditingController();
-  late Book? selectedBook;
+  Book? selectedBook;
 
   PostWritePage({this.selectedBook, Key? key}) : super(key: key);
 
-  // Book? selectedBook; // 변수를 추가하여 선택한 책을 추적
+  @override
+  _PostWritePageState createState() => _PostWritePageState();
+}
+
+class _PostWritePageState extends State<PostWritePage> {
+  String _saveTitle = "";
+  String _saveContent = "";
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  void initState() {
+    super.initState();
+
+    // 이전에 저장된 텍스트가 있으면 불러옴
+    widget.title.text = _saveTitle;
+    widget.content.text = _saveContent;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Form(
-      key: formKey,
+      key: widget.formKey,
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -46,10 +60,6 @@ class PostWritePage extends ConsumerWidget {
           actions: [
             TextButton(
               onPressed: () {
-                Logger().d("selectedId : ${selectedBook!.id}");
-                Logger().d("title : ${title.text}");
-                Logger().d("content : ${content.text}");
-                // TODO - 통신코드 처리하세요 : )
                 Navigator.popAndPushNamed(context, Move.MyLibraryMainPage);
               },
               child: Text(
@@ -65,14 +75,25 @@ class PostWritePage extends ConsumerWidget {
             child: Column(
               children: [
                 CustomTitleInsert(
-                    titleController: title, hintText: "제목을 입력하세요"),
+                    titleController: widget.title,
+                    hintText: "제목을 입력하세요",
+                    onChanged: (text) {
+                      setState(() {
+                        _saveTitle = text;
+                      });
+                    }),
                 CustomThinLine(),
                 CustomTextArea(
-                  controller: content,
+                  controller: widget.content,
                   hint: "내용을 입력하세요",
                   funValidator: validateContent(),
+                  onChanged: (text) {
+                    setState(() {
+                      _saveContent = text;
+                    });
+                  },
                 ),
-                if (selectedBook != null)
+                if (widget.selectedBook != null)
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -83,8 +104,8 @@ class PostWritePage extends ConsumerWidget {
                               style: subTitle2(mColor: kFontGray))),
                       Container(
                         width: getScreenWidth(context) / 3,
-                        child: selectedBook != null
-                            ? PostWriteRecommendBookCard(selectedBook)
+                        child: widget.selectedBook != null
+                            ? PostWriteRecommendBookCard(widget.selectedBook)
                             : Text(""),
                       )
                       // 여기에 선택한 책의 추가 정보를 표시할 수 있습니다.
@@ -122,7 +143,7 @@ class PostWritePage extends ConsumerWidget {
                             ),
                             child: TextButton(
                               onPressed: () async {
-                                selectedBook = await Navigator.push(
+                                widget.selectedBook = await Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) =>
@@ -132,7 +153,7 @@ class PostWritePage extends ConsumerWidget {
                                   ),
                                 );
 
-                                if (selectedBook != null) {
+                                if (widget.selectedBook != null) {
                                   // 선택한 책을 사용하여 원하는 작업을 수행
                                   // selectedBook를 사용하여 처리
                                 }
