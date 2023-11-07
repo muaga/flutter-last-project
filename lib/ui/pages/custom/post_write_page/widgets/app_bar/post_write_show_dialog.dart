@@ -31,7 +31,6 @@ class PostWriteShowDialog extends StatelessWidget {
                   backgroundColor: kBackGray, minimumSize: Size(130, 50)),
               onPressed: () {
                 Navigator.of(context).pop();
-                Navigator.of(context).pop();
               },
               child: Text(
                 '취소',
@@ -42,7 +41,9 @@ class PostWriteShowDialog extends StatelessWidget {
               style: TextButton.styleFrom(
                   backgroundColor: kPrimaryColor, minimumSize: Size(130, 50)),
               onPressed: () {
-                Navigator.of(context).pop();
+                Navigator.pop(context);
+                Navigator.pop(context);
+                Navigator.pop(context);
               },
               child: Text(
                 '확인',

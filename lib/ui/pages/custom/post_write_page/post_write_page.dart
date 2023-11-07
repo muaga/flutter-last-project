@@ -42,7 +42,7 @@ class PostWritePage extends ConsumerWidget {
             },
             icon: iconArrowBack(),
           ),
-          title: Text("일반 포스트", style: subTitle1()),
+          title: Text("포스트", style: subTitle1()),
           actions: [
             TextButton(
               onPressed: () {
@@ -72,27 +72,17 @@ class PostWritePage extends ConsumerWidget {
                   hint: "내용을 입력하세요",
                   funValidator: validateContent(),
                 ),
-                Container(
-                  width: getScreenWidth(context),
-                  height: 600,
-                  padding: EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                  ),
-                  child: Column(
+                if (selectedBook != null)
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "선택한 책 정보:",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 8),
+                      CustomThinLine(),
+                      Padding(
+                          padding: EdgeInsets.symmetric(vertical: gapMain),
+                          child: Text("선택한 책 정보:",
+                              style: subTitle2(mColor: kFontGray))),
                       Container(
                         width: getScreenWidth(context) / 3,
-                        height: 300,
                         child: selectedBook != null
                             ? PostWriteRecommendBookCard(selectedBook)
                             : Text(""),
@@ -100,7 +90,6 @@ class PostWritePage extends ConsumerWidget {
                       // 여기에 선택한 책의 추가 정보를 표시할 수 있습니다.
                     ],
                   ),
-                ),
               ],
             ),
           ),
@@ -116,7 +105,7 @@ class PostWritePage extends ConsumerWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(gapMain),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [

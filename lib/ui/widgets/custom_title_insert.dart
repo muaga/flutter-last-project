@@ -15,12 +15,12 @@ class CustomTitleInsert extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: title1(),
+      style: subTitle1(),
       controller: titleController,
       decoration: InputDecoration(
           border: InputBorder.none,
           hintText: "${hintText}",
-          hintStyle: title1(mColor: kFontGray)),
+          hintStyle: subTitle1(mColor: kFontGray)),
       maxLines: null,
       maxLength: 80,
     );

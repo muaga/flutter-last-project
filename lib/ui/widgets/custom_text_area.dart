@@ -22,23 +22,10 @@ class CustomTextArea extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
         controller: controller,
-        maxLines: 10,
+        maxLines: 20,
         validator: funValidator,
-        decoration: InputDecoration(
-          hintText: "Enter $hint",
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-        ),
+        decoration:
+            InputDecoration(hintText: "$hint", border: InputBorder.none),
       ),
     );
   }
