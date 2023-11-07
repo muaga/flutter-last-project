@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
+import 'package:flutter_blog/_core/constants/move.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
 
@@ -73,7 +74,7 @@ class BookDetailLike extends StatelessWidget {
             Expanded(
               child: TextButton(
                 onPressed: () {
-                  /// TODO 대욱 : 포스트 작성 페이지 이동
+                  Navigator.pushNamed(context, Move.PostWritePage);
                 },
                 child: Container(
                   width: 100,

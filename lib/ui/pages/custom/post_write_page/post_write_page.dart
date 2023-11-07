@@ -64,7 +64,9 @@ class _PostWritePageState extends State<PostWritePage> {
                               backgroundColor: kPrimaryColor,
                               minimumSize: Size(130, 50)),
                           onPressed: () {
-                            Navigator.of(context).pop();
+                            Navigator.pop(context); // alter 창 종료
+                            Navigator.pop(context); // 바텀시트 창 종료
+                            Navigator.pop(context);
                           },
                           child: Text(
                             '확인',

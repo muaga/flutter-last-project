@@ -54,6 +54,7 @@ class JoinBody extends ConsumerWidget {
               hintText: "비밀번호 입력",
               guideText: "영문, 숫자를 포함한 4~12자 조합으로 입력해 주세요.",
               controller: _password,
+              obscureText: true,
               funValidator: validatePassword(),
             ),
             const SizedBox(height: gapLarge),

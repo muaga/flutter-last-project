@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
+import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/dto/request_dto/book_like_request_dto.dart';
 import 'package:flutter_blog/ui/millie_bottom_navigation_bar.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/body/book_detail_body.dart';
@@ -66,7 +67,7 @@ class BookDetailPage extends ConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(gapMain),
               child: Container(
                 width: 250,
                 decoration: BoxDecoration(
@@ -87,9 +88,6 @@ class BookDetailPage extends ConsumerWidget {
                   ),
                 ),
               ),
-            ),
-            Flexible(
-              child: MillieBottomNavigationBar(),
             ),
           ],
         ),
