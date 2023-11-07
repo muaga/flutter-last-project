@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/data/model/board.dart';
 import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/millie_IndexStack_navigation_bar.dart';
 import 'package:flutter_blog/ui/pages/auth/join_page/join_page.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.d
 import 'package:flutter_blog/ui/pages/custom/book_read_page/book_read_page.dart';
 import 'package:flutter_blog/ui/pages/custom/post_detail_page/post_detail_page.dart';
 import 'package:flutter_blog/ui/pages/custom/post_list_page/post_list_page.dart';
+import 'package:flutter_blog/ui/pages/custom/post_update_page/post_update_page.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_page/post_write_page.dart';
 import 'package:flutter_blog/ui/pages/custom/reply_write_and_list_page/reply_write_and_list_page.dart';
 import 'package:flutter_blog/ui/pages/feed/feed_main_page/feed_main_page.dart';
@@ -43,12 +45,13 @@ class Move {
   static String SearchResultPage = "/searchResult";
 
   /// custom
-  static String BookDetailPage = "/book/Detail";
-  static String PostDetailPage = "/post/Detail";
-  static String PostWritePage = "/post/Write";
-  static String PostListPage = "/post/list";
+  static String BookDetailPage = "/bookDetail";
+  static String PostDetailPage = "/postDetail";
+  static String PostWritePage = "/postWrite";
+  static String PostListPage = "/postList";
+  static String PostUpdatePage = "/postUpdate";
   static String ReplyWriteAndListPage = "/replyWriteAndList";
-  static String BookReadPage = "/book/read";
+  static String BookReadPage = "/bookRead";
 
   /// today-now
   static String BookStoreBestBookListPage = "/bookStoreBestList";
@@ -104,8 +107,8 @@ Map<String, Widget Function(BuildContext)> getRouters() {
       return BookDetailPage(bookId: bookId);
     },
     Move.PostDetailPage: (context) {
-      final postId = ModalRoute.of(context)!.settings.arguments as int;
-      return PostDetailPage(postId: postId);
+      final board = ModalRoute.of(context)!.settings.arguments as Board;
+      return PostDetailPage(board: board);
     },
 
     Move.ReplyWriteAndListPage: (context) {
@@ -116,6 +119,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     Move.BookReadPage: (context) => BookReadPage(),
     Move.PostWritePage: (context) => PostWritePage(),
     Move.PostListPage: (context) => PostListPage(),
+    Move.PostUpdatePage: (context) => PostUpdatePage(board: board),
 
     /// today-now
     // 한달 이내에 출간한 책 목록 페이지

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/font.dart';
 
 class CustomTextArea extends StatelessWidget {
   final String hint;
   final funValidator;
   final controller;
-  final onChanged;
 
   const CustomTextArea({
     Key? key,
-    required this.onChanged,
     required this.hint,
     required this.funValidator,
     required this.controller,
@@ -19,12 +18,12 @@ class CustomTextArea extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: TextFormField(
+        style: subTitle2(mFontWeight: FontWeight.normal),
         controller: controller,
         maxLines: 20,
         validator: funValidator,
         decoration:
             InputDecoration(hintText: "$hint", border: InputBorder.none),
-        onChanged: onChanged,
       ),
     );
   }

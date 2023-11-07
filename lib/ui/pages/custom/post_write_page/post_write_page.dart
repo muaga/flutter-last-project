@@ -12,7 +12,6 @@ import 'package:flutter_blog/ui/pages/custom/post_write_page/widgets/app_bar/pos
 import 'package:flutter_blog/ui/widgets/custom_text_area.dart';
 import 'package:flutter_blog/ui/widgets/custom_title_insert.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
-import 'package:logger/logger.dart';
 
 class PostWritePage extends StatefulWidget {
   final formKey = GlobalKey<FormState>();
@@ -31,29 +30,23 @@ class PostWritePage extends StatefulWidget {
 }
 
 class _PostWritePageState extends State<PostWritePage> {
-  String _saveTitle = "";
-  String _saveContent = "";
-
+  // 초기값 설정
   @override
   void initState() {
     super.initState();
 
-    // 이전에 저장된 텍스트가 있으면 불러옴
+    // 이전에 저장된 텍스트가 있으면 불러와서
+    // 현재 textFormField의 controller의 text에 넣으면 textFormField에 초기값처럼 들어간다
     if (widget.writingTitle != null) {
-      _saveTitle = widget.writingTitle!;
-      widget.title.text = _saveTitle;
+      widget.title.text = widget.writingTitle!;
     }
     if (widget.writingContent != null) {
-      _saveContent = widget.writingContent!;
-      widget.content.text = _saveContent;
+      widget.content.text = widget.writingContent!;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    Logger().d("_saveTitle : ${_saveTitle}");
-    Logger().d("_saveContent : ${_saveContent}");
-
     return Form(
       key: widget.formKey,
       child: Scaffold(
@@ -90,22 +83,12 @@ class _PostWritePageState extends State<PostWritePage> {
                 CustomTitleInsert(
                   titleController: widget.title,
                   hintText: "제목을 입력하세요",
-                  onChanged: (text) {
-                    setState(() {
-                      text = _saveTitle;
-                    });
-                  },
                 ),
                 CustomThinLine(),
                 CustomTextArea(
                   controller: widget.content,
                   hint: "내용을 입력하세요",
                   funValidator: validateContent(),
-                  onChanged: (text) {
-                    setState(() {
-                      text = _saveContent;
-                    });
-                  },
                 ),
                 if (widget.selectedBook != null)
                   Column(

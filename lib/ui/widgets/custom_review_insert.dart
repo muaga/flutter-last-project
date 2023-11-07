@@ -15,9 +15,10 @@ class CustomReviewInsert extends ConsumerWidget {
     return Form(
       key: _formKey,
       child: Padding(
-        padding: const EdgeInsets.all(gapMain),
+        padding: const EdgeInsets.all(gapMedium),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
               padding: const EdgeInsets.only(top: gapMedium),
@@ -35,6 +36,7 @@ class CustomReviewInsert extends ConsumerWidget {
                 children: [
                   TextFormField(
                     controller: _content,
+                    style: body1(mFontWeight: FontWeight.w500),
                     textAlignVertical: TextAlignVertical.bottom,
                     decoration: InputDecoration(
                       hintText: "다양한 생각을 남겨주세요", // 힌트 텍스트를 비웁니다
@@ -55,7 +57,7 @@ class CustomReviewInsert extends ConsumerWidget {
                 ],
               ),
             ),
-            SizedBox(width: 16),
+            SizedBox(width: gapMedium),
             Container(
               height: 58,
               child: TextButton(
