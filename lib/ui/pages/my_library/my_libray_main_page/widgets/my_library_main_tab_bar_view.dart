@@ -4,6 +4,7 @@ import 'package:flutter_blog/data/model/board.dart';
 import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/data/model/book_reply.dart';
 import 'package:flutter_blog/data/model/user.dart';
+import 'package:flutter_blog/ui/pages/custom/post_update_page/post_update_page.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_library_choice_page/my_library_main_bookcase.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_library_choice_page/my_library_main_like_books.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_reading_note/my_library_main_reading_note_form/my_library_main_reading_note_post_form.dart';
@@ -173,23 +174,23 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
 
                           /// 포스트
                           ListView.builder(
-                            itemCount: bookReplys.length,
+                            itemCount: boards.length,
                             itemBuilder: (BuildContext context, int index) {
-                              final book = books[index];
-
                               return InkWell(
                                 onTap: () {
-                                  /// TODO 대욱 : 임시주소 -> 포스트디테일 페이지로 연결
-                                  Navigator.pushNamed(context, "/searchMain");
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => PostUpdatePage(
+                                                board: boards[index],
+                                              )));
                                 },
                                 child: Column(
                                   children: [
                                     MyLibraryMainReadingNotePostForm(
-                                      book: book,
-                                      postComent:
-                                          "${bookReplys[index].content}",
-                                      postDate:
-                                          "${bookReplys[index].createdAt}",
+                                      bookId: boards[index].bookId,
+                                      postComent: "${boards[index].title}",
+                                      postDate: "${boards[index].createdAt}",
                                     ),
                                   ],
                                 ),
