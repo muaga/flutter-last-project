@@ -5,9 +5,9 @@ import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/model/book.dart';
 
-class MyLibraryMainReadingNoteBook extends StatelessWidget {
+class MyLibraryMainReadingNotePostBook extends StatelessWidget {
   final Book book;
-  const MyLibraryMainReadingNoteBook({required this.book});
+  const MyLibraryMainReadingNotePostBook({required this.book});
 
   @override
   Widget build(BuildContext context) {
