@@ -5,11 +5,11 @@ import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/model/book.dart';
 import 'package:logger/logger.dart';
 
-class MyLibraryMainReadingNoteContent extends StatelessWidget {
+class MyLibraryMainReadingNoteReplyForm extends StatelessWidget {
   final String oneReviewComent;
   final String oneReviewDate;
   final Book? book;
-  const MyLibraryMainReadingNoteContent(
+  const MyLibraryMainReadingNoteReplyForm(
       {required this.oneReviewComent, required this.oneReviewDate, this.book});
 
   @override
