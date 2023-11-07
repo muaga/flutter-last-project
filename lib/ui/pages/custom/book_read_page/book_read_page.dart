@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
+import 'package:flutter_blog/_core/constants/icon.dart';
+import 'package:flutter_blog/_core/constants/size.dart';
+import 'package:flutter_blog/ui/widgets/line/custom_thick_line.dart';
+import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
 
 class BookReadPage extends StatefulWidget {
   const BookReadPage({Key? key}) : super(key: key);
@@ -14,6 +18,7 @@ class _BookReadPageState extends State<BookReadPage> {
   int currentPage = 0;
   double sliderValue = 0.0;
   int totalPages = 100; // 전체 페이지 수
+  int savedPage = -1;
 
   @override
   void initState() {
@@ -34,6 +39,80 @@ class _BookReadPageState extends State<BookReadPage> {
         child: ListView(
           children: [
             // Drawer contents
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Container(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Container(
+                      width: 70,
+                      height: 100,
+                      color: Colors.black,
+                    ),
+                    SizedBox(width: gapMedium),
+                    Column(
+                      children: [
+                        Text("제목"),
+                        Text("작가"),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            CustomThinLine(),
+            Container(
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.all(gapMain),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      child: Row(
+                        children: [
+                          iconBookMartOutline(),
+                          SizedBox(width: gapMedium),
+                          Text(
+                            "북마크",
+                            style: subTitle1(mFontWeight: FontWeight.normal),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: iconArrowForward(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            CustomThickLine(),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text("홈"),
+              onTap: () {
+                // 홈 화면으로 이동하거나 다른 작업 수행
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.book),
+              title: Text("내 서재"),
+              onTap: () {
+                // 내 서재 화면으로 이동하거나 다른 작업 수행
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text("설정"),
+              onTap: () {
+                // 설정 화면으로 이동하거나 다른 작업 수행
+              },
+            ),
           ],
         ),
       ),
@@ -49,17 +128,24 @@ class _BookReadPageState extends State<BookReadPage> {
             actions: [
               IconButton(
                 onPressed: () {
-                  pageController.jumpToPage(0);
-                  setState(() {
-                    currentPage = 0;
-                    sliderValue = 0.0; // 슬라이더 값 초기화
-                  });
+                  if (savedPage != -1) {
+                    // 유효한 페이지가 저장되어 있는지 확인한 후 저장된 페이지로 이동
+                    pageController.jumpToPage(savedPage);
+                  }
                 },
                 icon: Icon(Icons.home),
               ),
               IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.bookmark),
+                onPressed: () {
+                  // 현재 페이지를 북마크로 저장
+                  savedPage = currentPage;
+
+                  setState(() {
+                    // 슬라이더 값을 초기화합니다.
+                    sliderValue = currentPage.toDouble();
+                  });
+                },
+                icon: iconBookMartOutline(),
               ),
             ],
             floating: false,
