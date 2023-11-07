@@ -4,7 +4,7 @@ import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/model/book.dart';
 
 class PostWriteRecommendBookCard extends StatelessWidget {
-  final Book book;
+  Book? book;
 
   PostWriteRecommendBookCard(this.book); // 'book' 매개변수를 생성자에 추가
 
@@ -13,7 +13,7 @@ class PostWriteRecommendBookCard extends StatelessWidget {
     return Column(
       children: [
         CachedNetworkImage(
-          imageUrl: "http://192.168.0.37:8080/images/${book.picUrl}",
+          imageUrl: "http://192.168.0.37:8080/images/${book?.picUrl}",
           fit: BoxFit.cover,
           placeholder: (context, url) => CircularProgressIndicator(
             strokeWidth: 5,
@@ -28,7 +28,7 @@ class PostWriteRecommendBookCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                book.title ?? "",
+                book?.title ?? "제목 없음",
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -39,7 +39,7 @@ class PostWriteRecommendBookCard extends StatelessWidget {
               ),
               SizedBox(height: gapSmall),
               Text(
-                book.writer ?? "",
+                book?.writer ?? "",
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.bold,

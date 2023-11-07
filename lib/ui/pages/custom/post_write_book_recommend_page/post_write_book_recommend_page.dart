@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
+import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_page/post_write_page.dart';
@@ -27,7 +28,7 @@ class _PostWriteBookRecommendPageState
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back),
+          icon: iconArrowBack(),
         ),
         title: Text("책 추천하기"),
       ),
