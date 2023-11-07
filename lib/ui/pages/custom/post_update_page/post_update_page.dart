@@ -7,11 +7,10 @@ import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/_core/utils/validator_util.dart';
 import 'package:flutter_blog/data/model/board.dart';
 import 'package:flutter_blog/data/model/book.dart';
-import 'package:flutter_blog/ui/pages/custom/post_write_book_recommend_page/post_write_book_recommend_page.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_book_recommend_page/post_write_recommend-book-card.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_page/widgets/app_bar/post_write_show_dialog.dart';
+import 'package:flutter_blog/ui/pages/my_setting/my_setting_main_page/my_setting_main_page.dart';
 import 'package:flutter_blog/ui/widgets/custom_text_area.dart';
-import 'package:flutter_blog/ui/widgets/custom_title_insert.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
 import 'package:logger/logger.dart';
 
@@ -66,13 +65,16 @@ class PostUpdatePage extends StatelessWidget {
             padding: EdgeInsets.all(gapMain),
             child: Column(
               children: [
-                CustomTitleInsert(
-                    titleController: board.title, hintText: "제목을 입력하세요"),
+                // CustomTitleInsert(
+                //     titleController: board.title,
+                //     hintText: "제목을 입력하세요",
+                //     onChanged: () {}),
                 CustomThinLine(),
                 CustomTextArea(
                   controller: board.content,
                   hint: "내용을 입력하세요",
                   funValidator: validateContent(),
+                  onChanged: () {},
                 ),
                 Container(
                   width: getScreenWidth(context),
@@ -136,14 +138,10 @@ class PostUpdatePage extends StatelessWidget {
                             child: TextButton(
                               onPressed: () async {
                                 selectedBook = await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        PostWriteBookRecommendPage(
-                                            selectedBook:
-                                                null), // 선택한 책 정보를 초기화
-                                  ),
-                                );
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            MySettingMainPage()));
 
                                 if (selectedBook != null) {
                                   // 선택한 책을 사용하여 원하는 작업을 수행

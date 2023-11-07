@@ -18,9 +18,13 @@ class PostWritePage extends StatefulWidget {
   final formKey = GlobalKey<FormState>();
   final title = TextEditingController();
   final content = TextEditingController();
-  Book? selectedBook;
+  final Book? selectedBook;
+  final String? writingTitle;
+  final String? writingContent;
 
-  PostWritePage({this.selectedBook, Key? key}) : super(key: key);
+  PostWritePage(
+      {this.selectedBook, this.writingTitle, this.writingContent, Key? key})
+      : super(key: key);
 
   @override
   _PostWritePageState createState() => _PostWritePageState();
@@ -35,12 +39,21 @@ class _PostWritePageState extends State<PostWritePage> {
     super.initState();
 
     // 이전에 저장된 텍스트가 있으면 불러옴
-    widget.title.text = _saveTitle;
-    widget.content.text = _saveContent;
+    if (widget.writingTitle != null) {
+      _saveTitle = widget.writingTitle!;
+      widget.title.text = _saveTitle;
+    }
+    if (widget.writingContent != null) {
+      _saveContent = widget.writingContent!;
+      widget.content.text = _saveContent;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    Logger().d("_saveTitle : ${_saveTitle}");
+    Logger().d("_saveContent : ${_saveContent}");
+
     return Form(
       key: widget.formKey,
       child: Scaffold(
@@ -75,13 +88,14 @@ class _PostWritePageState extends State<PostWritePage> {
             child: Column(
               children: [
                 CustomTitleInsert(
-                    titleController: widget.title,
-                    hintText: "제목을 입력하세요",
-                    onChanged: (text) {
-                      setState(() {
-                        _saveTitle = text;
-                      });
-                    }),
+                  titleController: widget.title,
+                  hintText: "제목을 입력하세요",
+                  onChanged: (text) {
+                    setState(() {
+                      text = _saveTitle;
+                    });
+                  },
+                ),
                 CustomThinLine(),
                 CustomTextArea(
                   controller: widget.content,
@@ -89,7 +103,7 @@ class _PostWritePageState extends State<PostWritePage> {
                   funValidator: validateContent(),
                   onChanged: (text) {
                     setState(() {
-                      _saveContent = text;
+                      text = _saveContent;
                     });
                   },
                 ),
@@ -142,21 +156,16 @@ class _PostWritePageState extends State<PostWritePage> {
                               borderRadius: BorderRadius.circular(5),
                             ),
                             child: TextButton(
-                              onPressed: () async {
-                                widget.selectedBook = await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        PostWriteBookRecommendPage(
-                                            selectedBook:
-                                                null), // 선택한 책 정보를 초기화
-                                  ),
-                                );
-
-                                if (widget.selectedBook != null) {
-                                  // 선택한 책을 사용하여 원하는 작업을 수행
-                                  // selectedBook를 사용하여 처리
-                                }
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            PostWriteBookRecommendPage(
+                                              writingTitle: widget.title.text,
+                                              writingContent:
+                                                  widget.content.text,
+                                            )));
                               },
                               child: Text(
                                 "책 추천하기",
