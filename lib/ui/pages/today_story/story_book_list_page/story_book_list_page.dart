@@ -20,6 +20,7 @@ class StoryBookListPage extends StatelessWidget {
             },
             icon: iconArrowBack()),
         title: Text("${title}"),
+        elevation: 0.5,
       ),
       body: StoryBookListBody(books: books),
     );

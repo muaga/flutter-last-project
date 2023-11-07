@@ -24,7 +24,6 @@ class LoginTextForm extends ConsumerWidget {
         CustomOutLineTextFormField(
             hintText: "아이디 입력",
             controller: _username,
-            obscureText: false,
             funValidator: validateUsername()),
         SizedBox(height: gapMedium),
         CustomOutLineTextFormField(
@@ -39,12 +38,9 @@ class LoginTextForm extends ConsumerWidget {
           funPageRoute: () {
             if (_formKey.currentState!.validate()) {
               LoginRequestDTO loginReqDTO = LoginRequestDTO(
-                  // username: _username.text, password: _password.text);
-                  username: _username.text,
-                  password: _password.text);
+                  username: _username.text, password: _password.text);
+
               ref.read(sessionStore).login(loginReqDTO);
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => FeedMainPage()));
             }
           },
         ),

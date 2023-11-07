@@ -15,6 +15,7 @@ class SearchResultTabBar extends StatelessWidget {
       elevation: 0.5,
       pinned: true,
       leadingWidth: 0,
+      leading: Container(), // 뒤로가기 버튼 비활성화
       title: Align(
         alignment: Alignment.centerLeft,
         child: TabBar(

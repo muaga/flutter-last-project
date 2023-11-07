@@ -91,15 +91,14 @@ class _StoryMainBodyState extends State<StoryMainBody> {
             actions: [
               TextButton(
                   onPressed: () {
-                    Navigator.popAndPushNamed(context, Move.NowMainPage);
+                    Navigator.popAndPushNamed(
+                        context, Move.MillieIndexStackNavigationBar);
                   },
                   child: Text("NOW",
                       style: subTitle2(
                           mFontWeight: FontWeight.bold, mColor: currentColor))),
               TextButton(
-                  onPressed: () {
-                    // TODO 은혜 : 스토리 화면으로 넘어가기
-                  },
+                  onPressed: () {},
                   child: Text("스토리",
                       style: title1(
                           mFontWeight: FontWeight.bold, mColor: currentColor))),

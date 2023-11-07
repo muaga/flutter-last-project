@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.dart';
@@ -20,9 +21,9 @@ class NowSmallBookCard extends StatelessWidget {
       child: Column(
         children: [
           CachedNetworkImage(
-            imageUrl: "http://172.30.56.249:8080/images/${book?.picUrl ?? ""}",
-            height: getScreenWidth(context) * 0.35,
-            width: getScreenWidth(context) * 0.25,
+            imageUrl: dio.options.baseUrl + "/images/${book?.picUrl ?? ""}",
+            height: getScreenWidth(context) * 0.3,
+            width: getScreenWidth(context) * 0.22,
             fit: BoxFit.fill,
             placeholder: (context, url) => CircularProgressIndicator(
               strokeWidth: 5,
@@ -32,14 +33,14 @@ class NowSmallBookCard extends StatelessWidget {
           SizedBox(height: gapSmall),
           Container(
             height: 60,
-            width: getScreenWidth(context) * 0.25,
+            width: getScreenWidth(context) * 0.22,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   book?.title ?? "",
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 14,
                     fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
@@ -50,7 +51,7 @@ class NowSmallBookCard extends StatelessWidget {
                 Text(
                   book?.writer ?? "",
                   style: TextStyle(
-                    fontSize: 13,
+                    fontSize: 12,
                     fontWeight: FontWeight.bold,
                     color: Colors.grey,
                   ),

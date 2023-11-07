@@ -168,9 +168,7 @@ class _NowMainBodyState extends State<NowMainBody> {
             ),
             actions: [
               TextButton(
-                  onPressed: () {
-                    Navigator.popAndPushNamed(context, Move.NowMainPage);
-                  },
+                  onPressed: () {},
                   child: Text("NOW",
                       style: title1(
                           mFontWeight: FontWeight.bold, mColor: currentColor))),

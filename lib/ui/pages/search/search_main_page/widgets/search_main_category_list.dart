@@ -2,9 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
+import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/model/book_category.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
+import 'package:flutter_blog/ui/pages/search/search_category_book_list_page/search_category_book_list_page.dart';
 
 class SearchMainCategoryList extends StatelessWidget {
   const SearchMainCategoryList({
@@ -47,7 +49,13 @@ class SearchMainCategoryList extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         return InkWell(
           onTap: () {
-            /// TODO 은혜 : 현재 카테고리에 맞는 책 목록 가져오기
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => SearchCategoryBookListPage(
+                          title: bookCategorys[index].categoryName,
+                          categoryId: bookCategorys[index].id,
+                        )));
           },
           child: Container(
             padding: EdgeInsets.symmetric(
@@ -83,8 +91,8 @@ class SearchMainCategoryList extends StatelessWidget {
                       height: 100,
                       width: 70,
                       child: CachedNetworkImage(
-                        imageUrl:
-                            "http://192.168.0.37:8080/images/${bookCategorys[index].categoryPicUrl}",
+                        imageUrl: dio.options.baseUrl +
+                            "/images/${bookCategorys[index].categoryPicUrl}",
                         fit: BoxFit.cover,
                         placeholder: (context, url) =>
                             CircularProgressIndicator(
