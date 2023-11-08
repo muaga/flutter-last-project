@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/color.dart';
+import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
+import 'package:flutter_blog/_core/constants/size.dart';
+import 'package:flutter_blog/ui/pages/custom/book_read_page/widgets/book_read_view_model.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:logger/logger.dart';
 
 class BookReadBody extends StatefulWidget {
@@ -9,6 +14,7 @@ class BookReadBody extends StatefulWidget {
       required this.sliderValue,
       required this.totalPages,
       required this.savedPage,
+      required this.bookData,
       super.key});
 
   final PageController pageController;
@@ -16,6 +22,9 @@ class BookReadBody extends StatefulWidget {
   double sliderValue;
   final int totalPages;
   int savedPage;
+  BookReadModel bookData;
+  // 휴대폰 저장
+  final secureStorage = FlutterSecureStorage();
 
   @override
   State<BookReadBody> createState() => _BookReadBodyState();
@@ -24,62 +33,31 @@ class BookReadBody extends StatefulWidget {
 class _BookReadBodyState extends State<BookReadBody> {
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        SliverAppBar(
-          title: InkWell(
-            child: Text('Page ${widget.currentPage + 1}'),
-            onTap: () {
-              showPopupMenu(context);
-            },
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {
-                if (widget.savedPage != -1) {
-                  // 유효한 페이지가 저장되어 있는지 확인한 후 저장된 페이지로 이동
-                  widget.pageController.jumpToPage(widget.savedPage);
-                }
-              },
-              icon: Icon(Icons.home),
-            ),
-            IconButton(
-              onPressed: () {
-                // 현재 페이지를 북마크로 저장
-                widget.savedPage = widget.currentPage;
-                Logger().d(widget.savedPage);
-
-                setState(() {
-                  // 슬라이더 값을 초기화합니다.
-                  widget.sliderValue = widget.currentPage.toDouble();
-                });
-              },
-              icon: iconBookMartOutline(),
-            ),
-          ],
-          floating: false,
-          pinned: true,
-        ),
-        SliverToBoxAdapter(
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 25),
           child: Container(
             height: MediaQuery.of(context).size.height -
                 kToolbarHeight -
                 kBottomNavigationBarHeight,
+            color: Colors.transparent,
             child: PageView.builder(
               controller: widget.pageController,
               onPageChanged: (int page) {
                 setState(() {
-                  widget.currentPage = page;
-                  widget.sliderValue = page.toDouble();
+                  widget.currentPage = page.round();
+                  widget.sliderValue = page.roundToDouble();
                 });
               },
               itemCount: widget.totalPages, // 전체 페이지 수로 변경
-              itemBuilder: (BuildContext context, int index) {
+              itemBuilder: (context, index) {
                 return Container(
-                  color: Colors.blue,
-                  child: Center(
-                    child: Text('Page ${index + 1}'),
-                  ),
+                  height: getScreenHeight(context) * 0.88,
+                  width: getScreenWidth(context),
+                  child: Text("${widget.bookData.bookdata[index]}",
+                      style: TextStyle(
+                          fontFamily: 'D2Coding', fontSize: 23, height: 1.4)),
                 );
               },
             ),

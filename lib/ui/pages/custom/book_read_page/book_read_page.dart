@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
+import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
+import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
 import 'package:flutter_blog/ui/pages/custom/book_read_page/widgets/body/book_read_body.dart';
 import 'package:flutter_blog/ui/pages/custom/book_read_page/widgets/book_read_bottom_app_bar.dart';
 import 'package:flutter_blog/ui/pages/custom/book_read_page/widgets/book_read_drawer.dart';
@@ -13,8 +15,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
 class BookReadPage extends ConsumerStatefulWidget {
-  const BookReadPage({Key? key}) : super(key: key);
+  BookReadPage({required this.bookId, this.previousPage = 0});
 
+  final int bookId;
+  final previousPage;
 
   @override
   _BookReadPageState createState() => _BookReadPageState();
@@ -22,14 +26,31 @@ class BookReadPage extends ConsumerStatefulWidget {
 
 class _BookReadPageState extends ConsumerState<BookReadPage> {
   late PageController pageController;
-  int currentPage = 0;
-  double sliderValue = 0.0;
-  int savedPage = -1;
+  int currentPage = 0; // index
+  double sliderValue = 0.0; // index
+  int savedPage = 0;
+  bool isAppBarvisible = false;
+
+  // @override
+  // void didChangeDependencies() {
+  //   super.didChangeDependencies();
+  //
+  //   // bookData를 여기에서 가져옵니다.
+  //   final bookDataModel = ref.watch(bookReadProvider(widget.bookId));
+  //
+  //   if (bookDataModel != null) {
+  //     // bookDataModel이 null이 아닌 경우에만 previousPage 초기화
+  //     previousPage = bookDataModel.scroll;
+  //
+  //     // PageController 초기화
+  //     pageController = PageController(initialPage: previousPage);
+  //   }
+  // }
 
   @override
   void initState() {
     super.initState();
-    pageController = PageController(initialPage: currentPage);
+    pageController = PageController(initialPage: widget.previousPage);
   }
 
   @override
@@ -38,25 +59,102 @@ class _BookReadPageState extends ConsumerState<BookReadPage> {
     super.dispose();
   }
 
+  void toggleAppBarVisibility() {
+    setState(() {
+      isAppBarvisible = !isAppBarvisible;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    BookReadModel model = ref.read(bookReadProvider(bookId))
-    int totalPages = 100; // 전체 페이지 수
+    final bookModel = ref.watch(bookDetailProvider(widget.bookId));
+    final bookDataModel = ref.watch(bookReadProvider(widget.bookId));
+    BookReadModel bookData;
+    BookDetailModel book;
+    if (bookDataModel == null) {
+      return Center(child: CircularProgressIndicator());
+    } else {
+      bookData = bookDataModel;
+    }
+    if (bookModel == null) {
+      return Center(child: CircularProgressIndicator());
+    } else {
+      book = bookModel;
+    }
+
+    int totalPages = bookData.bookdata.length; // 전체 페이지 수
+    // int currentPage = pageController.page!.toInt();
 
     return Scaffold(
-      endDrawer: BookReadDrawer(),
-      body: BookReadBody(
-          pageController: pageController,
-          currentPage: currentPage,
-          savedPage: savedPage,
-          sliderValue: sliderValue,
-          totalPages: totalPages),
-      bottomNavigationBar: BookReadBottomAppBar(
-          pageController: pageController,
-          currentPage: currentPage,
-          savedPage: savedPage,
-          sliderValue: sliderValue,
-          totalPages: totalPages),
+      endDrawer: BookReadDrawer(bookModel: book!),
+      body: GestureDetector(
+        onTap: toggleAppBarVisibility,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(top: 70),
+              child: BookReadBody(
+                  bookData: bookData!,
+                  pageController: pageController,
+                  currentPage: currentPage,
+                  savedPage: savedPage,
+                  sliderValue: sliderValue,
+                  totalPages: totalPages),
+            ),
+            Visibility(
+              visible: isAppBarvisible,
+              child: Positioned(
+                child: AppBar(
+                  backgroundColor: Colors.transparent,
+                  leading: IconButton(
+                      icon: iconArrowBack(),
+                      onPressed: () async {
+                        double? lastPage = pageController.page;
+                        int lastPageInt = lastPage!.toInt();
+                        await secureStorage.write(
+                            key: 'currentPage', value: lastPageInt.toString());
+                        final value =
+                            await secureStorage.read(key: 'currentPage');
+                        Logger().d("저장됨 : ${value}");
+                        Navigator.pop(context);
+                      }),
+                  actions: [
+                    IconButton(
+                        onPressed: () {
+                          setState(() {
+                            // 슬라이더 값을 초기화
+                            sliderValue = pageController.page!;
+                            Logger().d("sliderValue : ${sliderValue}");
+
+                            // 현재 페이지를 북마크로 저장
+                            savedPage = sliderValue.toInt();
+                            Logger().d(savedPage);
+                          });
+                        },
+                        icon: iconBookMartOutline()),
+                    EndDrawerButton()
+                  ],
+                ),
+              ),
+            ),
+            Visibility(
+              visible: isAppBarvisible,
+              child: Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: BookReadBottomAppBar(
+                    pageController: pageController,
+                    currentPage: currentPage,
+                    savedPage: savedPage,
+                    sliderValue: sliderValue,
+                    totalPages: totalPages),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

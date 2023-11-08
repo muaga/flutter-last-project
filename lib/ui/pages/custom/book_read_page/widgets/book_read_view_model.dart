@@ -5,6 +5,7 @@ import 'package:flutter_blog/data/repository/book_data_repository.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 class BookReadModel {
   late int scroll;
@@ -27,7 +28,6 @@ class BookReadViewModel extends StateNotifier<BookReadModel?> {
 
   Future<void> notifyInit(int bookId) async {
     SessionUser sessionUser = ref.read(sessionStore);
-
     ResponseDTO responseDTO = await BookDataRepository()
         .fetchBookDataDetail(bookId, sessionUser.jwt!);
     BookReadModel model = responseDTO.data;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
+import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/dto/request_dto/book_like_request_dto.dart';
@@ -43,7 +44,7 @@ class BookDetailPage extends ConsumerWidget {
         actions: [
           IconButton(
             onPressed: () {
-              if (sessionUser.isLogin = true) {
+              if (sessionUser.isLogin == true) {
                 if (book.bookLike == -1) {
                   BookLikeRequestDTO dto = BookLikeRequestDTO(
                       userId: sessionUser.user!.id, bookId: bookId);
@@ -74,12 +75,20 @@ class BookDetailPage extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: TextButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    final bookId = book.bookId;
+                    final securePage =
+                        await secureStorage.read(key: "currentPage");
+                    final previousPage =
+                        int.parse(securePage?.split('.')[0] ?? '0');
+
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const BookReadPage()),
+                          builder: (context) => BookReadPage(
+                              bookId: bookId, previousPage: previousPage)),
                     );
+                    Logger().d("이전 페이지 보내기 : ${previousPage}");
                   },
                   child: Text(
                     "바로읽기",
