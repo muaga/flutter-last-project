@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/model/book.dart';
 
@@ -13,7 +14,7 @@ class PostWriteRecommendBookCard extends StatelessWidget {
     return Column(
       children: [
         CachedNetworkImage(
-          imageUrl: "http://192.168.0.37:8080/images/${book?.picUrl}",
+          imageUrl: dio.options.baseUrl + "/images/${book?.picUrl}",
           fit: BoxFit.cover,
           placeholder: (context, url) => CircularProgressIndicator(
             strokeWidth: 5,

@@ -122,11 +122,11 @@ class CustomPostListForm extends StatelessWidget {
         if (hasPicUrl) {
           return InkWell(
             onTap: () {
-              int? boardId = boards[index].id;
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => PostDetailPage(postId: boardId)));
+                      builder: (context) =>
+                          PostDetailPage(board: boards[index])));
             },
             child: Container(
               child: Padding(

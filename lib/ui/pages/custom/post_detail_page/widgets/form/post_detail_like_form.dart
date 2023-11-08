@@ -15,12 +15,9 @@ class PostDetailLikeForm extends StatelessWidget {
       children: [
         CustomLikeCount(),
         SizedBox(height: gapMedium),
-        InkWell(
-          onTap: () {},
-          child: Text(
-            "이 포스트를 좋아하는 사람들",
-            style: body1(mColor: kFontGray),
-          ),
+        Text(
+          "이 포스트를 좋아하는 사람들",
+          style: body1(mColor: kFontGray),
         ),
         SizedBox(height: gapXlarge),
       ],

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
+import 'package:flutter_blog/data/model/board.dart';
 import 'package:flutter_blog/ui/pages/custom/post_detail_page/widgets/body/post_detail_body.dart';
 
 class PostDetailPage extends StatelessWidget {
-  const PostDetailPage({Key? key, required this.postId}) : super(key: key);
+  const PostDetailPage({Key? key, required this.board}) : super(key: key);
 
-  final int postId;
+  final Board board;
 
   /// TODO 대욱 :
   @override
@@ -29,7 +30,7 @@ class PostDetailPage extends StatelessWidget {
           ),
         ],
       ),
-      body: PostDetailBody(),
+      body: PostDetailBody(board: board),
     );
   }
 }
