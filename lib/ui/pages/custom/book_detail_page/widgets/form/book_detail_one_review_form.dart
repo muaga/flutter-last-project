@@ -34,8 +34,7 @@ class BookDetailOneReviewForm extends StatelessWidget {
           ),
         ),
         CustomReviewListForm(
-            bookDetailReplyList: book.bookDetailReplyList,
-            sessionUser: sessionUser),
+            replyList: book.bookDetailReplyList, sessionUser: sessionUser),
       ],
     );
   }

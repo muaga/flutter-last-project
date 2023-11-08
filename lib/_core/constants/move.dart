@@ -116,7 +116,10 @@ Map<String, Widget Function(BuildContext)> getRouters() {
       return ReplyWriteAndListPage(bookId: bookId);
     },
 
-    Move.BookReadPage: (context) => BookReadPage(),
+    Move.BookReadPage: (context) {
+      final bookId = ModalRoute.of(context)!.settings.arguments as int;
+      return BookReadPage(bookId: bookId);
+    },
     Move.PostWritePage: (context) => PostWritePage(),
     Move.PostListPage: (context) => PostListPage(),
     Move.PostUpdatePage: (context) => PostUpdatePage(board: board),

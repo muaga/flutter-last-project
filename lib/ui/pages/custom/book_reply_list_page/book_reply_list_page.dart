@@ -28,7 +28,7 @@ class _BookReplyListPageState extends State<BookReplyListPage> {
       ),
       body: CustomReviewCard(
         userPicUrl: "${widget.bookDetailReplyList![0].userPicUrl}",
-        username: "${widget.bookDetailReplyList![0].nickname}",
+        nickName: "${widget.bookDetailReplyList![0].nickname}",
         writeAt: "${widget.bookDetailReplyList![0].replyCreatedAt}",
         review: "${widget.bookDetailReplyList![0].replyContent}",
       ),

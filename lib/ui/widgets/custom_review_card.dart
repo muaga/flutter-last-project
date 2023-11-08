@@ -6,15 +6,12 @@ import 'package:flutter_blog/_core/constants/size.dart';
 import '../../_core/constants/http.dart';
 
 class CustomReviewCard extends StatelessWidget {
-  final String userPicUrl;
-  final String username;
-  final String writeAt;
-  final String review;
+  final String? userPicUrl;
+  final String? nickName;
+  final String? writeAt;
+  final String? review;
   const CustomReviewCard(
-      {required this.userPicUrl,
-      required this.username,
-      required this.writeAt,
-      required this.review});
+      {this.userPicUrl, this.nickName, this.writeAt, this.review});
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +26,12 @@ class CustomReviewCard extends StatelessWidget {
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(username, style: subTitle2()),
-          Text(writeAt, style: body3()),
+          Text(nickName!, style: subTitle2()),
+          Text(writeAt!, style: body3()),
         ],
       ),
       subtitle: Text(
-        review,
+        review!,
         style: body1(),
       ),
       trailing: PopupMenuButton<String>(
