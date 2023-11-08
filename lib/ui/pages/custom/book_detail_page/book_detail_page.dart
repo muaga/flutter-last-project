@@ -31,7 +31,6 @@ class BookDetailPage extends ConsumerWidget {
     } else {
       book = bookDetailModel; // book 변수를 초기화
     }
-    Logger().d("bookDetailModel : ${bookDetailModel.bookTitle}");
 
     return Scaffold(
       appBar: AppBar(

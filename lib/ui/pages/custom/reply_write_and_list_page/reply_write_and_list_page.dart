@@ -100,17 +100,17 @@ class ReplyWriteAndListPage extends StatelessWidget {
             ),
             CustomReviewCard(
                 userPicUrl: "user1.png",
-                username: "삽살개",
+                nickName: "삽살개",
                 writeAt: "2023.10.31",
                 review: "꺄르륵"),
             CustomReviewCard(
                 userPicUrl: "user1.png",
-                username: "풍산개",
+                nickName: "풍산개",
                 writeAt: "2023.10.20",
                 review: "꺄르륵"),
             CustomReviewCard(
                 userPicUrl: "user1.png",
-                username: "진돗개",
+                nickName: "진돗개",
                 writeAt: "2023.10.11",
                 review: "꺄르륵"),
           ],
