@@ -50,6 +50,7 @@ dependencies:
   carousel_slider: ^4.2.1 # 이미지 슬라이더
   footer: ^0.0.4 #footer
   webview_flutter: ^4.4.2 #webView 이동
+  iamport_flutter: ^0.10.0
 
 
 
