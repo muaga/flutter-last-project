@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 
 class PostDetailTitle extends StatelessWidget {
-  final String title;
+  final String boardTitle;
 
-  const PostDetailTitle(this.title, {Key? key}) : super(key: key);
+  const PostDetailTitle(this.boardTitle, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      title,
+      boardTitle,
       style: title1(),
     );
   }

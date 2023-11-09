@@ -5,16 +5,21 @@ import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/model/board.dart';
 import 'package:flutter_blog/data/model/user.dart';
+import 'package:flutter_blog/data/store/session_user.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PostDetailWriter extends StatelessWidget {
+class PostDetailWriter extends ConsumerWidget {
   // TODO : userId로 user정보 찾기
   final int userId;
-  final Board board;
+  final String createdAt;
 
-  const PostDetailWriter({required this.userId, required this.board});
+  const PostDetailWriter({required this.userId, required this.createdAt});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    SessionUser sessionUser = ref.read(sessionStore);
+    User? user = sessionUser.user;
+
     return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -27,7 +32,7 @@ class PostDetailWriter extends StatelessWidget {
                   width: 40,
                   child: CircleAvatar(
                     backgroundImage: CachedNetworkImageProvider(
-                        dio.options.baseUrl + "/images/user1.png"),
+                        dio.options.baseUrl + "/images/${}"),
                   ),
                 ),
                 SizedBox(width: gapMain),
@@ -39,7 +44,7 @@ class PostDetailWriter extends StatelessWidget {
                       style: subTitle3(),
                     ),
                     Text(
-                      board.createdAt,
+                      createdAt,
                       style: body2(mFontWeight: FontWeight.normal),
                     ),
                   ],
