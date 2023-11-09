@@ -26,7 +26,7 @@ class FeedMainBody extends StatelessWidget {
                 child: CustomWriteBottomSheet()),
           ],
         ),
-        SliverFillRemaining(child: CustomPostListForm(boards: boards))
+        SliverFillRemaining(child: CustomPostListForm())
       ],
     );
   }

@@ -30,7 +30,7 @@ class SearchResultBookAndPostForm extends StatelessWidget {
             animeTo: 2,
             tabController: _tabController,
             count: boards.length),
-        Expanded(child: CustomPostListForm(boards: sixBoards)),
+        Expanded(child: CustomPostListForm()),
       ],
     );
   }
