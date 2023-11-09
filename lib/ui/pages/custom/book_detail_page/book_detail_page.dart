@@ -43,22 +43,21 @@ class BookDetailPage extends ConsumerWidget {
         title: Text(""),
         actions: [
           IconButton(
-            onPressed: () {
+            onPressed: () async {
               if (sessionUser.isLogin == true) {
-                if (book.bookLike == -1) {
-                  BookLikeRequestDTO dto = BookLikeRequestDTO(
-                      userId: sessionUser.user!.id, bookId: bookId);
-                  ref
-                      .read(bookDetailProvider(book.bookId).notifier)
-                      .bookLikeWrite(dto);
-                } else if (book.bookLike == 1) {
-                  ref
-                      .read(bookDetailProvider(book.bookId).notifier)
-                      .bookLikeDelete();
-                }
+                BookLikeRequestDTO dto = BookLikeRequestDTO(
+                    userId: sessionUser.user!.id, bookId: bookId);
+
+                await ref
+                    .read(bookDetailProvider(book.bookId).notifier)
+                    .bookLikeWrite(dto);
+
+                ref.watch(bookDetailProvider(book.bookId));
               }
             },
-            icon: book.bookLike == 1 ? iconFullStar() : iconEmptyStar(),
+            icon: book.bookLike == 1
+                ? iconFullStar(mColor: kPrimaryColor)
+                : iconEmptyStar(),
           ),
         ],
       ),

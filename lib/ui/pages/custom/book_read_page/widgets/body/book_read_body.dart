@@ -57,7 +57,7 @@ class _BookReadBodyState extends State<BookReadBody> {
                   width: getScreenWidth(context),
                   child: Text("${widget.bookData.bookdata[index]}",
                       style: TextStyle(
-                          fontFamily: 'D2Coding', fontSize: 23, height: 1.4)),
+                          fontFamily: 'D2Coding', fontSize: 22, height: 1.4)),
                 );
               },
             ),

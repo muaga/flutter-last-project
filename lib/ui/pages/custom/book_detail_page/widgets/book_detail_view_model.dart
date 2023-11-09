@@ -95,12 +95,14 @@ class BookDetailReplyList {
         replyCreatedAt: json["replyCreatedAt"],
         replyContent: json["replyContent"],
       );
+}
 
-  // alt+insert
-  @override
-  String toString() {
-    return 'BookDetailReplyDTO{nickname: $nickname, userPicUrl: $userPicUrl, replyCreatedAt: $replyCreatedAt, replyContent: $replyContent}';
-  }
+class BookLikeDTO {
+  int bookLike;
+
+  BookLikeDTO({required this.bookLike});
+
+  BookLikeDTO.fromJson(Map<String, dynamic> json) : bookLike = json["bookLike"];
 }
 
 // 창고
@@ -142,27 +144,41 @@ class BookDetailViewModel extends StateNotifier<BookDetailModel?> {
         .fetchBookLikeWrite(requestDTO, sessionUser.jwt!);
 
     // 데이터 갱신
-    if (responseDTO.code == 1) {
-      BookDetailModel model = this.state!; // 777
 
-      model.bookLike = model.bookLike * -1;
+    BookDetailModel? model = state; // 777
+    model!.bookLike = model!.bookLike * -1;
 
-      this.state = BookDetailModel.copy(model); // 790
-    }
+    state = BookDetailModel(
+        bookId: model.bookId,
+        bookLike: model.bookLike,
+        bookPicUrl: model.bookPicUrl,
+        bookTitle: model.bookTitle,
+        bookWriter: model.bookWriter,
+        bookLikeCount: model.bookLikeCount,
+        bookReplyCount: model.bookReplyCount,
+        bookSubTitle: model.bookSubTitle,
+        bookIntroduction: model.bookIntroduction,
+        bookCategory: model.bookCategory,
+        totalPage: model.totalPage,
+        publicationDate: model.publicationDate,
+        sequence: model.sequence,
+        writerIntroduction: model.writerIntroduction,
+        review: model.review,
+        bookDetailReplyList: model.bookDetailReplyList);
   }
 
   // 북마크 삭제
-  Future<void> bookLikeDelete() async {
-    SessionUser sessionUser = ref.read(sessionStore);
-    ResponseDTO responseDTO =
-        await BookLikeRepository().fetchBookLikeDelete(sessionUser.jwt!);
-
-    // 데이터 갱신
-    if (responseDTO.code == 1) {
-      this.state?.bookLike = 1;
-      // 2 => 데이터 존재
-    }
-  }
+  // Future<void> bookLikeDelete() async {
+  //   SessionUser sessionUser = ref.read(sessionStore);
+  //   ResponseDTO responseDTO =
+  //       await BookLikeRepository().fetchBookLikeDelete(sessionUser.jwt!);
+  //
+  //   // 데이터 갱신
+  //   if (responseDTO.code == 1) {
+  //     this.state?.bookLike = 1;
+  //     // 2 => 데이터 존재
+  //   }
+  // }
 }
 
 // 댓글 등록
