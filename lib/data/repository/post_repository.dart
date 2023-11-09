@@ -82,7 +82,7 @@ class PostRepository {
     try {
       // 통신
       Response response = await dio.get("/post/$id",
-          options: Options(headers: {"Authorization": "$jwt"}));
+          options: Options(headers: {"Authorization": jwt}));
 
       // 응답 받은 데이터 파싱
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);

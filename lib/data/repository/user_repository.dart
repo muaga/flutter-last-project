@@ -1,7 +1,11 @@
+import 'dart:ffi';
+
+import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/request_dto/user_request_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/model/user.dart';
+import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:logger/logger.dart';
 
 class UserRepository {
@@ -42,6 +46,23 @@ class UserRepository {
       return responseDTO;
     } catch (e) {
       return ResponseDTO(-1, "유저네임 혹은 비밀번호가 틀렸습니다.", null);
+    }
+  }
+
+  Future<ResponseDTO> fetchResignation(String jwt) async {
+    try {
+      Logger().d("레파지토리");
+      Logger().d(jwt);
+
+      final response = await dio.get("/user/delete",
+          options: Options(headers: {"Authorization": "$jwt"}));
+
+      Logger().d("여기는???????????");
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+      return responseDTO;
+    } catch (e) {
+      return new ResponseDTO(-1, "탈퇴에 실패했습니다 - 레파지토리에서 오류", null);
     }
   }
 }
