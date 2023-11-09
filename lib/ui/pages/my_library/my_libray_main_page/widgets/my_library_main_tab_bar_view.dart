@@ -120,34 +120,32 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
           padding: const EdgeInsets.all(gapMain),
           child: Column(
             children: [
+              Container(
+                height: 80,
+                child: Row(
+                  children: [
+                    CustomCategoryButton(
+                        label: "한 줄 리뷰",
+                        index: 0,
+                        pageIndex: _pageIndex,
+                        fontWeight: FontWeight.bold,
+                        onPress: () {
+                          changePage(0);
+                        }),
+                    CustomCategoryButton(
+                        label: "포스트",
+                        index: 1,
+                        pageIndex: _pageIndex,
+                        fontWeight: FontWeight.bold,
+                        onPress: () {
+                          changePage(1);
+                        }),
+                  ],
+                ),
+              ),
               Expanded(
                 child: CustomScrollView(
                   slivers: [
-                    SliverToBoxAdapter(
-                      child: Container(
-                        height: 80,
-                        child: Row(
-                          children: [
-                            CustomCategoryButton(
-                                label: "한 줄 리뷰",
-                                index: 0,
-                                pageIndex: _pageIndex,
-                                fontWeight: FontWeight.bold,
-                                onPress: () {
-                                  changePage(0);
-                                }),
-                            CustomCategoryButton(
-                                label: "포스트",
-                                index: 1,
-                                pageIndex: _pageIndex,
-                                fontWeight: FontWeight.bold,
-                                onPress: () {
-                                  changePage(1);
-                                }),
-                          ],
-                        ),
-                      ),
-                    ),
                     SliverFillRemaining(
                       child: IndexedStack(
                         index: _pageIndex,

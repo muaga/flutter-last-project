@@ -39,6 +39,7 @@ class EventSliderForm extends StatelessWidget {
                       event.title,
                       style: subTitle2(mColor: kFontWhite),
                     ),
+                    const SizedBox(height: gapSmall),
                     Text(
                       event.content,
                       style: body4(
@@ -47,11 +48,14 @@ class EventSliderForm extends StatelessWidget {
                   ],
                 ),
               ),
-              Image(
-                image: AssetImage("assets/images/${event.picUrl}"),
-                height: 100,
-                width: 100,
-                fit: BoxFit.contain,
+              Padding(
+                padding: const EdgeInsets.only(right: gapMain),
+                child: Image(
+                  image: AssetImage("assets/images/${event.picUrl}"),
+                  height: getScreenWidth(context) * 0.33,
+                  width: getScreenWidth(context) * 0.18,
+                  fit: BoxFit.contain,
+                ),
               )
             ],
           ),

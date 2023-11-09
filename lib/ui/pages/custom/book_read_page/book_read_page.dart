@@ -31,22 +31,6 @@ class _BookReadPageState extends ConsumerState<BookReadPage> {
   int savedPage = 0;
   bool isAppBarvisible = false;
 
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //
-  //   // bookData를 여기에서 가져옵니다.
-  //   final bookDataModel = ref.watch(bookReadProvider(widget.bookId));
-  //
-  //   if (bookDataModel != null) {
-  //     // bookDataModel이 null이 아닌 경우에만 previousPage 초기화
-  //     previousPage = bookDataModel.scroll;
-  //
-  //     // PageController 초기화
-  //     pageController = PageController(initialPage: previousPage);
-  //   }
-  // }
-
   @override
   void initState() {
     super.initState();
@@ -86,7 +70,8 @@ class _BookReadPageState extends ConsumerState<BookReadPage> {
     // int currentPage = pageController.page!.toInt();
 
     return Scaffold(
-      endDrawer: BookReadDrawer(bookModel: book!),
+      endDrawer: BookReadDrawer(
+          bookModel: book!, bookData: bookData, pageController: pageController),
       body: GestureDetector(
         onTap: toggleAppBarVisibility,
         child: Stack(

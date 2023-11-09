@@ -28,7 +28,7 @@ class NowEventSlider extends StatelessWidget {
       options: CarouselOptions(
         height: 120,
         viewportFraction: 1.0,
-        autoPlay: true,
+        autoPlay: false,
         autoPlayInterval: const Duration(seconds: 6),
         autoPlayAnimationDuration: Duration(seconds: 2),
         onPageChanged: funPageChanged,
