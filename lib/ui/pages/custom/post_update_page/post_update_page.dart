@@ -5,17 +5,21 @@ import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/_core/constants/move.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/_core/utils/validator_util.dart';
+import 'package:flutter_blog/data/dto/request_dto/post_request_dto.dart';
 import 'package:flutter_blog/data/model/board.dart';
 import 'package:flutter_blog/data/model/book.dart';
+import 'package:flutter_blog/data/store/session_user.dart';
+import 'package:flutter_blog/ui/pages/custom/post_update_page/widgets/post_update_view_model.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_book_recommend_page/post_write_book_recommend_page.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_book_recommend_page/post_write_recommend-book-card.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_page/widgets/app_bar/post_write_show_dialog.dart';
 import 'package:flutter_blog/ui/widgets/custom_text_area.dart';
 import 'package:flutter_blog/ui/widgets/custom_title_insert.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
-class PostUpdatePage extends StatefulWidget {
+class PostUpdatePage extends ConsumerStatefulWidget {
   final formKey = GlobalKey<FormState>();
   final title = TextEditingController();
   final content = TextEditingController();
@@ -25,10 +29,10 @@ class PostUpdatePage extends StatefulWidget {
   PostUpdatePage({this.selectedBook, this.board, Key? key}) : super(key: key);
 
   @override
-  State<PostUpdatePage> createState() => _PostUpdatePageState();
+  ConsumerState<PostUpdatePage> createState() => _PostUpdatePageState();
 }
 
-class _PostUpdatePageState extends State<PostUpdatePage> {
+class _PostUpdatePageState extends ConsumerState<PostUpdatePage> {
   // 초기값 설정
   @override
   void initState() {
@@ -43,6 +47,8 @@ class _PostUpdatePageState extends State<PostUpdatePage> {
 
   @override
   Widget build(BuildContext context) {
+    SessionUser sessionUser = ref.read(sessionStore);
+
     Logger().d("초기화 완료");
     Logger().d("값 : ${widget.title.text}");
 
@@ -66,6 +72,16 @@ class _PostUpdatePageState extends State<PostUpdatePage> {
             TextButton(
               onPressed: () {
                 Navigator.popAndPushNamed(context, Move.MyLibraryMainPage);
+                if (widget.formKey.currentState!.validate()) {
+                  PostUpdateReqDTO postSaveReqDTO = PostUpdateReqDTO(
+                      boardTitle: widget.title.text,
+                      content: widget.content.text,
+                      userId: sessionUser.user!.id,
+                      bookId: widget.selectedBook?.id ?? null);
+                  ref
+                      .read(postUpdateProvider.notifier)
+                      .updatePost(postSaveReqDTO);
+                }
               },
               child: Text(
                 "발행",

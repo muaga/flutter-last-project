@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
-import 'package:flutter_blog/data/dto/request_dto/post_request.dart';
+import 'package:flutter_blog/data/dto/request_dto/post_request_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/model/post.dart';
+import 'package:flutter_blog/ui/pages/custom/post_update_page/widgets/post_update_view_model.dart';
+import 'package:flutter_blog/ui/pages/custom/post_write_page/widgets/post_write_view_model.dart';
 
 class PostRepository {
   Future<ResponseDTO> fetchPostList(String jwt) async {
@@ -29,25 +31,50 @@ class PostRepository {
 
   // deletePost, updatePost, savePost
   // fetchPos, fetchPostList
-  Future<ResponseDTO> savePost(String jwt, PostSaveReqDTO dto) async {
+  Future<ResponseDTO> fetchSavePost(
+      String jwt, PostSaveReqDTO postSaveReqDTO) async {
     try {
       // 1. 통신
-      final response = await dio.post("/post",
-          data: dto.toJson(),
+      final response = await dio.post("/board/save",
+          data: postSaveReqDTO.toJson(),
           options: Options(headers: {"Authorization": "${jwt}"}));
 
       // 2. ResponseDTO 파싱
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
       // 3. ResponseDTO의 data 파싱
-      Post post = Post.fromJson(responseDTO.data);
+      PostWriteModel model = PostWriteModel.fromJson(responseDTO.data);
 
       // 4. 파싱된 데이터를 다시 공통 DTO로 덮어씌우기
-      responseDTO.data = post;
+      responseDTO.data = model;
 
       return responseDTO;
     } catch (e) {
       return ResponseDTO(-1, "게시글 작성 실패", null);
+    }
+  }
+
+  //수정
+  Future<ResponseDTO> fetchUpdatePost(
+      String jwt, PostUpdateReqDTO postUpdateReqDTO) async {
+    try {
+      // 1. 통신
+      final response = await dio.post("/board/1/update",
+          data: postUpdateReqDTO.toJson(),
+          options: Options(headers: {"Authorization": "${jwt}"}));
+
+      // 2. ResponseDTO 파싱
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+      // 3. ResponseDTO의 data 파싱
+      PostUpdateModel model = PostUpdateModel.fromJson(responseDTO.data);
+
+      // 4. 파싱된 데이터를 다시 공통 DTO로 덮어씌우기
+      responseDTO.data = model;
+
+      return responseDTO;
+    } catch (e) {
+      return ResponseDTO(-1, "게시글 수정 실패", null);
     }
   }
 
