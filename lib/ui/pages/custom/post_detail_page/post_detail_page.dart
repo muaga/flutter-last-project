@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/_core/constants/move.dart';
-import 'package:flutter_blog/data/model/board.dart';
 import 'package:flutter_blog/ui/pages/custom/post_detail_page/widgets/body/post_detail_body.dart';
 
 class PostDetailPage extends StatelessWidget {
-  final Board board;
-  PostDetailPage({required this.board});
+  final int boardId;
+  PostDetailPage({required this.boardId});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +30,7 @@ class PostDetailPage extends StatelessWidget {
           ),
         ],
       ),
-      body: PostDetailBody(board: board),
+      body: PostDetailBody(boardId: boardId),
     );
   }
 }

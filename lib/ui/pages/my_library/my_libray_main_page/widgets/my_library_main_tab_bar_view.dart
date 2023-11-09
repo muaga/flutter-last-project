@@ -180,7 +180,7 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => PostDetailPage(
-                                                board: boards[index],
+                                                boardId: boards[index].id,
                                               )));
                                 },
                                 child: Column(
