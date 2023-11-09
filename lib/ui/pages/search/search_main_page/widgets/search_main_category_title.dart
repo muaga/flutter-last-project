@@ -14,6 +14,8 @@ class SearchMainCategoryTitle extends StatelessWidget {
       elevation: 0.5,
       pinned: true,
       floating: false,
+      leading: Container(),
+      leadingWidth: 0,
       title: Align(
         alignment: Alignment.centerLeft,
         child: Padding(

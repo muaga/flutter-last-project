@@ -51,6 +51,8 @@ dependencies:
   footer: ^0.0.4 #footer
   webview_flutter: ^4.4.2 #webView 이동
   iamport_flutter: ^0.10.0
+  toast: ^0.3.0
+
 
 
 
@@ -101,6 +103,9 @@ flutter:
     - family: NanumSquare
       fonts:
         - asset: assets/fonts/NanumSquareR.ttf
+    - family: D2Coding
+      fonts:
+        - asset: assets/fonts/D2Coding.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

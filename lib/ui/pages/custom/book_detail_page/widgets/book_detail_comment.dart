@@ -16,7 +16,6 @@ class BookDetailComment extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              /// TODO 대욱 : 머릿말
               book.bookSubTitle,
               style: subTitle2(),
             ),

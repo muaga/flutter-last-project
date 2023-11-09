@@ -28,7 +28,9 @@ class MyLibraryMainAppBar extends StatelessWidget {
       flexibleSpace: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 55),
         child: MyLibraryMainAppBarUser(
-            username: "${user.username}의 서재", userUrlPic: "${user.picUrl}"),
+            username: "${user.username}의 서재",
+            userUrlPic: "${user.picUrl}",
+            email: user.email),
       ),
     );
   }

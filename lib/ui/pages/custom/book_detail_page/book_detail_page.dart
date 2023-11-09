@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
+import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
+import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/dto/request_dto/book_like_request_dto.dart';
 import 'package:flutter_blog/ui/millie_bottom_navigation_bar.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/body/book_detail_body.dart';
@@ -30,7 +32,6 @@ class BookDetailPage extends ConsumerWidget {
     } else {
       book = bookDetailModel; // book 변수를 초기화
     }
-    Logger().d("bookDetailModel : ${bookDetailModel.bookTitle}");
 
     return Scaffold(
       appBar: AppBar(
@@ -43,7 +44,7 @@ class BookDetailPage extends ConsumerWidget {
         actions: [
           IconButton(
             onPressed: () {
-              if (sessionUser.isLogin = true) {
+              if (sessionUser.isLogin == true) {
                 if (book.bookLike == -1) {
                   BookLikeRequestDTO dto = BookLikeRequestDTO(
                       userId: sessionUser.user!.id, bookId: bookId);
@@ -66,7 +67,7 @@ class BookDetailPage extends ConsumerWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(gapMain),
               child: Container(
                 width: 250,
                 decoration: BoxDecoration(
@@ -74,12 +75,20 @@ class BookDetailPage extends ConsumerWidget {
                   borderRadius: BorderRadius.circular(5),
                 ),
                 child: TextButton(
-                  onPressed: () {
+                  onPressed: () async {
+                    final bookId = book.bookId;
+                    final securePage =
+                        await secureStorage.read(key: "currentPage");
+                    final previousPage =
+                        int.parse(securePage?.split('.')[0] ?? '0');
+
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const BookReadPage()),
+                          builder: (context) => BookReadPage(
+                              bookId: bookId, previousPage: previousPage)),
                     );
+                    Logger().d("이전 페이지 보내기 : ${previousPage}");
                   },
                   child: Text(
                     "바로읽기",
@@ -87,9 +96,6 @@ class BookDetailPage extends ConsumerWidget {
                   ),
                 ),
               ),
-            ),
-            Flexible(
-              child: MillieBottomNavigationBar(),
             ),
           ],
         ),

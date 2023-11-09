@@ -3,24 +3,21 @@ import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 
 class CustomTitleInsert extends StatelessWidget {
-  const CustomTitleInsert({
-    super.key,
-    required this.titleController,
-    this.hintText,
-  });
+  const CustomTitleInsert(
+      {super.key, required this.titleController, this.hintText});
 
-  final TextEditingController titleController;
+  final titleController;
   final String? hintText;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      style: title1(),
+      style: subTitle1(),
       controller: titleController,
       decoration: InputDecoration(
           border: InputBorder.none,
           hintText: "${hintText}",
-          hintStyle: title1(mColor: kFontGray)),
+          hintStyle: subTitle1(mColor: kFontGray)),
       maxLines: null,
       maxLength: 80,
     );

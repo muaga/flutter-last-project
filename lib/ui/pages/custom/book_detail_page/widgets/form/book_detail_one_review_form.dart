@@ -28,15 +28,13 @@ class BookDetailOneReviewForm extends StatelessWidget {
                       bookReplyCount: book.bookDetailReplyList.length),
                 ),
                 CustomPageForwardButton(
-                  pageLoad: ReplyWriteAndListPage(),
-                ),
+                    bookId: book.bookId, bookDetailReplyList: book),
               ],
             ),
           ),
         ),
         CustomReviewListForm(
-            bookDetailReplyList: book.bookDetailReplyList,
-            sessionUser: sessionUser),
+            replyList: book.bookDetailReplyList, sessionUser: sessionUser),
       ],
     );
   }

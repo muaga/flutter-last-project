@@ -24,6 +24,7 @@ class PostListViewModel extends StateNotifier<PostListModel?> {
     // jwt 가져오기
     SessionUser sessionUser = ref.read(sessionStore);
 
+    // TODO 대욱 : MyLibraryMainViewModel로 메소드 옮기기
     ResponseDTO responseDTO =
         await PostRepository().fetchPostList(sessionUser.jwt!);
     state = PostListModel(responseDTO.data);

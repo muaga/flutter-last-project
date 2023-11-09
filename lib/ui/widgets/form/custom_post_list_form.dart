@@ -2,15 +2,17 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
+import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/model/board.dart';
 import 'package:flutter_blog/data/model/user.dart';
+import 'package:flutter_blog/ui/pages/custom/post_detail_page/post_detail_page.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
 
 class CustomPostListForm extends StatelessWidget {
-  const CustomPostListForm({
-    super.key,
-  });
+  const CustomPostListForm({super.key, required this.boards});
+
+  final List<Board> boards;
 
   @override
   Widget build(BuildContext context) {
@@ -120,9 +122,11 @@ class CustomPostListForm extends StatelessWidget {
         if (hasPicUrl) {
           return InkWell(
             onTap: () {
-              int? boardId = boards[index].id;
-
-              /// TODO 은혜 : 게시물 상세보기로 이동 경로 짜기
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          PostDetailPage(board: boards[index])));
             },
             child: Container(
               child: Padding(
@@ -142,7 +146,8 @@ class CustomPostListForm extends StatelessWidget {
                         ),
                         image: DecorationImage(
                           image: CachedNetworkImageProvider(
-                            "http://192.168.0.37:8080/images/${boards[index].picUrl}",
+                            dio.options.baseUrl +
+                                "/images/${boards[index].picUrl}",
                           ),
                           colorFilter: ColorFilter.mode(
                             Colors.white.withOpacity(0.8),
@@ -163,8 +168,8 @@ class CustomPostListForm extends StatelessWidget {
                         padding: EdgeInsets.symmetric(
                             vertical: gapMain, horizontal: gapLarge),
                         child: CachedNetworkImage(
-                          imageUrl:
-                              "http://192.168.0.37:8080/images/${boards[index].picUrl}",
+                          imageUrl: dio.options.baseUrl +
+                              "/images/${boards[index].picUrl}",
                           fit: BoxFit.contain,
                           placeholder: (context, url) =>
                               CircularProgressIndicator(
@@ -222,7 +227,7 @@ class CustomPostListForm extends StatelessWidget {
                               leading: CircleAvatar(
                                 backgroundImage: CachedNetworkImageProvider(
                                   // TODO 은혜 : 게시글 유저 이미지 넣기
-                                  "http://192.168.0.37:8080/images/user3.png",
+                                  dio.options.baseUrl + "/images/user3.png",
                                 ),
                               ),
                               title: Text("yuns의 서재"),
@@ -320,7 +325,7 @@ class CustomPostListForm extends StatelessWidget {
                               leading: CircleAvatar(
                                 backgroundImage: CachedNetworkImageProvider(
                                   // TODO 은혜 : 게시글 유저 이미지 넣기
-                                  "http://192.168.0.37:8080/images/user3.png",
+                                  dio.options.baseUrl + "/images/user3.png",
                                 ),
                               ),
                               title: Text("yuns의 서재"),

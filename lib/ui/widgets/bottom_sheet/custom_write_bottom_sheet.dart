@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_page/post_write_page.dart';
-import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/widgets/my_library_main_one_review.dart';
+import 'package:flutter_blog/ui/pages/my_library/my_library_choice_page/my_library_main_one_review.dart';
 import 'package:flutter_blog/ui/widgets/bottom_sheet/custom_write_bottom_sheet_button.dart';
 
 class CustomWriteBottomSheet extends StatelessWidget {

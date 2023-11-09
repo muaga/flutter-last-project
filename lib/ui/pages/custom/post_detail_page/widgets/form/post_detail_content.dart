@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/font.dart';
 
 class PostDetailContent extends StatelessWidget {
   final String content;
@@ -8,7 +9,7 @@ class PostDetailContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Text(content),
+      child: Text(content, style: body1(mFontWeight: FontWeight.normal)),
     );
   }
 }

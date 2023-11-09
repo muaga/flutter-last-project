@@ -1,13 +1,19 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
+import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/ui/widgets/custom_review_card.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thick_line.dart';
 
 class ReplyWriteAndListPage extends StatelessWidget {
+  final int bookId;
   final _content = TextEditingController();
+
+  ReplyWriteAndListPage({required this.bookId});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,10 +23,10 @@ class ReplyWriteAndListPage extends StatelessWidget {
               Navigator.pop(context);
             },
             icon: iconArrowBack()),
-        title: Text("한줄리뷰"),
+        title: Text("한 줄리뷰"),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(gapMain),
         child: ListView(
           children: [
             Container(
@@ -31,15 +37,15 @@ class ReplyWriteAndListPage extends StatelessWidget {
                     child: Text(
                       "호기심 많은 룰룰루님\n"
                       "한 줄 리뷰를 작성해보세요",
-                      style: title1(),
+                      style: subTitle1(),
                     ),
                   ),
                   Container(
-                    height: 40,
-                    width: 40,
+                    height: 50,
+                    width: 50,
                     child: CircleAvatar(
-                      backgroundImage:
-                          AssetImage("assets/user_images/avatar.png"),
+                      backgroundImage: CachedNetworkImageProvider(
+                          dio.options.baseUrl + "/images/user1.png"),
                     ),
                   ),
                 ],
@@ -86,22 +92,25 @@ class ReplyWriteAndListPage extends StatelessWidget {
               ),
             ),
             CustomThickLine(),
-            Container(
-              child: Text("총 21개", style: title1()),
+            Padding(
+              padding: const EdgeInsets.all(gapMain),
+              child: Container(
+                child: Text("총 21개", style: subTitle2()),
+              ),
             ),
             CustomReviewCard(
-                userPicUrl: "https://picsum.photos/200/300",
-                username: "삽살개",
+                userPicUrl: "user1.png",
+                nickName: "삽살개",
                 writeAt: "2023.10.31",
                 review: "꺄르륵"),
             CustomReviewCard(
-                userPicUrl: "https://picsum.photos/200/300",
-                username: "풍산개",
+                userPicUrl: "user1.png",
+                nickName: "풍산개",
                 writeAt: "2023.10.20",
                 review: "꺄르륵"),
             CustomReviewCard(
-                userPicUrl: "https://picsum.photos/200/300",
-                username: "진돗개",
+                userPicUrl: "user1.png",
+                nickName: "진돗개",
                 writeAt: "2023.10.11",
                 review: "꺄르륵"),
           ],

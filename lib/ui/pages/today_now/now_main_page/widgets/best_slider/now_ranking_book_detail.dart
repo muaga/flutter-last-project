@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
+import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.dart';
@@ -50,7 +51,7 @@ class NowRankingBookDetail extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
                       image: CachedNetworkImageProvider(
-                        "http://172.30.56.249:8080/images/${bookPicUrl}",
+                        dio.options.baseUrl + "/images/${bookPicUrl}",
                       ),
                       fit: BoxFit.cover),
                 ),
@@ -105,7 +106,7 @@ class NowRankingBookDetail extends StatelessWidget {
                 const SizedBox(height: gapMedium),
                 Image(
                   image: CachedNetworkImageProvider(
-                    "http://172.30.56.249:8080/images/${bookPicUrl}",
+                    dio.options.baseUrl + "/images/${bookPicUrl}",
                   ),
                   height: getScreenWidth(context) * 0.5,
                 )
