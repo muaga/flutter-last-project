@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
+import 'package:flutter_blog/ui/pages/my_setting/my_setting_payment_page/pay_home.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_payment_page/widgets/form/my_setting_payment_notice_form.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_payment_page/widgets/form/my_setting_payment_title_form.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_payment_page/widgets/my_setting_sub_radio_button.dart';
 import 'package:flutter_blog/ui/widgets/button/custom_bottom_button.dart';
+import 'package:logger/logger.dart';
 
 class MySettingPaymentBody extends StatefulWidget {
   const MySettingPaymentBody({super.key});
@@ -54,6 +56,7 @@ class _MySettingPaymentBodyState extends State<MySettingPaymentBody> {
                         onChanged: (value) {
                           setState(() {
                             selectedNum = value;
+                            Logger().d(selectedNum);
                           });
                         },
                       ),
@@ -68,6 +71,7 @@ class _MySettingPaymentBodyState extends State<MySettingPaymentBody> {
                         onChanged: (value) {
                           setState(() {
                             selectedNum = value;
+                            Logger().d(selectedNum);
                           });
                         },
                       ),
@@ -78,7 +82,25 @@ class _MySettingPaymentBodyState extends State<MySettingPaymentBody> {
                   SizedBox(height: gapXlarge),
                   // TODO 은혜 : 결제 구현 보고 수정하기
                   CustomBottomButton(
-                    funPageRoute: () {},
+                    funPageRoute: () {
+                      if (selectedNum == 0) {
+                        int price = 11900;
+                        String name = "월 결제";
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    PayHomePage(price: price, name: name)));
+                      } else {
+                        int price = 119000;
+                        String name = "연 결제";
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    PayHomePage(price: price, name: name)));
+                      }
+                    },
                     buttonText: "지금 다시 시작하기",
                   )
                 ],
