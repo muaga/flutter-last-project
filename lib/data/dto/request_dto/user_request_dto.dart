@@ -1,5 +1,3 @@
-import 'package:flutter_blog/data/model/user.dart';
-
 /// UserRequestDTO - toJson
 // class User {
 //   final int id;
@@ -53,5 +51,17 @@ class LoginRequestDTO {
   Map<String, dynamic> toJson() => {
         "username": username,
         "password": password,
+      };
+}
+
+class PaymentRequestDTO {
+  final int userId;
+  final String pay;
+
+  PaymentRequestDTO({required this.userId, required this.pay});
+
+  Map<String, dynamic> toJson() => {
+        "userId": userId,
+        "pay": pay,
       };
 }
