@@ -2,19 +2,23 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/data/model/book.dart';
 
 class PostWriteRecommendBookCard extends StatelessWidget {
-  Book? book;
+  final String bookPicUrl;
+  final String bookTitle;
+  final String bookWriter;
 
-  PostWriteRecommendBookCard(this.book); // 'book' 매개변수를 생성자에 추가
+  PostWriteRecommendBookCard(
+      {required this.bookPicUrl,
+      required this.bookTitle,
+      required this.bookWriter}); // 'book' 매개변수를 생성자에 추가
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         CachedNetworkImage(
-          imageUrl: dio.options.baseUrl + "/images/${book?.picUrl}",
+          imageUrl: dio.options.baseUrl + "/images/${bookPicUrl}",
           fit: BoxFit.cover,
           placeholder: (context, url) => CircularProgressIndicator(
             strokeWidth: 5,
@@ -29,7 +33,7 @@ class PostWriteRecommendBookCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                book?.title ?? "제목 없음",
+                bookTitle,
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -40,7 +44,7 @@ class PostWriteRecommendBookCard extends StatelessWidget {
               ),
               SizedBox(height: gapSmall),
               Text(
-                book?.writer ?? "",
+                bookWriter,
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.bold,
