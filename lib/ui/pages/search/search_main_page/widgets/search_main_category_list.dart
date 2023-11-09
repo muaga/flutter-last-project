@@ -72,7 +72,7 @@ class SearchMainCategoryList extends StatelessWidget {
                     padding: EdgeInsets.symmetric(
                         vertical: gapLarge, horizontal: gapLarge),
                     child: Container(
-                      width: 200,
+                      width: getScreenWidth(context) * 0.5,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
