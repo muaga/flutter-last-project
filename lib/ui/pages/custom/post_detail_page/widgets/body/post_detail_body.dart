@@ -46,10 +46,10 @@ class PostDetailBody extends ConsumerWidget {
                 CustomThinLine(),
                 const SizedBox(height: gapLarge),
                 Text("추천도서", style: subTitle2()),
-                SizedBox(height: gapLargegt),
+                SizedBox(height: gapLarge),
                 Container(
                   width: getScreenWidth(context) / 3,
-                  height: getScreenWidth(context) * 0.5,
+                  height: getScreenWidth(context) * 0.7,
                   child: PostWriteRecommendBookCard(
                     bookPicUrl: detailBook!.bookPicUrl,
                     bookTitle: detailBook!.bookTitle,

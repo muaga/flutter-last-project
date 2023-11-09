@@ -15,7 +15,7 @@ class SearchResultPostForm extends StatelessWidget {
       children: [
         SearchResultTitle(title: "검색결과", count: boards.length),
         Expanded(
-          child: CustomPostListForm(boards: boards),
+          child: CustomPostListForm(),
         ),
       ],
     );
