@@ -7,6 +7,7 @@ import 'package:flutter_blog/data/model/user.dart';
 import 'package:flutter_blog/data/repository/user_repository.dart';
 import 'package:flutter_blog/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 /// 창고
 class SessionUser {
@@ -51,6 +52,22 @@ class SessionUser {
       // 메인으로 화면 이동
       // TODO 은혜 : 메인 페이지 완성 시 이동
       Navigator.pushNamed(mContext!, Move.MillieIndexStackNavigationBar);
+    } else {
+      ScaffoldMessenger.of(mContext!)
+          .showSnackBar(SnackBar(content: Text(responseDTO.msg)));
+    }
+  }
+
+  Future<void> resignation() async {
+    String jwt = await secureStorage.read(key: 'jwt') as String;
+    ResponseDTO responseDTO = await UserRepository().fetchResignation(jwt);
+    Logger().d(responseDTO);
+
+    Logger().d(responseDTO.code);
+
+    if (responseDTO.code == 1) {
+      Navigator.of(mContext!)
+          .pushNamedAndRemoveUntil('/loginJoin', (route) => false);
     } else {
       ScaffoldMessenger.of(mContext!)
           .showSnackBar(SnackBar(content: Text(responseDTO.msg)));
