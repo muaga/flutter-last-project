@@ -3,8 +3,8 @@ class Board {
   late String title;
   late String content;
   final String? picUrl;
-  final String? createdAt;
-  late int userId;
+  final String createdAt;
+  final int userId;
   final int? bookId;
 
   Board(

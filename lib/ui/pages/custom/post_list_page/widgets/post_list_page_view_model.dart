@@ -1,6 +1,6 @@
 // 1. 창고 데이터
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/data/dto/request_dto/post_request.dart';
+import 'package:flutter_blog/data/dto/request_dto/post_request_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/model/post.dart';
 import 'package:flutter_blog/data/repository/post_repository.dart';
@@ -34,7 +34,7 @@ class PostListViewModel extends StateNotifier<PostListModel?> {
     SessionUser sessionUser = ref.read(sessionStore);
 
     ResponseDTO responseDTO =
-        await PostRepository().savePost(sessionUser.jwt!, dto);
+        await PostRepository().fetchSavePost(sessionUser.jwt!, dto);
 
     if (responseDTO.code == 1) {
       Post newPost = responseDTO.data as Post; // 1. dynamic(Post) -> 다운캐스팅
