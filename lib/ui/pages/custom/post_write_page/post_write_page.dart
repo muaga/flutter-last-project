@@ -118,7 +118,11 @@ class _PostWritePageState extends ConsumerState<PostWritePage> {
                       Container(
                         width: getScreenWidth(context) / 3,
                         child: widget.selectedBook != null
-                            ? PostWriteRecommendBookCard(widget.selectedBook)
+                            ? PostWriteRecommendBookCard(
+                                bookPicUrl: widget.selectedBook!.picUrl,
+                                bookTitle: widget.selectedBook!.title,
+                                bookWriter: widget.selectedBook!.writer,
+                              )
                             : Text(""),
                       )
                       // 여기에 선택한 책의 추가 정보를 표시할 수 있습니다.
