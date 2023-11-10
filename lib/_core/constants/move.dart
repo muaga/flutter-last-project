@@ -108,7 +108,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     },
     Move.PostDetailPage: (context) {
       final board = ModalRoute.of(context)!.settings.arguments as Board;
-      return PostDetailPage(boardId: board);
+      return PostDetailPage(boardId: board.id);
     },
 
     Move.ReplyWriteAndListPage: (context) {

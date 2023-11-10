@@ -32,7 +32,7 @@ class PostDetailWriter extends ConsumerWidget {
                   width: 40,
                   child: CircleAvatar(
                     backgroundImage: CachedNetworkImageProvider(
-                        dio.options.baseUrl + "/images/${}"),
+                        dio.options.baseUrl + "/images/${user?.picUrl}"),
                   ),
                 ),
                 SizedBox(width: gapMain),
@@ -40,7 +40,7 @@ class PostDetailWriter extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      user.username,
+                      user!.username,
                       style: subTitle3(),
                     ),
                     Text(
