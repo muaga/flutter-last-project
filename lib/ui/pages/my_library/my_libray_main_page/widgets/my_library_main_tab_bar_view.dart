@@ -9,8 +9,11 @@ import 'package:flutter_blog/ui/pages/my_library/my_library_choice_page/my_libra
 import 'package:flutter_blog/ui/pages/my_library/my_library_choice_page/my_library_main_like_books.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_reading_note/my_library_main_reading_note_form/my_library_main_reading_note_post_form.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_reading_note/my_library_main_reading_note_form/my_library_main_reading_note_reply_form.dart';
+import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/widgets/my_library_view_model.dart';
 import 'package:flutter_blog/ui/widgets/button/custom_category_button.dart';
 import 'package:flutter_blog/ui/widgets/scroll_view/custom_book_grid_view.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 class MyLibraryMainTabBarView extends StatefulWidget {
   final User user;
@@ -44,167 +47,175 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
 
   @override
   Widget build(BuildContext context) {
-    return TabBarView(
-      children: [
-        Column(
-          children: [
-            Container(
-              height: 50,
-              width: double.infinity,
-              alignment: Alignment.topRight,
-              child: PopupMenuButton<String>(
-                onSelected: (String choice) {
-                  if (choice == "수정하기") {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          // 이동할 페이지의 위젯을 반환합니다.
-                          return MyLibraryMainLikeBooks();
-                        },
-                      ),
-                    );
-                  }
-                },
-                itemBuilder: (BuildContext context) {
-                  return ["수정하기"].map((String choice) {
-                    return PopupMenuItem<String>(
-                      padding: EdgeInsets.only(left: 25),
-                      height: 20,
-                      value: choice,
-                      child: Text(choice),
-                    );
-                  }).toList();
-                },
-              ),
-            ),
-            Expanded(child: CustomBookGridView(books: books)),
-          ],
-        ),
-        Column(
-          children: [
-            Container(
-              height: 50,
-              width: double.infinity,
-              alignment: Alignment.topRight,
-              child: PopupMenuButton<String>(
-                onSelected: (String choice) {
-                  if (choice == "수정하기") {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          // 이동할 페이지의 위젯을 반환합니다.
-                          return MyLibraryMainBookcase();
-                        },
-                      ),
-                    );
-                  }
-                },
-                itemBuilder: (BuildContext context) {
-                  return ["수정하기"].map((String choice) {
-                    return PopupMenuItem<String>(
-                      padding: EdgeInsets.only(left: 25),
-                      height: 20,
-                      value: choice,
-                      child: Text(choice),
-                    );
-                  }).toList();
-                },
-              ),
-            ),
-            Expanded(child: CustomBookGridView(books: books)),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.all(gapMain),
-          child: Column(
+    return Consumer(
+        builder: (BuildContext context, WidgetRef ref, Widget? child) {
+      ref.read(myLibraryProvider.notifier).notifyInit();
+
+      MyLibraryModel? model = ref.watch(myLibraryProvider);git ad
+      Logger().d(model!.bookLikeCount);
+      return TabBarView(
+        children: [
+          Column(
             children: [
               Container(
-                height: 80,
-                child: Row(
-                  children: [
-                    CustomCategoryButton(
-                        label: "한 줄 리뷰",
-                        index: 0,
-                        pageIndex: _pageIndex,
-                        fontWeight: FontWeight.bold,
-                        onPress: () {
-                          changePage(0);
-                        }),
-                    CustomCategoryButton(
-                        label: "포스트",
-                        index: 1,
-                        pageIndex: _pageIndex,
-                        fontWeight: FontWeight.bold,
-                        onPress: () {
-                          changePage(1);
-                        }),
-                  ],
+                height: 50,
+                width: double.infinity,
+                alignment: Alignment.topRight,
+                child: PopupMenuButton<String>(
+                  onSelected: (String choice) {
+                    if (choice == "수정하기") {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            // 이동할 페이지의 위젯을 반환합니다.
+                            return MyLibraryMainLikeBooks();
+                          },
+                        ),
+                      );
+                    }
+                  },
+                  itemBuilder: (BuildContext context) {
+                    return ["수정하기"].map((String choice) {
+                      return PopupMenuItem<String>(
+                        padding: EdgeInsets.only(left: 25),
+                        height: 20,
+                        value: choice,
+                        child: Text(choice),
+                      );
+                    }).toList();
+                  },
                 ),
               ),
-              Expanded(
-                child: CustomScrollView(
-                  slivers: [
-                    SliverFillRemaining(
-                      child: IndexedStack(
-                        index: _pageIndex,
-                        children: [
-                          /// 한줄리뷰
-                          ListView.builder(
-                            itemCount: bookReplys.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              final book = books[index];
-
-                              return Column(
-                                children: [
-                                  MyLibraryMainReadingNoteReplyForm(
-                                    book: book,
-                                    oneReviewComent:
-                                        "${bookReplys[index].content}",
-                                    oneReviewDate:
-                                        "${bookReplys[index].createdAt}",
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
-
-                          /// 포스트
-                          ListView.builder(
-                            itemCount: boards.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => PostDetailPage(
-                                                boardId: boards[index].id,
-                                              )));
-                                },
-                                child: Column(
-                                  children: [
-                                    MyLibraryMainReadingNotePostForm(
-                                      bookId: boards[index].bookId,
-                                      postComent: "${boards[index].title}",
-                                      postDate: "${boards[index].createdAt}",
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
+              Expanded(child: CustomBookGridView(books: books)),
             ],
           ),
-        ),
-      ],
-    );
+          Column(
+            children: [
+              Container(
+                height: 50,
+                width: double.infinity,
+                alignment: Alignment.topRight,
+                child: PopupMenuButton<String>(
+                  onSelected: (String choice) {
+                    if (choice == "수정하기") {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            // 이동할 페이지의 위젯을 반환합니다.
+                            return MyLibraryMainBookcase();
+                          },
+                        ),
+                      );
+                    }
+                  },
+                  itemBuilder: (BuildContext context) {
+                    return ["수정하기"].map((String choice) {
+                      return PopupMenuItem<String>(
+                        padding: EdgeInsets.only(left: 25),
+                        height: 20,
+                        value: choice,
+                        child: Text(choice),
+                      );
+                    }).toList();
+                  },
+                ),
+              ),
+              Expanded(child: CustomBookGridView(books: books)),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.all(gapMain),
+            child: Column(
+              children: [
+                Container(
+                  height: 80,
+                  child: Row(
+                    children: [
+                      CustomCategoryButton(
+                          label: "한 줄 리뷰",
+                          index: 0,
+                          pageIndex: _pageIndex,
+                          fontWeight: FontWeight.bold,
+                          onPress: () {
+                            changePage(0);
+                          }),
+                      CustomCategoryButton(
+                          label: "포스트",
+                          index: 1,
+                          pageIndex: _pageIndex,
+                          fontWeight: FontWeight.bold,
+                          onPress: () {
+                            changePage(1);
+                          }),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: CustomScrollView(
+                    slivers: [
+                      SliverFillRemaining(
+                        child: IndexedStack(
+                          index: _pageIndex,
+                          children: [
+                            /// 한줄리뷰
+                            ListView.builder(
+                              itemCount: bookReplys.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                final book = books[index];
+
+                                return Column(
+                                  children: [
+                                    MyLibraryMainReadingNoteReplyForm(
+                                      book: book,
+                                      oneReviewComent:
+                                          "${bookReplys[index].content}",
+                                      oneReviewDate:
+                                          "${bookReplys[index].createdAt}",
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
+
+                            /// 포스트
+                            ListView.builder(
+                              itemCount: boards.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                PostDetailPage(
+                                                  boardId: boards[index].id,
+                                                )));
+                                  },
+                                  child: Column(
+                                    children: [
+                                      MyLibraryMainReadingNotePostForm(
+                                        bookId: boards[index].bookId,
+                                        postComent: "${boards[index].title}",
+                                        postDate: "${boards[index].createdAt}",
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      );
+    });
   }
 }

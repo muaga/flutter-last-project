@@ -4,6 +4,7 @@ import 'package:flutter_blog/data/dto/request_dto/book_request_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
+import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/widgets/my_library_view_model.dart';
 
 // 통신 & 파싱
 class BookRepository {
@@ -43,6 +44,22 @@ class BookRepository {
       return responseDTO;
     } catch (e) {
       return ResponseDTO(-1, "책 목록 불러오기 실패", null);
+    }
+  }
+
+  //내 서재 불러오기
+  Future<ResponseDTO> fetchMyLibrary(String jwt) async {
+    try {
+      Response response = await dio.get("/book/bookOfMine",
+          options: Options(headers: {"Authorization": jwt}));
+
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      MyLibraryModel dto = MyLibraryModel.fromJson(responseDTO.data);
+      responseDTO.data = dto;
+
+      return responseDTO;
+    } catch (e) {
+      return ResponseDTO(-1, "내 서재 불러오기 실패 - 레파지토리 터짐 ", null);
     }
   }
 }
