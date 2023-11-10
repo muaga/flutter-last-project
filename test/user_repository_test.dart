@@ -5,11 +5,11 @@ import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:logger/logger.dart';
 
 void main() async {
-  await fetch(LoginRequestDTO(username: "ssar", password: "1234"));
+  await fetch(LoginReqDTO(username: "ssar", password: "1234"));
 }
 
 /// TODO : 통신 테스트
-Future<void> fetch(LoginRequestDTO dto) async {
+Future<void> fetch(LoginReqDTO dto) async {
   Response<dynamic> response = await dio.post("/login", data: dto.toJson());
   // Logger().d(response.data);
   ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);

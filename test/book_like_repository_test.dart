@@ -2,11 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter_blog/data/dto/request_dto/book_like_request_dto.dart';
 
 void main() async {
-  await fetch(BookLikeRequestDTO(bookId: 1, userId: 1));
+  await fetch(BookLikeReqDTO(bookId: 1, userId: 1));
 }
 
 /// TODO : 통신 테스트
-Future<void> fetch(BookLikeRequestDTO dto) async {
+Future<void> fetch(BookLikeReqDTO dto) async {
   // Response<dynamic> response = await dio.post("/login", data: dto.toJson());
   // // Logger().d(response.data);
   // ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);

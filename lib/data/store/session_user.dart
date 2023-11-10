@@ -21,7 +21,7 @@ class SessionUser {
   SessionUser({this.user, this.jwt, this.isLogin = false});
 
   /// fetchJoin
-  Future<void> join(JoinRequestDTO joinReqDTO) async {
+  Future<void> join(JoinReqDTO joinReqDTO) async {
     // 통신 코드
     ResponseDTO responseDTO = await UserRepository().fetchJoin(joinReqDTO);
 
@@ -35,7 +35,7 @@ class SessionUser {
   }
 
   /// fetchLogin
-  Future<void> login(LoginRequestDTO loginReqDTO) async {
+  Future<void> login(LoginReqDTO loginReqDTO) async {
     // 통신 코드
     ResponseDTO responseDTO = await UserRepository().fetchLogin(loginReqDTO);
 

@@ -5,7 +5,7 @@ import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:logger/logger.dart';
 
 class paymentRepository {
-  Future<ResponseDTO> fetchPayment(PaymentRequestDTO dto) async {
+  Future<ResponseDTO> fetchPayment(PaymentReqDTO dto) async {
     try {
       Response response = await dio.post(
         "/payment/result",

@@ -136,7 +136,7 @@ class BookDetailViewModel extends StateNotifier<BookDetailModel?> {
   }
 
   // 북마크 등록
-  Future<void> bookLikeWrite(BookLikeRequestDTO requestDTO) async {
+  Future<void> bookLikeWrite(BookLikeReqDTO requestDTO) async {
     SessionUser sessionUser = ref.read(sessionStore);
 
     // BookLikeRequestDTO와 sessionUser.jwt를 fetchBookLikeWrite 메서드로 전달

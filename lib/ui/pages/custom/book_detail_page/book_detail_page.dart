@@ -45,7 +45,7 @@ class BookDetailPage extends ConsumerWidget {
           IconButton(
             onPressed: () async {
               if (sessionUser.isLogin == true) {
-                BookLikeRequestDTO dto = BookLikeRequestDTO(
+                BookLikeReqDTO dto = BookLikeReqDTO(
                     userId: sessionUser.user!.id, bookId: bookId);
 
                 await ref

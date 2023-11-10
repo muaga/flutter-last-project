@@ -77,7 +77,7 @@ class JoinBody extends ConsumerWidget {
             CustomBottomButton(
               funPageRoute: () {
                 if (_formkey.currentState!.validate()) {
-                  JoinRequestDTO requestDTO = JoinRequestDTO(
+                  JoinReqDTO requestDTO = JoinReqDTO(
                       username: _username.text,
                       email: _email.text,
                       password: _password.text,
