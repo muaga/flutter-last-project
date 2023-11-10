@@ -13,8 +13,8 @@ import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PostDetailBody extends ConsumerWidget {
-  const PostDetailBody({required this.board, Key? key}) : super(key: key);
-  final Board board;
+  const PostDetailBody({required this.boardId, Key? key}) : super(key: key);
+  final int boardId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -33,7 +33,7 @@ class PostDetailBody extends ConsumerWidget {
         children: [
           PostDetailTitle(board.title),
           SizedBox(height: gapXlarge),
-          PostDetailWriter(userId: board.userId, board: board),
+          PostDetailWriter(userId: board.userId, board: b),
           SizedBox(height: gapLarge),
           CustomThinLine(),
           SizedBox(height: gapLarge),

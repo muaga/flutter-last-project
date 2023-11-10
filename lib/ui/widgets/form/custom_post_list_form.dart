@@ -29,7 +29,7 @@ class CustomPostListForm extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          PostDetailPage(board: boards[index])));
+                          PostDetailPage(boardId: boards[index].id)));
             },
             child: Container(
               child: Padding(
