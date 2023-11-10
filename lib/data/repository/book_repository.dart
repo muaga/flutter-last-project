@@ -28,7 +28,7 @@ class BookRepository {
   }
 
   // 책 목록보기
-  Future<ResponseDTO> fetchBookList(BookRequestDTO dto) async {
+  Future<ResponseDTO> fetchBookList(BookReqDTO dto) async {
     try {
       // 통신
       Response<dynamic> response =

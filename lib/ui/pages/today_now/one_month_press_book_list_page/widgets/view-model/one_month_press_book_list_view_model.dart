@@ -20,7 +20,7 @@ class OneMonthPressBookListViewModel
   // Ref ref;
 
   // 통신을 통해 reponseDTO에 데이터 받아오고 최초 상태 변경하기
-  Future<void> notifyInit(BookRequestDTO dto) async {
+  Future<void> notifyInit(BookReqDTO dto) async {
     ResponseDTO responseDTO = await BookRepository().fetchBookList(dto);
     state = OneMonthPressBookListModel(books: responseDTO.data);
   }
@@ -30,6 +30,6 @@ class OneMonthPressBookListViewModel
 final OneMonthPressBookListProvider = StateNotifierProvider.family<
     OneMonthPressBookListViewModel,
     OneMonthPressBookListModel?,
-    BookRequestDTO>((ref, dto) {
+    BookReqDTO>((ref, dto) {
   return OneMonthPressBookListViewModel(null)..notifyInit(dto);
 });
