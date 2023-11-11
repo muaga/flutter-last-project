@@ -5,9 +5,8 @@ import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/dto/request_dto/book_like_request_dto.dart';
-import 'package:flutter_blog/ui/millie_bottom_navigation_bar.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/body/book_detail_body.dart';
-import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
+import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/view_model/book_detail_view_model.dart';
 import 'package:flutter_blog/ui/pages/custom/book_read_page/book_read_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
@@ -40,7 +39,6 @@ class BookDetailPage extends ConsumerWidget {
               Navigator.pop(context);
             },
             icon: iconArrowBack()),
-        title: Text(""),
         actions: [
           IconButton(
             onPressed: () async {

@@ -73,6 +73,14 @@ class SessionUser {
           .showSnackBar(SnackBar(content: Text(responseDTO.msg)));
     }
   }
+
+  Future<void> logout() async {
+    this.user = null;
+    this.jwt = null;
+    this.isLogin = false;
+    await secureStorage.delete(key: "jwt");
+    Logger().d("세션 종료 및 디바이스 JWT 삭제");
+  }
 }
 
 /// 창고 관리자

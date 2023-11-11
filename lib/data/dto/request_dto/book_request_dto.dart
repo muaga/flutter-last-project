@@ -1,11 +1,11 @@
 class BookReqDTO {
-  final int bookCategowryId;
+  final int bookCategoryId;
   final String alignment;
 
-  BookReqDTO({required this.bookCategowryId, required this.alignment});
+  BookReqDTO({required this.bookCategoryId, required this.alignment});
 
   Map<String, dynamic> toJson() => {
-        "bookCategowryId": bookCategowryId,
+        "bookCategoryId": bookCategoryId,
         "alignment": alignment,
       };
 }
