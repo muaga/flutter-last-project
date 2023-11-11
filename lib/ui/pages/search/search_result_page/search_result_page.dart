@@ -29,7 +29,6 @@ class _SearchResultPageState extends State<SearchResultPage>
 
   @override
   Widget build(BuildContext context) {
-    String _searchText = widget.searchText;
     return Scaffold(
       // 페이지 화면
       appBar: AppBar(

@@ -26,3 +26,13 @@ class BookCategoryReqDTO {
         "minusMonths": minusMonths,
       };
 }
+
+class BookSearchReqDTO {
+  final String keyword;
+
+  BookSearchReqDTO({required this.keyword});
+
+  Map<String, dynamic> toJson() => {
+        "keyword": keyword,
+      };
+}

@@ -1,14 +1,17 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/request_dto/book_request_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/repository/book_repository.dart';
 import 'package:flutter_blog/ui/pages/search/search_category_book_list_page/widgets/view_model/search_category_book_list_view_model.dart';
+import 'package:flutter_blog/ui/pages/search/search_result_page/widgets/view_model/search_main_view_model.dart';
 import 'package:logger/logger.dart';
 
 void main() async {
   // await fetch(BookRequestDTO(bookCategowryId: 1, alignment: "ranking"));
-  await notifyInit(BookCategoryReqDTO(
-      bookCategoryId: 1, alignment: "ranking", minusMonths: 12));
+  // await notifyInit(BookCategoryReqDTO(
+  //     bookCategoryId: 1, alignment: "ranking", minusMonths: 12));
+  await notifyInit2(BookSearchReqDTO(keyword: "힐링"));
 }
 
 /// TODO : 통신 테스트
@@ -56,4 +59,25 @@ Future<void> notifyInit(BookCategoryReqDTO bookCategoryReqDTO) async {
   Logger().d(model.bookCategoryId);
   Logger().d(model.byCategoryPages);
   Logger().d(model.bookCount);
+}
+
+Future<void> fetchSearchBookOrBoard(BookSearchReqDTO bookSearchReqDTO) async {
+  // 통신
+  Response<dynamic> response =
+      await dio.post("/book/search", data: bookSearchReqDTO.toJson());
+
+  // 파싱
+  ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+  // Logger().d(responseDTO.data);
+
+  SearchResultModel model = SearchResultModel.fromJson(responseDTO.data);
+  Logger().d(model.keyword);
+  Logger().d(model.bookKeywordList);
+}
+
+Future<void> notifyInit2(BookSearchReqDTO bookSearchReqDTO) async {
+  ResponseDTO responseDTO =
+      await BookRepository().fetchSearchBookOrBoard(bookSearchReqDTO);
+  SearchResultModel model = responseDTO.data;
+  Logger().d(model.keyword);
 }

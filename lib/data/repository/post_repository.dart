@@ -6,7 +6,6 @@ import 'package:flutter_blog/data/model/post.dart';
 import 'package:flutter_blog/ui/pages/custom/post_update_page/widgets/post_update_view_model.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_page/widgets/post_write_view_model.dart';
 import 'package:flutter_blog/ui/pages/feed/feed_main_page/widgets/feed_main_view_model.dart';
-import 'package:logger/logger.dart';
 
 class PostRepository {
   // 피드 전체 post 목록
@@ -21,7 +20,6 @@ class PostRepository {
 
       // 3. ResponseDTO의 data 파싱
       FeedMainModel model = FeedMainModel.fromJson(responseDTO.data);
-      Logger().d("feedMainModel : ${model}");
 
       // 4. 파싱된 데이터를 다시 공통 DTO로 덮어씌우기
       responseDTO.data = model;
