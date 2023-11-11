@@ -20,6 +20,7 @@ class SearchResultBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     BookSearchReqDTO bookSearchReqDTO = BookSearchReqDTO(keyword: searchText);
+    Logger().d("bookSearchReqDTO : ${bookSearchReqDTO.keyword}");
     SearchResultModel? model = ref.read(searchProvider(bookSearchReqDTO));
     Logger().d("model : ${model}");
 

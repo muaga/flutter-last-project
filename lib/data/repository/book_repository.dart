@@ -2,10 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/request_dto/book_request_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
-import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
 import 'package:flutter_blog/ui/pages/search/search_category_book_list_page/widgets/view_model/search_category_book_list_view_model.dart';
 import 'package:flutter_blog/ui/pages/search/search_result_page/widgets/view_model/search_main_view_model.dart';
+import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/widgets/view-model/one_month_press_book_list_view_model.dart';
 
 // 통신 & 파싱
 class BookRepository {
@@ -29,19 +29,21 @@ class BookRepository {
     }
   }
 
-  // 책 목록보기
-  Future<ResponseDTO> fetchBookList(BookReqDTO dto) async {
+  // 한달 이내 출간된 책 목록
+  Future<ResponseDTO> fetchMonthBookList(
+      BookMonthReqDTO bookMonthReqDTO) async {
     try {
       // 통신
       Response<dynamic> response =
-          await dio.post("/book/monthList", data: dto.toJson());
+          await dio.post("/book/monthList", data: bookMonthReqDTO.toJson());
 
       // 파싱
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-      List<dynamic> mapList = responseDTO.data as List<dynamic>;
-      List<Book> bookList = mapList.map((e) => Book.fromJson(e)).toList();
 
-      responseDTO.data = bookList;
+      OneMonthPressBookListModel model =
+          OneMonthPressBookListModel.fromJson(responseDTO.data);
+
+      responseDTO.data = model;
       return responseDTO;
     } catch (e) {
       return ResponseDTO(-1, "책 목록 불러오기 실패", null);
@@ -69,6 +71,7 @@ class BookRepository {
     }
   }
 
+  // 책, 포스트 검색 결과
   Future<ResponseDTO> fetchSearchBookOrBoard(
       BookSearchReqDTO bookSearchReqDTO) async {
     try {
