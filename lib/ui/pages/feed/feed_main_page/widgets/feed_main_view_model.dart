@@ -3,6 +3,7 @@ import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/repository/post_repository.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 class FeedMainModel {
   final List<BoardDTO> boardList;
@@ -24,7 +25,7 @@ class BoardDTO {
   final String userPicUrl;
   final String userNickname;
   final String boardCreatedAt;
-  final int? boardId;
+  final int? bookId;
 
   BoardDTO(
       {required this.id,
@@ -33,7 +34,7 @@ class BoardDTO {
       required this.userPicUrl,
       required this.userNickname,
       required this.boardCreatedAt,
-      this.boardId});
+      this.bookId});
 
   BoardDTO.fromJson(Map<String, dynamic> json)
       : id = json["id"],
@@ -42,7 +43,7 @@ class BoardDTO {
         userPicUrl = json["userPicUrl"],
         userNickname = json["userNickname"],
         boardCreatedAt = json["boardCreatedAt"],
-        boardId = json["boardId"];
+        bookId = json["bookId"];
 }
 
 class FeedMainViewModel extends StateNotifier<FeedMainModel?> {
@@ -50,11 +51,14 @@ class FeedMainViewModel extends StateNotifier<FeedMainModel?> {
 
   Ref ref;
 
-  void notifyInit() async {
+  Future<void> notifyInit() async {
     SessionUser sessionUser = ref.read(sessionStore);
+    Logger().d("sessionUser : ${sessionUser.user?.nickname}");
     ResponseDTO responseDTO =
         await PostRepository().fetchPostList(sessionUser.jwt!);
-    state = FeedMainModel(boardList: responseDTO.data);
+    FeedMainModel model = responseDTO.data;
+    state = FeedMainModel(boardList: model.boardList);
+    Logger().d("FeedMainModel : ${responseDTO.data}");
   }
 }
 

@@ -135,7 +135,7 @@ class BookDetailViewModel extends StateNotifier<BookDetailModel?> {
         bookDetailReplyList: model.bookDetailReplyList);
   }
 
-  // 북마크 등록
+  // 북 스크랩 등록
   Future<void> bookLikeWrite(BookLikeReqDTO requestDTO) async {
     SessionUser sessionUser = ref.read(sessionStore);
 
