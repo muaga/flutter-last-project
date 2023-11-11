@@ -7,7 +7,8 @@ import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
 import '../../../../widgets/scroll_view/custom_book_grid_view.dart';
 
 class SearchCategoryBookListBody extends StatelessWidget {
-  const SearchCategoryBookListBody({super.key});
+  final int categoryId;
+  const SearchCategoryBookListBody({super.key, required this.categoryId});
 
   @override
   Widget build(BuildContext context) {

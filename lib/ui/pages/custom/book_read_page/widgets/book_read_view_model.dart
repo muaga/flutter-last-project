@@ -1,4 +1,5 @@
 // 창고 데이터
+import 'package:flutter_blog/data/dto/request_dto/book_mark_request_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/repository/book_data_repository.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
@@ -17,6 +18,12 @@ class BookReadModel {
   }
 }
 
+// class BookMarkDTO {
+//   final int id;
+//   BookMarkDTO({required this.bookLike});
+//   BookMarkDTO.fromJson(Map<String, dynamic> json) : bookLike = json["bookLike"];
+// }
+
 // 창고
 class BookReadViewModel extends StateNotifier<BookReadModel?> {
   BookReadViewModel(super._state, this.ref);
@@ -32,7 +39,7 @@ class BookReadViewModel extends StateNotifier<BookReadModel?> {
   }
 
   // 페이지 북마크 등록
-  Future<void> bookMark() async {
+  Future<void> bookMark(BookMarkReqDTO bookMarkReqDTO) async {
     SessionUser sessionUser = ref.read(sessionStore);
 
     // ResponseDTO responseDTO = await BookMarkRespository()

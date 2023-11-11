@@ -22,7 +22,7 @@ class SearchCategoryBookListPage extends StatelessWidget {
         title: Text("${title}"),
         elevation: 0.5,
       ),
-      body: SearchCategoryBookListBody(),
+      body: SearchCategoryBookListBody(categoryId: categoryId),
     );
   }
 }
