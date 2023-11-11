@@ -2,6 +2,7 @@ import 'package:flutter_blog/data/dto/request_dto/book_request_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/repository/book_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 /// 1. 창고 데이터
 class OneMonthPressBookListModel {
@@ -55,11 +56,14 @@ class OneMonthPressBookListViewModel
         bookCategoryId: model.bookCategoryId,
         bookCount: model.bookCount,
         bookList: model.bookList);
+    Logger().d("상태 : ${state?.bookCategoryId}");
+    Logger().d("상태 : ${state?.bookCount}");
+    Logger().d("상태 : ${state?.bookList}");
   }
 }
 
 /// 3. 창고 관리자(view가 빌드되기 직전에 생성됨)
-final OneMonthPressBookListProvider = StateNotifierProvider.family<
+final oneMonthPressProvider = StateNotifierProvider.family<
     OneMonthPressBookListViewModel,
     OneMonthPressBookListModel?,
     BookMonthReqDTO>((ref, bookMonthReqDTO) {

@@ -1,22 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/data/model/book.dart';
+import 'package:flutter_blog/data/dto/request_dto/book_request_dto.dart';
+import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/widgets/one_month_book_grid_view.dart';
+import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/widgets/view-model/one_month_press_book_list_view_model.dart';
 import 'package:flutter_blog/ui/widgets/button/custom_category_button.dart';
-import 'package:flutter_blog/ui/widgets/scroll_view/Custom_book_grid_view.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
-class CustomCategoryForm extends StatefulWidget {
-  CustomCategoryForm({super.key});
+class OneMonthCategoryForm extends ConsumerStatefulWidget {
+  OneMonthCategoryForm({super.key});
 
   @override
-  State<CustomCategoryForm> createState() => _CustomCategoryBarState();
+  _OneMonthCategoryFormState createState() => _OneMonthCategoryFormState();
 }
 
-class _CustomCategoryBarState extends State<CustomCategoryForm> {
+class _OneMonthCategoryFormState extends ConsumerState<OneMonthCategoryForm> {
   int _pageIndex = 0; // 현재 페이지 인덱스
+  final String alignment = "ranking";
+  late List<BookListDTO> bookList;
 
   void changePage(int index) {
     setState(() {
       _pageIndex = index;
     });
+  }
+
+  void changeBookList(int categoryId) {
+    BookMonthReqDTO bookMonthReqDTO =
+        BookMonthReqDTO(bookCategoryId: categoryId, alignment: alignment);
+    OneMonthPressBookListModel? model =
+        ref.read(oneMonthPressProvider(bookMonthReqDTO));
+    Logger().d("model = ${model}");
+    if (model != null) {
+      setState(() {
+        bookList = model.bookList!;
+      });
+    }
   }
 
   @override
@@ -38,6 +56,7 @@ class _CustomCategoryBarState extends State<CustomCategoryForm> {
                         pageIndex: _pageIndex,
                         onPress: () {
                           changePage(0);
+                          changeBookList(0);
                         }),
                     CustomCategoryButton(
                         label: "트렌드",
@@ -45,6 +64,7 @@ class _CustomCategoryBarState extends State<CustomCategoryForm> {
                         pageIndex: _pageIndex,
                         onPress: () {
                           changePage(1);
+                          changeBookList(1);
                         }),
                     CustomCategoryButton(
                         label: "라이프",
@@ -52,6 +72,7 @@ class _CustomCategoryBarState extends State<CustomCategoryForm> {
                         pageIndex: _pageIndex,
                         onPress: () {
                           changePage(2);
+                          changeBookList(2);
                         }),
                     CustomCategoryButton(
                         label: "힐링",
@@ -59,6 +80,7 @@ class _CustomCategoryBarState extends State<CustomCategoryForm> {
                         pageIndex: _pageIndex,
                         onPress: () {
                           changePage(3);
+                          changeBookList(3);
                         }),
                     CustomCategoryButton(
                         label: "지적교양",
@@ -66,6 +88,7 @@ class _CustomCategoryBarState extends State<CustomCategoryForm> {
                         pageIndex: _pageIndex,
                         onPress: () {
                           changePage(4);
+                          changeBookList(4);
                         }),
                     CustomCategoryButton(
                         label: "소설",
@@ -73,6 +96,7 @@ class _CustomCategoryBarState extends State<CustomCategoryForm> {
                         pageIndex: _pageIndex,
                         onPress: () {
                           changePage(5);
+                          changeBookList(5);
                         }),
                   ],
                 ),
@@ -83,12 +107,12 @@ class _CustomCategoryBarState extends State<CustomCategoryForm> {
             child: IndexedStack(
               index: _pageIndex,
               children: [
-                CustomBookGridView(categoryId: 0, books: books),
-                CustomBookGridView(categoryId: 1, books: books),
-                CustomBookGridView(categoryId: 2, books: books),
-                CustomBookGridView(categoryId: 3, books: books),
-                CustomBookGridView(categoryId: 4, books: books),
-                CustomBookGridView(categoryId: 5, books: books),
+                OneMonthBookGridView(bookList: bookList),
+                OneMonthBookGridView(bookList: bookList),
+                OneMonthBookGridView(bookList: bookList),
+                OneMonthBookGridView(bookList: bookList),
+                OneMonthBookGridView(bookList: bookList),
+                OneMonthBookGridView(bookList: bookList),
               ],
             ),
           )

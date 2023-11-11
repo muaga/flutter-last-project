@@ -17,6 +17,6 @@ class BookStoreBestBookListBody extends ConsumerWidget {
       books = model.books;
     }
 
-    return CustomCategoryForm(books: books);
+    return CustomCategoryForm();
   }
 }
