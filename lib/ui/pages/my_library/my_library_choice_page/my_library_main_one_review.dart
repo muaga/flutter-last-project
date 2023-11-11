@@ -52,7 +52,11 @@ class _MyLibraryOneReview extends State<MyLibraryOneReview> {
                           builder: (context) =>
                               ReplyWriteAndListPage(bookId: bookId)));
                 },
-                child: CustomGridBookCard(book: books[index]),
+                child: CustomGridBookCard(
+                  title: book.title,
+                  writer: book.writer,
+                  picUrl: book.picUrl,
+                ),
               );
             },
             // 더 많은 리스트 아이템을 추가할 수 있습니다.

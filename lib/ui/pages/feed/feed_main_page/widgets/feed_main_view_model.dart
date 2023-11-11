@@ -53,12 +53,10 @@ class FeedMainViewModel extends StateNotifier<FeedMainModel?> {
 
   Future<void> notifyInit() async {
     SessionUser sessionUser = ref.read(sessionStore);
-    Logger().d("sessionUser : ${sessionUser.user?.nickname}");
     ResponseDTO responseDTO =
         await PostRepository().fetchPostList(sessionUser.jwt!);
     FeedMainModel model = responseDTO.data;
     state = FeedMainModel(boardList: model.boardList);
-    Logger().d("FeedMainModel : ${responseDTO.data}");
   }
 }
 

@@ -15,7 +15,7 @@ class OneMonthPressBookListBody extends ConsumerWidget {
     final String alignment = "ranking";
 
     BookReqDTO dto =
-        BookReqDTO(bookCategowryId: categoryId, alignment: alignment);
+        BookReqDTO(bookCategoryId: categoryId, alignment: alignment);
 
     OneMonthPressBookListModel? model =
         ref.watch(OneMonthPressBookListProvider(dto));

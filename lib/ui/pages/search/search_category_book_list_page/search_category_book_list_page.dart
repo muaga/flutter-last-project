@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
+import 'package:logger/logger.dart';
 
 import 'widgets/search_category_book_list_body.dart';
 
@@ -12,6 +13,7 @@ class SearchCategoryBookListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Logger().d("카테고리 번호 : ${categoryId}");
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
