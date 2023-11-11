@@ -95,7 +95,11 @@ class _MyLibraryMainLikeBooksState extends State<MyLibraryMainLikeBooks> {
                     },
                   );
                 },
-                child: CustomGridBookCard(book: books[index]),
+                child: CustomGridBookCard(
+                  title: books[index].title,
+                  writer: books[index].writer,
+                  picUrl: books[index].picUrl,
+                ),
               );
             },
             // 더 많은 리스트 아이템을 추가할 수 있습니다.

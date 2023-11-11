@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/_core/constants/color.dart';
-import 'package:flutter_blog/_core/constants/http.dart';
-import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/ui/pages/custom/book_read_page/widgets/book_read_view_model.dart';
+import 'package:flutter_blog/ui/pages/custom/book_read_page/widgets/view_model/book_read_view_model.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:logger/logger.dart';
 
 class BookReadBody extends StatefulWidget {
   BookReadBody(

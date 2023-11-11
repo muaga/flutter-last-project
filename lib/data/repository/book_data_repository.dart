@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
-import 'package:flutter_blog/ui/pages/custom/book_read_page/widgets/book_read_view_model.dart';
-import 'package:logger/logger.dart';
+import 'package:flutter_blog/ui/pages/custom/book_read_page/widgets/view_model/book_read_view_model.dart';
 
 class BookDataRepository {
   // 책 내용 상세보기
