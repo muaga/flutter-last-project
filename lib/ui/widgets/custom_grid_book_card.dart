@@ -6,10 +6,11 @@ import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 
 class CustomGridBookCard extends StatelessWidget {
-  final String? picUrl;
-  final String? title;
-  final String? writer;
-  const CustomGridBookCard({this.picUrl, this.title, this.writer});
+  final String picUrl;
+  final String title;
+  final String writer;
+  const CustomGridBookCard(
+      {required this.picUrl, required this.title, required this.writer});
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +34,14 @@ class CustomGridBookCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                title!,
+                title,
                 style: subTitle3(),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis, // text ...
               ),
               SizedBox(height: gapSmall),
               Text(
-                writer!,
+                writer,
                 style: body4(mColor: kFontGray),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis, // text ...
