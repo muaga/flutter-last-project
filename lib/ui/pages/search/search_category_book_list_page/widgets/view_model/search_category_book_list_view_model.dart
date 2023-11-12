@@ -48,11 +48,13 @@ class ByCategoryPage {
 /// 2. 창고
 class SearchCategoryBookListViewModel
     extends StateNotifier<SearchCategoryBookListModel?> {
-  SearchCategoryBookListViewModel(
-      super._state); // super._state = PostListModel 타입
+  SearchCategoryBookListViewModel(SearchCategoryBookListModel? state, this.ref)
+      : super(state);
+  Ref ref;
 
   // 통신을 통해 reponseDTO에 데이터 받아오고 최초 상태 변경하기
-  Future<void> notifyInit(BookCategoryReqDTO bookCategoryReqDTO) async {
+  Future<SearchCategoryBookListModel> notifyInit(
+      BookCategoryReqDTO bookCategoryReqDTO) async {
     ResponseDTO responseDTO =
         await BookRepository().fetchCategoryBookList(bookCategoryReqDTO);
     SearchCategoryBookListModel model = responseDTO.data;
@@ -63,6 +65,11 @@ class SearchCategoryBookListViewModel
     Logger().d(state?.bookCategoryId);
     Logger().d(state?.bookCount);
     Logger().d(state?.byCategoryPages);
+
+    return SearchCategoryBookListModel(
+        bookCount: model.bookCount,
+        bookCategoryId: model.bookCategoryId,
+        byCategoryPages: model.byCategoryPages);
   }
 }
 
@@ -71,5 +78,6 @@ final searchCategoryProvider = StateNotifierProvider.family<
     SearchCategoryBookListViewModel,
     SearchCategoryBookListModel?,
     BookCategoryReqDTO>((ref, bookCategoryReqDTO) {
-  return SearchCategoryBookListViewModel(null)..notifyInit(bookCategoryReqDTO);
+  return SearchCategoryBookListViewModel(null, ref)
+    ..notifyInit(bookCategoryReqDTO);
 });

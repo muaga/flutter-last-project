@@ -1,23 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/ui/pages/today_now/book_store_best_book_list_page/widgets/book_store_best_book_grid_view.dart';
+import 'package:flutter_blog/data/dto/request_dto/book_request_dto.dart';
+import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/widgets/one_month_book_grid_view.dart';
+import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/widgets/view-model/one_month_press_book_list_view_model.dart';
 import 'package:flutter_blog/ui/widgets/button/custom_category_button.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
-class BookStoreBestBookCategoryForm extends StatefulWidget {
-  BookStoreBestBookCategoryForm({super.key});
+class OneMonthCategoryForm extends ConsumerStatefulWidget {
+  OneMonthCategoryForm({super.key});
 
   @override
-  State<BookStoreBestBookCategoryForm> createState() =>
-      _BookStoreBestBookCategoryFormState();
+  _OneMonthCategoryFormState createState() => _OneMonthCategoryFormState();
 }
 
-class _BookStoreBestBookCategoryFormState
-    extends State<BookStoreBestBookCategoryForm> {
+class _OneMonthCategoryFormState extends ConsumerState<OneMonthCategoryForm> {
   int _pageIndex = 0; // 현재 페이지 인덱스
+  final String alignment = "ranking";
+  late List<BookListDTO> bookList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    changePage(0);
+    changeBookList(0); // 초기 페이지를 종합으로 설정
+  }
 
   void changePage(int index) {
     setState(() {
       _pageIndex = index;
     });
+  }
+
+  void changeBookList(int categoryId) async {
+    BookMonthReqDTO bookMonthReqDTO =
+        BookMonthReqDTO(bookCategoryId: categoryId, alignment: alignment);
+    OneMonthPressBookListModel? model = await ref
+        .read(oneMonthPressProvider(bookMonthReqDTO).notifier)
+        .notifyInit(bookMonthReqDTO);
+    Logger().d("이번에는 받아오자..! ${model}");
+    if (model != null) {
+      setState(() {
+        bookList = model.bookList!;
+      });
+    }
   }
 
   @override
@@ -38,6 +63,7 @@ class _BookStoreBestBookCategoryFormState
                         index: 0,
                         pageIndex: _pageIndex,
                         onPress: () {
+                          changeBookList(0);
                           changePage(0);
                         }),
                     CustomCategoryButton(
@@ -45,6 +71,7 @@ class _BookStoreBestBookCategoryFormState
                         index: 1,
                         pageIndex: _pageIndex,
                         onPress: () {
+                          changeBookList(1);
                           changePage(1);
                         }),
                     CustomCategoryButton(
@@ -52,6 +79,7 @@ class _BookStoreBestBookCategoryFormState
                         index: 2,
                         pageIndex: _pageIndex,
                         onPress: () {
+                          changeBookList(2);
                           changePage(2);
                         }),
                     CustomCategoryButton(
@@ -59,6 +87,7 @@ class _BookStoreBestBookCategoryFormState
                         index: 3,
                         pageIndex: _pageIndex,
                         onPress: () {
+                          changeBookList(3);
                           changePage(3);
                         }),
                     CustomCategoryButton(
@@ -66,6 +95,7 @@ class _BookStoreBestBookCategoryFormState
                         index: 4,
                         pageIndex: _pageIndex,
                         onPress: () {
+                          changeBookList(4);
                           changePage(4);
                         }),
                     CustomCategoryButton(
@@ -73,6 +103,7 @@ class _BookStoreBestBookCategoryFormState
                         index: 5,
                         pageIndex: _pageIndex,
                         onPress: () {
+                          changeBookList(5);
                           changePage(5);
                         }),
                   ],
@@ -84,12 +115,12 @@ class _BookStoreBestBookCategoryFormState
             child: IndexedStack(
               index: _pageIndex,
               children: [
-                BookStoreBestBookGridView(categoryId: 0),
-                BookStoreBestBookGridView(categoryId: 1),
-                BookStoreBestBookGridView(categoryId: 2),
-                BookStoreBestBookGridView(categoryId: 3),
-                BookStoreBestBookGridView(categoryId: 4),
-                BookStoreBestBookGridView(categoryId: 5),
+                OneMonthBookGridView(bookList: bookList),
+                OneMonthBookGridView(bookList: bookList),
+                OneMonthBookGridView(bookList: bookList),
+                OneMonthBookGridView(bookList: bookList),
+                OneMonthBookGridView(bookList: bookList),
+                OneMonthBookGridView(bookList: bookList),
               ],
             ),
           )

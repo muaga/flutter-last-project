@@ -4,9 +4,10 @@ import 'package:flutter_blog/data/dto/request_dto/book_request_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/view_model/book_detail_view_model.dart';
 import 'package:flutter_blog/ui/pages/search/search_category_book_list_page/widgets/view_model/search_category_book_list_view_model.dart';
-import 'package:flutter_blog/ui/pages/search/search_result_page/widgets/view_model/search_main_view_model.dart';
-import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/widgets/view_model/one_month_press_book_list_view_model.dart';
-
+import 'package:flutter_blog/ui/pages/search/search_result_page/widgets/view_model/search_result_view_model.dart';
+import 'package:flutter_blog/ui/pages/today_now/book_store_best_book_list_page/widgets/view-model/book_store_best_book_list_view_model.dart';
+import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/widgets/view-model/one_month_press_book_list_view_model.dart';
+import 'package:flutter_blog/ui/pages/today_story/story_main_page/widgets/view_model/today_story_view_model.dart';
 
 // 통신 & 파싱
 class BookRepository {
@@ -72,6 +73,25 @@ class BookRepository {
     }
   }
 
+  // 스토리 카테고리별 책 목록
+  Future<ResponseDTO> fetchStoryBookList(int categoryId) async {
+    try {
+      // 통신
+      Response<dynamic> response =
+          await dio.get("/book/storyCategory/${categoryId}");
+      // 파싱
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+      TodayStoryModel model = TodayStoryModel.fromJson(responseDTO.data);
+
+      responseDTO.data = model;
+
+      return responseDTO;
+    } catch (e) {
+      return ResponseDTO(-1, "책 목록 불러오기 실패", null);
+    }
+  }
+
   // 책, 포스트 검색 결과
   Future<ResponseDTO> fetchSearchBookOrBoard(
       BookSearchReqDTO bookSearchReqDTO) async {
@@ -93,38 +113,18 @@ class BookRepository {
     }
   }
 
-  // 카테고리별 책 목록
-  Future<ResponseDTO> fetchCategoryBookList(
-      BookCategoryReqDTO bookCategoryReqDTO) async {
-    try {
-      // 통신
-      Response<dynamic> response = await dio.post("/book/bookCategory",
-          data: bookCategoryReqDTO.toJson());
-      // 파싱
-      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-
-      SearchCategoryBookListModel model =
-          SearchCategoryBookListModel.fromJson(responseDTO.data);
-
-      responseDTO.data = model;
-
-      return responseDTO;
-    } catch (e) {
-      return ResponseDTO(-1, "책 목록 불러오기 실패", null);
-    }
-  }
-
-  Future<ResponseDTO> fetchSearchBookOrBoard(
-      BookSearchReqDTO bookSearchReqDTO) async {
+  // 서점 베스트 책 목록
+  Future<ResponseDTO> fetchBestBookList(BookBestReqDTO bookBestReqDTO) async {
     try {
       // 통신
       Response<dynamic> response =
-          await dio.post("/book/search", data: bookSearchReqDTO.toJson());
+          await dio.post("/book/rankingList", data: bookBestReqDTO.toJson());
 
       // 파싱
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
-      SearchResultModel model = SearchResultModel.fromJson(responseDTO.data);
+      BookStoreBestBookListModel model =
+          BookStoreBestBookListModel.fromJson(responseDTO.data);
 
       responseDTO.data = model;
 

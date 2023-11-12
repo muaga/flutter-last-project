@@ -4,29 +4,34 @@ import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/move.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/banner_slider/now_image_slider_form.dart';
 import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/banner_slider/now_text_slider_form.dart';
-import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/now_book_card.dart';
 import 'package:flutter_blog/ui/pages/today_story/story_book_list_page/story_book_list_page.dart';
 import 'package:flutter_blog/ui/pages/today_story/story_main_page/widgets/recommend/story_recommend_form.dart';
+import 'package:flutter_blog/ui/pages/today_story/story_main_page/widgets/story_book_card.dart';
+import 'package:flutter_blog/ui/pages/today_story/story_main_page/widgets/view_model/today_story_view_model.dart';
 import 'package:flutter_blog/ui/widgets/form/custom_footer_form.dart';
 import 'package:flutter_blog/ui/widgets/form/custom_title_and_forword_form.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class StoryMainBody extends StatefulWidget {
+class StoryMainBody extends ConsumerStatefulWidget {
   const StoryMainBody({super.key});
 
   @override
-  State<StoryMainBody> createState() => _StoryMainBodyState();
+  _StoryMainBodyState createState() => _StoryMainBodyState();
 }
 
-class _StoryMainBodyState extends State<StoryMainBody> {
+class _StoryMainBodyState extends ConsumerState<StoryMainBody> {
   // 슬라이더 초기 번호
   int _bannerCurrent = 0;
   int _eventCurrent = 0;
 
   // AppBar 초기 아이템 컬러
   Color currentColor = kFontWhite;
+
+  late List<StoryBookDTO> loveStoryBookList = [];
+  late List<StoryBookDTO> fanStoryBookList = [];
+  late List<StoryBookDTO> normalStoryBookList = [];
 
   // 컨트롤러
   final CarouselController _imageController = CarouselController();
@@ -49,6 +54,9 @@ class _StoryMainBodyState extends State<StoryMainBody> {
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
+    changeBookList(1);
+    changeBookList(2);
+    changeBookList(3);
   }
 
   @override
@@ -70,6 +78,27 @@ class _StoryMainBodyState extends State<StoryMainBody> {
           currentColor = kFontWhite;
         });
       }
+    }
+  }
+
+  void changeBookList(int categoryId) async {
+    TodayStoryModel? model = await ref
+        .read(todayStoryProvider(categoryId).notifier)
+        .notifyInit(categoryId);
+    if (categoryId == 1) {
+      setState(() {
+        loveStoryBookList = model.storyBookList!;
+      });
+    }
+    if (categoryId == 2) {
+      setState(() {
+        fanStoryBookList = model.storyBookList!;
+      });
+    }
+    if (categoryId == 3) {
+      setState(() {
+        normalStoryBookList = model.storyBookList!;
+      });
     }
   }
 
@@ -143,24 +172,27 @@ class _StoryMainBodyState extends State<StoryMainBody> {
 
           /// 카테고리별 추천 책
           SliverToBoxAdapter(
-            child: StoryRecommendForm(books: books),
+            child: StoryRecommendForm(
+                fanBookList: fanStoryBookList,
+                loveBookList: loveStoryBookList,
+                normalBookList: normalStoryBookList),
           ),
 
           SliverToBoxAdapter(child: SizedBox(height: gapXxlarge)),
 
-          /// # 헌터 # 각성자
+          /// # 무협 # 판타지
           SliverToBoxAdapter(
             child: Column(
               children: [
                 CustomTitleAndForwardForm(
-                  title: "# 헌터 # 각성자",
+                  title: "# 무협 # 판타지",
                   funPageRoute: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => StoryBookListPage(
-                          title: "# 헌터 # 각성자",
-                          books: books,
+                          title: "# 무협 # 판타지",
+                          books: fanStoryBookList,
                         ),
                       ),
                     );
@@ -172,48 +204,10 @@ class _StoryMainBodyState extends State<StoryMainBody> {
                     height: getScreenWidth(context) * 0.7,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: 8,
+                      itemCount: 4,
                       itemExtent: 150,
                       itemBuilder: (context, index) {
-                        return NowBookCard(book: books[index]);
-                      },
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          SliverToBoxAdapter(child: SizedBox(height: gapLarge)),
-
-          /// # 스포츠물
-          SliverToBoxAdapter(
-            child: Column(
-              children: [
-                CustomTitleAndForwardForm(
-                  title: "# 스포츠물",
-                  funPageRoute: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => StoryBookListPage(
-                          title: "# 스포츠물",
-                          books: books,
-                        ),
-                      ),
-                    );
-                  },
-                ),
-                Padding(
-                  padding: EdgeInsets.all(gapMain),
-                  child: Container(
-                    height: getScreenWidth(context) * 0.7,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: 8,
-                      itemExtent: 150,
-                      itemBuilder: (context, index) {
-                        return NowBookCard(book: books[index]);
+                        return StoryBookCard(book: fanStoryBookList[index]);
                       },
                     ),
                   ),
@@ -236,7 +230,7 @@ class _StoryMainBodyState extends State<StoryMainBody> {
                       MaterialPageRoute(
                         builder: (context) => StoryBookListPage(
                           title: "# 이 무렵, 내가 사랑하는 이야기",
-                          books: books,
+                          books: loveStoryBookList,
                         ),
                       ),
                     );
@@ -248,10 +242,48 @@ class _StoryMainBodyState extends State<StoryMainBody> {
                     height: getScreenWidth(context) * 0.7,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: 8,
+                      itemCount: 4,
                       itemExtent: 150,
                       itemBuilder: (context, index) {
-                        return NowBookCard(book: books[index]);
+                        return StoryBookCard(book: loveStoryBookList[index]);
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          SliverToBoxAdapter(child: SizedBox(height: gapLarge)),
+
+          /// # 끌리는 책이 없다면 이 책 어때요?
+          SliverToBoxAdapter(
+            child: Column(
+              children: [
+                CustomTitleAndForwardForm(
+                  title: "# 끌리는 책이 없다면 이 책 어때요?",
+                  funPageRoute: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => StoryBookListPage(
+                          title: "# 끌리는 책이 없다면 이 책 어때요?",
+                          books: normalStoryBookList,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                Padding(
+                  padding: EdgeInsets.all(gapMain),
+                  child: Container(
+                    height: getScreenWidth(context) * 0.7,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 4,
+                      itemExtent: 150,
+                      itemBuilder: (context, index) {
+                        return StoryBookCard(book: normalStoryBookList[index]);
                       },
                     ),
                   ),

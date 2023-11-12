@@ -1,21 +1,22 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/pages/today_story/story_main_page/widgets/recommend/story_category_slider_form.dart';
+import 'package:flutter_blog/ui/pages/today_story/story_main_page/widgets/view_model/today_story_view_model.dart';
 
 class StoryCategorySlider extends StatelessWidget {
-  const StoryCategorySlider({
-    Key? key,
-    required this.storyCategoryId,
-    required this.imageController,
-    required this.current,
-    required this.funPageChanged,
-  });
+  const StoryCategorySlider(
+      {Key? key,
+      required this.storyCategoryId,
+      required this.imageController,
+      required this.current,
+      required this.funPageChanged,
+      required this.bookList});
 
   final int storyCategoryId;
   final CarouselController imageController;
   final int current;
   final funPageChanged;
+  final List<StoryBookDTO> bookList;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class StoryCategorySlider extends StatelessWidget {
       width: double.infinity,
       child: CarouselSlider(
         carouselController: imageController,
-        items: books.map(
+        items: bookList.map(
           (book) {
             return Builder(
               builder: (context) {
