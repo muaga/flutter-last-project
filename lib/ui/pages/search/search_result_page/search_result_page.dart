@@ -13,7 +13,6 @@ class SearchResultPage extends StatefulWidget {
 class _SearchResultPageState extends State<SearchResultPage>
     with SingleTickerProviderStateMixin {
   TabController? _tabController;
-  late String _searchText;
 
   @override
   void initState() {
@@ -42,7 +41,7 @@ class _SearchResultPageState extends State<SearchResultPage>
       ),
       // bottomNavigationBar: MillieIndexStackNavigationBar(),
       body: SearchResultBody(
-          tabController: _tabController, searchText: _searchText),
+          tabController: _tabController, searchText: widget.searchText),
     );
   }
 }

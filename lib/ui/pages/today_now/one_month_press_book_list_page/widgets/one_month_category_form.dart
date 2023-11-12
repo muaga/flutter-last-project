@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/data/dto/request_dto/book_request_dto.dart';
 import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/widgets/one_month_book_grid_view.dart';
-import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/widgets/view_model/one_month_press_book_list_view_model.dart';
+import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/widgets/view-model/one_month_press_book_list_view_model.dart';
 import 'package:flutter_blog/ui/widgets/button/custom_category_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 class OneMonthCategoryForm extends ConsumerStatefulWidget {
   OneMonthCategoryForm({super.key});
@@ -13,12 +15,27 @@ class OneMonthCategoryForm extends ConsumerStatefulWidget {
 
 class _OneMonthCategoryFormState extends ConsumerState<OneMonthCategoryForm> {
   int _pageIndex = 0; // 현재 페이지 인덱스
+  final String alignment = "ranking";
   late List<BookListDTO> bookList = [];
 
   void changePage(int index) {
     setState(() {
       _pageIndex = index;
     });
+  }
+
+  void changeBookList(int categoryId) async {
+    BookMonthReqDTO bookMonthReqDTO =
+        BookMonthReqDTO(bookCategoryId: categoryId, alignment: alignment);
+    OneMonthPressBookListModel? model = await ref
+        .read(oneMonthPressProvider(bookMonthReqDTO).notifier)
+        .notifyInit(bookMonthReqDTO);
+    Logger().d("이번에는 받아오자..! ${model}");
+    if (model != null) {
+      setState(() {
+        bookList = model.bookList!;
+      });
+    }
   }
 
   @override
@@ -39,6 +56,7 @@ class _OneMonthCategoryFormState extends ConsumerState<OneMonthCategoryForm> {
                         index: 0,
                         pageIndex: _pageIndex,
                         onPress: () {
+                          changeBookList(0);
                           changePage(0);
                         }),
                     CustomCategoryButton(
@@ -46,6 +64,7 @@ class _OneMonthCategoryFormState extends ConsumerState<OneMonthCategoryForm> {
                         index: 1,
                         pageIndex: _pageIndex,
                         onPress: () {
+                          changeBookList(1);
                           changePage(1);
                         }),
                     CustomCategoryButton(
@@ -53,6 +72,7 @@ class _OneMonthCategoryFormState extends ConsumerState<OneMonthCategoryForm> {
                         index: 2,
                         pageIndex: _pageIndex,
                         onPress: () {
+                          changeBookList(2);
                           changePage(2);
                         }),
                     CustomCategoryButton(
@@ -60,6 +80,7 @@ class _OneMonthCategoryFormState extends ConsumerState<OneMonthCategoryForm> {
                         index: 3,
                         pageIndex: _pageIndex,
                         onPress: () {
+                          changeBookList(3);
                           changePage(3);
                         }),
                     CustomCategoryButton(
@@ -67,6 +88,7 @@ class _OneMonthCategoryFormState extends ConsumerState<OneMonthCategoryForm> {
                         index: 4,
                         pageIndex: _pageIndex,
                         onPress: () {
+                          changeBookList(4);
                           changePage(4);
                         }),
                     CustomCategoryButton(
@@ -74,6 +96,7 @@ class _OneMonthCategoryFormState extends ConsumerState<OneMonthCategoryForm> {
                         index: 5,
                         pageIndex: _pageIndex,
                         onPress: () {
+                          changeBookList(5);
                           changePage(5);
                         }),
                   ],
@@ -85,12 +108,12 @@ class _OneMonthCategoryFormState extends ConsumerState<OneMonthCategoryForm> {
             child: IndexedStack(
               index: _pageIndex,
               children: [
-                OneMonthBookGridView(categoryId: 0),
-                OneMonthBookGridView(categoryId: 1),
-                OneMonthBookGridView(categoryId: 2),
-                OneMonthBookGridView(categoryId: 3),
-                OneMonthBookGridView(categoryId: 4),
-                OneMonthBookGridView(categoryId: 5),
+                OneMonthBookGridView(bookList: bookList),
+                OneMonthBookGridView(bookList: bookList),
+                OneMonthBookGridView(bookList: bookList),
+                OneMonthBookGridView(bookList: bookList),
+                OneMonthBookGridView(bookList: bookList),
+                OneMonthBookGridView(bookList: bookList),
               ],
             ),
           )

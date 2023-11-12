@@ -93,6 +93,12 @@ class SearchResultViewModel extends StateNotifier<SearchResultModel?> {
     Logger().d(model.bookCount);
     Logger().d(model.boardKeywordList);
     Logger().d(model.bookKeywordList);
+    Logger().d("상태 : ${state?.keyword}");
+    Logger().d("상태 : ${state?.boardCount}");
+    Logger().d("상태 : ${state?.bookCount}");
+    Logger().d("상태 : ${state?.boardKeywordList}");
+    Logger().d("상태 : ${state?.bookKeywordList}");
+
   }
 }
 

@@ -2,24 +2,27 @@ import 'package:flutter_blog/data/dto/request_dto/book_request_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/repository/book_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 /// 1. 창고 데이터
 class OneMonthPressBookListModel {
-  final int bookCount;
-  final int bookCategoryId;
-  final List<BookListDTO>? bookList;
+  int bookCount;
+  int bookCategoryId;
+  List<BookListDTO> bookList;
   OneMonthPressBookListModel(
-      {required this.bookCount, required this.bookCategoryId, this.bookList});
+      {required this.bookCount,
+      required this.bookCategoryId,
+      required this.bookList});
 
   factory OneMonthPressBookListModel.fromJson(Map<String, dynamic> json) {
     List<dynamic> temp = json["bookList"];
-    List<BookListDTO> boardList =
+    List<BookListDTO> bookList =
         temp.map((e) => BookListDTO.fromJson(e)).toList();
 
     return OneMonthPressBookListModel(
         bookCount: json["bookCount"],
         bookCategoryId: json["bookCategoryId"],
-        bookList: boardList);
+        bookList: bookList);
   }
 }
 
@@ -45,14 +48,24 @@ class BookListDTO {
 /// 2. 창고
 class OneMonthPressBookListViewModel
     extends StateNotifier<OneMonthPressBookListModel?> {
-  OneMonthPressBookListViewModel(super._state);
+  OneMonthPressBookListViewModel(super._state, this.ref);
 
-  // 통신을 통해 reponseDTO에 데이터 받아오고 최초 상태 변경하기
-  Future<void> notifyInit(BookReqDTO bookReqDTO) async {
+  Ref ref;
+
+  Future<OneMonthPressBookListModel> notifyInit(
+      BookMonthReqDTO bookMonthReqDTO) async {
     ResponseDTO responseDTO =
-        await BookRepository().fetchBookMonthList(bookReqDTO);
+        await BookRepository().fetchMonthBookList(bookMonthReqDTO);
     OneMonthPressBookListModel model = responseDTO.data;
     state = OneMonthPressBookListModel(
+        bookCategoryId: model.bookCategoryId,
+        bookCount: model.bookCount,
+        bookList: model.bookList);
+    Logger().d("상태 : ${state?.bookCategoryId}");
+    Logger().d("상태 : ${state?.bookCount}");
+    Logger().d("상태 : ${state?.bookList}");
+
+    return OneMonthPressBookListModel(
         bookCount: model.bookCount,
         bookCategoryId: model.bookCategoryId,
         bookList: model.bookList);
@@ -60,9 +73,9 @@ class OneMonthPressBookListViewModel
 }
 
 /// 3. 창고 관리자(view가 빌드되기 직전에 생성됨)
-final oneMonthPressBookListProvider = StateNotifierProvider.family<
+final oneMonthPressProvider = StateNotifierProvider.family<
     OneMonthPressBookListViewModel,
     OneMonthPressBookListModel?,
-    BookReqDTO>((ref, bookReqDTO) {
-  return OneMonthPressBookListViewModel(null)..notifyInit(bookReqDTO);
+    BookMonthReqDTO>((ref, bookMonthReqDTO) {
+  return OneMonthPressBookListViewModel(null, ref)..notifyInit(bookMonthReqDTO);
 });
