@@ -27,19 +27,6 @@ class BookCategoryReqDTO {
       };
 }
 
-class BookBestReqDTO {
-  final int bookCategoryId;
-  final String alignment;
-
-  BookBestReqDTO({required this.bookCategoryId, required this.alignment});
-
-  Map<String, dynamic> toJson() => {
-        "bookCategoryId": bookCategoryId,
-        "alignment": alignment,
-      };
-}
-
-
 class BookSearchReqDTO {
   final String keyword;
 

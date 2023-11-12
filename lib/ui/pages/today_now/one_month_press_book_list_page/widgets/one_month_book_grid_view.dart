@@ -24,23 +24,22 @@ class OneMonthBookGridView extends StatelessWidget {
         itemCount: bookList.length,
         itemBuilder: (context, index) {
           return InkWell(
-            onTap: () {
-              int? bookId = bookList?[index].bookId;
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          BookDetailPage(bookId: bookId ?? 0)));
+              onTap: () {
+                int? bookId = bookList[index].bookId;
 
-              /// ?가 붙는 변수는 꼭 null일 때의 디폴트값을 명시해줄것
-            },
-            child: CustomGridBookCard(
-              title: bookList?[index].bookTitle,
-              writer: bookList?[index].bookWriter,
-              picUrl: bookList?[index].bookPicUrl,
-            ),
-          );
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            BookDetailPage(bookId: bookId ?? 0)));
 
+                /// ?가 붙는 변수는 꼭 null일 때의 디폴트값을 명시해줄것
+              },
+              child: CustomGridBookCard(
+                title: bookList[index].bookTitle,
+                writer: bookList[index].bookWriter,
+                picUrl: bookList[index].bookPicUrl,
+              ));
         },
         // 더 많은 리스트 아이템을 추가할 수 있습니다.
       ),

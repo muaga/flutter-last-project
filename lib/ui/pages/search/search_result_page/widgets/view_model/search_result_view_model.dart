@@ -90,12 +90,26 @@ class SearchResultViewModel extends StateNotifier<SearchResultModel?> {
         bookCount: model.bookCount,
         boardKeywordList: model.boardKeywordList,
         bookKeywordList: model.bookKeywordList);
+<<<<<<< HEAD:lib/ui/pages/search/search_result_page/widgets/view_model/search_result_view_model.dart
     return SearchResultModel(
         keyword: model.keyword,
         bookCount: model.bookCount,
         boardCount: model.boardCount,
         bookKeywordList: model.bookKeywordList,
         boardKeywordList: model.boardKeywordList);
+=======
+    Logger().d(model.keyword);
+    Logger().d(model.boardCount);
+    Logger().d(model.bookCount);
+    Logger().d(model.boardKeywordList);
+    Logger().d(model.bookKeywordList);
+    Logger().d("상태 : ${state?.keyword}");
+    Logger().d("상태 : ${state?.boardCount}");
+    Logger().d("상태 : ${state?.bookCount}");
+    Logger().d("상태 : ${state?.boardKeywordList}");
+    Logger().d("상태 : ${state?.bookKeywordList}");
+
+>>>>>>> dev:lib/ui/pages/search/search_result_page/widgets/view_model/search_main_view_model.dart
   }
 }
 
