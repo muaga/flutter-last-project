@@ -63,9 +63,9 @@ class _PostWriteBookRecommendPageState
                 }
               },
               child: CustomGridBookCard(
-                title: book.title,
-                writer: book.writer,
-                picUrl: book.picUrl,
+                title: books[index].title,
+                writer: books[index].writer,
+                picUrl: books[index].picUrl,
               ),
             );
           },

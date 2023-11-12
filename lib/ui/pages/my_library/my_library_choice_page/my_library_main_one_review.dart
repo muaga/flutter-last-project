@@ -53,9 +53,15 @@ class _MyLibraryOneReview extends State<MyLibraryOneReview> {
                               ReplyWriteAndListPage(bookId: bookId)));
                 },
                 child: CustomGridBookCard(
+<<<<<<< HEAD
                   title: book.title,
                   writer: book.writer,
                   picUrl: book.picUrl,
+=======
+                  title: books[index].title,
+                  writer: books[index].writer,
+                  picUrl: books[index].picUrl,
+>>>>>>> dev
                 ),
               );
             },

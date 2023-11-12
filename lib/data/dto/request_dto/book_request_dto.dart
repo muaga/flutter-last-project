@@ -5,7 +5,7 @@ class BookReqDTO {
   BookReqDTO({required this.bookCategoryId, required this.alignment});
 
   Map<String, dynamic> toJson() => {
-        "bookCategowryId": bookCategoryId,
+        "bookCategoryId": bookCategoryId,
         "alignment": alignment,
       };
 }

@@ -3,7 +3,6 @@ import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/repository/post_repository.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 
 class FeedMainModel {
   final List<BoardDTO> boardList;

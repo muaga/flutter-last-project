@@ -5,13 +5,11 @@ import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/repository/book_repository.dart';
 import 'package:flutter_blog/ui/pages/search/search_category_book_list_page/widgets/view_model/search_category_book_list_view_model.dart';
 import 'package:flutter_blog/ui/pages/search/search_result_page/widgets/view_model/search_main_view_model.dart';
+import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/widgets/view_model/one_month_press_book_list_view_model.dart';
 import 'package:logger/logger.dart';
 
 void main() async {
   // await fetch(BookRequestDTO(bookCategowryId: 1, alignment: "ranking"));
-  // await notifyInit(BookCategoryReqDTO(
-  //     bookCategoryId: 1, alignment: "ranking", minusMonths: 12));
-  await notifyInit2(BookSearchReqDTO(keyword: "힐링"));
 }
 
 /// TODO : 통신 테스트
@@ -34,12 +32,24 @@ void main() async {
 // Logger().d(model.bookDetailReplyList[2]);
 // Logger().d(model.bookId);
 
-Future<void> fetch() async {
-  try {
-    final response = await dio.get("/book/detail/1");
-    Logger().d(response.data);
-    // BookDetailModel model = BookDetailModel.fromJson(response.data);
-  } catch (e) {}
+// 책 한달 이내 출간된 책 목록보기
+Future<void> fetchBookMonthList(BookReqDTO bookReqDTO) async {
+  // 통신
+  Response<dynamic> response =
+      await dio.post("/book/monthList", data: bookReqDTO.toJson());
+  // Logger().d(response);
+
+  // 파싱
+  ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+  // Logger().d(responseDTO);
+
+  OneMonthPressBookListModel model =
+      OneMonthPressBookListModel.fromJson(responseDTO.data);
+  List<BookListDTO>? bookList = model.bookList;
+
+  for (BookListDTO book in bookList!) {
+    Logger().d(book.bookTitle);
+  }
 }
 
 // BookCategory category = BookCategory.fromJson(model.bookCategory);
