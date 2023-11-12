@@ -21,7 +21,7 @@ class SessionUser {
   SessionUser({this.user, this.jwt, this.isLogin = false});
 
   /// fetchJoin
-  Future<void> join(JoinRequestDTO joinReqDTO) async {
+  Future<void> join(JoinReqDTO joinReqDTO) async {
     // 통신 코드
     ResponseDTO responseDTO = await UserRepository().fetchJoin(joinReqDTO);
 
@@ -35,7 +35,7 @@ class SessionUser {
   }
 
   /// fetchLogin
-  Future<void> login(LoginRequestDTO loginReqDTO) async {
+  Future<void> login(LoginReqDTO loginReqDTO) async {
     // 통신 코드
     ResponseDTO responseDTO = await UserRepository().fetchLogin(loginReqDTO);
 
@@ -72,6 +72,14 @@ class SessionUser {
       ScaffoldMessenger.of(mContext!)
           .showSnackBar(SnackBar(content: Text(responseDTO.msg)));
     }
+  }
+
+  Future<void> logout() async {
+    this.user = null;
+    this.jwt = null;
+    this.isLogin = false;
+    await secureStorage.delete(key: "jwt");
+    Logger().d("세션 종료 및 디바이스 JWT 삭제");
   }
 }
 

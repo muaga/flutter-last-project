@@ -4,11 +4,13 @@ import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/data/model/book.dart';
 
 class CustomGridBookCard extends StatelessWidget {
-  final Book? book;
-  const CustomGridBookCard({this.book});
+  final String picUrl;
+  final String title;
+  final String writer;
+  const CustomGridBookCard(
+      {required this.picUrl, required this.title, required this.writer});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class CustomGridBookCard extends StatelessWidget {
       children: [
         Expanded(
           child: CachedNetworkImage(
-            imageUrl: dio.options.baseUrl + "/images/${book?.picUrl ?? ""}",
+            imageUrl: dio.options.baseUrl + "/images/${picUrl}",
             fit: BoxFit.cover,
             placeholder: (context, url) => CircularProgressIndicator(
               strokeWidth: 5,
@@ -32,14 +34,14 @@ class CustomGridBookCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                book?.title ?? "",
+                title,
                 style: subTitle3(),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis, // text ...
               ),
               SizedBox(height: gapSmall),
               Text(
-                book?.writer ?? "",
+                writer,
                 style: body4(mColor: kFontGray),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis, // text ...

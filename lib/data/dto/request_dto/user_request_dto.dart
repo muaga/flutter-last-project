@@ -17,13 +17,13 @@
 //   "created": createdAt,
 // };
 
-class JoinRequestDTO {
+class JoinReqDTO {
   final String username;
   final String email;
   final String password;
   final String nickname; // 닉네임
 
-  JoinRequestDTO(
+  JoinReqDTO(
       {required this.username,
       required this.email,
       required this.password,
@@ -42,11 +42,11 @@ class JoinRequestDTO {
   }
 }
 
-class LoginRequestDTO {
+class LoginReqDTO {
   final String username;
   final String password;
 
-  LoginRequestDTO({required this.username, required this.password});
+  LoginReqDTO({required this.username, required this.password});
 
   Map<String, dynamic> toJson() => {
         "username": username,
@@ -54,11 +54,11 @@ class LoginRequestDTO {
       };
 }
 
-class PaymentRequestDTO {
+class PaymentReqDTO {
   final int userId;
   final String pay;
 
-  PaymentRequestDTO({required this.userId, required this.pay});
+  PaymentReqDTO({required this.userId, required this.pay});
 
   Map<String, dynamic> toJson() => {
         "userId": userId,

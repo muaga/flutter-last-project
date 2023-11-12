@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/model/board.dart';
-import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
+import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/view_model/book_detail_view_model.dart';
 import 'package:flutter_blog/ui/pages/custom/post_detail_page/widgets/form/post_detail_content.dart';
 import 'package:flutter_blog/ui/pages/custom/post_detail_page/widgets/form/post_detail_like_form.dart';
 import 'package:flutter_blog/ui/pages/custom/post_detail_page/widgets/form/post_detail_one_review_form.dart';
@@ -33,7 +33,7 @@ class PostDetailBody extends ConsumerWidget {
         children: [
           PostDetailTitle(board.title),
           SizedBox(height: gapXlarge),
-          PostDetailWriter(userId: board.userId, createdAt: board.createdAt),
+          PostDetailWriter(userId: board.userId),
           SizedBox(height: gapLarge),
           CustomThinLine(),
           SizedBox(height: gapLarge),
@@ -49,7 +49,7 @@ class PostDetailBody extends ConsumerWidget {
                 SizedBox(height: gapLarge),
                 Container(
                   width: getScreenWidth(context) / 3,
-                  height: getScreenWidth(context) * 0.5,
+                  height: getScreenWidth(context) * 0.7,
                   child: PostWriteRecommendBookCard(
                     bookPicUrl: detailBook!.bookPicUrl,
                     bookTitle: detailBook!.bookTitle,

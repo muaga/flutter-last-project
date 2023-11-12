@@ -135,8 +135,8 @@ class BookDetailViewModel extends StateNotifier<BookDetailModel?> {
         bookDetailReplyList: model.bookDetailReplyList);
   }
 
-  // 북마크 등록
-  Future<void> bookLikeWrite(BookLikeRequestDTO requestDTO) async {
+  // 북 스크랩 등록
+  Future<void> bookLikeWrite(BookLikeReqDTO requestDTO) async {
     SessionUser sessionUser = ref.read(sessionStore);
 
     // BookLikeRequestDTO와 sessionUser.jwt를 fetchBookLikeWrite 메서드로 전달
@@ -166,24 +166,7 @@ class BookDetailViewModel extends StateNotifier<BookDetailModel?> {
         review: model.review,
         bookDetailReplyList: model.bookDetailReplyList);
   }
-
-  // 북마크 삭제
-  // Future<void> bookLikeDelete() async {
-  //   SessionUser sessionUser = ref.read(sessionStore);
-  //   ResponseDTO responseDTO =
-  //       await BookLikeRepository().fetchBookLikeDelete(sessionUser.jwt!);
-  //
-  //   // 데이터 갱신
-  //   if (responseDTO.code == 1) {
-  //     this.state?.bookLike = 1;
-  //     // 2 => 데이터 존재
-  //   }
-  // }
 }
-
-// 댓글 등록
-
-// 댓글 삭제
 
 final bookDetailProvider =
     StateNotifierProvider.family<BookDetailViewModel, BookDetailModel?, int>(

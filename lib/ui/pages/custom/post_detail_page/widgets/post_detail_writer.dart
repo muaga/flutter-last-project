@@ -10,9 +10,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class PostDetailWriter extends ConsumerWidget {
   // TODO : userId로 user정보 찾기
   final int userId;
-  final String createdAt;
+  // final String createdAt;
 
-  const PostDetailWriter({required this.userId, required this.createdAt});
+  const PostDetailWriter({required this.userId});
+  //, required this.createdAt
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -43,7 +44,7 @@ class PostDetailWriter extends ConsumerWidget {
                       style: subTitle3(),
                     ),
                     Text(
-                      createdAt,
+                      "createdAt",
                       style: body2(mFontWeight: FontWeight.normal),
                     ),
                   ],

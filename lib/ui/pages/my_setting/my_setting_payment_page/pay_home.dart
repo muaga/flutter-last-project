@@ -52,8 +52,8 @@ class PayHomePage extends ConsumerWidget {
       /* [필수입력] 콜백 함수 */
       callback: (Map<String, String> result) async {
         if (result['imp_success'] == 'true') {
-          PaymentRequestDTO requestDTO =
-              PaymentRequestDTO(userId: session.user!.id, pay: name);
+          PaymentReqDTO requestDTO =
+              PaymentReqDTO(userId: session.user!.id, pay: name);
           Logger().d("requestDTO.userId  ${requestDTO.userId}");
           ResponseDTO responseDTO =
               await paymentRepository().fetchPayment(requestDTO);

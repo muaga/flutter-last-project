@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 
 class CustomBookImage extends StatelessWidget {
@@ -16,7 +17,7 @@ class CustomBookImage extends StatelessWidget {
         height: imageHeight,
         width: imageWidth,
         child: CachedNetworkImage(
-          imageUrl: "http://192.168.0.40:8080/images/${picUrl}",
+          imageUrl: dio.options.baseUrl + "/images/${picUrl}",
           fit: BoxFit.cover,
           placeholder: (context, url) => CircularProgressIndicator(
             strokeWidth: 5,

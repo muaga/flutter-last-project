@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/data/model/board.dart';
 import 'package:flutter_blog/ui/widgets/bottom_sheet/custom_write_bottom_sheet.dart';
 import 'package:flutter_blog/ui/widgets/form/custom_post_list_form.dart';
 
@@ -26,7 +25,7 @@ class FeedMainBody extends StatelessWidget {
                 child: CustomWriteBottomSheet()),
           ],
         ),
-        SliverFillRemaining(child: CustomPostListForm(boards: boards))
+        SliverFillRemaining(child: CustomPostListForm())
       ],
     );
   }

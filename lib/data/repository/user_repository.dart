@@ -9,7 +9,7 @@ import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:logger/logger.dart';
 
 class UserRepository {
-  Future<ResponseDTO> fetchJoin(JoinRequestDTO requestDTO) async {
+  Future<ResponseDTO> fetchJoin(JoinReqDTO requestDTO) async {
     Logger().d("fetchJoin", requestDTO);
 
     // ★ 통신은 무조건 try 해야 한다.
@@ -27,7 +27,7 @@ class UserRepository {
   }
 
   /// fetchLogin
-  Future<ResponseDTO> fetchLogin(LoginRequestDTO requestDTO) async {
+  Future<ResponseDTO> fetchLogin(LoginReqDTO requestDTO) async {
     try {
       final response = await dio.post("/login", data: requestDTO.toJson());
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
