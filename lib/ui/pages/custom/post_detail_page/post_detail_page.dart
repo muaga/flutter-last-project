@@ -3,7 +3,7 @@ import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/_core/constants/move.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:flutter_blog/ui/pages/custom/post_detail_page/widgets/body/post_detail_body.dart';
-import 'package:flutter_blog/ui/pages/custom/post_detail_page/widgets/post_detail_page_view_model.dart';
+import 'package:flutter_blog/ui/pages/custom/post_detail_page/widgets/view_model/post_detail_page_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PostDetailPage extends ConsumerWidget {
