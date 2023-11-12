@@ -51,6 +51,8 @@ class OneMonthPressBookListViewModel
   Future<void> notifyInit(BookMonthReqDTO bookMonthReqDTO) async {
     ResponseDTO responseDTO =
         await BookRepository().fetchMonthBookList(bookMonthReqDTO);
+    Logger().d("responseDTO : ${responseDTO}");
+
     OneMonthPressBookListModel model = responseDTO.data;
     state = OneMonthPressBookListModel(
         bookCategoryId: model.bookCategoryId,

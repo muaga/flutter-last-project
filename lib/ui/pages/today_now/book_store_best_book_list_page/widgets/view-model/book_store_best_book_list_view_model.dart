@@ -17,12 +17,17 @@ class BookStoreBestBookListModel {
       this.category});
 
   factory BookStoreBestBookListModel.fromJson(Map<String, dynamic> json) {
-    List<dynamic> temp1 = json["bookList"];
-    List<BookListDTO> bookList =
-        temp1.map((e) => BookListDTO.fromJson(e)).toList();
-    List<dynamic> temp2 = json["category"];
-    List<CategoryDTO> category =
-        temp2.map((e) => CategoryDTO.fromJson(e)).toList();
+    List<dynamic>? temp1 = json["bookList"];
+    List<BookListDTO> bookList = [];
+    if (temp1 != null) {
+      bookList = temp1.map((e) => BookListDTO.fromJson(e)).toList();
+    }
+
+    List<dynamic>? temp2 = json["category"];
+    List<CategoryDTO> category = [];
+    if (temp2 != null) {
+      category = temp2.map((e) => CategoryDTO.fromJson(e)).toList();
+    }
 
     return BookStoreBestBookListModel(
         bookCount: json["bookCount"],
@@ -33,10 +38,10 @@ class BookStoreBestBookListModel {
 }
 
 class CategoryDTO {
-  final int categoryId;
-  final String categoryName;
+  int? categoryId;
+  String? categoryName;
 
-  CategoryDTO({required this.categoryId, required this.categoryName});
+  CategoryDTO({this.categoryId, this.categoryName});
 
   CategoryDTO.fromJson(Map<String, dynamic> json)
       : categoryId = json["categoryId"],
@@ -44,16 +49,12 @@ class CategoryDTO {
 }
 
 class BookListDTO {
-  final int bookId;
-  final String bookPicUrl;
-  final String bookTitle;
-  final String bookWriter;
+  int? bookId;
+  String? bookPicUrl;
+  String? bookTitle;
+  String? bookWriter;
 
-  BookListDTO(
-      {required this.bookId,
-      required this.bookPicUrl,
-      required this.bookTitle,
-      required this.bookWriter});
+  BookListDTO({this.bookId, this.bookPicUrl, this.bookTitle, this.bookWriter});
 
   BookListDTO.fromJson(Map<String, dynamic> json)
       : bookId = json["bookId"],
@@ -70,6 +71,8 @@ class BookStoreBestBookListViewModel
   Future<void> notifyInit(BookBestReqDTO bookBestReqDTO) async {
     ResponseDTO responseDTO =
         await BookRepository().fetchBestBookList(bookBestReqDTO);
+    Logger().d("responseDTO : ${responseDTO}");
+
     BookStoreBestBookListModel model = responseDTO.data;
     state = BookStoreBestBookListModel(
         bookCategoryId: model.bookCategoryId,

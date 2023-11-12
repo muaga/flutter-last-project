@@ -29,6 +29,7 @@ class _BookStoreBestCategoryFormState
   void changeBookList(int categoryId) {
     BookBestReqDTO bookBestReqDTO =
         BookBestReqDTO(bookCategoryId: categoryId, alignment: alignment);
+    Logger().d("bookBestReqDTO = ${bookBestReqDTO.bookCategoryId}");
     BookStoreBestBookListModel? model =
         ref.read(bookBestProvider(bookBestReqDTO));
     Logger().d("model = ${model}");
