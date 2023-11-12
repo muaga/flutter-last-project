@@ -8,6 +8,7 @@ import 'package:flutter_blog/ui/pages/search/search_result_page/widgets/view_mod
 import 'package:flutter_blog/ui/pages/today_now/book_store_best_book_list_page/widgets/view-model/book_store_best_book_list_view_model.dart';
 import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/widgets/view-model/one_month_press_book_list_view_model.dart';
 
+
 // 통신 & 파싱
 class BookRepository {
   // 책 상세보기
@@ -65,6 +66,7 @@ class BookRepository {
           BookStoreBestBookListModel.fromJson(responseDTO.data);
 
       responseDTO.data = model;
+
       return responseDTO;
     } catch (e) {
       return ResponseDTO(-1, "책 목록 불러오기 실패", null);

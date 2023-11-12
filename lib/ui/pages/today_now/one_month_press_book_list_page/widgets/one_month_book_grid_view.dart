@@ -3,14 +3,13 @@ import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.dart';
 import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/widgets/view-model/one_month_press_book_list_view_model.dart';
 import 'package:flutter_blog/ui/widgets/custom_grid_book_card.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class OneMonthBookGridView extends ConsumerWidget {
+class OneMonthBookGridView extends StatelessWidget {
   List<BookListDTO> bookList;
   OneMonthBookGridView({required this.bookList});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Container(
       width: getScreenWidth(context),
       height: getScreenHeight(context),
@@ -22,7 +21,7 @@ class OneMonthBookGridView extends ConsumerWidget {
           crossAxisSpacing: 10,
           childAspectRatio: 1 / 2,
         ),
-        itemCount: bookList?.length,
+        itemCount: bookList.length,
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
@@ -41,6 +40,7 @@ class OneMonthBookGridView extends ConsumerWidget {
               picUrl: bookList?[index].bookPicUrl,
             ),
           );
+
         },
         // 더 많은 리스트 아이템을 추가할 수 있습니다.
       ),
