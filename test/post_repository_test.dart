@@ -1,14 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/request_dto/post_request_dto.dart';
-import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
-import 'package:flutter_blog/data/repository/post_repository.dart';
-import 'package:flutter_blog/ui/pages/feed/feed_main_page/widgets/feed_main_view_model.dart';
 import 'package:logger/logger.dart';
 
 void main() async {
-  await fetch(PostSaveReqDTO(
-      boardTitle: "추천합니다", content: "이 글 너무 좋아여", userId: 1, bookId: 1));
+  // await fetch(PostSaveReqDTO(
+  //     boardTitle: "추천합니다", content: "이 글 너무 좋아여", userId: 1, bookId: 1));
 
   // await notifyInit();
 }
@@ -63,4 +60,3 @@ Future<void> fetch(PostDeleteReqDTO dto) async {
 //   FeedMainModel model = responseDTO.data;
 //   Logger().d("model : ${model.boardList[0].boardTitle}");
 // }
-

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/ui/pages/search/search_result_page/search_result_page.dart';
-import 'package:logger/logger.dart';
 
 class SearchMainSuggestKeyword extends StatelessWidget {
   // List<String> keyword;
@@ -8,13 +7,7 @@ class SearchMainSuggestKeyword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> suggestKeyword = [
-      "무라카미",
-      "힐링이 필요해",
-      "미야자키 하야오",
-      "카테고리 철학",
-      "최재호"
-    ];
+    List<String> suggestKeyword = ["무라카미", "힐링", "미야자키 하야오", "칠마선문", "최재호"];
     return SliverToBoxAdapter(
       child: Padding(
         padding: EdgeInsets.all(16),

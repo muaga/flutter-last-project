@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/ui/pages/search/search_result_page/search_result_page.dart';
-import 'package:logger/logger.dart';
 
 class CustomTextFormFieldSearchBar extends StatelessWidget {
   CustomTextFormFieldSearchBar({super.key, this.searchText});
@@ -31,8 +30,6 @@ class CustomTextFormFieldSearchBar extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) => SearchResultPage(searchText: value)));
-          Logger().d("SearchResultPage로 이동");
-          // Logger().d("searchText : ${value}");
         },
       ),
     );
