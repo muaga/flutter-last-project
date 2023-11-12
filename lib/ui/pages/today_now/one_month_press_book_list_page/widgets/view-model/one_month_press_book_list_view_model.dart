@@ -8,9 +8,11 @@ import 'package:logger/logger.dart';
 class OneMonthPressBookListModel {
   int bookCount;
   int bookCategoryId;
-  List<BookListDTO>? bookList;
+  List<BookListDTO> bookList;
   OneMonthPressBookListModel(
-      {required this.bookCount, required this.bookCategoryId, this.bookList});
+      {required this.bookCount,
+      required this.bookCategoryId,
+      required this.bookList});
 
   factory OneMonthPressBookListModel.fromJson(Map<String, dynamic> json) {
     List<dynamic> temp = json["bookList"];
@@ -46,9 +48,12 @@ class BookListDTO {
 /// 2. 창고
 class OneMonthPressBookListViewModel
     extends StateNotifier<OneMonthPressBookListModel?> {
-  OneMonthPressBookListViewModel(super._state);
+  OneMonthPressBookListViewModel(super._state, this.ref);
 
-  Future<void> notifyInit(BookMonthReqDTO bookMonthReqDTO) async {
+  Ref ref;
+
+  Future<OneMonthPressBookListModel> notifyInit(
+      BookMonthReqDTO bookMonthReqDTO) async {
     ResponseDTO responseDTO =
         await BookRepository().fetchMonthBookList(bookMonthReqDTO);
     OneMonthPressBookListModel model = responseDTO.data;
@@ -59,6 +64,11 @@ class OneMonthPressBookListViewModel
     Logger().d("상태 : ${state?.bookCategoryId}");
     Logger().d("상태 : ${state?.bookCount}");
     Logger().d("상태 : ${state?.bookList}");
+
+    return OneMonthPressBookListModel(
+        bookCount: model.bookCount,
+        bookCategoryId: model.bookCategoryId,
+        bookList: model.bookList);
   }
 }
 
@@ -67,5 +77,5 @@ final oneMonthPressProvider = StateNotifierProvider.family<
     OneMonthPressBookListViewModel,
     OneMonthPressBookListModel?,
     BookMonthReqDTO>((ref, bookMonthReqDTO) {
-  return OneMonthPressBookListViewModel(null)..notifyInit(bookMonthReqDTO);
+  return OneMonthPressBookListViewModel(null, ref)..notifyInit(bookMonthReqDTO);
 });
