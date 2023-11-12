@@ -1,13 +1,19 @@
 import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
-import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/pages/today_story/story_main_page/widgets/recommend/story_category_slider.dart';
+import 'package:flutter_blog/ui/pages/today_story/story_main_page/widgets/view_model/today_story_view_model.dart';
 import 'package:flutter_blog/ui/widgets/button/custom_category_button.dart';
 
 class StoryRecommendForm extends StatefulWidget {
-  StoryRecommendForm({super.key, required this.books});
-  List<Book> books;
+  StoryRecommendForm(
+      {super.key,
+      required this.loveBookList,
+      required this.fanBookList,
+      required this.normalBookList});
+  final List<StoryBookDTO> loveBookList;
+  final List<StoryBookDTO> fanBookList;
+  final List<StoryBookDTO> normalBookList;
 
   @override
   State<StoryRecommendForm> createState() => _StoryRecommendFormState();
@@ -76,6 +82,7 @@ class _StoryRecommendFormState extends State<StoryRecommendForm> {
                     storyCategoryId: 1,
                     current: _bookCurrent,
                     imageController: _carouselController,
+                    bookList: widget.loveBookList,
                     funPageChanged: (index, reason) {
                       setState(() {
                         _bookCurrent = index;
@@ -86,6 +93,7 @@ class _StoryRecommendFormState extends State<StoryRecommendForm> {
                     storyCategoryId: 2,
                     current: _bookCurrent,
                     imageController: _carouselController,
+                    bookList: widget.fanBookList,
                     funPageChanged: (index, reason) {
                       setState(() {
                         _bookCurrent = index;
@@ -96,6 +104,7 @@ class _StoryRecommendFormState extends State<StoryRecommendForm> {
                     storyCategoryId: 3,
                     current: _bookCurrent,
                     imageController: _carouselController,
+                    bookList: widget.normalBookList,
                     funPageChanged: (index, reason) {
                       setState(() {
                         _bookCurrent = index;

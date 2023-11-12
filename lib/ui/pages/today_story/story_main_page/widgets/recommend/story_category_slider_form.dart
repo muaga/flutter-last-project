@@ -4,13 +4,13 @@ import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.dart';
+import 'package:flutter_blog/ui/pages/today_story/story_main_page/widgets/view_model/today_story_view_model.dart';
 
 class StoryCategorySliderForm extends StatelessWidget {
   const StoryCategorySliderForm({super.key, required this.book});
 
-  final Book book;
+  final StoryBookDTO book;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class StoryCategorySliderForm extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => BookDetailPage(bookId: book.id)));
+                  builder: (context) => BookDetailPage(bookId: book.bookId)));
         },
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -29,15 +29,15 @@ class StoryCategorySliderForm extends StatelessWidget {
             ClipRRect(
               child: Image(
                 image: CachedNetworkImageProvider(
-                  dio.options.baseUrl + "/images/${book.picUrl}",
+                  dio.options.baseUrl + "/images/${book.bookPicUrl}",
                 ),
                 height: getScreenWidth(context) * 0.5,
               ),
             ),
             SizedBox(height: gapMedium),
-            Text("${book.title}", style: subTitle3()),
+            Text("${book.bookTitle}", style: subTitle3()),
             Text(
-              "${book.writer}",
+              "${book.bookWriter}",
               style: body2(mColor: kFontGray, mFontWeight: FontWeight.normal),
             )
           ],

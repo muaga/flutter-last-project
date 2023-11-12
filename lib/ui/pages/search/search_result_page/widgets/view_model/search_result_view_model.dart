@@ -3,7 +3,6 @@ import 'package:flutter_blog/data/dto/request_dto/book_request_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/repository/book_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 
 class SearchResultModel {
   String keyword;
@@ -76,9 +75,12 @@ class BoardKeywordDTO {
 
 // 창고
 class SearchResultViewModel extends StateNotifier<SearchResultModel?> {
-  SearchResultViewModel(super._state);
+  SearchResultViewModel(super._state, this.ref);
 
-  Future<void> notifyInit(BookSearchReqDTO bookSearchReqDTO) async {
+  Ref ref;
+
+  Future<SearchResultModel> notifyInit(
+      BookSearchReqDTO bookSearchReqDTO) async {
     ResponseDTO responseDTO =
         await BookRepository().fetchSearchBookOrBoard(bookSearchReqDTO);
     SearchResultModel model = responseDTO.data;
@@ -88,21 +90,17 @@ class SearchResultViewModel extends StateNotifier<SearchResultModel?> {
         bookCount: model.bookCount,
         boardKeywordList: model.boardKeywordList,
         bookKeywordList: model.bookKeywordList);
-    Logger().d(model.keyword);
-    Logger().d(model.boardCount);
-    Logger().d(model.bookCount);
-    Logger().d(model.boardKeywordList);
-    Logger().d(model.bookKeywordList);
-    Logger().d("상태 : ${state?.keyword}");
-    Logger().d("상태 : ${state?.boardCount}");
-    Logger().d("상태 : ${state?.bookCount}");
-    Logger().d("상태 : ${state?.boardKeywordList}");
-    Logger().d("상태 : ${state?.bookKeywordList}");
+    return SearchResultModel(
+        keyword: model.keyword,
+        bookCount: model.bookCount,
+        boardCount: model.boardCount,
+        bookKeywordList: model.bookKeywordList,
+        boardKeywordList: model.boardKeywordList);
   }
 }
 
 // 창고 관리자
 final searchProvider = StateNotifierProvider.family<SearchResultViewModel,
     SearchResultModel?, BookSearchReqDTO>((ref, bookSearchReqDTO) {
-  return SearchResultViewModel(null)..notifyInit(bookSearchReqDTO);
+  return SearchResultViewModel(null, ref)..notifyInit(bookSearchReqDTO);
 });

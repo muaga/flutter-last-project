@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.dart';
-import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/widgets/view-model/one_month_press_book_list_view_model.dart';
+import 'package:flutter_blog/ui/pages/today_story/story_main_page/widgets/view_model/today_story_view_model.dart';
 
-class NowBookCard extends StatelessWidget {
-  final BookListDTO? book;
-  const NowBookCard({this.book});
+class StoryBookCard extends StatelessWidget {
+  final StoryBookDTO? book;
+  const StoryBookCard({this.book});
 
   @override
   Widget build(BuildContext context) {
