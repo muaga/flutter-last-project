@@ -6,6 +6,6 @@ class BookStoreBestBookListBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomCategoryForm();
+    return BookStoreBestCategoryForm();
   }
 }

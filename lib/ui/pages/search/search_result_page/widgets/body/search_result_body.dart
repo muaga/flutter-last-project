@@ -19,7 +19,6 @@ class SearchResultBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-<<<<<<< HEAD
     return FutureBuilder<SearchResultModel>(
       future: fetchModel(ref), // 비동기 함수 호출
       builder: (context, snapshot) {
@@ -29,13 +28,6 @@ class SearchResultBody extends ConsumerWidget {
         } else if (snapshot.hasError) {
           // 에러 발생 시의 화면
           Logger().d(snapshot.error);
-=======
-    BookSearchReqDTO bookSearchReqDTO = BookSearchReqDTO(keyword: searchText);
-    Logger().d("bookSearchReqDTO : ${bookSearchReqDTO.keyword}");
-
-    SearchResultModel? model = ref.read(searchProvider(bookSearchReqDTO));
-    Logger().d("model : ${model}");
->>>>>>> dev
 
           return Text('Error: ${snapshot.error}');
         } else {
