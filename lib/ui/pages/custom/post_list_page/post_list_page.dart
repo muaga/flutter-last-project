@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/ui/pages/custom/post_list_page/widgets/post_list_body/post_list_body.dart';
-import 'package:flutter_blog/ui/pages/custom/post_list_page/widgets/post_list_page_view_model.dart';
+import 'package:flutter_blog/ui/pages/custom/post_list_page/widgets/view_model/post_list_page_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 

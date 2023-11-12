@@ -7,12 +7,7 @@ import 'package:flutter_blog/ui/pages/search/search_category_book_list_page/widg
 import 'package:flutter_blog/ui/pages/search/search_result_page/widgets/view_model/search_main_view_model.dart';
 import 'package:logger/logger.dart';
 
-void main() async {
-  // await fetch(BookRequestDTO(bookCategowryId: 1, alignment: "ranking"));
-  // await notifyInit(BookCategoryReqDTO(
-  //     bookCategoryId: 1, alignment: "ranking", minusMonths: 12));
-  await notifyInit2(BookSearchReqDTO(keyword: "힐링"));
-}
+void main() async {}
 
 /// TODO : 통신 테스트
 // Future<void> fetch(BookRequestDTO dto) async {
@@ -33,14 +28,6 @@ void main() async {
 // Logger().d(model.bookDetailReplyList[1]);
 // Logger().d(model.bookDetailReplyList[2]);
 // Logger().d(model.bookId);
-
-Future<void> fetch() async {
-  try {
-    final response = await dio.get("/book/detail/1");
-    Logger().d(response.data);
-    // BookDetailModel model = BookDetailModel.fromJson(response.data);
-  } catch (e) {}
-}
 
 // BookCategory category = BookCategory.fromJson(model.bookCategory);
 // Logger().d(responseDTO.code);
@@ -73,11 +60,4 @@ Future<void> fetchSearchBookOrBoard(BookSearchReqDTO bookSearchReqDTO) async {
   SearchResultModel model = SearchResultModel.fromJson(responseDTO.data);
   Logger().d(model.keyword);
   Logger().d(model.bookKeywordList);
-}
-
-Future<void> notifyInit2(BookSearchReqDTO bookSearchReqDTO) async {
-  ResponseDTO responseDTO =
-      await BookRepository().fetchSearchBookOrBoard(bookSearchReqDTO);
-  SearchResultModel model = responseDTO.data;
-  Logger().d(model.keyword);
 }

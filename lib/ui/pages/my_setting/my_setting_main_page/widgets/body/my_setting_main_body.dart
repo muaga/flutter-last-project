@@ -3,14 +3,17 @@ import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/move.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
+import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_main_page/widgets/form/my_setting_main_member_type_form.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_main_page/widgets/form/my_setting_main_no_sub_scription_form.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_main_page/widgets/form/my_setting_main_yes_sub_scription_form.dart';
 import 'package:flutter_blog/ui/widgets/button/custom_radius_color_button.dart';
 import 'package:flutter_blog/ui/widgets/form/custom_title_and_forword_form.dart';
 import 'package:flutter_blog/ui/widgets/form/custom_title_gray_form.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
-class MySettingMainBody extends StatelessWidget {
+class MySettingMainBody extends ConsumerWidget {
   const MySettingMainBody({Key? key});
 
   /// 구독권의 유무
@@ -18,7 +21,7 @@ class MySettingMainBody extends StatelessWidget {
   final bool subScription = false;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return ListView(
       children: [
         Padding(
@@ -61,7 +64,11 @@ class MySettingMainBody extends StatelessWidget {
         Padding(
             padding: const EdgeInsets.all(gapMain),
             child: CustomRadiusColorButton(
-              funPageRoute: () {},
+              funPageRoute: () {
+                ref.read(sessionStore).logout();
+                Logger().d("로그아웃 완료");
+                Navigator.popAndPushNamed(context, Move.LoginPage);
+              },
               buttonText: "로그아웃",
               textColor: kFontWhite,
               borderRadius: 5,

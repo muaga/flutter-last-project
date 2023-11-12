@@ -3,12 +3,12 @@ import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_comment.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_like.dart';
-import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/form/book_detail_data_form.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/form/book_detail_info_form.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/form/book_detail_introduce_form.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/form/book_detail_one_review_form.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/form/book_detail_sub_info_form.dart';
+import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/view_model/book_detail_view_model.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thick_line.dart';
 
 class BookDetailBody extends StatelessWidget {
