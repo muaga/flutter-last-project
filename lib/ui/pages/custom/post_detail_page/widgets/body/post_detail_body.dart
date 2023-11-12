@@ -33,7 +33,7 @@ class PostDetailBody extends ConsumerWidget {
         children: [
           PostDetailTitle(board.title),
           SizedBox(height: gapXlarge),
-          PostDetailWriter(userId: board.userId),
+          PostDetailWriter(userId: board.userId, board: boardId),
           SizedBox(height: gapLarge),
           CustomThinLine(),
           SizedBox(height: gapLarge),

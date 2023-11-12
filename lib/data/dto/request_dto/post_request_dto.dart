@@ -35,3 +35,13 @@ class PostUpdateReqDTO {
         "userId": userId,
       };
 }
+
+class PostDeleteReqDTO {
+  final int boardId;
+  PostDeleteReqDTO(
+      {required this.boardId});
+
+  Map<String, dynamic> toJson() => {
+    "bookId": boardId,
+  };
+}

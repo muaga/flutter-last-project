@@ -8,13 +8,105 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
 class PostDetailModel {
-  Post post;
-  PostDetailModel(this.post);
+  late int boardId;
+  late int boardLikeCount;
+  late int boardReplCount;
+  late String boardTitle;
+  late String boardUserPicUrl;
+  late String boardUserNickname;
+  late String boardCreatedAt;
+  late String boardContent;
+  late int bookId;
+  late String bookPicUrl;
+  late String bookTitle;
+  late int boardReplyCount;
+  late List<BoardReplyDto> boardReplyDtOs;
+
+  PostDetailModel({
+    required this.boardId,
+    required this.boardLikeCount,
+    required this.boardReplCount,
+    required this.boardTitle,
+    required this.boardUserPicUrl,
+    required this.boardUserNickname,
+    required this.boardCreatedAt,
+    required this.boardContent,
+    required this.bookId,
+    required this.bookPicUrl,
+    required this.bookTitle,
+    required this.boardReplyCount,
+    required this.boardReplyDtOs,
+  });
+
+  factory PostDetailModel.fromJson(Map<String, dynamic> json) =>
+      PostDetailModel(
+        boardId: json["boardId"],
+        boardLikeCount: json["boardLikeCount"],
+        boardReplCount: json["boardReplCount"],
+        boardTitle: json["boardTitle"],
+        boardUserPicUrl: json["boardUserPicUrl"],
+        boardUserNickname: json["boardUserNickname"],
+        boardCreatedAt: json["boardCreatedAt"],
+        boardContent: json["boardContent"],
+        bookId: json["bookId"],
+        bookPicUrl: json["bookPicUrl"],
+        bookTitle: json["bookTitle"],
+        boardReplyCount: json["boardReplyCount"],
+        boardReplyDtOs: List<BoardReplyDto>.from(
+            json["boardReplyDTOs"].map((x) => BoardReplyDto.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "boardId": boardId,
+        "boardLikeCount": boardLikeCount,
+        "boardReplCount": boardReplCount,
+        "boardTitle": boardTitle,
+        "boardUserPicUrl": boardUserPicUrl,
+        "boardUserNickname": boardUserNickname,
+        "boardCreatedAt": boardCreatedAt,
+        "boardContent": boardContent,
+        "bookId": bookId,
+        "bookPicUrl": bookPicUrl,
+        "bookTitle": bookTitle,
+        "boardReplyCount": boardReplyCount,
+        "boardReplyDTOs":
+            List<dynamic>.from(boardReplyDtOs.map((x) => x.toJson())),
+      };
+}
+
+class BoardReplyDto {
+  final String replyUserPicUrl;
+  final String replyUserNickname;
+  final DateTime replyCreatedAt;
+  final String replyContent;
+
+  BoardReplyDto({
+    required this.replyUserPicUrl,
+    required this.replyUserNickname,
+    required this.replyCreatedAt,
+    required this.replyContent,
+  });
+
+  factory BoardReplyDto.fromJson(Map<String, dynamic> json) => BoardReplyDto(
+        replyUserPicUrl: json["replyUserPicUrl"],
+        replyUserNickname: json["replyUserNickname"],
+        replyCreatedAt: DateTime.parse(json["replyCreatedAt"]),
+        replyContent: json["replyContent"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "replyUserPicUrl": replyUserPicUrl,
+        "replyUserNickname": replyUserNickname,
+        "replyCreatedAt":
+            "${replyCreatedAt.year.toString().padLeft(4, '0')}-${replyCreatedAt.month.toString().padLeft(2, '0')}-${replyCreatedAt.day.toString().padLeft(2, '0')}",
+        "replyContent": replyContent,
+      };
 }
 
 // 창고
 class PostDetailViewModel extends StateNotifier<PostDetailModel?> {
   PostDetailViewModel(super._state, this.ref);
+
   Ref ref;
 
   Future<void> notifyInit(int id) async {
@@ -24,14 +116,27 @@ class PostDetailViewModel extends StateNotifier<PostDetailModel?> {
     ResponseDTO responseDTO =
         await PostRepository().fetchPost(sessionUser.jwt!, id);
 
-    state = PostDetailModel(responseDTO.data);
+    PostDetailModel? model = state;
+    state = PostDetailModel(
+        boardId: model!.boardId,
+        boardLikeCount: model.boardLikeCount,
+        boardReplCount: model.boardReplCount,
+        boardTitle: model.boardTitle,
+        boardUserPicUrl: model.boardUserPicUrl,
+        boardUserNickname: model.boardUserPicUrl,
+        boardCreatedAt: model.boardCreatedAt,
+        boardContent: model.boardContent,
+        bookId: model.bookId,
+        bookPicUrl: model.bookPicUrl,
+        bookTitle: model.bookTitle,
+        boardReplyCount: model.boardReplyCount,
+        boardReplyDtOs: model.boardReplyDtOs);
   }
 }
 
 // 창고 관리자
 final postDetailProvider =
-    StateNotifierProvider.autoDispose<PostDetailViewModel, PostDetailModel?>(
-        (ref) {
-  int postId = ref.read(paramProvider).postDetailId!;
-  return PostDetailViewModel(null, ref)..notifyInit(postId);
+    StateNotifierProvider.family<PostDetailViewModel, PostDetailModel?, int>(
+        (ref, boardId) {
+  return PostDetailViewModel(null, ref)..notifyInit(boardId);
 });
