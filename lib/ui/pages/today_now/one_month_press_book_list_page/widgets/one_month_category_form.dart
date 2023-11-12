@@ -55,48 +55,48 @@ class _OneMonthCategoryFormState extends ConsumerState<OneMonthCategoryForm> {
                         index: 0,
                         pageIndex: _pageIndex,
                         onPress: () {
-                          changePage(0);
                           changeBookList(0);
+                          changePage(0);
                         }),
                     CustomCategoryButton(
                         label: "트렌드",
                         index: 1,
                         pageIndex: _pageIndex,
                         onPress: () {
-                          changePage(1);
                           changeBookList(1);
+                          changePage(1);
                         }),
                     CustomCategoryButton(
                         label: "라이프",
                         index: 2,
                         pageIndex: _pageIndex,
                         onPress: () {
-                          changePage(2);
                           changeBookList(2);
+                          changePage(2);
                         }),
                     CustomCategoryButton(
                         label: "힐링",
                         index: 3,
                         pageIndex: _pageIndex,
                         onPress: () {
-                          changePage(3);
                           changeBookList(3);
+                          changePage(3);
                         }),
                     CustomCategoryButton(
                         label: "지적교양",
                         index: 4,
                         pageIndex: _pageIndex,
                         onPress: () {
-                          changePage(4);
                           changeBookList(4);
+                          changePage(4);
                         }),
                     CustomCategoryButton(
                         label: "소설",
                         index: 5,
                         pageIndex: _pageIndex,
                         onPress: () {
-                          changePage(5);
                           changeBookList(5);
+                          changePage(5);
                         }),
                   ],
                 ),
