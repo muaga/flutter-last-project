@@ -5,7 +5,6 @@ import 'package:flutter_blog/ui/pages/search/search_category_book_list_page/widg
 import 'package:flutter_blog/ui/widgets/custom_grid_book_card.dart';
 
 class SearchCategoryBookGridView extends StatelessWidget {
-  // TODO 은혜 : 여기서 카테고리 Id로 알아오기
   final List<ByCategoryPage>? bookList;
   const SearchCategoryBookGridView({required this.bookList});
 
@@ -32,8 +31,6 @@ class SearchCategoryBookGridView extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) =>
                             BookDetailPage(bookId: bookId ?? 0)));
-
-                /// ?가 붙는 변수는 꼭 null일 때의 디폴트값을 명시해줄것
               },
               child: CustomGridBookCard(
                 picUrl: bookList![index].bookPicUrl,
