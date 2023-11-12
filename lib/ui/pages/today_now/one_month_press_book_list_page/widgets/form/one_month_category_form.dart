@@ -18,18 +18,26 @@ class _OneMonthCategoryFormState extends ConsumerState<OneMonthCategoryForm> {
   final String alignment = "ranking";
   late List<BookListDTO> bookList = [];
 
+  @override
+  void initState() {
+    super.initState();
+    changePage(0);
+    changeBookList(0); // 초기 페이지를 종합으로 설정
+  }
+
   void changePage(int index) {
     setState(() {
       _pageIndex = index;
     });
   }
 
-  void changeBookList(int categoryId) {
+  void changeBookList(int categoryId) async {
     BookMonthReqDTO bookMonthReqDTO =
         BookMonthReqDTO(bookCategoryId: categoryId, alignment: alignment);
-    OneMonthPressBookListModel? model =
-        ref.read(oneMonthPressProvider(bookMonthReqDTO));
-    Logger().d("model = ${model}");
+    OneMonthPressBookListModel? model = await ref
+        .read(oneMonthPressProvider(bookMonthReqDTO).notifier)
+        .notifyInit(bookMonthReqDTO);
+    Logger().d("이번에는 받아오자..! ${model}");
     if (model != null) {
       setState(() {
         bookList = model.bookList!;

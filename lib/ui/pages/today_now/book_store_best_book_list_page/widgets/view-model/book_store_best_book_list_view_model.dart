@@ -68,7 +68,8 @@ class BookStoreBestBookListViewModel
     extends StateNotifier<BookStoreBestBookListModel?> {
   BookStoreBestBookListViewModel(super._state);
 
-  Future<void> notifyInit(BookBestReqDTO bookBestReqDTO) async {
+  Future<BookStoreBestBookListModel> notifyInit(
+      BookBestReqDTO bookBestReqDTO) async {
     ResponseDTO responseDTO =
         await BookRepository().fetchBestBookList(bookBestReqDTO);
     Logger().d("responseDTO : ${responseDTO}");
@@ -83,6 +84,11 @@ class BookStoreBestBookListViewModel
     Logger().d("상태 : ${state?.bookCount}");
     Logger().d("상태 : ${state?.bookList}");
     Logger().d("상태 : ${state?.category}");
+
+    return BookStoreBestBookListModel(
+        bookCount: model.bookCount,
+        bookCategoryId: model.bookCategoryId,
+        bookList: model.bookList);
   }
 }
 
