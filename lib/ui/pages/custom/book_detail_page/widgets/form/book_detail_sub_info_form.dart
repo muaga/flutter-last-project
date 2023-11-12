@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_expandable_description.dart';
-import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
+import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/view_model/book_detail_view_model.dart';
 
 class BookDetailSubInfoForm extends StatelessWidget {
   const BookDetailSubInfoForm({

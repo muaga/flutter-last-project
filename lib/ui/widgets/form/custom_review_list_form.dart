@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
-import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
+import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/view_model/book_detail_view_model.dart';
 import 'package:flutter_blog/ui/widgets/custom_review_card.dart';
 import 'package:flutter_blog/ui/widgets/custom_review_insert.dart';
-import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
-import 'package:flutter_blog/ui/widgets/validation_guide/login_validation_guide.dart';
-import 'package:logger/logger.dart';
 
 class CustomReviewListForm extends StatefulWidget {
   final List<BookDetailReplyList>? replyList;

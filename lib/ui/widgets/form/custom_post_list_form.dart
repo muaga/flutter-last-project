@@ -4,12 +4,11 @@ import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
+import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/view_model/book_detail_view_model.dart';
 import 'package:flutter_blog/ui/pages/custom/post_detail_page/post_detail_page.dart';
 import 'package:flutter_blog/ui/pages/feed/feed_main_page/widgets/feed_main_view_model.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 
 class CustomPostListForm extends ConsumerWidget {
   const CustomPostListForm({super.key});
@@ -21,7 +20,6 @@ class CustomPostListForm extends ConsumerWidget {
     if (model != null) {
       List<BoardDTO> boardList = [];
       boardList = model.boardList;
-      Logger().d(boardList.length);
 
       return ListView.builder(
         shrinkWrap: true,

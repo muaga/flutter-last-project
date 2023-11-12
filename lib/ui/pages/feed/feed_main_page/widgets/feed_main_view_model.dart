@@ -3,7 +3,6 @@ import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/repository/post_repository.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 
 class FeedMainModel {
   final List<BoardDTO> boardList;
@@ -53,12 +52,10 @@ class FeedMainViewModel extends StateNotifier<FeedMainModel?> {
 
   Future<void> notifyInit() async {
     SessionUser sessionUser = ref.read(sessionStore);
-    Logger().d("sessionUser : ${sessionUser.user?.nickname}");
     ResponseDTO responseDTO =
         await PostRepository().fetchPostList(sessionUser.jwt!);
     FeedMainModel model = responseDTO.data;
     state = FeedMainModel(boardList: model.boardList);
-    Logger().d("FeedMainModel : ${responseDTO.data}");
   }
 }
 
