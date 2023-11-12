@@ -64,6 +64,7 @@ class OneMonthPressBookListViewModel
     Logger().d("상태 : ${state?.bookCategoryId}");
     Logger().d("상태 : ${state?.bookCount}");
     Logger().d("상태 : ${state?.bookList}");
+
     return OneMonthPressBookListModel(
         bookCount: model.bookCount,
         bookCategoryId: model.bookCategoryId,
