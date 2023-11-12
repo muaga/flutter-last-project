@@ -4,9 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/request_dto/book_like_request_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
-import 'package:flutter_blog/data/model/book_like.dart';
-import 'package:flutter_blog/data/store/session_user.dart';
-import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/book_detail_view_model.dart';
+import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/view_model/book_detail_view_model.dart';
 
 class BookLikeRepository {
   Future<ResponseDTO> fetchBookLikeWrite(

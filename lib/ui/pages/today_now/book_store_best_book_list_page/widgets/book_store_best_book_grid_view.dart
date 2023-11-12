@@ -26,6 +26,7 @@ class BookStoreBestBookGridView extends StatelessWidget {
           return InkWell(
               onTap: () {
                 int? bookId = bookList[index].bookId;
+
                 Navigator.push(
                     context,
                     MaterialPageRoute(

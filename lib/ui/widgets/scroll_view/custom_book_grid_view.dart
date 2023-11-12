@@ -37,9 +37,9 @@ class CustomBookGridView extends StatelessWidget {
                 /// ?가 붙는 변수는 꼭 null일 때의 디폴트값을 명시해줄것
               },
               child: CustomGridBookCard(
-                title: book.title,
-                writer: book.writer,
-                picUrl: book.picUrl,
+                title: books[index].title,
+                writer: books[index].writer,
+                picUrl: books[index].picUrl,
               ));
         },
         // 더 많은 리스트 아이템을 추가할 수 있습니다.
