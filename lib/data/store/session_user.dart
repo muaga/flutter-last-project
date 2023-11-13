@@ -46,7 +46,6 @@ class SessionUser {
 
       // 디바이스에 JWT 저장 : 자동로그인
       await secureStorage.write(key: "jwt", value: responseDTO.token);
-      // await secureStorage.write(key: "user", value: responseDTO.data);
 
       // 메인으로 화면 이동
       // TODO 은혜 : 메인 페이지 완성 시 이동
@@ -57,20 +56,18 @@ class SessionUser {
     }
   }
 
-  // Future<void> userUpdate(UserUpdateReqDTO userUpdateReqDTO) async {
-  //   String jwt = await secureStorage.read(key: 'jwt') as String;
-  //   // User user = await secureStorage.read(key: 'user') as User;
-  //   // int userId = user.id;
-  //   ResponseDTO responseDTO =
-  //       await UserRepository().fetchUserUpdate(jwt, userId, userUpdateReqDTO);
-  //
-  //   if (responseDTO.code == 1) {
-  //     Navigator.pop(mContext!);
-  //   } else {
-  //     ScaffoldMessenger.of(mContext!)
-  //         .showSnackBar(SnackBar(content: Text(responseDTO.msg)));
-  //   }
-  // }
+  Future<void> userUpdate(UserUpdateReqDTO userUpdateReqDTO) async {
+    String jwt = await secureStorage.read(key: 'jwt') as String;
+    ResponseDTO responseDTO =
+        await UserRepository().fetchUserUpdate(jwt, userUpdateReqDTO);
+
+    if (responseDTO.code == 1) {
+      Navigator.pop(mContext!);
+    } else {
+      ScaffoldMessenger.of(mContext!)
+          .showSnackBar(SnackBar(content: Text(responseDTO.msg)));
+    }
+  }
 
   Future<void> resignation() async {
     String jwt = await secureStorage.read(key: 'jwt') as String;

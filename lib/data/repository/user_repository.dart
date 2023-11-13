@@ -60,9 +60,9 @@ class UserRepository {
   }
 
   Future<ResponseDTO> fetchUserUpdate(
-      String jwt, int userId, UserUpdateReqDTO userUpdateReqDTO) async {
+      String jwt, UserUpdateReqDTO userUpdateReqDTO) async {
     try {
-      final response = await dio.post("/user/${userId}/update",
+      final response = await dio.post("/user/update",
           data: userUpdateReqDTO.toJson(),
           options: Options(headers: {"Authorization": "$jwt"}));
 

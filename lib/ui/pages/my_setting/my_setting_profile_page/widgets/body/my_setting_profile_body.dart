@@ -94,7 +94,7 @@ class MySettingProfileBody extends ConsumerWidget {
                       nickName: _nickName.text,
                       password: _password.text,
                       email: _email.text);
-                  // ref.read(sessionStore).userUpdate(userUpdateReqDTO);
+                  ref.read(sessionStore).userUpdate(userUpdateReqDTO);
                 }
               },
               buttonText: "확인",
