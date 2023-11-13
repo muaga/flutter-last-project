@@ -1,13 +1,15 @@
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/repository/my_library_repository.dart';
+import 'package:flutter_blog/data/repository/post_repository.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 class MyLibraryMainModel {
   final int bookLikeCount;
   final List<LikeBookList> likeBookList;
   final List<ReadingBookList> readingBookList;
-  final PostList postList;
+  late PostList postList;
 
   MyLibraryMainModel({
     required this.bookLikeCount,
@@ -75,7 +77,7 @@ class PostList {
   final int replyCount;
   final ReplyList replyList;
   final int boardConut;
-  final List<BoardList> boardList;
+  late List<BoardList> boardList;
 
   PostList({
     required this.replyCount,
@@ -280,10 +282,32 @@ class MyLibraryMainViewModel extends StateNotifier<MyLibraryMainModel?> {
       readingBookList: model.readingBookList,
     );
   }
+
+  Future<void> deletePost(int boardId) async {
+    SessionUser sessionUser = ref.read(sessionStore);
+    Logger().d("boardId $boardId");
+
+    ResponseDTO responseDTO =
+        await PostRepository().fetchDeletePost(sessionUser.jwt!, boardId);
+
+    Logger().d("responseDTO $responseDTO");
+
+    MyLibraryMainModel stateModel = state!;
+    stateModel?.postList.boardList = stateModel!.postList.boardList
+        .where((board) => board.boardId != boardId)
+        .toList();
+
+    state = MyLibraryMainModel(
+        bookLikeCount: stateModel.bookLikeCount,
+        likeBookList: stateModel.likeBookList,
+        readingBookList: stateModel.readingBookList,
+        postList: stateModel.postList);
+  }
+
+  // Future<void> detailNotify()
 }
 
-final MyLibraryProvider =
-StateNotifierProvider.family<MyLibraryMainViewModel, MyLibraryMainModel?, int>(
-        (ref, userId) {
-      return MyLibraryMainViewModel(null, ref)..notifyInit(userId);
-    });
+final MyLibraryProvider = StateNotifierProvider.family<MyLibraryMainViewModel,
+    MyLibraryMainModel?, int>((ref, userId) {
+  return MyLibraryMainViewModel(null, ref)..notifyInit(userId);
+});
