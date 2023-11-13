@@ -5,6 +5,7 @@ import 'package:flutter_blog/_core/utils/validator_util.dart';
 import 'package:flutter_blog/data/dto/request_dto/user_request_dto.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_profile_page/widgets/my_setting_profile_member_type_form.dart';
+import 'package:flutter_blog/ui/pages/my_setting/my_setting_profile_page/widgets/my_setting_profile_view_model.dart';
 import 'package:flutter_blog/ui/widgets/button/custom_bottom_button.dart';
 import 'package:flutter_blog/ui/widgets/form/custom_check_box_and_title_form.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
@@ -23,7 +24,8 @@ class MySettingProfileBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SessionUser sessionUser = ref.read(sessionStore);
-
+    MySettingProfileModel? model = ref.read(mySettingProfileProvider);
+    Logger().d(model);
     return Padding(
       padding: const EdgeInsets.all(gapMain),
       child: Form(
@@ -35,7 +37,7 @@ class MySettingProfileBody extends ConsumerWidget {
             SliverToBoxAdapter(
               child: CustomTextForm(
                 title: "필명",
-                hintText: "${sessionUser.user!.nickname}",
+                hintText: "${model!.nickname}",
                 funValidator: validateNickname(),
                 controller: _nickName,
               ),

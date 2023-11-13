@@ -73,4 +73,17 @@ class UserRepository {
       return new ResponseDTO(-1, "개인 정보 수정에 실패했습니다", null);
     }
   }
+
+  Future<ResponseDTO> fetchUserInfo(String jwt) async {
+    try {
+      final response = await dio.get("/user/updatePage",
+          options: Options(headers: {"Authorization": "$jwt"}));
+
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+      return responseDTO;
+    } catch (e) {
+      return new ResponseDTO(-1, "개인 정보를 불러오는데 실패했습니다", null);
+    }
+  }
 }
