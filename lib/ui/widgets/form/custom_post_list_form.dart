@@ -17,7 +17,8 @@ class CustomPostListForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     FeedMainModel? model = ref.watch(feedMainProvider);
-    Logger().d("model ${model}");
+    Logger().d("model : ${model}");
+
 
     if (model != null) {
       List<BoardDTO> boardList = [];

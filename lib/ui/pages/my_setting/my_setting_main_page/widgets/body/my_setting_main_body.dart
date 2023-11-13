@@ -22,6 +22,7 @@ class MySettingMainBody extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    SessionUser sessionUser = ref.read(sessionStore);
     return ListView(
       children: [
         Padding(
@@ -31,7 +32,7 @@ class MySettingMainBody extends ConsumerWidget {
             children: [
               MySettingMainMemberTypeForm(),
               const SizedBox(height: gapLarge),
-              Text("호기심 많은 률률류님", style: title1()),
+              Text("${sessionUser.user!.nickname}님", style: title1()),
               const SizedBox(height: gapLarge),
 
               /// 구독권 유무에 따라 아래의 화면이 바뀐다.
