@@ -24,8 +24,9 @@ class MySettingProfileBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SessionUser sessionUser = ref.read(sessionStore);
-    MySettingProfileModel? model = ref.read(mySettingProfileProvider);
-    Logger().d(model);
+    MySettingProfileModel? model = ref.watch(mySettingProfileProvider);
+    Logger().d("model은 $model");
+    Logger().d("nickname : ${model?.nickname}");
     return Padding(
       padding: const EdgeInsets.all(gapMain),
       child: Form(
@@ -60,7 +61,7 @@ class MySettingProfileBody extends ConsumerWidget {
             SliverToBoxAdapter(
               child: CustomTextForm(
                 title: "이메일",
-                hintText: "${sessionUser.user!.email}",
+                hintText: "${model!.email}",
                 funValidator: validateEmail(),
                 controller: _email,
               ),
@@ -91,13 +92,14 @@ class MySettingProfileBody extends ConsumerWidget {
             SliverToBoxAdapter(child: SizedBox(height: gapLarge)),
             SliverToBoxAdapter(
                 child: CustomBottomButton(
-              funPageRoute: () {
+              funPageRoute: () async {
                 if (_formkey.currentState!.validate()) {
                   UserUpdateReqDTO userUpdateReqDTO = UserUpdateReqDTO(
                       nickname: _nickName.text,
                       password: _password.text,
                       email: _email.text);
-                  ref.read(sessionStore).userUpdate(userUpdateReqDTO);
+                  await ref.read(sessionStore).userUpdate(userUpdateReqDTO);
+                  ref.read(mySettingProfileProvider.notifier).notifyInit();
                   Logger().d("개인정보수정 시작");
                 }
               },

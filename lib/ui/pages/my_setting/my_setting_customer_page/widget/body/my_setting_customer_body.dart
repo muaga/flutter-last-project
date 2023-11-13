@@ -3,6 +3,8 @@ import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/data/model/book_reply.dart';
+import 'package:flutter_blog/data/model/faq.dart';
+import 'package:flutter_blog/data/model/notice.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_customer_page/widget/my_setting_category_button.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_customer_page/widget/my_setting_customer_notice.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_customer_page/widget/my_setting_expandable_description.dart';
@@ -61,7 +63,7 @@ class _MySettingCustomerBodyState extends State<MySettingCustomerBody> {
                               onPress: () {
                                 changePage(1);
                               },
-                              icon: iconBookMark(),
+                              icon: iconBottomSetting(),
                             ),
                           ],
                         ),
@@ -73,18 +75,11 @@ class _MySettingCustomerBodyState extends State<MySettingCustomerBody> {
                         children: [
                           /// 결제/환불
                           ListView.builder(
-                            itemCount: bookReplys.length,
+                            itemCount: paymentFAQ.length,
                             itemBuilder: (BuildContext context, int index) {
-                              final book = books[index];
-
-                              return Column(
-                                children: [
-                                  MySettingExpandableDescription(
-                                      title: "결제/환불",
-                                      description: "결제/환불 문의사항"),
-                                  SizedBox(height: gapLarge),
-                                ],
-                              );
+                              return MySettingExpandableDescription(
+                                  title: "${paymentFAQ[index].subTitle}",
+                                  description: "${paymentFAQ[index].content}");
                             },
                           ),
 
@@ -97,9 +92,8 @@ class _MySettingCustomerBodyState extends State<MySettingCustomerBody> {
                               return Column(
                                 children: [
                                   MySettingExpandableDescription(
-                                      title: "회원/비회원",
-                                      description: "회원/비회원 문의사항"),
-                                  SizedBox(height: gapLarge),
+                                      title: "${userFAQ[index].subTitle}",
+                                      description: "${userFAQ[index].content}"),
                                 ],
                               );
                             },
@@ -116,16 +110,14 @@ class _MySettingCustomerBodyState extends State<MySettingCustomerBody> {
 
         /// 공지사항 탭
         ListView.builder(
-          itemCount: bookReplys.length,
+          itemCount: noticeList.length,
           itemBuilder: (BuildContext context, int index) {
-            final book = books[index];
-
             return Padding(
-              padding: const EdgeInsets.all(gapMain),
+              padding: const EdgeInsets.symmetric(horizontal: gapMain),
               child: MySettingCustomerNotice(
-                  noticeTitle: "공지사항입니다",
-                  noticeDate: "2023-11.04",
-                  noticeComent: "주목주목 책을 많이 읽기 이벤트 당첨자 발표"),
+                  noticeTitle: "${noticeList[index].subTitle}",
+                  noticeDate: "${noticeList[index].createdAt}",
+                  noticeComent: "${noticeList[index].content}"),
             );
           },
         ),
