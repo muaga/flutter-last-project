@@ -49,10 +49,13 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
   Widget build(BuildContext context) {
     return Consumer(
         builder: (BuildContext context, WidgetRef ref, Widget? child) {
+      MyLibraryModel? model = ref.watch(myLibraryProvider);
       ref.read(myLibraryProvider.notifier).notifyInit();
 
-      MyLibraryModel? model = ref.watch(myLibraryProvider);git ad
-      Logger().d(model!.bookLikeCount);
+      if (model == null) {
+        return CircularProgressIndicator();
+      }
+
       return TabBarView(
         children: [
           Column(
