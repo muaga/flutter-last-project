@@ -2,6 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/request_dto/book_request_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
+
+import 'package:flutter_blog/data/model/book.dart';
+import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/widgets/my_library_view_model.dart';
+import 'package:logger/logger.dart';
+
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/view_model/book_detail_view_model.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/widgets/my_library_view_model.dart';
 import 'package:flutter_blog/ui/pages/search/search_category_book_list_page/widgets/view_model/search_category_book_list_view_model.dart';
@@ -139,7 +144,6 @@ class BookRepository {
   //내 서재 불러오기
   Future<ResponseDTO> fetchMyLibrary(String jwt) async {
     try {
-      Logger().d(jwt);
       Response response = await dio.get("/book/bookOfMine",
           options: Options(headers: {"Authorization": jwt}));
 
