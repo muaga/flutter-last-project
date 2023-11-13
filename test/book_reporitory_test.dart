@@ -4,8 +4,7 @@ import 'package:logger/logger.dart';
 
 void main() async {
   String jwt =
-      "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtZXRhY29kaW5nLWtleSIsImlkIjoxLCJlbWFpbCI6InNzYXJAbmF0ZS5jb20iLCJleHAiOjE3MDAzNjY1OTR9.VdqjdU8Mj-RV6NCfKn8VmArqikOnA5jLfNCLk434sCzlkrUgG3x5nhaggCsaHbFpQKSO3k8oGVRv9Dn6L1K3bg";
-
+      "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtZXRhY29kaW5nLWtleSIsImlkIjoxLCJlbWFpbCI6InNzYXJAbmF0ZS5jb20iLCJleHAiOjE3MDA0ODAzNzB9.twn16oq7p9735rS1jeNsHaLtcR_qh_mRjQYWD0d40vWp0F9HcSXhq4kNbNIjAUi9j7GOHxdynXyHY6mA1v9QYg";
   await fetchBookDetail(1, jwt);
 }
 
@@ -16,7 +15,7 @@ Future<void> fetchBookDetail(int bookId, String jwt) async {
     options: Options(headers: {"Authorization": jwt}),
   );
 
-  Logger().d(response.data);
+  Logger().d(response);
 
   // 파싱
   // ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
