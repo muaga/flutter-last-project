@@ -67,7 +67,7 @@ class _BookReadPageState extends ConsumerState<BookReadPage> {
     SessionUser sessionUser = ref.read(sessionStore);
     BookMarkReqDTO bookMarkReqDTO = BookMarkReqDTO(
         userId: sessionUser.user!.id, bookId: bookId, scroll: page);
-    ref.read(bookReadProvider(bookId).notifier).bookMark(bookMarkReqDTO);
+    await ref.read(bookReadProvider(bookId).notifier).bookMark(bookMarkReqDTO);
   }
 
   @override
@@ -123,7 +123,7 @@ class _BookReadPageState extends ConsumerState<BookReadPage> {
                       }),
                   actions: [
                     IconButton(
-                        onPressed: () {
+                        onPressed: () async {
                           setState(() {
                             // 슬라이더 값을 초기화
                             sliderValue = pageController.page!;

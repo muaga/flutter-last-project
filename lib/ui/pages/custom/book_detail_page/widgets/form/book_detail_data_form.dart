@@ -20,7 +20,7 @@ class BookDetailDataForm extends StatelessWidget {
           Expanded(
             child: CustomDataInfo(
                 dataTitle: "카테고리",
-                dataContent: book.bookCategory?.categoryName ?? "카테고리 정보 없음"),
+                dataContent: book.bookCategory ?? "카테고리 정보 없음"),
           ),
           Container(height: gapXlarge, width: 1, color: Colors.grey),
           Expanded(
