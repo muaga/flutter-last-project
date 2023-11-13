@@ -62,7 +62,7 @@ class BookDetailModel {
       bookReplyCount: json["bookReplyCount"],
       bookSubTitle: json["bookSubTitle"],
       bookIntroduction: json["bookIntroduction"],
-      bookCategory: json["bookCategory"], // Object
+      bookCategory: json["bookCategory"],
       totalPage: json["totalPage"],
       // publicationDate: DateTime.parse(json["publicationDate"]),
       publicationDate: json["publicationDate"],

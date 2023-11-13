@@ -95,7 +95,7 @@ class _MyLibraryMainLikeBooksState
                                       userId: sessionUser.user!.id);
                                   await ref
                                       .read(myLibraryProvider.notifier)
-                                      .bookLikeWrite(bookLikeDTO);
+                                      .likeBookDelete(bookLikeDTO);
                                   Navigator.of(context).pop(); // 알림창 닫기
                                 },
                                 child: Text(
