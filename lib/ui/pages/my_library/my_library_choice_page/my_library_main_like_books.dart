@@ -3,7 +3,10 @@ import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
+import 'package:flutter_blog/data/dto/request_dto/book_like_request_dto.dart';
 import 'package:flutter_blog/data/model/book.dart';
+import 'package:flutter_blog/data/store/session_user.dart';
+import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/view_model/book_detail_view_model.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/widgets/my_library_view_model.dart';
 import 'package:flutter_blog/ui/widgets/custom_grid_book_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,6 +23,8 @@ class _MyLibraryMainLikeBooksState
   @override
   Widget build(BuildContext context) {
     MyLibraryModel? model = ref.watch(myLibraryProvider);
+    List<LikeListDTO>? likeBookList = model?.likeBookList;
+    SessionUser sessionUser = ref.read(sessionStore);
 
     return Scaffold(
       appBar: AppBar(
@@ -44,11 +49,11 @@ class _MyLibraryMainLikeBooksState
               crossAxisSpacing: 10,
               childAspectRatio: 1 / 2,
             ),
-            itemCount: books.length,
+            itemCount: likeBookList?.length,
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
-                  int? bookId = books[index].id;
+                  int? bookId = likeBookList?[index].bookId;
                   showDialog(
                     context: context,
                     builder: (context) {
@@ -84,8 +89,13 @@ class _MyLibraryMainLikeBooksState
                                 style: TextButton.styleFrom(
                                     backgroundColor: kPrimaryColor, // 배경색
                                     minimumSize: Size(130, 50)),
-                                onPressed: () {
-                                  // 삭제 동작을 수행하거나 필요한 작업을 추가
+                                onPressed: () async {
+                                  BookLikeReqDTO bookLikeDTO = BookLikeReqDTO(
+                                      bookId: bookId!,
+                                      userId: sessionUser.user!.id);
+                                  await ref
+                                      .read(myLibraryProvider.notifier)
+                                      .likeBookDelete(bookLikeDTO);
                                   Navigator.of(context).pop(); // 알림창 닫기
                                 },
                                 child: Text(
@@ -101,9 +111,9 @@ class _MyLibraryMainLikeBooksState
                   );
                 },
                 child: CustomGridBookCard(
-                  title: books[index].title,
-                  writer: books[index].writer,
-                  picUrl: books[index].picUrl,
+                  title: likeBookList![index].likeBookTitle,
+                  writer: likeBookList![index].likeWriter,
+                  picUrl: likeBookList![index].likeBookPicUrl,
                 ),
               );
             },

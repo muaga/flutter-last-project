@@ -3,6 +3,7 @@ import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/dto/request_dto/book_reply_request_dto.dart';
+import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:flutter_blog/ui/pages/custom/reply_write_and_list_page/reply_write_and_list_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -62,11 +63,13 @@ class CustomReviewInsert extends ConsumerWidget {
               height: 58,
               child: TextButton(
                 onPressed: () {
-                  BookReplyWriteReqDTO dto =
-                      BookReplyWriteReqDTO(content: _content.text, bookId: '1');
-                  ref.read(bookReplyListProvider.notifier).notifyAdd(dto);
-
-                  // 리뷰를 제출하는 로직을 추가하세요.
+                  SessionUser session = ref.read(sessionStore);
+                  BookReplyWriteReqDTO dto = BookReplyWriteReqDTO(
+                      userId: session.user!.id,
+                      bookId: 1,
+                      content: _content.text);
+                  //TODO: 여기 이전 페이지부터 bookId 넘겨줘야함
+                  // ref.read(bookReplyListProvider.notifier).notifyAdd(dto, );
                 },
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.grey, // 원하는 배경색으로 변경

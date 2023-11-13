@@ -4,7 +4,7 @@ import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
-import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/widgets/my_library_main_view_model.dart';
+import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/widgets/my_library_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MyLibraryMainReadingNotePostContent extends ConsumerWidget {
@@ -44,9 +44,7 @@ class MyLibraryMainReadingNotePostContent extends ConsumerWidget {
                 offset: Offset(20, -30), // 아이콘 위치를 조정합니다.
                 onSelected: (String choice) {
                   if (choice == "삭제하기") {
-                    ref
-                        .read(MyLibraryProvider(sessionUser.user!.id).notifier)
-                        .deletePost(boardId!);
+                    ref.read(myLibraryProvider.notifier).deletePost(boardId!);
                   }
                 },
                 itemBuilder: (BuildContext context) {

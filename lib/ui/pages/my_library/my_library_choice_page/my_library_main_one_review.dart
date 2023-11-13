@@ -12,8 +12,6 @@ class MyLibraryOneReview extends StatefulWidget {
   State<MyLibraryOneReview> createState() => _MyLibraryOneReview();
 }
 
-//
-
 class _MyLibraryOneReview extends State<MyLibraryOneReview> {
   @override
   Widget build(BuildContext context) {

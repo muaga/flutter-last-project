@@ -2,7 +2,6 @@ import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/repository/my_library_repository.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
-import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/widgets/my_library_main_view_model.dart';
 import 'package:logger/logger.dart';
 
 void main() async {
@@ -35,8 +34,8 @@ Future<void> notifyInit(int userId) async {
       "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtZXRhY29kaW5nLWtleSIsImlkIjoxLCJlbWFpbCI6InNzYXJAbmF0ZS5jb20iLCJleHAiOjE3MDAxMjE4NTd9.CGja8EcO7NVAd5iWXUPSMq5Pnne6j54on_Dl9Kc4dloz9nOibTLFyoISLj_embkOeMDRmD2ur9gdkgH4wD2awQ";
   int userId = 1;
 
-  ResponseDTO responseDTO =
-  await MyLibraryRepository().fetchMyLibraryInfo(jwt);
-  MyLibraryMainModel? model = responseDTO.data;
-  Logger().d(model);
+  // ResponseDTO responseDTO =
+  // await MyLibraryRepository().fetchMyLibraryInfo(jwt);
+  // MyLibraryMainModel? model = responseDTO.data;
+  // Logger().d(model);
 }

@@ -1,7 +1,12 @@
 import 'dart:convert';
 
+import 'package:flutter_blog/data/dto/request_dto/book_like_request_dto.dart';
+import 'package:flutter_blog/data/dto/request_dto/my_library_requset_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
+import 'package:flutter_blog/data/repository/book_like_repository.dart';
 import 'package:flutter_blog/data/repository/book_repository.dart';
+import 'package:flutter_blog/data/repository/post_repository.dart';
+import 'package:flutter_blog/data/repository/reading_book_repository.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
@@ -84,7 +89,7 @@ class PostDTO {
   final int? replyCount;
   final ReplyDTO replyList;
   final int? boardCount;
-  final List<BoardDTO> boardList;
+  late final List<BoardDTO> boardList;
 
   PostDTO(
       {required this.replyCount,
@@ -200,11 +205,78 @@ class MyLibraryViewModel extends StateNotifier<MyLibraryModel?> {
 
   MyLibraryViewModel(super._state, this.ref);
 
+  /// 최초
   Future<void> notifyInit() async {
     SessionUser session = ref.read(sessionStore);
     ResponseDTO responseDTO =
         await BookRepository().fetchMyLibrary(session.jwt!);
     state = responseDTO.data;
+  }
+
+  Future<void> deletePost(int boardId) async {
+    SessionUser sessionUser = ref.read(sessionStore);
+    Logger().d("boardId $boardId");
+
+    ResponseDTO responseDTO =
+        await PostRepository().fetchDeletePost(sessionUser.jwt!, boardId);
+
+    Logger().d("responseDTO $responseDTO");
+
+    MyLibraryModel stateModel = state!;
+    stateModel?.postList.boardList = stateModel!.postList.boardList
+        .where((board) => board.boardId != boardId)
+        .toList();
+
+    state = MyLibraryModel(
+        bookLikeCount: stateModel.bookLikeCount,
+        likeBookList: stateModel.likeBookList,
+        readingBookList: stateModel.readingBookList,
+        postList: stateModel.postList);
+  }
+
+  /// 좋아하는 책 스크랩 삭제
+  Future<void> likeBookDelete(BookLikeReqDTO requestDTO) async {
+    SessionUser sessionUser = ref.read(sessionStore);
+
+    // BookLikeRequestDTO와 sessionUser.jwt를 fetchBookLikeWrite 메서드로 전달
+    ResponseDTO responseDTO = await BookLikeRepository()
+        .fetchBookLikeWrite(requestDTO, sessionUser.jwt!);
+
+    // 데이터 갱신
+    MyLibraryModel? model = state;
+    Logger().d("변하기 전 값 : ${model?.likeBookList}");
+    model?.likeBookList
+        .removeWhere((likeBook) => likeBook.bookId == requestDTO.bookId);
+
+    // 상태 갱신
+    state = MyLibraryModel(
+        bookLikeCount: model?.bookLikeCount,
+        likeBookList: model!.likeBookList,
+        readingBookList: model.readingBookList,
+        postList: model.postList);
+    Logger().d("변한 값 : ${state?.likeBookList}");
+  }
+
+  /// 읽고있는 책 스크랩 삭제
+  Future<void> readingBookDelete(int bookId) async {
+    SessionUser sessionUser = ref.read(sessionStore);
+
+    ResponseDTO responseDTO = await ReadingBookRepository()
+        .fetchReadingBookDelete(bookId, sessionUser.jwt!);
+
+    // 데이터 갱신
+    MyLibraryModel? model = state;
+    Logger().d("변하기 전 값 : ${model?.readingBookList}");
+    model?.readingBookList
+        .removeWhere((readingBook) => readingBook.bookId == bookId);
+
+    // 상태 갱신
+    state = MyLibraryModel(
+        bookLikeCount: model?.bookLikeCount,
+        likeBookList: model!.likeBookList,
+        readingBookList: model.readingBookList,
+        postList: model.postList);
+    Logger().d("변한 값 : ${state?.readingBookList}");
   }
 }
 

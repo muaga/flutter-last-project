@@ -13,18 +13,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MyLibraryMainTabBarView extends StatefulWidget {
   final User user;
-  // List<Board> boards = [
-  //   Board(
-  //     id: 1,
-  //     title: "벤자민 하디의 퓨처셀프",
-  //     content:
-  //         "그동안 주춤했던 뇌를 깨우고 싶거나, 나를 성장시키고 싶으신 분들, 또는 자기 계발의 실질적 행동 지침이 필요하신 분들!! 이 책을 추천드립니다",
-  //     createdAt: "2023-10-10",
-  //     picUrl: "book7.png",
-  //     userId: 1,
-  //     bookId: 2,
-  //   ),
-  // ];
+
   MyLibraryMainTabBarView({required this.user});
 
   @override
@@ -46,6 +35,7 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
     return Consumer(
         builder: (BuildContext context, WidgetRef ref, Widget? child) {
       MyLibraryModel? model = ref.watch(myLibraryProvider);
+
       return TabBarView(
         children: [
           Column(
@@ -159,9 +149,7 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
                           children: [
                             /// 한줄리뷰
                             ListView.builder(
-                              itemCount: model!
-                                  .postList.replyList.bookReplyList.length,
-
+                              itemCount: model!.postList.replyCount,
                               itemBuilder: (BuildContext context, int index) {
                                 final book =
                                     model!.postList.replyList.bookReplyList;

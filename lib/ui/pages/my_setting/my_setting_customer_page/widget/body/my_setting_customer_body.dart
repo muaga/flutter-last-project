@@ -8,6 +8,7 @@ import 'package:flutter_blog/data/model/notice.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_customer_page/widget/my_setting_category_button.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_customer_page/widget/my_setting_customer_notice.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_customer_page/widget/my_setting_expandable_description.dart';
+import 'package:flutter_blog/ui/widgets/form/custom_footer_form.dart';
 
 class MySettingCustomerBody extends StatefulWidget {
   const MySettingCustomerBody({
