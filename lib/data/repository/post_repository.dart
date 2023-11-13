@@ -6,6 +6,7 @@ import 'package:flutter_blog/data/model/post.dart';
 import 'package:flutter_blog/ui/pages/custom/post_update_page/widgets/post_update_view_model.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_page/widgets/post_write_view_model.dart';
 import 'package:flutter_blog/ui/pages/feed/feed_main_page/widgets/feed_main_view_model.dart';
+import 'package:logger/logger.dart';
 
 class PostRepository {
   // 피드 전체 post 목록
@@ -92,6 +93,23 @@ class PostRepository {
       return responseDTO;
     } catch (e) {
       return ResponseDTO(-1, "게시글 한건 불러오기 실패", null);
+    }
+  }
+
+  Future<ResponseDTO> fetchDeletePost(String jwt, int boardId) async {
+    try {
+      // 통신
+      Response response = await dio.delete("/board/${boardId}/delete",
+          options: Options(headers: {"Authorization": jwt}));
+      Logger().d("응답 : $response");
+
+      // 응답 받은 데이터 파싱
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      // responseDTO.data = Post.fromJson(responseDTO.data);
+
+      return responseDTO;
+    } catch (e) {
+      return ResponseDTO(-1, "게시글 삭제 실패", null);
     }
   }
 }

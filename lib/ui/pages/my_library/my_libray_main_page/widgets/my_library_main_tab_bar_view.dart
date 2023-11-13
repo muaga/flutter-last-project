@@ -14,18 +14,18 @@ import 'package:flutter_blog/ui/widgets/scroll_view/custom_book_grid_view.dart';
 
 class MyLibraryMainTabBarView extends StatefulWidget {
   final User user;
-  List<Board> boards = [
-    Board(
-      id: 1,
-      title: "벤자민 하디의 퓨처셀프",
-      content:
-          "그동안 주춤했던 뇌를 깨우고 싶거나, 나를 성장시키고 싶으신 분들, 또는 자기 계발의 실질적 행동 지침이 필요하신 분들!! 이 책을 추천드립니다",
-      createdAt: "2023-10-10",
-      picUrl: "book7.png",
-      userId: 1,
-      bookId: 2,
-    ),
-  ];
+  // List<Board> boards = [
+  //   Board(
+  //     id: 1,
+  //     title: "벤자민 하디의 퓨처셀프",
+  //     content:
+  //         "그동안 주춤했던 뇌를 깨우고 싶거나, 나를 성장시키고 싶으신 분들, 또는 자기 계발의 실질적 행동 지침이 필요하신 분들!! 이 책을 추천드립니다",
+  //     createdAt: "2023-10-10",
+  //     picUrl: "book7.png",
+  //     userId: 1,
+  //     bookId: 2,
+  //   ),
+  // ];
   MyLibraryMainTabBarView({required this.user});
 
   @override
@@ -187,6 +187,7 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
                                   children: [
                                     MyLibraryMainReadingNotePostForm(
                                       bookId: boards[index].bookId,
+                                      boardId: boards[index].id,
                                       postComent: "${boards[index].title}",
                                       postDate: "${boards[index].createdAt}",
                                     ),
