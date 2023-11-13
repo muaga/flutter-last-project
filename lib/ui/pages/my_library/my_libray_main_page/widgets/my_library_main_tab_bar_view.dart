@@ -50,12 +50,6 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
     return Consumer(
         builder: (BuildContext context, WidgetRef ref, Widget? child) {
       MyLibraryModel? model = ref.watch(myLibraryProvider);
-      ref.read(myLibraryProvider.notifier).notifyInit();
-
-      if (model == null) {
-        return CircularProgressIndicator();
-      }
-
       return TabBarView(
         children: [
           Column(
@@ -79,6 +73,7 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
                     }
                   },
                   itemBuilder: (BuildContext context) {
+                    MyLibraryModel? model = ref.watch(myLibraryProvider);
                     return ["수정하기"].map((String choice) {
                       return PopupMenuItem<String>(
                         padding: EdgeInsets.only(left: 25),
@@ -90,7 +85,8 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
                   },
                 ),
               ),
-              Expanded(child: CustomBookGridView(books: books)),
+              Expanded(
+                  child: CustomBookGridView(likeListDTO: model!.likeBookList)),
             ],
           ),
           Column(
@@ -125,7 +121,10 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
                   },
                 ),
               ),
-              Expanded(child: CustomBookGridView(books: books)),
+              Expanded(
+                  child: CustomBookGridView(
+                readingBookDTO: model!.readingBookList,
+              )),
             ],
           ),
           Padding(
@@ -164,17 +163,20 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
                           children: [
                             /// 한줄리뷰
                             ListView.builder(
-                              itemCount: bookReplys.length,
+                              itemCount: model!.postList.,
                               itemBuilder: (BuildContext context, int index) {
-                                final book = books[index];
+                                final book =
+                                    model!.postList.replyList.bookReplyList;
+                                final boards = model!.postList.boardList;
 
                                 return Column(
                                   children: [
                                     MyLibraryMainReadingNotePostForm(
-                                      bookId: boards[index].bookId,
-                                      boardId: boards[index].id,
-                                      postComent: "${boards[index].title}",
-                                      postDate: "${boards[index].createdAt}",
+                                      bookId: book[index].bookReplyId,
+                                      boardId: boards[index].boardId,
+                                      postComent: "${boards[index].boardTitle}",
+                                      postDate:
+                                          "${boards[index].boardCreatedAt}",
                                     ),
                                   ],
                                 );

@@ -201,14 +201,10 @@ class MyLibraryViewModel extends StateNotifier<MyLibraryModel?> {
   MyLibraryViewModel(super._state, this.ref);
 
   Future<void> notifyInit() async {
-    Logger().d("init 호출되는지 확인");
     SessionUser session = ref.read(sessionStore);
-    Logger().d("세션 있는지 확인", session);
     ResponseDTO responseDTO =
         await BookRepository().fetchMyLibrary(session.jwt!);
-    Logger().d("responseDTO 있는지 확인", responseDTO);
     state = responseDTO.data;
-    Logger().d("상태 변경되는지 확인", state);
   }
 }
 
