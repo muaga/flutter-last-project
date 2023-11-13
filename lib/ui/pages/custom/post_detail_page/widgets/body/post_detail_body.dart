@@ -23,7 +23,7 @@ class PostDetailBody extends ConsumerWidget {
     final int? bookId = board.bookId;
     BookDetailModel? detailBook;
     if (bookId != null) {
-      BookDetailModel? model = ref.read(bookDetailProvider(bookId));
+      BookDetailModel? model = ref.read(bookDetailProvider(boardId));
       detailBook = model!;
     }
 

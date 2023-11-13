@@ -1,8 +1,6 @@
 // 창고 데이터
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
-import 'package:flutter_blog/data/model/post.dart';
 import 'package:flutter_blog/data/repository/post_repository.dart';
-import 'package:flutter_blog/data/store/param_store.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
@@ -19,6 +17,7 @@ class PostDetailModel {
   late int bookId;
   late String bookPicUrl;
   late String bookTitle;
+  late String bookWriter;
   late int boardReplyCount;
   late List<BoardReplyDto> boardReplyDtOs;
 
@@ -34,6 +33,7 @@ class PostDetailModel {
     required this.bookId,
     required this.bookPicUrl,
     required this.bookTitle,
+    required this.bookWriter,
     required this.boardReplyCount,
     required this.boardReplyDtOs,
   });
@@ -51,6 +51,7 @@ class PostDetailModel {
         bookId: json["bookId"],
         bookPicUrl: json["bookPicUrl"],
         bookTitle: json["bookTitle"],
+        bookWriter: json["bookWriter"],
         boardReplyCount: json["boardReplyCount"],
         boardReplyDtOs: List<BoardReplyDto>.from(
             json["boardReplyDTOs"].map((x) => BoardReplyDto.fromJson(x))),
@@ -68,6 +69,7 @@ class PostDetailModel {
         "bookId": bookId,
         "bookPicUrl": bookPicUrl,
         "bookTitle": bookTitle,
+        "bookWriter": bookWriter,
         "boardReplyCount": boardReplyCount,
         "boardReplyDTOs":
             List<dynamic>.from(boardReplyDtOs.map((x) => x.toJson())),
@@ -129,6 +131,7 @@ class PostDetailViewModel extends StateNotifier<PostDetailModel?> {
         bookId: model.bookId,
         bookPicUrl: model.bookPicUrl,
         bookTitle: model.bookTitle,
+        bookWriter: model.bookWriter,
         boardReplyCount: model.boardReplyCount,
         boardReplyDtOs: model.boardReplyDtOs);
   }

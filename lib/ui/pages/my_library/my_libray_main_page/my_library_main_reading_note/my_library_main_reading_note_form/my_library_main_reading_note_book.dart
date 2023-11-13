@@ -2,12 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
+import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/model/book.dart';
 
 class MyLibraryMainReadingNotePostBook extends StatelessWidget {
-  final Book book;
-  const MyLibraryMainReadingNotePostBook({required this.book});
+  final int? bookId;
+  const MyLibraryMainReadingNotePostBook({required this.bookId});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class MyLibraryMainReadingNotePostBook extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             child: CachedNetworkImage(
-              imageUrl: "http://192.168.0.40:8080/images/${book.picUrl}",
+              imageUrl: dio.options.baseUrl + "/images/${book.picUrl}",
               fit: BoxFit.fill,
               placeholder: (context, url) => CircularProgressIndicator(
                 strokeWidth: 5,
