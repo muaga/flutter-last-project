@@ -29,7 +29,7 @@ class _MySettingExpandableDescriptionState
     return ExpansionTile(
       title: Text(
         widget.title,
-        style: subTitle1(mFontWeight: FontWeight.normal),
+        style: subTitle2(mFontWeight: FontWeight.normal),
       ),
       trailing: Icon(
         isExpanded ? Icons.expand_less : Icons.expand_more, // 확장 및 축소 아이콘 변경
@@ -40,13 +40,16 @@ class _MySettingExpandableDescriptionState
         toggleDescription();
       },
       children: <Widget>[
-        Container(
-          width: double.infinity,
-          padding: EdgeInsets.all(gapMain),
-          child: Text(
-            widget.description,
-            style: body1(mFontWeight: FontWeight.w300),
-            textAlign: TextAlign.left,
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: gapMain),
+          child: Container(
+            width: double.infinity,
+            padding: EdgeInsets.all(gapMain),
+            child: Text(
+              widget.description,
+              style: body1(mFontWeight: FontWeight.w300),
+              textAlign: TextAlign.left,
+            ),
           ),
         ),
       ],

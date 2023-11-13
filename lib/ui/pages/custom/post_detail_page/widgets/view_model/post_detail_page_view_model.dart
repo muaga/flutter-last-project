@@ -1,8 +1,6 @@
 // 창고 데이터
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
-import 'package:flutter_blog/data/model/post.dart';
 import 'package:flutter_blog/data/repository/post_repository.dart';
-import 'package:flutter_blog/data/store/param_store.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
@@ -19,6 +17,7 @@ class PostDetailModel {
   late int bookId;
   late String bookPicUrl;
   late String bookTitle;
+  late String bookWriter;
   late int boardReplyCount;
   late List<BoardReplyDto> boardReplyDtOs;
 
@@ -34,6 +33,7 @@ class PostDetailModel {
     required this.bookId,
     required this.bookPicUrl,
     required this.bookTitle,
+    required this.bookWriter,
     required this.boardReplyCount,
     required this.boardReplyDtOs,
   });
@@ -51,33 +51,35 @@ class PostDetailModel {
         bookId: json["bookId"],
         bookPicUrl: json["bookPicUrl"],
         bookTitle: json["bookTitle"],
+        bookWriter: json["bookWriter"],
         boardReplyCount: json["boardReplyCount"],
         boardReplyDtOs: List<BoardReplyDto>.from(
             json["boardReplyDTOs"].map((x) => BoardReplyDto.fromJson(x))),
       );
 
-  Map<String, dynamic> toJson() => {
-        "boardId": boardId,
-        "boardLikeCount": boardLikeCount,
-        "boardReplCount": boardReplCount,
-        "boardTitle": boardTitle,
-        "boardUserPicUrl": boardUserPicUrl,
-        "boardUserNickname": boardUserNickname,
-        "boardCreatedAt": boardCreatedAt,
-        "boardContent": boardContent,
-        "bookId": bookId,
-        "bookPicUrl": bookPicUrl,
-        "bookTitle": bookTitle,
-        "boardReplyCount": boardReplyCount,
-        "boardReplyDTOs":
-            List<dynamic>.from(boardReplyDtOs.map((x) => x.toJson())),
-      };
+  // Map<String, dynamic> toJson() => {
+  //       "boardId": boardId,
+  //   "boardLikeCount": boardLikeCount,
+  //   "boardReplCount": boardReplCount,
+  //   "boardTitle": boardTitle,
+  //   "boardUserPicUrl": boardUserPicUrl,
+  //       "boardUserNickname": boardUserNickname,
+  //       "boardCreatedAt": boardCreatedAt,
+  //       "boardContent": boardContent,
+  //       "bookId": bookId,
+  //       "bookPicUrl": bookPicUrl,
+  //       "bookTitle": bookTitle,
+  //       "bookWriter": bookWriter,
+  //       "boardReplyCount": boardReplyCount,
+  //       "boardReplyDTOs":
+  //           List<dynamic>.from(boardReplyDtOs.map((x) => x.toJson())),
+  //     };
 }
 
 class BoardReplyDto {
   final String replyUserPicUrl;
   final String replyUserNickname;
-  final DateTime replyCreatedAt;
+  final String replyCreatedAt;
   final String replyContent;
 
   BoardReplyDto({
@@ -87,36 +89,35 @@ class BoardReplyDto {
     required this.replyContent,
   });
 
-  factory BoardReplyDto.fromJson(Map<String, dynamic> json) => BoardReplyDto(
-        replyUserPicUrl: json["replyUserPicUrl"],
-        replyUserNickname: json["replyUserNickname"],
-        replyCreatedAt: DateTime.parse(json["replyCreatedAt"]),
-        replyContent: json["replyContent"],
-      );
+  BoardReplyDto.fromJson(Map<String, dynamic> json)
+      : replyUserPicUrl = json["replyUserPicUrl"],
+        replyUserNickname = json["replyUserNickname"],
+        replyCreatedAt = json["replyCreatedAt"],
+        replyContent = json["replyContent"];
 
-  Map<String, dynamic> toJson() => {
-        "replyUserPicUrl": replyUserPicUrl,
-        "replyUserNickname": replyUserNickname,
-        "replyCreatedAt":
-            "${replyCreatedAt.year.toString().padLeft(4, '0')}-${replyCreatedAt.month.toString().padLeft(2, '0')}-${replyCreatedAt.day.toString().padLeft(2, '0')}",
-        "replyContent": replyContent,
-      };
+  // Map<String, dynamic> toJson() => {
+  //       "replyUserPicUrl": replyUserPicUrl,
+  //       "replyUserNickname": replyUserNickname,
+  //       "replyCreatedAt":
+  //           "${replyCreatedAt.year.toString().padLeft(4, '0')}-${replyCreatedAt.month.toString().padLeft(2, '0')}-${replyCreatedAt.day.toString().padLeft(2, '0')}",
+  //       "replyContent": replyContent,
+  //     };
 }
 
 // 창고
 class PostDetailViewModel extends StateNotifier<PostDetailModel?> {
   PostDetailViewModel(super._state, this.ref);
-
   Ref ref;
 
-  Future<void> notifyInit(int id) async {
-    Logger().d("notifyInit");
-
+  Future<void> notifyInit(int boardId) async {
     SessionUser sessionUser = ref.read(sessionStore);
-    ResponseDTO responseDTO =
-        await PostRepository().fetchPost(sessionUser.jwt!, id);
 
-    PostDetailModel? model = state;
+    ResponseDTO responseDTO =
+        await PostRepository().fetchPost(sessionUser.jwt!, boardId);
+
+    PostDetailModel? model = responseDTO.data;
+    Logger().d("data : ${responseDTO.data}");
+
     state = PostDetailModel(
         boardId: model!.boardId,
         boardLikeCount: model.boardLikeCount,
@@ -129,6 +130,7 @@ class PostDetailViewModel extends StateNotifier<PostDetailModel?> {
         bookId: model.bookId,
         bookPicUrl: model.bookPicUrl,
         bookTitle: model.bookTitle,
+        bookWriter: model.bookWriter,
         boardReplyCount: model.boardReplyCount,
         boardReplyDtOs: model.boardReplyDtOs);
   }

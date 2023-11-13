@@ -1,6 +1,5 @@
 import 'package:flutter_blog/data/dto/request_dto/book_like_request_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
-import 'package:flutter_blog/data/model/book_category.dart';
 import 'package:flutter_blog/data/repository/book_like_repository.dart';
 import 'package:flutter_blog/data/repository/book_repository.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
@@ -17,7 +16,7 @@ class BookDetailModel {
   late int bookReplyCount;
   late String bookSubTitle;
   late String bookIntroduction;
-  late BookCategory bookCategory; // Map
+  late String bookCategory;
   late String totalPage;
   late String publicationDate;
   late String sequence;
@@ -63,7 +62,7 @@ class BookDetailModel {
       bookReplyCount: json["bookReplyCount"],
       bookSubTitle: json["bookSubTitle"],
       bookIntroduction: json["bookIntroduction"],
-      bookCategory: BookCategory.fromJson(json["bookCategory"]), // Object
+      bookCategory: json["bookCategory"], // Object
       totalPage: json["totalPage"],
       // publicationDate: DateTime.parse(json["publicationDate"]),
       publicationDate: json["publicationDate"],

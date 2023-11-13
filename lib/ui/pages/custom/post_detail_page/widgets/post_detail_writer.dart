@@ -9,10 +9,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PostDetailWriter extends ConsumerWidget {
   // TODO : userId로 user정보 찾기
-  final int userId;
+  final String? boardUserNickname;
   // final String createdAt;
 
-  const PostDetailWriter({required this.userId});
+  PostDetailWriter({required this.boardUserNickname});
   //, required this.createdAt
 
   @override

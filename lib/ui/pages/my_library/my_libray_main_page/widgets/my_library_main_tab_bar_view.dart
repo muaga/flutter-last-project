@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/model/board.dart';
-import 'package:flutter_blog/data/model/book.dart';
-import 'package:flutter_blog/data/model/book_reply.dart';
 import 'package:flutter_blog/data/model/user.dart';
 import 'package:flutter_blog/ui/pages/custom/post_detail_page/post_detail_page.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_library_choice_page/my_library_main_bookcase.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_library_choice_page/my_library_main_like_books.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_reading_note/my_library_main_reading_note_form/my_library_main_reading_note_post_form.dart';
-import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_reading_note/my_library_main_reading_note_form/my_library_main_reading_note_reply_form.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/widgets/my_library_view_model.dart';
 import 'package:flutter_blog/ui/widgets/button/custom_category_button.dart';
 import 'package:flutter_blog/ui/widgets/scroll_view/custom_book_grid_view.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 
 class MyLibraryMainTabBarView extends StatefulWidget {
   final User user;
@@ -190,8 +186,8 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
                                   child: Column(
                                     children: [
                                       MyLibraryMainReadingNotePostForm(
-                                        bookId: boards[index].bookId,
-                                        postComent: "${boards[index].title}",
+                                        bookId: 5,
+                                        postComent: "제목",
                                         postDate: "${boards[index].createdAt}",
                                       ),
                                     ],

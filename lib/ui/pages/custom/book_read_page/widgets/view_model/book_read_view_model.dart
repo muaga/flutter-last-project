@@ -2,27 +2,54 @@
 import 'package:flutter_blog/data/dto/request_dto/book_mark_request_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/repository/book_data_repository.dart';
+import 'package:flutter_blog/data/repository/book_mark_repository.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 class BookReadModel {
-  late int scroll;
   late List<String> bookdata;
-  BookReadModel({required this.scroll, required this.bookdata});
+  late List<BookMarkDTO>? bookMarkDTOList;
+  BookReadModel({this.bookMarkDTOList, required this.bookdata});
 
   factory BookReadModel.fromJson(Map<String, dynamic> json) {
-    List<dynamic> temp = json["bookdata"];
-    List<String> bookdata = temp.map((e) => e.toString()).toList();
-
-    return BookReadModel(scroll: json["scroll"], bookdata: bookdata);
+    List<dynamic> temp1 = json["bookdata"];
+    List<String> bookdata = temp1.map((e) => e.toString()).toList();
+    List<dynamic> temp2 = json["bookMarkDTOList"];
+    List<BookMarkDTO>? bookMarkDTOList =
+        temp2.map((e) => BookMarkDTO.fromJson(e)).toList();
+    return BookReadModel(bookdata: bookdata, bookMarkDTOList: bookMarkDTOList);
   }
 }
 
-// class BookMarkDTO {
-//   final int id;
-//   BookMarkDTO({required this.bookLike});
-//   BookMarkDTO.fromJson(Map<String, dynamic> json) : bookLike = json["bookLike"];
-// }
+class BookMarkDTO {
+  final int? id;
+  final int? bookMark;
+  final int? userId;
+  final int? bookId;
+  final int? scroll;
+  final String? bookMarkCreatedAt;
+  BookMarkDTO(
+      {this.bookMarkCreatedAt,
+      this.scroll,
+      this.id,
+      this.bookId,
+      this.bookMark,
+      this.userId});
+  BookMarkDTO.fromJson(Map<String, dynamic> json)
+      : id = json["id"],
+        bookMark = json["bookMark"],
+        userId = json["userId"],
+        bookId = json["bookId"],
+        scroll = json["scroll"],
+        bookMarkCreatedAt = json["bookMarkCreatedAt"];
+}
+
+class checkDTO {
+  final int bookMark;
+  checkDTO({required this.bookMark});
+  checkDTO.fromJson(Map<String, dynamic> json) : bookMark = json["bookMark"];
+}
 
 // 창고
 class BookReadViewModel extends StateNotifier<BookReadModel?> {
@@ -30,25 +57,36 @@ class BookReadViewModel extends StateNotifier<BookReadModel?> {
 
   Ref ref;
 
-  Future<void> notifyInit(int bookId) async {
+  Future<BookReadModel> notifyInit(int bookId) async {
     SessionUser sessionUser = ref.read(sessionStore);
     ResponseDTO responseDTO = await BookDataRepository()
         .fetchBookDataDetail(bookId, sessionUser.jwt!);
     BookReadModel model = responseDTO.data;
-    state = BookReadModel(scroll: model.scroll, bookdata: model.bookdata);
+    state = BookReadModel(
+        bookMarkDTOList: model.bookMarkDTOList, bookdata: model.bookdata);
+    Logger().d(state?.bookdata);
+
+    return BookReadModel(
+        bookdata: model.bookdata, bookMarkDTOList: model.bookMarkDTOList);
   }
 
-  // 페이지 북마크 등록
+  // 페이지 북마크 등록 및 삭제
   Future<void> bookMark(BookMarkReqDTO bookMarkReqDTO) async {
     SessionUser sessionUser = ref.read(sessionStore);
 
-    // ResponseDTO responseDTO = await BookMarkRespository()
+    ResponseDTO responseDTO = await BookMarkRepository()
+        .fetchBookMark(bookMarkReqDTO, sessionUser.jwt!);
 
-    // 데이터 갱신
-    BookReadModel? model = state; // 777
-    // model!.bookLike = model!.bookLike * -1;
+    BookMarkDTO bookMark = responseDTO.data;
 
-    // state = BookReadModel(scroll: model.scroll, bookdata: model.bookdata);
+    // bookMarkDTO의 bookMark 번호가 1이라면, 추가
+    if (bookMark.bookMark == 1) {
+      // 데이터 갱신
+      BookReadModel? model = state; // 777
+      model?.bookMarkDTOList = [bookMark, ...?model.bookMarkDTOList];
+      state = BookReadModel(
+          bookdata: model!.bookdata, bookMarkDTOList: model.bookMarkDTOList);
+    }
   }
 }
 

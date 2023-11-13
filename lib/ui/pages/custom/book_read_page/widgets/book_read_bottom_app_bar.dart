@@ -1,8 +1,9 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:logger/logger.dart';
 
 class BookReadBottomAppBar extends StatefulWidget {
   BookReadBottomAppBar(
@@ -54,8 +55,8 @@ class _BookReadBottomAppBarState extends State<BookReadBottomAppBar> {
               });
             },
             min: 0.0, // 최소 값
-            max: widget.totalPages.toDouble() - 1, // 최대 값 (전체 페이지 수 - 1)
-            divisions: widget.totalPages - 1, // 분할 수 (전체 페이지 수 - 1)
+            max: widget.totalPages.toDouble(), // 최대 값 (전체 페이지 수)
+            divisions: max(1, widget.totalPages - 1), // 분할 수 (1 이상의 값으로 설정
           ),
           Padding(
             padding: EdgeInsets.only(bottom: gapMain),
@@ -63,7 +64,7 @@ class _BookReadBottomAppBarState extends State<BookReadBottomAppBar> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "${widget.pageController.page?.toInt() ?? widget.sliderValue.toInt() + 1}",
+                  "${(widget.pageController.page!.toInt() + 1) ?? (widget.sliderValue.toInt() + 1)}",
                   style: subTitle2(),
                 ),
                 Text(
