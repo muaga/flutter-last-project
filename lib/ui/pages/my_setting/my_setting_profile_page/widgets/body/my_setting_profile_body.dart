@@ -5,11 +5,13 @@ import 'package:flutter_blog/_core/utils/validator_util.dart';
 import 'package:flutter_blog/data/dto/request_dto/user_request_dto.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:flutter_blog/ui/pages/my_setting/my_setting_profile_page/widgets/my_setting_profile_member_type_form.dart';
+import 'package:flutter_blog/ui/pages/my_setting/my_setting_profile_page/widgets/my_setting_profile_view_model.dart';
 import 'package:flutter_blog/ui/widgets/button/custom_bottom_button.dart';
 import 'package:flutter_blog/ui/widgets/form/custom_check_box_and_title_form.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
 import 'package:flutter_blog/ui/widgets/text_form/custom_text_form.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 class MySettingProfileBody extends ConsumerWidget {
   MySettingProfileBody({super.key});
@@ -22,7 +24,9 @@ class MySettingProfileBody extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SessionUser sessionUser = ref.read(sessionStore);
-
+    MySettingProfileModel? model = ref.watch(mySettingProfileProvider);
+    Logger().d("model은 $model");
+    Logger().d("nickname : ${model?.nickname}");
     return Padding(
       padding: const EdgeInsets.all(gapMain),
       child: Form(
@@ -34,7 +38,7 @@ class MySettingProfileBody extends ConsumerWidget {
             SliverToBoxAdapter(
               child: CustomTextForm(
                 title: "필명",
-                hintText: "${sessionUser.user!.nickname}",
+                hintText: "${model!.nickname}",
                 funValidator: validateNickname(),
                 controller: _nickName,
               ),
@@ -57,7 +61,7 @@ class MySettingProfileBody extends ConsumerWidget {
             SliverToBoxAdapter(
               child: CustomTextForm(
                 title: "이메일",
-                hintText: "${sessionUser.user!.email}",
+                hintText: "${model!.email}",
                 funValidator: validateEmail(),
                 controller: _email,
               ),
@@ -88,13 +92,15 @@ class MySettingProfileBody extends ConsumerWidget {
             SliverToBoxAdapter(child: SizedBox(height: gapLarge)),
             SliverToBoxAdapter(
                 child: CustomBottomButton(
-              funPageRoute: () {
+              funPageRoute: () async {
                 if (_formkey.currentState!.validate()) {
                   UserUpdateReqDTO userUpdateReqDTO = UserUpdateReqDTO(
-                      nickName: _nickName.text,
+                      nickname: _nickName.text,
                       password: _password.text,
                       email: _email.text);
-                  ref.read(sessionStore).userUpdate(userUpdateReqDTO);
+                  await ref.read(sessionStore).userUpdate(userUpdateReqDTO);
+                  ref.read(mySettingProfileProvider.notifier).notifyInit();
+                  Logger().d("개인정보수정 시작");
                 }
               },
               buttonText: "확인",

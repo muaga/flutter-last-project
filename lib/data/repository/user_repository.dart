@@ -3,6 +3,7 @@ import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/request_dto/user_request_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/model/user.dart';
+import 'package:flutter_blog/ui/pages/my_setting/my_setting_profile_page/widgets/my_setting_profile_view_model.dart';
 import 'package:logger/logger.dart';
 
 class UserRepository {
@@ -71,6 +72,23 @@ class UserRepository {
       return responseDTO;
     } catch (e) {
       return new ResponseDTO(-1, "개인 정보 수정에 실패했습니다", null);
+    }
+  }
+
+  Future<ResponseDTO> fetchUserInfo(String jwt) async {
+    try {
+      Response response = await dio.get("/user/updatePage",
+          options: Options(headers: {"Authorization": "$jwt"}));
+
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      Logger().d(responseDTO.data);
+      MySettingProfileModel model =
+          MySettingProfileModel.fromJson(responseDTO.data);
+      responseDTO.data = model;
+
+      return responseDTO;
+    } catch (e) {
+      return new ResponseDTO(-1, "개인 정보를 불러오는데 실패했습니다", null);
     }
   }
 }
