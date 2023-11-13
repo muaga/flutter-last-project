@@ -77,12 +77,12 @@ class BookReplyListViewModel extends StateNotifier<BookReplyListModel?> {
 
   final mContext = navigatorKey.currentContext;
 
-  Future<void> notifyInit() async {
+  Future<void> notifyInit(int bookId) async {
     // jwt 가져오기
     SessionUser sessionUser = ref.read(sessionStore);
 
-    ResponseDTO responseDTO =
-        await BookReplyRepository().fetchBookReplyList(sessionUser.jwt!);
+    ResponseDTO responseDTO = await BookReplyRepository()
+        .fetchBookReplyList(sessionUser.jwt!, bookId);
 
     state = responseDTO.data;
   }
@@ -116,7 +116,8 @@ class BookReplyListViewModel extends StateNotifier<BookReplyListModel?> {
 }
 
 // 3. 창고 관리자 (View 빌드되기 직전에 생성됨)
-final bookReplyListProvider = StateNotifierProvider.autoDispose<
-    BookReplyListViewModel, BookReplyListModel?>((ref) {
-  return BookReplyListViewModel(null, ref)..notifyInit();
+final bookReplyListProvider = StateNotifierProvider.family
+    .autoDispose<BookReplyListViewModel, BookReplyListModel?, int>(
+        (ref, bookId) {
+  return BookReplyListViewModel(null, ref)..notifyInit(bookId);
 });

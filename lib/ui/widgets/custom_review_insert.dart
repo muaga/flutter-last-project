@@ -68,8 +68,8 @@ class CustomReviewInsert extends ConsumerWidget {
                       userId: session.user!.id,
                       bookId: 1,
                       content: _content.text);
-                  ref.read(bookReplyListProvider.notifier).notifyAdd(dto);
-                  // 리뷰를 제출하는 로직을 추가하세요.
+                  //TODO: 여기 이전 페이지부터 bookId 넘겨줘야함
+                  // ref.read(bookReplyListProvider.notifier).notifyAdd(dto, );
                 },
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.grey, // 원하는 배경색으로 변경

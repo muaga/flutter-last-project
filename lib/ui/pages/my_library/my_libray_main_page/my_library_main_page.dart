@@ -11,7 +11,7 @@ class MyLibraryMainPage extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: null,
-        body: MyLibraryMainBody(userId: users.length),
+        body: MyLibraryMainBody(),
       ),
     );
   }

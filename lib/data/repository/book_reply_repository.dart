@@ -9,10 +9,10 @@ import 'package:logger/logger.dart';
 
 class BookReplyRepository {
   /// TODO 패치부분 수정
-  Future<ResponseDTO> fetchBookReplyList(String jwt) async {
+  Future<ResponseDTO> fetchBookReplyList(String jwt, int bookId) async {
     try {
       // 1. 통신
-      final response = await dio.get("/book/1/bookReply",
+      final response = await dio.get("/book/$bookId/bookReply",
           options: Options(headers: {"Authorization": "$jwt"}));
 
       // 2. ResponseDTO 파싱

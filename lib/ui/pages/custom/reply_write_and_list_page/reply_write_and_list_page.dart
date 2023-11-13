@@ -20,8 +20,8 @@ class ReplyWriteAndListPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.read(bookReplyListProvider.notifier).notifyInit();
-    BookReplyListModel? model = ref.watch(bookReplyListProvider);
+    ref.read(bookReplyListProvider(bookId).notifier).notifyInit(bookId);
+    BookReplyListModel? model = ref.watch(bookReplyListProvider(bookId));
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -35,7 +35,8 @@ class ReplyWriteAndListPage extends ConsumerWidget {
         padding: const EdgeInsets.all(gapMain),
         child: NestedScrollView(
           headerSliverBuilder: (context, innerBoxIsScrolled) {
-            BookReplyListModel? model = ref.watch(bookReplyListProvider);
+            BookReplyListModel? model =
+                ref.watch(bookReplyListProvider(bookId));
             return [
               SliverToBoxAdapter(
                 child: Container(
@@ -102,7 +103,9 @@ class ReplyWriteAndListPage extends ConsumerWidget {
                           userId: session.user!.id,
                           bookId: bookId,
                           content: _content.text);
-                      ref.read(bookReplyListProvider.notifier).notifyAdd(dto);
+                      ref
+                          .read(bookReplyListProvider(bookId).notifier)
+                          .notifyAdd(dto);
                     },
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.grey,
@@ -128,7 +131,8 @@ class ReplyWriteAndListPage extends ConsumerWidget {
             shrinkWrap: true,
             itemCount: model!.replyDTOs.length,
             itemBuilder: (context, index) {
-              BookReplyListModel? model = ref.watch(bookReplyListProvider);
+              BookReplyListModel? model =
+                  ref.watch(bookReplyListProvider(bookId));
               return CustomReviewCard(
                 userPicUrl: model!.replyDTOs[index].userPicUrl,
                 nickName: model!.replyDTOs[index].nickname,
