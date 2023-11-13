@@ -20,7 +20,6 @@ class SessionUser {
 
   SessionUser({this.user, this.jwt, this.isLogin = false});
 
-  /// fetchJoin
   Future<void> join(JoinReqDTO joinReqDTO) async {
     // 통신 코드
     ResponseDTO responseDTO = await UserRepository().fetchJoin(joinReqDTO);
@@ -34,7 +33,6 @@ class SessionUser {
     }
   }
 
-  /// fetchLogin
   Future<void> login(LoginReqDTO loginReqDTO) async {
     // 통신 코드
     ResponseDTO responseDTO = await UserRepository().fetchLogin(loginReqDTO);
@@ -58,12 +56,22 @@ class SessionUser {
     }
   }
 
+  Future<void> userUpdate(UserUpdateReqDTO userUpdateReqDTO) async {
+    String jwt = await secureStorage.read(key: 'jwt') as String;
+    ResponseDTO responseDTO =
+        await UserRepository().fetchUserUpdate(jwt, userUpdateReqDTO);
+
+    if (responseDTO.code == 1) {
+      Navigator.pop(mContext!);
+    } else {
+      ScaffoldMessenger.of(mContext!)
+          .showSnackBar(SnackBar(content: Text(responseDTO.msg)));
+    }
+  }
+
   Future<void> resignation() async {
     String jwt = await secureStorage.read(key: 'jwt') as String;
     ResponseDTO responseDTO = await UserRepository().fetchResignation(jwt);
-    Logger().d(responseDTO);
-
-    Logger().d(responseDTO.code);
 
     if (responseDTO.code == 1) {
       Navigator.of(mContext!)
