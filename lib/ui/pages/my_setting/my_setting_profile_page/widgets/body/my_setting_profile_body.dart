@@ -10,6 +10,7 @@ import 'package:flutter_blog/ui/widgets/form/custom_check_box_and_title_form.dar
 import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
 import 'package:flutter_blog/ui/widgets/text_form/custom_text_form.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 class MySettingProfileBody extends ConsumerWidget {
   MySettingProfileBody({super.key});
@@ -91,10 +92,11 @@ class MySettingProfileBody extends ConsumerWidget {
               funPageRoute: () {
                 if (_formkey.currentState!.validate()) {
                   UserUpdateReqDTO userUpdateReqDTO = UserUpdateReqDTO(
-                      nickName: _nickName.text,
+                      nickname: _nickName.text,
                       password: _password.text,
                       email: _email.text);
                   ref.read(sessionStore).userUpdate(userUpdateReqDTO);
+                  Logger().d("개인정보수정 시작");
                 }
               },
               buttonText: "확인",
