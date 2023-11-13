@@ -55,15 +55,15 @@ class LoginReqDTO {
 }
 
 class UserUpdateReqDTO {
-  final String nickName;
+  final String nickname;
   final String password;
   final String email;
 
   UserUpdateReqDTO(
-      {required this.nickName, required this.password, required this.email});
+      {required this.nickname, required this.password, required this.email});
 
   Map<String, dynamic> toJson() => {
-        "nickName": nickName,
+        "nickname": nickname,
         "password": password,
         "email": email,
       };
