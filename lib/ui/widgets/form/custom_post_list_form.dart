@@ -19,6 +19,7 @@ class CustomPostListForm extends ConsumerWidget {
     FeedMainModel? model = ref.watch(feedMainProvider);
     Logger().d("model : ${model}");
 
+
     if (model != null) {
       List<BoardDTO> boardList = [];
       boardList = model.boardList;
@@ -33,8 +34,10 @@ class CustomPostListForm extends ConsumerWidget {
           /// 만약 존재한다면,
           if (hasPicUrl) {
             BookDetailModel? book =
-                ref.read(bookDetailProvider(boardList[index].bookId!));
-            Logger().d(book);
+                ref.watch(bookDetailProvider(boardList[index].bookId!));
+            Logger().d("book을 찾아라 : ${book}");
+            Logger().d("bookId ${boardList[index].bookId!}");
+
             return InkWell(
               onTap: () {
                 Navigator.push(
