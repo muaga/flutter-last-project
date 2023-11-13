@@ -1,11 +1,50 @@
-class BookReqDTO {
-  final int bookCategowryId;
+class BookMonthReqDTO {
+  final int bookCategoryId;
   final String alignment;
 
-  BookReqDTO({required this.bookCategowryId, required this.alignment});
+  BookMonthReqDTO({required this.bookCategoryId, required this.alignment});
 
   Map<String, dynamic> toJson() => {
-        "bookCategowryId": bookCategowryId,
+        "bookCategoryId": bookCategoryId,
+        "alignment": alignment,
+      };
+}
+
+class BookCategoryReqDTO {
+  final int bookCategoryId;
+  final String alignment;
+  final int minusMonths;
+
+  BookCategoryReqDTO(
+      {required this.bookCategoryId,
+      required this.alignment,
+      required this.minusMonths});
+
+  Map<String, dynamic> toJson() => {
+        "bookCategoryId": bookCategoryId,
+        "alignment": alignment,
+        "minusMonths": minusMonths,
+      };
+}
+
+class BookSearchReqDTO {
+  final String keyword;
+
+  BookSearchReqDTO({required this.keyword});
+
+  Map<String, dynamic> toJson() => {
+        "keyword": keyword,
+      };
+}
+
+class BookBestReqDTO {
+  final int bookCategoryId;
+  final String alignment;
+
+  BookBestReqDTO({required this.bookCategoryId, required this.alignment});
+
+  Map<String, dynamic> toJson() => {
+        "bookCategoryId": bookCategoryId,
         "alignment": alignment,
       };
 }

@@ -1,11 +1,8 @@
-import 'dart:ffi';
-
 import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/request_dto/user_request_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/model/user.dart';
-import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:logger/logger.dart';
 
 class UserRepository {

@@ -2,11 +2,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/book_detail_page.dart';
+import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/widgets/view-model/one_month_press_book_list_view_model.dart';
 
 class NowBookCard extends StatelessWidget {
-  final Book? book;
+  final BookListDTO? book;
   const NowBookCard({this.book});
 
   @override
@@ -16,12 +16,12 @@ class NowBookCard extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => BookDetailPage(bookId: book!.id)));
+                builder: (context) => BookDetailPage(bookId: book!.bookId)));
       },
       child: Column(
         children: [
           CachedNetworkImage(
-            imageUrl: dio.options.baseUrl + "/images/${book?.picUrl ?? ""}",
+            imageUrl: dio.options.baseUrl + "/images/${book?.bookPicUrl ?? ""}",
             height: getScreenWidth(context) * 0.45,
             width: getScreenWidth(context) * 0.3,
             fit: BoxFit.fill,
@@ -38,7 +38,7 @@ class NowBookCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  book?.title ?? "",
+                  book?.bookTitle ?? "",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -49,7 +49,7 @@ class NowBookCard extends StatelessWidget {
                 ),
                 SizedBox(height: gapSmall),
                 Text(
-                  book?.writer ?? "",
+                  book?.bookWriter ?? "",
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.bold,

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/data/model/book.dart';
+import 'package:flutter_blog/ui/pages/today_story/story_book_list_page/widgets/story_book_grid_view.dart';
+import 'package:flutter_blog/ui/pages/today_story/story_main_page/widgets/view_model/today_story_view_model.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
-import 'package:flutter_blog/ui/widgets/scroll_view/Custom_book_grid_view.dart';
 
 class StoryBookListBody extends StatelessWidget {
   const StoryBookListBody({super.key, required this.books});
 
-  final List<Book> books;
+  final List<StoryBookDTO> books;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class StoryBookListBody extends StatelessWidget {
         Expanded(
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: gapMain),
-            child: CustomBookGridView(
+            child: StoryBookGridView(
               books: books,
             ),
           ),

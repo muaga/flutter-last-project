@@ -5,23 +5,25 @@ import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/model/post.dart';
 import 'package:flutter_blog/ui/pages/custom/post_update_page/widgets/post_update_view_model.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_page/widgets/post_write_view_model.dart';
+import 'package:flutter_blog/ui/pages/feed/feed_main_page/widgets/feed_main_view_model.dart';
+import 'package:logger/logger.dart';
 
 class PostRepository {
+  // 피드 전체 post 목록
   Future<ResponseDTO> fetchPostList(String jwt) async {
     try {
       // 1. 통신
-      final response = await dio.get("/post",
-          options: Options(headers: {"Authorization": "${jwt}"}));
+      Response response = await dio.get("/boardList",
+          options: Options(headers: {"Authorization": jwt}));
 
       // 2. ResponseDTO 파싱
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 
       // 3. ResponseDTO의 data 파싱
-      List<dynamic> mapList = responseDTO.data as List<dynamic>;
-      List<Post> postList = mapList.map((e) => Post.fromJson(e)).toList();
+      FeedMainModel model = FeedMainModel.fromJson(responseDTO.data);
 
       // 4. 파싱된 데이터를 다시 공통 DTO로 덮어씌우기
-      responseDTO.data = postList;
+      responseDTO.data = model;
 
       return responseDTO;
     } catch (e) {
@@ -91,6 +93,23 @@ class PostRepository {
       return responseDTO;
     } catch (e) {
       return ResponseDTO(-1, "게시글 한건 불러오기 실패", null);
+    }
+  }
+
+  Future<ResponseDTO> fetchDeletePost(String jwt, int boardId) async {
+    try {
+      // 통신
+      Response response = await dio.delete("/board/${boardId}/delete",
+          options: Options(headers: {"Authorization": jwt}));
+      Logger().d("응답 : $response");
+
+      // 응답 받은 데이터 파싱
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+      // responseDTO.data = Post.fromJson(responseDTO.data);
+
+      return responseDTO;
+    } catch (e) {
+      return ResponseDTO(-1, "게시글 삭제 실패", null);
     }
   }
 }

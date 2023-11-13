@@ -62,7 +62,11 @@ class _PostWriteBookRecommendPageState
                   setState(() {});
                 }
               },
-              child: CustomGridBookCard(book: books[index]),
+              child: CustomGridBookCard(
+                title: books[index].title,
+                writer: books[index].writer,
+                picUrl: books[index].picUrl,
+              ),
             );
           },
         ),

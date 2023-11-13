@@ -4,7 +4,7 @@ import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/move.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/data/model/book.dart';
+import 'package:flutter_blog/data/dto/request_dto/book_request_dto.dart';
 import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/banner_slider/now_image_slider_form.dart';
 import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/banner_slider/now_text_slider_form.dart';
 import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/best_slider/now_book_slider.dart';
@@ -19,16 +19,18 @@ import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/month/now_
 import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/month/now_month_title_and_forward_form.dart';
 import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/reponse_dto/best_book_response_dto_test.dart';
 import 'package:flutter_blog/ui/pages/today_now/now_main_page/widgets/reponse_dto/event_response_dto_test.dart';
+import 'package:flutter_blog/ui/pages/today_now/one_month_press_book_list_page/widgets/view-model/one_month_press_book_list_view_model.dart';
 import 'package:flutter_blog/ui/widgets/form/custom_footer_form.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class NowMainBody extends StatefulWidget {
+class NowMainBody extends ConsumerStatefulWidget {
   const NowMainBody({super.key});
 
   @override
-  State<NowMainBody> createState() => _NowMainBodyState();
+  _NowMainBodyState createState() => _NowMainBodyState();
 }
 
-class _NowMainBodyState extends State<NowMainBody> {
+class _NowMainBodyState extends ConsumerState<NowMainBody> {
   // 슬라이더 초기 번호
   int _bannerCurrent = 0;
   int _bestCurrent = 0;
@@ -36,6 +38,8 @@ class _NowMainBodyState extends State<NowMainBody> {
 
   // AppBar 초기 아이템 컬러
   Color currentColor = kFontWhite;
+
+  late List<BookListDTO> bookList = [];
 
   // 컨트롤러
   final CarouselController _imageController = CarouselController();
@@ -127,6 +131,7 @@ class _NowMainBodyState extends State<NowMainBody> {
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
+    changeBookList(0);
   }
 
   @override
@@ -148,6 +153,20 @@ class _NowMainBodyState extends State<NowMainBody> {
           currentColor = kFontWhite;
         });
       }
+    }
+  }
+
+  void changeBookList(int categoryId) async {
+    BookMonthReqDTO bookMonthReqDTO =
+        BookMonthReqDTO(bookCategoryId: categoryId, alignment: "ranking");
+    OneMonthPressBookListModel? model = await ref
+        .read(oneMonthPressProvider(bookMonthReqDTO).notifier)
+        .notifyInit(bookMonthReqDTO);
+
+    if (model != null) {
+      setState(() {
+        bookList = model.bookList!;
+      });
     }
   }
 
@@ -264,8 +283,8 @@ class _NowMainBodyState extends State<NowMainBody> {
           /// 한달 이내에 출간된 책
           SliverToBoxAdapter(child: SizedBox(height: gapXxlarge)),
           NowMonthTitleAndForwardForm(),
-          NowMonthBookForm(books: books),
-          NowMonthBookSmallForm(books: books),
+          NowMonthBookForm(books: bookList),
+          NowMonthBookSmallForm(books: bookList),
           SliverToBoxAdapter(child: SizedBox(height: gapLarge)),
 
           /// 오늘의 한 문장

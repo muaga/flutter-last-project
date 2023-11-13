@@ -24,7 +24,7 @@ class BoardDTO {
   final String userPicUrl;
   final String userNickname;
   final String boardCreatedAt;
-  final int? boardId;
+  final int? bookId;
 
   BoardDTO(
       {required this.id,
@@ -33,7 +33,7 @@ class BoardDTO {
       required this.userPicUrl,
       required this.userNickname,
       required this.boardCreatedAt,
-      this.boardId});
+      this.bookId});
 
   BoardDTO.fromJson(Map<String, dynamic> json)
       : id = json["id"],
@@ -42,7 +42,7 @@ class BoardDTO {
         userPicUrl = json["userPicUrl"],
         userNickname = json["userNickname"],
         boardCreatedAt = json["boardCreatedAt"],
-        boardId = json["boardId"];
+        bookId = json["bookId"];
 }
 
 class FeedMainViewModel extends StateNotifier<FeedMainModel?> {
@@ -50,11 +50,12 @@ class FeedMainViewModel extends StateNotifier<FeedMainModel?> {
 
   Ref ref;
 
-  void notifyInit() async {
+  Future<void> notifyInit() async {
     SessionUser sessionUser = ref.read(sessionStore);
     ResponseDTO responseDTO =
         await PostRepository().fetchPostList(sessionUser.jwt!);
-    state = FeedMainModel(boardList: responseDTO.data);
+    FeedMainModel model = responseDTO.data;
+    state = FeedMainModel(boardList: model.boardList);
   }
 }
 
