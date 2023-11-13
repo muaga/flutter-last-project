@@ -8,22 +8,22 @@ void main() async {
   String jwt =
       "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtZXRhY29kaW5nLWtleSIsImlkIjoxLCJlbWFpbCI6InNzYXJAbmF0ZS5jb20iLCJleHAiOjE3MDA0NjUyMzl9.7ZGbEjc3WxdDw-9EVRts83uD-1k5FtqDfZzrruG1ss3_hv5hYXoq6WDRH9CmqiJPs1ZqrM1LJ1enIAAlp80Oig";
 
-  await fetchPost(jwt, 1);
+  await fetchDeletePost(jwt, 1);
 }
 
 // TODO : 통신 테스트
 
-// Future<void> fetchDeletePost(String jwt, int boardId) async {
-//   Response response = await dio.delete("/board/${boardId}/delete",
-//       options: Options(headers: {"Authorization": jwt}));
-//   Logger().d("응답 : $response");
-//
-//   // 응답 받은 데이터 파싱
-//   ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-//   // Logger().d("응답 : $response.");
-//
-//   // responseDTO.data = Post.fromJson(responseDTO.data);
-// }
+Future<void> fetchDeletePost(String jwt, int boardId) async {
+  Response response = await dio.delete("/board/${boardId}/delete",
+      options: Options(headers: {"Authorization": jwt}));
+  // Logger().d("응답 : $response");
+
+  // 응답 받은 데이터 파싱
+  ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+  Logger().d("응답 : $response.");
+
+  // responseDTO.data = Post.fromJson(responseDTO.data);
+}
 
 Future<ResponseDTO> fetchPost(String jwt, int id) async {
   try {

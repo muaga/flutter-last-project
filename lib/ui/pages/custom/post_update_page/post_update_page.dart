@@ -118,6 +118,7 @@ class _PostUpdatePageState extends ConsumerState<PostUpdatePage> {
                         width: getScreenWidth(context) / 3,
                         child: widget.selectedBook != null
                             ? PostWriteRecommendBookCard(
+                                bookId: widget.selectedBook!.id,
                                 bookPicUrl: widget.selectedBook!.picUrl,
                                 bookWriter: widget.selectedBook!.writer,
                                 bookTitle: widget.selectedBook!.title,

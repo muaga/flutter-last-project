@@ -4,15 +4,15 @@ import 'package:logger/logger.dart';
 
 void main() async {
   String jwt =
-      "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtZXRhY29kaW5nLWtleSIsImlkIjoxLCJlbWFpbCI6InNzYXJAbmF0ZS5jb20iLCJleHAiOjE3MDAzNjY1OTR9.VdqjdU8Mj-RV6NCfKn8VmArqikOnA5jLfNCLk434sCzlkrUgG3x5nhaggCsaHbFpQKSO3k8oGVRv9Dn6L1K3bg";
+      "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJtZXRhY29kaW5nLWtleSIsImlkIjoxLCJlbWFpbCI6InNzYXJAbmF0ZS5jb20iLCJleHAiOjE3MDA0ODE4OTZ9.eDqGN5C81bobxsxwFTyQrC546m_ZWOHyZheoQ7WgZpcF4WuGtszrcd3H8aJG6jPlJjmL1mRD6jKQJCZ-crQAhA";
 
-  await fetchBookDetail(1, jwt);
+  await fetchCategoryBookList(1);
 }
 
 Future<void> fetchBookDetail(int bookId, String jwt) async {
   // 통신
   Response response = await dio.get(
-    "/book/detail/$bookId",
+    "/book/detail/1",
     options: Options(headers: {"Authorization": jwt}),
   );
 
@@ -22,4 +22,17 @@ Future<void> fetchBookDetail(int bookId, String jwt) async {
   // ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
   // BookDetailModel book = BookDetailModel.fromJson(responseDTO.data);
   // responseDTO.data = book;
+}
+
+Future<void> fetchCategoryBookList(int categoryId) async {
+  // 통신
+  Response<dynamic> response =
+      await dio.post("/book/bookCategory/${categoryId}");
+
+  Logger().d(response);
+  // 파싱
+  // ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+  //
+  // SearchCategoryBookListModel model =
+  // SearchCategoryBookListModel.fromJson(responseDTO.data);
 }

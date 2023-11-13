@@ -74,4 +74,20 @@ class BookReplyRepository {
       return ResponseDTO(-1, "게시글 한건 불러오기 실패", null);
     }
   }
+
+  /// 책 댓글 삭제
+  Future<ResponseDTO> fetchDeleteReply(String jwt, int replyId) async {
+    try {
+      // 통신
+      Response response = await dio.delete("/bookReply/${replyId}/delete",
+          options: Options(headers: {"Authorization": "$jwt"}));
+
+      // 응답 받은 데이터 파싱
+      ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
+
+      return responseDTO;
+    } catch (e) {
+      return ResponseDTO(-1, "댓글 삭제 실패", null);
+    }
+  }
 }

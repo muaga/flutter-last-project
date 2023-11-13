@@ -22,10 +22,15 @@ class ReplyWriteAndListPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.read(bookReplyListProvider(bookId).notifier).notifyInit(bookId);
     BookReplyListModel? model = ref.watch(bookReplyListProvider(bookId));
+
+    if (model == null) {
+      return CircularProgressIndicator();
+    }
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
+              Navigator.pop(context);
               Navigator.pop(context);
             },
             icon: iconArrowBack()),

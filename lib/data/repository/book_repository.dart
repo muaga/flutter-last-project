@@ -54,12 +54,11 @@ class BookRepository {
   }
 
   // 카테고리별 책 목록
-  Future<ResponseDTO> fetchCategoryBookList(
-      BookCategoryReqDTO bookCategoryReqDTO) async {
+  Future<ResponseDTO> fetchCategoryBookList(int categoryId) async {
     try {
       // 통신
-      Response<dynamic> response = await dio.post("/book/bookCategory",
-          data: bookCategoryReqDTO.toJson());
+      Response<dynamic> response =
+          await dio.get("/book/bookCategory/${categoryId}");
       // 파싱
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
 

@@ -6,20 +6,20 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
 class PostDetailModel {
-  late int boardId;
-  late int boardLikeCount;
-  late int boardReplCount;
-  late String boardTitle;
-  late String boardUserPicUrl;
-  late String boardUserNickname;
-  late String boardCreatedAt;
-  late String boardContent;
-  late int bookId;
-  late String bookPicUrl;
-  late String bookTitle;
-  late String bookWriter;
-  late int boardReplyCount;
-  late List<BoardReplyDto> boardReplyDtOs;
+  final int boardId;
+  final int boardLikeCount;
+  final int boardReplCount;
+  final String boardTitle;
+  final String boardUserPicUrl;
+  final String boardUserNickname;
+  final String boardCreatedAt;
+  final String boardContent;
+  final int? bookId;
+  final String? bookPicUrl;
+  final String? bookTitle;
+  final String? bookWriter;
+  final int? boardReplyCount;
+  final List<BoardReplyDto>? boardReplyDtOs;
 
   PostDetailModel({
     required this.boardId,
@@ -30,12 +30,12 @@ class PostDetailModel {
     required this.boardUserNickname,
     required this.boardCreatedAt,
     required this.boardContent,
-    required this.bookId,
-    required this.bookPicUrl,
-    required this.bookTitle,
-    required this.bookWriter,
-    required this.boardReplyCount,
-    required this.boardReplyDtOs,
+    this.bookId,
+    this.bookPicUrl,
+    this.bookTitle,
+    this.bookWriter,
+    this.boardReplyCount,
+    this.boardReplyDtOs,
   });
 
   factory PostDetailModel.fromJson(Map<String, dynamic> json) =>
@@ -48,45 +48,27 @@ class PostDetailModel {
         boardUserNickname: json["boardUserNickname"],
         boardCreatedAt: json["boardCreatedAt"],
         boardContent: json["boardContent"],
-        bookId: json["bookId"],
-        bookPicUrl: json["bookPicUrl"],
-        bookTitle: json["bookTitle"],
-        bookWriter: json["bookWriter"],
-        boardReplyCount: json["boardReplyCount"],
+        bookId: json["bookId"] ?? 0,
+        bookPicUrl: json["bookPicUrl"] ?? "",
+        bookTitle: json["bookTitle"] ?? "",
+        bookWriter: json["bookWriter"] ?? "",
+        boardReplyCount: json["boardReplyCount"] ?? 0,
         boardReplyDtOs: List<BoardReplyDto>.from(
-            json["boardReplyDTOs"].map((x) => BoardReplyDto.fromJson(x))),
+            json["boardReplyDTOs"].map((x) => BoardReplyDto.fromJson(x)) ?? []),
       );
-
-  // Map<String, dynamic> toJson() => {
-  //       "boardId": boardId,
-  //   "boardLikeCount": boardLikeCount,
-  //   "boardReplCount": boardReplCount,
-  //   "boardTitle": boardTitle,
-  //   "boardUserPicUrl": boardUserPicUrl,
-  //       "boardUserNickname": boardUserNickname,
-  //       "boardCreatedAt": boardCreatedAt,
-  //       "boardContent": boardContent,
-  //       "bookId": bookId,
-  //       "bookPicUrl": bookPicUrl,
-  //       "bookTitle": bookTitle,
-  //       "bookWriter": bookWriter,
-  //       "boardReplyCount": boardReplyCount,
-  //       "boardReplyDTOs":
-  //           List<dynamic>.from(boardReplyDtOs.map((x) => x.toJson())),
-  //     };
 }
 
 class BoardReplyDto {
-  final String replyUserPicUrl;
-  final String replyUserNickname;
-  final String replyCreatedAt;
-  final String replyContent;
+  final String? replyUserPicUrl;
+  final String? replyUserNickname;
+  final String? replyCreatedAt;
+  final String? replyContent;
 
   BoardReplyDto({
-    required this.replyUserPicUrl,
-    required this.replyUserNickname,
-    required this.replyCreatedAt,
-    required this.replyContent,
+    this.replyUserPicUrl,
+    this.replyUserNickname,
+    this.replyCreatedAt,
+    this.replyContent,
   });
 
   BoardReplyDto.fromJson(Map<String, dynamic> json)
@@ -124,7 +106,7 @@ class PostDetailViewModel extends StateNotifier<PostDetailModel?> {
         boardReplCount: model.boardReplCount,
         boardTitle: model.boardTitle,
         boardUserPicUrl: model.boardUserPicUrl,
-        boardUserNickname: model.boardUserPicUrl,
+        boardUserNickname: model.boardUserNickname,
         boardCreatedAt: model.boardCreatedAt,
         boardContent: model.boardContent,
         bookId: model.bookId,

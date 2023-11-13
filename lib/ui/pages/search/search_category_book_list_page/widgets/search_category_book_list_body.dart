@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/data/dto/request_dto/book_request_dto.dart';
 import 'package:flutter_blog/ui/pages/search/search_category_book_list_page/widgets/search_category_book_grid_view.dart';
 import 'package:flutter_blog/ui/pages/search/search_category_book_list_page/widgets/view_model/search_category_book_list_view_model.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
@@ -53,15 +52,9 @@ class SearchCategoryBookListBody extends ConsumerWidget {
   }
 
   Future<SearchCategoryBookListModel> fetchModel(WidgetRef ref) async {
-    BookCategoryReqDTO bookCategoryReqDTO = BookCategoryReqDTO(
-      bookCategoryId: categoryId,
-      alignment: "ranking",
-      minusMonths: 12,
-    );
-
     SearchCategoryBookListModel model = await ref
-        .read(searchCategoryProvider(bookCategoryReqDTO).notifier)
-        .notifyInit(bookCategoryReqDTO);
+        .read(searchCategoryProvider(categoryId).notifier)
+        .notifyInit(categoryId);
 
     return model;
   }

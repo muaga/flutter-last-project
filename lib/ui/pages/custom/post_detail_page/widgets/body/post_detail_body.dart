@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/data/model/board.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
 import 'package:flutter_blog/ui/pages/custom/post_detail_page/widgets/form/post_detail_content.dart';
 import 'package:flutter_blog/ui/pages/custom/post_detail_page/widgets/form/post_detail_like_form.dart';
@@ -24,56 +23,72 @@ class PostDetailBody extends ConsumerWidget {
     final SessionUser sessionUser = ref.read(sessionStore);
 
     PostDetailModel? model = ref.watch(postDetailProvider(boardId));
-    final int? bookId = model?.bookId;
-    Logger().d("boardId : ${boardId}");
+    if (model == null) {
+      return CircularProgressIndicator();
+    }
 
-    // BookDetailModel? detailBook;
-    //
-    // if (bookId != null) {
-    //   detailBook = ref.watch(bookDetailProvider(boardId));
-    //   Logger().d("디테일북:${detailBook}");
-    // }
+    Logger().d(model.bookPicUrl);
 
-    // if (detailBook != null) {
-    return Padding(
-      padding: const EdgeInsets.all(gapMain),
-      child: ListView(
-        children: [
-          PostDetailTitle(model!.boardTitle),
-          SizedBox(height: gapXlarge),
-          PostDetailWriter(boardUserNickname: model.boardUserNickname),
-          SizedBox(height: gapLarge),
-          CustomThinLine(),
-          SizedBox(height: gapLarge),
-          PostDetailContent(model.boardContent),
-          if (board.picUrl != null)
+    if (model.bookPicUrl != null && model.bookPicUrl!.isNotEmpty) {
+      return Padding(
+        padding: const EdgeInsets.all(gapMain),
+        child: ListView(
+          children: [
+            PostDetailTitle(model!.boardTitle),
+            SizedBox(height: gapXlarge),
+            PostDetailWriter(
+                boardUserNickname: model.boardUserNickname,
+                createdAt: model.boardCreatedAt),
+            SizedBox(height: gapLarge),
+            CustomThinLine(),
+            SizedBox(height: gapLarge),
+            PostDetailContent(model.boardContent),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: gapLarge),
+                SizedBox(height: gapLarge),
                 CustomThinLine(),
-                const SizedBox(height: gapLarge),
+                SizedBox(height: gapLarge),
                 Text("추천도서", style: subTitle2()),
                 SizedBox(height: gapLarge),
                 Container(
                   width: getScreenWidth(context) / 3,
                   height: getScreenWidth(context) * 0.7,
                   child: PostWriteRecommendBookCard(
-                    bookPicUrl: model.bookPicUrl,
-                    bookTitle: model.bookTitle,
-                    bookWriter: model.bookWriter,
+                    bookId: model.bookId!,
+                    bookPicUrl: model.bookPicUrl!,
+                    bookTitle: model.bookTitle!,
+                    bookWriter: model.bookWriter!,
                   ),
-                )
+                ),
               ],
             ),
-          SizedBox(height: gapMain),
-          PostDetailLikeForm(),
-          PostDetailOneReviewForm(),
-        ],
-      ),
-    );
-    // } else {
-    return Container();
+            SizedBox(height: gapMain),
+            PostDetailLikeForm(),
+            PostDetailOneReviewForm(),
+          ],
+        ),
+      );
+    } else {
+      return Padding(
+        padding: const EdgeInsets.all(gapMain),
+        child: ListView(
+          children: [
+            PostDetailTitle(model!.boardTitle),
+            SizedBox(height: gapXlarge),
+            PostDetailWriter(
+                boardUserNickname: model.boardUserNickname,
+                createdAt: model.boardCreatedAt),
+            SizedBox(height: gapLarge),
+            CustomThinLine(),
+            SizedBox(height: gapLarge),
+            PostDetailContent(model.boardContent),
+            SizedBox(height: gapXlarge),
+            PostDetailLikeForm(),
+            PostDetailOneReviewForm(),
+          ],
+        ),
+      );
+    }
   }
 }
-// }

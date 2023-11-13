@@ -1,8 +1,6 @@
-import 'package:flutter_blog/data/dto/request_dto/book_request_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/repository/book_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 
 /// 1. 창고 데이터
 class SearchCategoryBookListModel {
@@ -53,18 +51,14 @@ class SearchCategoryBookListViewModel
   Ref ref;
 
   // 통신을 통해 reponseDTO에 데이터 받아오고 최초 상태 변경하기
-  Future<SearchCategoryBookListModel> notifyInit(
-      BookCategoryReqDTO bookCategoryReqDTO) async {
+  Future<SearchCategoryBookListModel> notifyInit(int categoryId) async {
     ResponseDTO responseDTO =
-        await BookRepository().fetchCategoryBookList(bookCategoryReqDTO);
+        await BookRepository().fetchCategoryBookList(categoryId);
     SearchCategoryBookListModel model = responseDTO.data;
     state = SearchCategoryBookListModel(
         bookCategoryId: model.bookCategoryId,
         bookCount: model.bookCount,
         byCategoryPages: model.byCategoryPages);
-    Logger().d(state?.bookCategoryId);
-    Logger().d(state?.bookCount);
-    Logger().d(state?.byCategoryPages);
 
     return SearchCategoryBookListModel(
         bookCount: model.bookCount,
@@ -77,7 +71,6 @@ class SearchCategoryBookListViewModel
 final searchCategoryProvider = StateNotifierProvider.family<
     SearchCategoryBookListViewModel,
     SearchCategoryBookListModel?,
-    BookCategoryReqDTO>((ref, bookCategoryReqDTO) {
-  return SearchCategoryBookListViewModel(null, ref)
-    ..notifyInit(bookCategoryReqDTO);
+    int>((ref, categoryId) {
+  return SearchCategoryBookListViewModel(null, ref)..notifyInit(categoryId);
 });

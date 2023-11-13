@@ -1,9 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter_blog/data/dto/request_dto/book_like_request_dto.dart';
-import 'package:flutter_blog/data/dto/request_dto/my_library_requset_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
 import 'package:flutter_blog/data/repository/book_like_repository.dart';
+import 'package:flutter_blog/data/repository/book_reply_repository.dart';
 import 'package:flutter_blog/data/repository/book_repository.dart';
 import 'package:flutter_blog/data/repository/post_repository.dart';
 import 'package:flutter_blog/data/repository/reading_book_repository.dart';
@@ -223,9 +221,29 @@ class MyLibraryViewModel extends StateNotifier<MyLibraryModel?> {
     Logger().d("responseDTO $responseDTO");
 
     MyLibraryModel stateModel = state!;
-    stateModel?.postList.boardList = stateModel!.postList.boardList
-        .where((board) => board.boardId != boardId)
-        .toList();
+    stateModel?.postList.boardList
+        .removeWhere((board) => board.boardId == boardId);
+
+    state = MyLibraryModel(
+        bookLikeCount: stateModel.bookLikeCount,
+        likeBookList: stateModel.likeBookList,
+        readingBookList: stateModel.readingBookList,
+        postList: stateModel.postList);
+  }
+
+  /// 댓글 삭제
+  Future<void> deleteReply(int replyId) async {
+    SessionUser sessionUser = ref.read(sessionStore);
+    Logger().d("boardId $replyId");
+
+    ResponseDTO responseDTO =
+        await BookReplyRepository().fetchDeleteReply(sessionUser.jwt!, replyId);
+
+    Logger().d("responseDTO $responseDTO");
+
+    MyLibraryModel stateModel = state!;
+    stateModel?.postList.replyList.bookReplyList
+        .removeWhere((reply) => reply.bookReplyId == replyId);
 
     state = MyLibraryModel(
         bookLikeCount: stateModel.bookLikeCount,
@@ -281,6 +299,7 @@ class MyLibraryViewModel extends StateNotifier<MyLibraryModel?> {
 }
 
 final myLibraryProvider =
-    StateNotifierProvider<MyLibraryViewModel, MyLibraryModel?>((ref) {
+    StateNotifierProvider.autoDispose<MyLibraryViewModel, MyLibraryModel?>(
+        (ref) {
   return MyLibraryViewModel(null, ref)..notifyInit();
 });
