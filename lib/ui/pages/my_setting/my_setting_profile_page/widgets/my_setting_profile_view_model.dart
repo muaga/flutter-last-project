@@ -24,9 +24,8 @@ class MySettingProfileModel {
 }
 
 class MySettingProfileViewModel extends StateNotifier<MySettingProfileModel?> {
-  MySettingProfileViewModel(super._state, this.ref);
-
   Ref ref;
+  MySettingProfileViewModel(super._state, this.ref);
 
   Future<void> notifyInit() async {
     SessionUser sessionUser = ref.read(sessionStore);
@@ -42,8 +41,7 @@ class MySettingProfileViewModel extends StateNotifier<MySettingProfileModel?> {
   }
 }
 
-final mySettingProfileProvider =
-    StateNotifierProvider<MySettingProfileViewModel, MySettingProfileModel?>(
-        (ref) {
+final mySettingProfileProvider = StateNotifierProvider.autoDispose<
+    MySettingProfileViewModel, MySettingProfileModel?>((ref) {
   return MySettingProfileViewModel(null, ref)..notifyInit();
 });

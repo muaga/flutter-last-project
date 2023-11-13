@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
+import 'package:flutter_blog/_core/constants/size.dart';
 
 class MySettingCategoryButton extends StatelessWidget {
   final String label;
@@ -25,12 +26,13 @@ class MySettingCategoryButton extends StatelessWidget {
         onPress();
       },
       style: TextButton.styleFrom(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-        backgroundColor:
-            isSelected ? kBackBlack : Colors.transparent, // 선택한 상태에 따라 배경색 변경
-        side: BorderSide(color: Colors.black),
-      ),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+          backgroundColor: isSelected ? kBackBlack : kBackWhite,
+          elevation: 5,
+          minimumSize: Size(120, 50) // 선택한 상태에 따라 배경색 변경
+          ),
       child: Row(
         children: [
           Icon(
@@ -38,10 +40,11 @@ class MySettingCategoryButton extends StatelessWidget {
             color: isSelected ? Colors.white : kFontBlack, // 아이콘의 색상 변경
             size: 20,
           ),
+          const SizedBox(width: gapSmall),
           Text(
             label,
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 16,
               color: isSelected ? kFontWhite : kFontBlack, // 선택한 상태에 따라 색상 변경
               fontWeight: isSelected
                   ? FontWeight.bold
