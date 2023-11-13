@@ -33,7 +33,10 @@ class CustomPostListForm extends ConsumerWidget {
           /// 만약 존재한다면,
           if (hasPicUrl) {
             BookDetailModel? book =
-                ref.read(bookDetailProvider(boardList[index].bookId!));
+                ref.watch(bookDetailProvider(boardList[index].bookId!));
+            Logger().d("book을 찾아라 : ${book}");
+            Logger().d("bookId ${boardList[index].bookId!}");
+
             return InkWell(
               onTap: () {
                 Navigator.push(
