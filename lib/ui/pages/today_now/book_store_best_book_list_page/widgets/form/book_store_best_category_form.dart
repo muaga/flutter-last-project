@@ -20,18 +20,26 @@ class _BookStoreBestCategoryFormState
   final String alignment = "ranking";
   late List<BookListDTO> bookList = [];
 
+  @override
+  void initState() {
+    super.initState();
+    changePage(0);
+    changeBookList(0); // 초기 페이지를 종합으로 설정
+  }
+
   void changePage(int index) {
     setState(() {
       _pageIndex = index;
     });
   }
 
-  void changeBookList(int categoryId) {
+  void changeBookList(int categoryId) async {
     BookBestReqDTO bookBestReqDTO =
         BookBestReqDTO(bookCategoryId: categoryId, alignment: alignment);
     Logger().d("bookBestReqDTO = ${bookBestReqDTO.bookCategoryId}");
-    BookStoreBestBookListModel? model =
-        ref.read(bookBestProvider(bookBestReqDTO));
+    BookStoreBestBookListModel? model = await ref
+        .read(bookBestProvider(bookBestReqDTO).notifier)
+        .notifyInit(bookBestReqDTO);
     Logger().d("model = ${model}");
     if (model != null) {
       setState(() {

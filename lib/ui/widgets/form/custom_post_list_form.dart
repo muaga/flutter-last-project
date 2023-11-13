@@ -9,6 +9,7 @@ import 'package:flutter_blog/ui/pages/custom/post_detail_page/post_detail_page.d
 import 'package:flutter_blog/ui/pages/feed/feed_main_page/widgets/feed_main_view_model.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 class CustomPostListForm extends ConsumerWidget {
   const CustomPostListForm({super.key});
@@ -16,6 +17,7 @@ class CustomPostListForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     FeedMainModel? model = ref.watch(feedMainProvider);
+    Logger().d("model : ${model}");
 
     if (model != null) {
       List<BoardDTO> boardList = [];
@@ -32,6 +34,7 @@ class CustomPostListForm extends ConsumerWidget {
           if (hasPicUrl) {
             BookDetailModel? book =
                 ref.read(bookDetailProvider(boardList[index].bookId!));
+            Logger().d(book);
             return InkWell(
               onTap: () {
                 Navigator.push(

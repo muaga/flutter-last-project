@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/ui/pages/custom/book_read_page/widgets/view_model/book_read_view_model.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class BookReadBody extends StatefulWidget {
@@ -18,7 +17,7 @@ class BookReadBody extends StatefulWidget {
   double sliderValue;
   final int totalPages;
   int savedPage;
-  BookReadModel bookData;
+  List<String> bookData;
   // 휴대폰 저장
   final secureStorage = FlutterSecureStorage();
 
@@ -51,9 +50,9 @@ class _BookReadBodyState extends State<BookReadBody> {
                 return Container(
                   height: getScreenHeight(context) * 0.88,
                   width: getScreenWidth(context),
-                  child: Text("${widget.bookData.bookdata[index]}",
+                  child: Text("${widget.bookData[index]}",
                       style: TextStyle(
-                          fontFamily: 'D2Coding', fontSize: 22, height: 1.4)),
+                          fontFamily: 'D2Coding', fontSize: 21, height: 1.4)),
                 );
               },
             ),

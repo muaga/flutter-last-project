@@ -17,7 +17,7 @@ class NowMonthBookSmallForm extends StatelessWidget {
           height: getScreenWidth(context) * 0.55,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: 5,
+            itemCount: 4,
             itemExtent: 120,
             itemBuilder: (context, index) {
               return NowSmallBookCard(book: books[index + 4]);

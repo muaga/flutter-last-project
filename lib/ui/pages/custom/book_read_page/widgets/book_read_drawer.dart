@@ -11,15 +11,17 @@ import 'package:flutter_blog/ui/widgets/line/custom_thick_line.dart';
 import 'package:logger/logger.dart';
 
 class BookReadDrawer extends StatefulWidget {
-  const BookReadDrawer(
+  BookReadDrawer(
       {super.key,
       required this.bookModel,
       required this.bookData,
-      required this.pageController});
+      required this.pageController,
+      this.bookMarkList});
 
   final BookDetailModel bookModel;
-  final BookReadModel bookData;
+  final List<String> bookData;
   final PageController pageController;
+  late List<BookMarkDTO>? bookMarkList;
 
   @override
   State<BookReadDrawer> createState() => _BookReadDrawerState();
@@ -104,160 +106,206 @@ class _BookReadDrawerState extends State<BookReadDrawer> {
                             context: context,
                             barrierDismissible: true,
                             builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: gapSmall),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "북마크",
-                                        style: subTitle1(
-                                            mFontWeight: FontWeight.normal),
-                                      ),
-                                      Text("5개",
-                                          style: body2(
-                                              mFontWeight: FontWeight.normal)),
-                                    ],
+                              if (widget.bookMarkList != null &&
+                                  widget.bookMarkList!.isNotEmpty) {
+                                return AlertDialog(
+                                  title: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: gapSmall),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "북마크",
+                                          style: subTitle1(
+                                              mFontWeight: FontWeight.normal),
+                                        ),
+                                        Text(
+                                            "${widget.bookMarkList?.length ?? ""}개",
+                                            style: body2(
+                                                mFontWeight:
+                                                    FontWeight.normal)),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                actions: [
-                                  IconButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    icon: iconClose(),
-                                  ),
-                                ],
-                                content: Container(
-                                  height: getScreenWidth(context),
-                                  width: getScreenWidth(context) * 1.2,
-                                  child: CustomScrollView(
-                                    slivers: [
-                                      SliverList(
-                                        delegate: SliverChildBuilderDelegate(
-                                          (context, index) {
-                                            return InkWell(
-                                              onTap: () {
-                                                // int clickedIndex = index;
-                                                setState(() {
-                                                  widget.pageController
-                                                      .animateToPage(index,
-                                                          duration: Duration(
-                                                              milliseconds:
-                                                                  500),
-                                                          curve: Curves.ease);
-                                                  Logger()
-                                                      .d("여기 봐바 : ${index}");
-                                                  Navigator.of(context).pop();
-                                                  Navigator.of(context).pop();
-                                                });
-                                              },
-                                              child: Padding(
-                                                padding:
-                                                    EdgeInsets.all(gapSmall),
-                                                child: Container(
-                                                  width:
-                                                      getScreenWidth(context) *
-                                                          0.6,
-                                                  height:
-                                                      getScreenWidth(context) *
-                                                          0.25,
-                                                  decoration: BoxDecoration(
-                                                    color: kBackWhite,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                        color:
-                                                            kFontLightGray, // 그림자의 색상
-                                                        offset: Offset(0,
-                                                            1), // 그림자의 위치 (x, y)
-                                                        blurRadius:
-                                                            5.0, // 그림자의 흐림 정도
-                                                        spreadRadius:
-                                                            1.0, // 그림자의 확산 정도
-                                                      )
-                                                    ],
-                                                  ),
-                                                  child: Row(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      IconButton(
-                                                        onPressed: () {
-                                                          // TODO 은혜 : 북마크 삭제 기능 넣기
-                                                        },
-                                                        icon: iconBookMark(
-                                                            mSize: 15,
-                                                            mColor:
-                                                                kPrimaryColor),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(top: 14),
-                                                        child: Column(
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
-                                                          children: [
-                                                            Text(
-                                                                "${widget.bookData.bookdata[index]}",
-                                                                style: body2(
-                                                                    mFontWeight:
-                                                                        FontWeight
-                                                                            .normal),
-                                                                overflow:
-                                                                    TextOverflow
-                                                                        .ellipsis,
-                                                                maxLines: 3),
-                                                            const SizedBox(
-                                                                height:
-                                                                    gapSmall),
-                                                            RichText(
-                                                                text: TextSpan(
-                                                                    children: [
-                                                                  TextSpan(
-                                                                      text:
-                                                                          "92p",
-                                                                      style: body2(
-                                                                          mFontWeight:
-                                                                              FontWeight.w500)),
-                                                                  TextSpan(
-                                                                      text:
-                                                                          "   |   ",
-                                                                      style: body2(
-                                                                          mFontWeight:
-                                                                              FontWeight.normal)),
-                                                                  TextSpan(
-                                                                      text:
-                                                                          "2023-11-03",
-                                                                      style: body2(
-                                                                          mFontWeight:
-                                                                              FontWeight.normal))
-                                                                ]))
-                                                          ],
+                                  actions: [
+                                    IconButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      icon: iconClose(),
+                                    ),
+                                  ],
+                                  content: Container(
+                                    height: getScreenWidth(context),
+                                    width: getScreenWidth(context) * 1.2,
+                                    child: CustomScrollView(
+                                      slivers: [
+                                        SliverList(
+                                          delegate: SliverChildBuilderDelegate(
+                                            (context, index) {
+                                              return InkWell(
+                                                onTap: () {
+                                                  // int clickedIndex = index;
+                                                  setState(() {
+                                                    widget.pageController
+                                                        .animateToPage(
+                                                            widget
+                                                                .bookMarkList![
+                                                                    index]
+                                                                .scroll!,
+                                                            duration: Duration(
+                                                                milliseconds:
+                                                                    500),
+                                                            curve: Curves.ease);
+                                                    Logger().d(
+                                                        "인덱스 : ${widget.bookMarkList![index].scroll!}");
+                                                    Navigator.of(context).pop();
+                                                    Navigator.of(context).pop();
+                                                  });
+                                                },
+                                                child: Padding(
+                                                  padding:
+                                                      EdgeInsets.all(gapSmall),
+                                                  child: Container(
+                                                    width: getScreenWidth(
+                                                            context) *
+                                                        0.6,
+                                                    height: getScreenWidth(
+                                                            context) *
+                                                        0.25,
+                                                    decoration: BoxDecoration(
+                                                      color: kBackWhite,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                          color: kFontLightGray,
+                                                          // 그림자의 색상
+                                                          offset: Offset(0, 1),
+                                                          // 그림자의 위치 (x, y)
+                                                          blurRadius: 5.0,
+                                                          // 그림자의 흐림 정도
+                                                          spreadRadius:
+                                                              1.0, // 그림자의 확산 정도
+                                                        )
+                                                      ],
+                                                    ),
+                                                    child: Row(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        IconButton(
+                                                          onPressed: () {
+                                                            // TODO 은혜 : 북마크 삭제 기능 넣기
+                                                          },
+                                                          icon: iconBookMark(
+                                                              mSize: 15,
+                                                              mColor:
+                                                                  kPrimaryColor),
                                                         ),
-                                                      )
-                                                    ],
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  top: 14),
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Text(
+                                                                  "${widget.bookData[widget.bookMarkList![index].scroll!]}",
+                                                                  style: body2(
+                                                                      mFontWeight:
+                                                                          FontWeight
+                                                                              .normal),
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
+                                                                  maxLines: 3),
+                                                              const SizedBox(
+                                                                  height:
+                                                                      gapSmall),
+                                                              RichText(
+                                                                text: TextSpan(
+                                                                  children: [
+                                                                    TextSpan(
+                                                                        text:
+                                                                            "${widget.bookMarkList![index].scroll! + 1}p",
+                                                                        style: body2(
+                                                                            mFontWeight:
+                                                                                FontWeight.w500)),
+                                                                    TextSpan(
+                                                                        text:
+                                                                            "   |   ",
+                                                                        style: body2(
+                                                                            mFontWeight:
+                                                                                FontWeight.normal)),
+                                                                    TextSpan(
+                                                                        text:
+                                                                            "${widget.bookMarkList![index].bookMarkCreatedAt}",
+                                                                        style: body2(
+                                                                            mFontWeight:
+                                                                                FontWeight.normal))
+                                                                  ],
+                                                                ),
+                                                              )
+                                                            ],
+                                                          ),
+                                                        )
+                                                      ],
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            );
-                                          },
-                                          childCount: 5,
+                                              );
+                                            },
+                                            childCount: 5,
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                contentPadding: EdgeInsets.all(gapXlarge),
-                              );
+                                  contentPadding: EdgeInsets.all(gapXlarge),
+                                );
+                              } else {
+                                return AlertDialog(
+                                  title: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: gapSmall),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "북마크",
+                                          style: subTitle1(
+                                              mFontWeight: FontWeight.normal),
+                                        ),
+                                        Text(
+                                            "${widget.bookMarkList?.length ?? ""}개",
+                                            style: body2(
+                                                mFontWeight:
+                                                    FontWeight.normal)),
+                                      ],
+                                    ),
+                                  ),
+                                  actions: [
+                                    IconButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      icon: iconClose(),
+                                    ),
+                                  ],
+                                  content: Container(
+                                      height: getScreenWidth(context),
+                                      width: getScreenWidth(context) * 1.2),
+                                );
+                              }
                             });
                       },
                       icon: iconArrowForward(mSize: 16))
