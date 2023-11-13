@@ -6,17 +6,21 @@ import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/widgets/my_library_view_model.dart';
 import 'package:flutter_blog/ui/widgets/custom_grid_book_card.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MyLibraryMainLikeBooks extends StatefulWidget {
+class MyLibraryMainLikeBooks extends ConsumerStatefulWidget {
   const MyLibraryMainLikeBooks({super.key});
 
   @override
-  State<MyLibraryMainLikeBooks> createState() => _MyLibraryMainLikeBooksState();
+  _MyLibraryMainLikeBooksState createState() => _MyLibraryMainLikeBooksState();
 }
 
-class _MyLibraryMainLikeBooksState extends State<MyLibraryMainLikeBooks> {
+class _MyLibraryMainLikeBooksState
+    extends ConsumerState<MyLibraryMainLikeBooks> {
   @override
   Widget build(BuildContext context) {
+    MyLibraryModel? model = ref.watch(myLibraryProvider);
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
