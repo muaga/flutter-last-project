@@ -159,7 +159,9 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
                           children: [
                             /// 한줄리뷰
                             ListView.builder(
-                              itemCount: 2,
+                              itemCount: model!
+                                  .postList.replyList.bookReplyList.length,
+
                               itemBuilder: (BuildContext context, int index) {
                                 final book =
                                     model!.postList.replyList.bookReplyList;
@@ -196,8 +198,8 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
                                   child: Column(
                                     children: [
                                       MyLibraryMainReadingNotePostForm(
-                                        bookId: boards[index].bookId,
-                                        postComent: "${boards[index].title}",
+                                        bookId: 5,
+                                        postComent: "제목",
                                         postDate: "${boards[index].createdAt}",
                                       ),
                                     ],

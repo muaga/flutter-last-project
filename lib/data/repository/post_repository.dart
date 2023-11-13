@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/data/dto/request_dto/post_request_dto.dart';
 import 'package:flutter_blog/data/dto/response_dto/reponse_dto.dart';
-import 'package:flutter_blog/data/model/post.dart';
+import 'package:flutter_blog/ui/pages/custom/post_detail_page/widgets/view_model/post_detail_page_view_model.dart';
 import 'package:flutter_blog/ui/pages/custom/post_update_page/widgets/post_update_view_model.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_page/widgets/post_write_view_model.dart';
 import 'package:flutter_blog/ui/pages/feed/feed_main_page/widgets/feed_main_view_model.dart';
@@ -83,12 +83,14 @@ class PostRepository {
   Future<ResponseDTO> fetchPost(String jwt, int id) async {
     try {
       // 통신
-      Response response = await dio.get("/post/$id",
+      Response response = await dio.get("/boardDetail/$id",
           options: Options(headers: {"Authorization": jwt}));
 
       // 응답 받은 데이터 파싱
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-      responseDTO.data = Post.fromJson(responseDTO.data);
+      PostDetailModel model = PostDetailModel.fromJson(responseDTO.data);
+      Logger().d(model.boardUserNickname);
+      responseDTO.data = model;
 
       return responseDTO;
     } catch (e) {
