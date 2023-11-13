@@ -1,10 +1,13 @@
 class BookReplyWriteReqDTO {
-  final String bookId;
+  final int? userId;
+  final int? bookId;
   final String content;
 
-  BookReplyWriteReqDTO({required this.bookId, required this.content});
+  BookReplyWriteReqDTO(
+      {required this.userId, required this.bookId, required this.content});
 
-  Map<String, dynamic> toJson() => {"bookId": bookId, "content": content};
+  Map<String, dynamic> toJson() =>
+      {"userId": userId, "bookId": bookId, "content": content};
 }
 
 class BookReplyUpdateReqDTO {

@@ -163,7 +163,7 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
                           children: [
                             /// 한줄리뷰
                             ListView.builder(
-                              itemCount: model!.postList.,
+                              itemCount: model!.postList.replyCount,
                               itemBuilder: (BuildContext context, int index) {
                                 final book =
                                     model!.postList.replyList.bookReplyList;
