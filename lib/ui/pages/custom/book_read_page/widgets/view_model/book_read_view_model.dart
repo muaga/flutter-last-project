@@ -24,11 +24,23 @@ class BookReadModel {
 
 class BookMarkDTO {
   final int? id;
+  final int? bookMark;
+  final int? userId;
+  final int? bookId;
   final int? scroll;
   final String? bookMarkCreatedAt;
-  BookMarkDTO({this.bookMarkCreatedAt, this.scroll, this.id});
+  BookMarkDTO(
+      {this.bookMarkCreatedAt,
+      this.scroll,
+      this.id,
+      this.bookId,
+      this.bookMark,
+      this.userId});
   BookMarkDTO.fromJson(Map<String, dynamic> json)
       : id = json["id"],
+        bookMark = json["bookMark"],
+        userId = json["userId"],
+        bookId = json["bookId"],
         scroll = json["scroll"],
         bookMarkCreatedAt = json["bookMarkCreatedAt"];
 }
@@ -68,9 +80,8 @@ class BookReadViewModel extends StateNotifier<BookReadModel?> {
     BookMarkDTO bookMark = responseDTO.data;
 
     // bookMarkDTO의 bookMark 번호가 1이라면, 추가
-    if (bookMark == 1) {
+    if (bookMark.bookMark == 1) {
       // 데이터 갱신
-
       BookReadModel? model = state; // 777
       model?.bookMarkDTOList = [bookMark, ...?model.bookMarkDTOList];
       state = BookReadModel(
