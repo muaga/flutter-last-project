@@ -105,7 +105,7 @@ class PostDTO {
 }
 
 class ReplyDTO {
-  final List<BookReplyDTO> bookReplyList;
+  late List<BookReplyDTO> bookReplyList;
   final List<BoardReplyDTO> boardReplyList;
 
   ReplyDTO({required this.bookReplyList, required this.boardReplyList});
@@ -295,6 +295,69 @@ class MyLibraryViewModel extends StateNotifier<MyLibraryModel?> {
         readingBookList: model.readingBookList,
         postList: model.postList);
     Logger().d("변한 값 : ${state?.readingBookList}");
+  }
+
+  /// 좋아하는 책 스크랩 추가 갱신
+  Future<void> bookLikeNotify(LikeListDTO likeListDTO) async {
+    MyLibraryModel model = state!;
+    model.likeBookList = [likeListDTO, ...model.likeBookList];
+    state = MyLibraryModel(
+        bookLikeCount: model.bookLikeCount,
+        likeBookList: model.likeBookList,
+        readingBookList: model.readingBookList,
+        postList: model.postList);
+  }
+
+  /// 읽고 있는 책 스크랩 추가 갱신
+  Future<void> readingBookNotify(ReadingBookDTO readingBookDTO) async {
+    MyLibraryModel model = state!;
+    model.readingBookList = [readingBookDTO, ...model.readingBookList];
+    state = MyLibraryModel(
+        bookLikeCount: model.bookLikeCount,
+        likeBookList: model.likeBookList,
+        readingBookList: model.readingBookList,
+        postList: model.postList);
+  }
+
+  /// 좋아하는 책 스크랩 삭제 갱신
+  Future<void> bookLikeDeleteNotify(int bookId) async {
+    // 데이터 갱신
+    MyLibraryModel? model = state;
+    Logger().d("변하기 전 값 : ${model?.likeBookList}");
+    model?.likeBookList.removeWhere((likeBook) => likeBook.bookId == bookId);
+
+    // 상태 갱신
+    state = MyLibraryModel(
+        bookLikeCount: model?.bookLikeCount,
+        likeBookList: model!.likeBookList,
+        readingBookList: model.readingBookList,
+        postList: model.postList);
+    Logger().d("변한 값 : ${state?.likeBookList}");
+  }
+
+  /// 댓글 추가 갱신
+  Future<void> replyNotify(BookReplyDTO bookReplyDTO) async {
+    MyLibraryModel model = state!;
+    model.postList.replyList.bookReplyList = [
+      bookReplyDTO,
+      ...model.postList.replyList.bookReplyList
+    ];
+    state = MyLibraryModel(
+        bookLikeCount: model.bookLikeCount,
+        likeBookList: model.likeBookList,
+        readingBookList: model.readingBookList,
+        postList: model.postList);
+  }
+
+  /// 포스트 추가 갱신
+  Future<void> postNotify(BoardDTO boardDTO) async {
+    MyLibraryModel model = state!;
+    model.postList.boardList = [boardDTO, ...model.postList.boardList];
+    state = MyLibraryModel(
+        bookLikeCount: model.bookLikeCount,
+        likeBookList: model.likeBookList,
+        readingBookList: model.readingBookList,
+        postList: model.postList);
   }
 }
 

@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
-import 'package:flutter_blog/_core/constants/move.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/_core/utils/validator_util.dart';
 import 'package:flutter_blog/data/dto/request_dto/post_request_dto.dart';
 import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
+import 'package:flutter_blog/ui/pages/custom/post_list_page/widgets/view_model/post_list_page_view_model.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_book_recommend_page/post_write_book_recommend_page.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_book_recommend_page/post_write_recommend-book-card.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_page/widgets/app_bar/post_write_show_dialog.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_page/widgets/post_write_view_model.dart';
+import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/widgets/my_library_view_model.dart';
 import 'package:flutter_blog/ui/widgets/custom_text_area.dart';
 import 'package:flutter_blog/ui/widgets/custom_title_insert.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
@@ -72,9 +73,9 @@ class _PostWritePageState extends ConsumerState<PostWritePage> {
           title: Text("포스트", style: subTitle1()),
           actions: [
             TextButton(
-              onPressed: () {
+              onPressed: () async {
                 Logger().d(widget.content);
-                Navigator.popAndPushNamed(context, Move.MyLibraryMainPage);
+                Navigator.pop(context);
                 if (widget.formKey.currentState!.validate()) {
                   PostSaveReqDTO postSaveReqDTO = PostSaveReqDTO(
                       boardTitle: widget.title.text,
@@ -82,6 +83,10 @@ class _PostWritePageState extends ConsumerState<PostWritePage> {
                       userId: sessionUser.user!.id,
                       bookId: widget.selectedBook?.id ?? null);
                   ref.read(postWriteProvider.notifier).savePost(postSaveReqDTO);
+
+                  await ref
+                      .read(myLibraryProvider.notifier)
+                      .postNotify(boardDTO);
                 }
               },
               child: Text(
