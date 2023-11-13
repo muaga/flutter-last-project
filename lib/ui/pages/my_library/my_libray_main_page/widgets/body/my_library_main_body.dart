@@ -25,6 +25,7 @@ class MyLibraryMainBody extends ConsumerWidget {
     // 책 정보 검색
     final MyLibraryMainModel = ref.watch(MyLibraryProvider(userId));
 
+    MyLibraryModel? model = ref.watch(myLibraryProvider);
     return NestedScrollView(
       headerSliverBuilder: (context, innerBoxIsScrolled) {
         return [
