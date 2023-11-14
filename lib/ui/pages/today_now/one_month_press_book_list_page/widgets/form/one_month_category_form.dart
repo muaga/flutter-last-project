@@ -37,7 +37,6 @@ class _OneMonthCategoryFormState extends ConsumerState<OneMonthCategoryForm> {
     OneMonthPressBookListModel? model = await ref
         .read(oneMonthPressProvider(bookMonthReqDTO).notifier)
         .notifyInit(bookMonthReqDTO);
-    Logger().d("이번에는 받아오자..! ${model}");
     if (model != null) {
       setState(() {
         bookList = model.bookList!;
