@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
-import 'package:flutter_blog/data/model/board.dart';
 import 'package:flutter_blog/data/model/user.dart';
 import 'package:flutter_blog/ui/pages/custom/post_detail_page/post_detail_page.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_library_choice_page/my_library_main_bookcase.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_library_choice_page/my_library_main_like_books.dart';
-import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_reading_note/my_library_main_reading_note_form/my_library_main_reading_note_post_form.dart';
+import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_reading_note/my_library_main_reading_note_form/my_library_book_reply_form.dart';
+import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/my_library_main_reading_note/my_library_main_reading_note_form/my_library_post_form.dart';
 import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/widgets/my_library_view_model.dart';
 import 'package:flutter_blog/ui/widgets/button/custom_category_button.dart';
 import 'package:flutter_blog/ui/widgets/scroll_view/custom_book_grid_view.dart';
@@ -24,6 +24,8 @@ class MyLibraryMainTabBarView extends StatefulWidget {
 class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
   int _pageIndex = 0;
 
+  final refreshKey = GlobalKey<RefreshIndicatorState>();
+
   void changePage(int index) {
     setState(() {
       _pageIndex = index;
@@ -35,6 +37,10 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
     return Consumer(
         builder: (BuildContext context, WidgetRef ref, Widget? child) {
       MyLibraryModel? model = ref.watch(myLibraryProvider);
+
+      List<BookReplyDTO> bookReplyList =
+          model!.postList.replyList.bookReplyList;
+      List<BoardDTO> postList = model!.postList.boardList;
 
       return TabBarView(
         children: [
@@ -147,53 +153,76 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
                         child: IndexedStack(
                           index: _pageIndex,
                           children: [
-                            /// 한줄리뷰
-                            ListView.builder(
-                              itemCount: model!.postList.replyCount,
-                              itemBuilder: (BuildContext context, int index) {
-                                final book =
-                                    model!.postList.replyList.bookReplyList;
-                                final boards = model!.postList.boardList;
-
-                                return Column(
-                                  children: [
-                                    MyLibraryMainReadingNotePostForm(
-                                      bookId: book[index].bookReplyId,
-                                      boardId: boards[index].boardId,
-                                      postComent: "${boards[index].boardTitle}",
-                                      postDate:
-                                          "${boards[index].boardCreatedAt}",
-                                    ),
-                                  ],
-                                );
+                            /// 한 줄 리뷰
+                            RefreshIndicator(
+                              onRefresh: () async {
+                                await ref
+                                    .watch(myLibraryProvider.notifier)
+                                    .notifyInit();
                               },
+                              key: refreshKey,
+                              child: ListView.builder(
+                                itemCount: model!.postList.replyList
+                                        .bookReplyList.length ??
+                                    0,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Column(
+                                    children: [
+                                      MyLibraryBookReplyForm(
+                                        replyId:
+                                            bookReplyList[index].bookReplyId,
+                                        replyComment: bookReplyList[index]
+                                            .bookReplyContent,
+                                        replyCreatedAt: bookReplyList[index]
+                                            .bookReplyCreatedAt,
+                                        bookWriter:
+                                            bookReplyList[index].bookWriter,
+                                        bookTitle:
+                                            bookReplyList[index].bookTitle,
+                                        bookPicUrl:
+                                            bookReplyList[index].bookPicUrl,
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
                             ),
 
                             /// 포스트
-                            ListView.builder(
-                              itemCount: boards.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                return InkWell(
-                                  onTap: () {
-                                    Navigator.push(
+                            RefreshIndicator(
+                              onRefresh: () async {
+                                await ref
+                                    .watch(myLibraryProvider.notifier)
+                                    .notifyInit();
+                              },
+                              key: refreshKey,
+                              child: ListView.builder(
+                                itemCount: postList.length ?? 0,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return InkWell(
+                                    onTap: () {
+                                      Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                PostDetailPage(
-                                                  boardId: boards[index].id,
-                                                )));
-                                  },
-                                  child: Column(
-                                    children: [
-                                      MyLibraryMainReadingNotePostForm(
-                                        bookId: 5,
-                                        postComent: "제목",
-                                        postDate: "${boards[index].createdAt}",
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              },
+                                          builder: (context) => PostDetailPage(
+                                            boardId: postList[index].boardId!,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: Column(
+                                      children: [
+                                        MyLibraryPostForm(
+                                          postId: postList[index].boardId!,
+                                          postTitle: postList[index].boardTitle,
+                                          postCreatedAt:
+                                              postList[index].boardCreatedAt,
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                           ],
                         ),

@@ -8,8 +8,8 @@ import 'package:flutter_blog/data/dto/request_dto/book_like_request_dto.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/body/book_detail_body.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/view_model/book_detail_view_model.dart';
 import 'package:flutter_blog/ui/pages/custom/book_read_page/book_read_page.dart';
+import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/widgets/my_library_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 
 import '../../../../data/store/session_user.dart';
 
@@ -50,7 +50,25 @@ class BookDetailPage extends ConsumerWidget {
                     .read(bookDetailProvider(book.bookId).notifier)
                     .bookLikeWrite(dto);
 
-                ref.watch(bookDetailProvider(book.bookId));
+                BookDetailModel? model =
+                    ref.watch(bookDetailProvider(book.bookId));
+
+                if (book.bookLike == 1) {
+                  LikeListDTO likeListDTO = LikeListDTO(
+                      bookLikeId: model!.bookLike,
+                      bookLikeUserId: sessionUser.user!.id,
+                      bookId: bookId,
+                      likeBookPicUrl: model.bookPicUrl,
+                      likeBookTitle: model.bookTitle,
+                      likeWriter: model.bookWriter);
+                  await ref
+                      .read(myLibraryProvider.notifier)
+                      .bookLikeNotify(likeListDTO);
+                } else {
+                  await ref
+                      .read(myLibraryProvider.notifier)
+                      .bookLikeDeleteNotify(book.bookId);
+                }
               }
             },
             icon: book.bookLike == 1
@@ -85,7 +103,6 @@ class BookDetailPage extends ConsumerWidget {
                           builder: (context) => BookReadPage(
                               bookId: bookId, previousPage: previousPage)),
                     );
-                    Logger().d("이전 페이지 보내기 : ${previousPage}");
                   },
                   child: Text(
                     "바로읽기",

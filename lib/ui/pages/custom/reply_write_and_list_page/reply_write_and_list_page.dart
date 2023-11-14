@@ -7,7 +7,9 @@ import 'package:flutter_blog/_core/constants/icon.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/dto/request_dto/book_reply_request_dto.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
+import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/view_model/book_detail_view_model.dart';
 import 'package:flutter_blog/ui/pages/custom/reply_write_and_list_page/reply_write_and_list_view_model.dart';
+import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/widgets/my_library_view_model.dart';
 import 'package:flutter_blog/ui/widgets/custom_review_card.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thick_line.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,10 +24,16 @@ class ReplyWriteAndListPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.read(bookReplyListProvider(bookId).notifier).notifyInit(bookId);
     BookReplyListModel? model = ref.watch(bookReplyListProvider(bookId));
+    int last = model!.bookReplyCount!;
+
+    if (model == null) {
+      return CircularProgressIndicator();
+    }
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-            onPressed: () {
+            onPressed: () async {
+              Navigator.pop(context);
               Navigator.pop(context);
             },
             icon: iconArrowBack()),
@@ -97,15 +105,33 @@ class ReplyWriteAndListPage extends ConsumerWidget {
                 child: Container(
                   height: 58,
                   child: TextButton(
-                    onPressed: () {
+                    onPressed: () async {
                       SessionUser session = ref.read(sessionStore);
                       BookReplyWriteReqDTO dto = BookReplyWriteReqDTO(
                           userId: session.user!.id,
                           bookId: bookId,
                           content: _content.text);
-                      ref
+                      await ref
                           .read(bookReplyListProvider(bookId).notifier)
                           .notifyAdd(dto);
+
+                      BookDetailModel? book =
+                          ref.watch(bookDetailProvider(bookId));
+
+                      int number = model!.replyDTOs.length - 1;
+
+                      BookReplyDTO bookReplyDTO = BookReplyDTO(
+                          bookReplyId: number,
+                          bookReplyContent: model!.replyDTOs[last].replyContent,
+                          bookReplyCreatedAt:
+                              model!.replyDTOs[last].replyCreatedAt,
+                          bookPicUrl: book?.bookPicUrl,
+                          bookTitle: book!.bookTitle,
+                          bookWriter: book.bookWriter);
+
+                      await ref
+                          .read(myLibraryProvider.notifier)
+                          .replyNotify(bookReplyDTO);
                     },
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.grey,

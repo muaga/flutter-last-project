@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
-import 'package:flutter_blog/_core/constants/move.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/_core/utils/validator_util.dart';
 import 'package:flutter_blog/data/dto/request_dto/post_request_dto.dart';
@@ -72,9 +71,9 @@ class _PostWritePageState extends ConsumerState<PostWritePage> {
           title: Text("포스트", style: subTitle1()),
           actions: [
             TextButton(
-              onPressed: () {
+              onPressed: () async {
                 Logger().d(widget.content);
-                Navigator.popAndPushNamed(context, Move.MyLibraryMainPage);
+                Navigator.pop(context);
                 if (widget.formKey.currentState!.validate()) {
                   PostSaveReqDTO postSaveReqDTO = PostSaveReqDTO(
                       boardTitle: widget.title.text,
@@ -82,6 +81,10 @@ class _PostWritePageState extends ConsumerState<PostWritePage> {
                       userId: sessionUser.user!.id,
                       bookId: widget.selectedBook?.id ?? null);
                   ref.read(postWriteProvider.notifier).savePost(postSaveReqDTO);
+
+                  // await ref
+                  //     .read(myLibraryProvider.notifier)
+                  //     .postNotify(boardDTO);
                 }
               },
               child: Text(
@@ -119,6 +122,7 @@ class _PostWritePageState extends ConsumerState<PostWritePage> {
                         width: getScreenWidth(context) / 3,
                         child: widget.selectedBook != null
                             ? PostWriteRecommendBookCard(
+                                bookId: widget.selectedBook!.id,
                                 bookPicUrl: widget.selectedBook!.picUrl,
                                 bookTitle: widget.selectedBook!.title,
                                 bookWriter: widget.selectedBook!.writer,

@@ -70,6 +70,15 @@ class BookReadViewModel extends StateNotifier<BookReadModel?> {
         bookdata: model.bookdata, bookMarkDTOList: model.bookMarkDTOList);
   }
 
+  Future<void> notifyInit2(int bookId) async {
+    SessionUser sessionUser = ref.read(sessionStore);
+    ResponseDTO responseDTO = await BookDataRepository()
+        .fetchBookDataDetail(bookId, sessionUser.jwt!);
+    BookReadModel model = responseDTO.data;
+    state = BookReadModel(
+        bookMarkDTOList: model.bookMarkDTOList, bookdata: model.bookdata);
+  }
+
   // 페이지 북마크 등록 및 삭제
   Future<void> bookMark(BookMarkReqDTO bookMarkReqDTO) async {
     SessionUser sessionUser = ref.read(sessionStore);

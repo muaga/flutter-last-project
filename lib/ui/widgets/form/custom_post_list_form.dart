@@ -241,7 +241,6 @@ class CustomPostListForm extends ConsumerWidget {
                                 contentPadding: EdgeInsets.only(left: 0),
                                 leading: CircleAvatar(
                                   backgroundImage: CachedNetworkImageProvider(
-                                    // TODO 은혜 : 게시글 유저 이미지 넣기
                                     dio.options.baseUrl +
                                         "/images/${boardList[index].userPicUrl}",
                                   ),
