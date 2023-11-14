@@ -39,9 +39,9 @@ class MySettingMainBody extends ConsumerWidget {
               /// 구독권 유무에 따라 아래의 화면이 바뀐다.
               if (subScription == true)
                 MySettingMainYesSubScriptionForm(
-                  startDuration: "2021.06.18",
-                  endDuration: "2023.08.16",
-                  paymentDate: "2023.08.06",
+                  startDuration: "2023.11.14",
+                  endDuration: "2023.12.13",
+                  paymentDate: "2023.12.13",
                 )
               else
                 Column(children: [

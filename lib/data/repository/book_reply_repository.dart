@@ -17,11 +17,9 @@ class BookReplyRepository {
 
       // 2. ResponseDTO 파싱
       ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
-      Logger().d(responseDTO);
 
       // 3. ResponseDTO의 data 파싱
       BookReplyListModel model = BookReplyListModel.fromJson(responseDTO.data);
-      Logger().d("이게 나와야함", model);
 
       // 4. 파싱된 데이터를 다시 공통 DTO로 덮어씌우기
       responseDTO.data = model;
@@ -47,7 +45,6 @@ class BookReplyRepository {
 
       // 3. ResponseDTO의 data 파싱
       SaveReplyDTO saveReplyDTO = SaveReplyDTO.fromJson(responseDTO.data);
-      Logger().d("이거 나오나?", saveReplyDTO);
 
       // 4. 파싱된 데이터를 다시 공통 DTO로 덮어씌우기
       responseDTO.data = saveReplyDTO;
