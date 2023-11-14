@@ -132,7 +132,7 @@ class _BookReadPageState extends ConsumerState<BookReadPage> {
                             savedPage = sliderValue.toInt();
                           });
 
-                          // 북마크 등록
+                          // 북마크 등록 또는 삭제
                           bookMarkSave(widget.bookId, savedPage);
                         },
                         icon: iconBookMartOutline()),

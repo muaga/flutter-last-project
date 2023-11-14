@@ -16,13 +16,14 @@ import 'package:logger/logger.dart';
 class MySettingMainBody extends ConsumerWidget {
   const MySettingMainBody({Key? key});
 
-  /// 구독권의 유무
-  // TODO 은혜 : 구독권을 bool로 할 지 결정
-  final bool subScription = false;
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     SessionUser sessionUser = ref.read(sessionStore);
+
+    /// 구독권의 유무
+    final bool? subScription = sessionUser.user?.paymentStatus;
+    Logger().d(subScription);
+
     return ListView(
       children: [
         Padding(
@@ -36,7 +37,7 @@ class MySettingMainBody extends ConsumerWidget {
               const SizedBox(height: gapLarge),
 
               /// 구독권 유무에 따라 아래의 화면이 바뀐다.
-              if (subScription)
+              if (subScription == true)
                 MySettingMainYesSubScriptionForm(
                   startDuration: "2021.06.18",
                   endDuration: "2023.08.16",

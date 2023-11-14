@@ -30,7 +30,7 @@ class BookReadDrawer extends ConsumerStatefulWidget {
 
 class _BookReadDrawerState extends ConsumerState<BookReadDrawer> {
   bool isExpanded = false;
-  final refreshKey = GlobalKey<RefreshIndicatorState>();
+  final refreshKey2 = GlobalKey<RefreshIndicatorState>();
 
   void toggleDescription() {
     setState(() {
@@ -143,13 +143,13 @@ class _BookReadDrawerState extends ConsumerState<BookReadDrawer> {
                                     height: getScreenWidth(context),
                                     width: getScreenWidth(context) * 1.2,
                                     child: RefreshIndicator(
-                                      key: refreshKey,
+                                      key: refreshKey2,
                                       onRefresh: () async {
                                         await ref
                                             .read(bookReadProvider(
                                                     widget.bookModel.bookId)
                                                 .notifier)
-                                            .notifyInit2(
+                                            .notifyInit(
                                                 widget.bookModel.bookId);
                                       },
                                       child: CustomScrollView(

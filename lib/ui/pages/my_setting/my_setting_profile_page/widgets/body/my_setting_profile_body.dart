@@ -27,6 +27,11 @@ class MySettingProfileBody extends ConsumerWidget {
     MySettingProfileModel? model = ref.watch(mySettingProfileProvider);
     Logger().d("model은 $model");
     Logger().d("nickname : ${model?.nickname}");
+
+    if (model == null) {
+      return CircularProgressIndicator();
+    }
+
     return Padding(
       padding: const EdgeInsets.all(gapMain),
       child: Form(
@@ -100,7 +105,6 @@ class MySettingProfileBody extends ConsumerWidget {
                       email: _email.text);
                   await ref.read(sessionStore).userUpdate(userUpdateReqDTO);
                   ref.read(mySettingProfileProvider.notifier).notifyInit();
-                  Logger().d("개인정보수정 시작");
                 }
               },
               buttonText: "확인",
