@@ -32,6 +32,7 @@ class SessionUser {
     //   ScaffoldMessenger.of(mContext!)
     //       .showSnackBar(SnackBar(content: Text(responseDTO.msg)));
     // }
+    Navigator.pushNamed(mContext!, Move.LoginPage);
   }
 
   Future<void> login(LoginReqDTO loginReqDTO) async {

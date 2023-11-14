@@ -72,8 +72,8 @@ class _PostWritePageState extends ConsumerState<PostWritePage> {
           actions: [
             TextButton(
               onPressed: () async {
-                Logger().d(widget.content);
                 Navigator.pop(context);
+
                 if (widget.formKey.currentState!.validate()) {
                   PostSaveReqDTO postSaveReqDTO = PostSaveReqDTO(
                       boardTitle: widget.title.text,
@@ -81,9 +81,7 @@ class _PostWritePageState extends ConsumerState<PostWritePage> {
                       userId: sessionUser.user!.id,
                       bookId: widget.selectedBook?.id ?? null);
                   ref.read(postWriteProvider.notifier).savePost(postSaveReqDTO);
-
                   // await ref
-                  //     .read(myLibraryProvider.notifier)
                   //     .postNotify(boardDTO);
                 }
               },

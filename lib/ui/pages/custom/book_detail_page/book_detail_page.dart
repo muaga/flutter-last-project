@@ -3,6 +3,7 @@ import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/http.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
+import 'package:flutter_blog/_core/constants/move.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/data/dto/request_dto/book_like_request_dto.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/body/book_detail_body.dart';
@@ -91,18 +92,83 @@ class BookDetailPage extends ConsumerWidget {
                 ),
                 child: TextButton(
                   onPressed: () async {
-                    final bookId = book.bookId;
-                    final securePage =
-                        await secureStorage.read(key: "currentPage");
-                    final previousPage =
-                        int.parse(securePage?.split('.')[0] ?? '0');
+                    if (sessionUser.user?.paymentStatus == true) {
+                      final bookId = book.bookId;
+                      final securePage =
+                          await secureStorage.read(key: "currentPage");
+                      final previousPage =
+                          int.parse(securePage?.split('.')[0] ?? '0');
 
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => BookReadPage(
-                              bookId: bookId, previousPage: previousPage)),
-                    );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => BookReadPage(
+                                bookId: bookId, previousPage: previousPage)),
+                      );
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Center(
+                              child: Text(
+                                '구독하고 무제한으로 즐겨요',
+                                style: subTitle1(mFontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  "회원님이 지금 관심있는 도서를 포함하여\n"
+                                  "다양한 독서 콘텐츠를 무제한으로 즐겨보세요!",
+                                  style: body1(mColor: kFontGray),
+                                  textAlign: TextAlign.center,
+                                ),
+                                Image.asset(
+                                  "assets/images/readingBookValidation.png",
+                                  width: 180,
+                                  height: 180,
+                                ),
+                              ],
+                            ),
+                            actions: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                        backgroundColor: kBackGray, // 배경색
+                                        minimumSize: Size(130, 50)),
+                                    onPressed: () {
+                                      Navigator.of(context).pop(); // 알림창 닫기
+                                    },
+                                    child: Text(
+                                      '취소',
+                                      style: subTitle3(mColor: kFontBlack),
+                                    ),
+                                  ),
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                        backgroundColor: kPrimaryColor, // 배경색
+                                        minimumSize: Size(130, 50)),
+                                    onPressed: () {
+                                      Navigator.popAndPushNamed(context,
+                                          Move.MySettingPaymentPage); // 알림창 닫기
+                                    },
+                                    child: Text(
+                                      '구독하기',
+                                      style: subTitle3(mColor: kFontBlack),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
                   },
                   child: Text(
                     "바로읽기",

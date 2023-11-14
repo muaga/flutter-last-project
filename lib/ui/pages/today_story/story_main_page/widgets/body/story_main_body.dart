@@ -85,6 +85,7 @@ class _StoryMainBodyState extends ConsumerState<StoryMainBody> {
     TodayStoryModel? model = await ref
         .read(todayStoryProvider(categoryId).notifier)
         .notifyInit(categoryId);
+
     if (categoryId == 1) {
       setState(() {
         loveStoryBookList = model.storyBookList!;
