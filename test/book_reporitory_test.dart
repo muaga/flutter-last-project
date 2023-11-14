@@ -16,7 +16,7 @@ Future<void> fetchBookDetail(int bookId, String jwt) async {
     options: Options(headers: {"Authorization": jwt}),
   );
 
-  Logger().d(response.data);
+  Logger().d(response);
 
   // 파싱
   // ResponseDTO responseDTO = ResponseDTO.fromJson(response.data);
