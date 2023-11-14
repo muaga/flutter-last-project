@@ -105,7 +105,6 @@ class MySettingProfileBody extends ConsumerWidget {
                       email: _email.text);
                   await ref.read(sessionStore).userUpdate(userUpdateReqDTO);
                   ref.read(mySettingProfileProvider.notifier).notifyInit();
-                  Logger().d("개인정보수정 시작");
                 }
               },
               buttonText: "확인",

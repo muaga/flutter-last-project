@@ -80,7 +80,6 @@ class _MySettingPaymentBodyState extends State<MySettingPaymentBody> {
                   SizedBox(height: gapLarge),
                   MySettingPaymentNoticeForm(),
                   SizedBox(height: gapXlarge),
-                  // TODO 은혜 : 결제 구현 보고 수정하기
                   CustomBottomButton(
                     funPageRoute: () {
                       if (selectedNum == 0) {
