@@ -24,6 +24,8 @@ class MyLibraryMainTabBarView extends StatefulWidget {
 class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
   int _pageIndex = 0;
 
+  final refreshKey = GlobalKey<RefreshIndicatorState>();
+
   void changePage(int index) {
     setState(() {
       _pageIndex = index;
@@ -152,57 +154,75 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
                           index: _pageIndex,
                           children: [
                             /// 한 줄 리뷰
-                            ListView.builder(
-                              itemCount: model!.postList.replyList.bookReplyList
-                                      .length ??
-                                  0,
-                              itemBuilder: (BuildContext context, int index) {
-                                return Column(
-                                  children: [
-                                    MyLibraryBookReplyForm(
-                                      replyId: bookReplyList[index].bookReplyId,
-                                      replyComment:
-                                          bookReplyList[index].bookReplyContent,
-                                      replyCreatedAt: bookReplyList[index]
-                                          .bookReplyCreatedAt,
-                                      bookWriter:
-                                          bookReplyList[index].bookWriter,
-                                      bookTitle: bookReplyList[index].bookTitle,
-                                      bookPicUrl:
-                                          bookReplyList[index].bookPicUrl,
-                                    ),
-                                  ],
-                                );
+                            RefreshIndicator(
+                              onRefresh: () async {
+                                await ref
+                                    .watch(myLibraryProvider.notifier)
+                                    .notifyInit();
                               },
+                              key: refreshKey,
+                              child: ListView.builder(
+                                itemCount: model!.postList.replyList
+                                        .bookReplyList.length ??
+                                    0,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Column(
+                                    children: [
+                                      MyLibraryBookReplyForm(
+                                        replyId:
+                                            bookReplyList[index].bookReplyId,
+                                        replyComment: bookReplyList[index]
+                                            .bookReplyContent,
+                                        replyCreatedAt: bookReplyList[index]
+                                            .bookReplyCreatedAt,
+                                        bookWriter:
+                                            bookReplyList[index].bookWriter,
+                                        bookTitle:
+                                            bookReplyList[index].bookTitle,
+                                        bookPicUrl:
+                                            bookReplyList[index].bookPicUrl,
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
                             ),
 
                             /// 포스트
-                            ListView.builder(
-                              itemCount: postList.length ?? 0,
-                              itemBuilder: (BuildContext context, int index) {
-                                return InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => PostDetailPage(
-                                          boardId: postList[index].boardId!,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  child: Column(
-                                    children: [
-                                      MyLibraryPostForm(
-                                        postId: postList[index].boardId!,
-                                        postTitle: postList[index].boardTitle,
-                                        postCreatedAt:
-                                            postList[index].boardCreatedAt,
-                                      ),
-                                    ],
-                                  ),
-                                );
+                            RefreshIndicator(
+                              onRefresh: () async {
+                                await ref
+                                    .watch(myLibraryProvider.notifier)
+                                    .notifyInit();
                               },
+                              key: refreshKey,
+                              child: ListView.builder(
+                                itemCount: postList.length ?? 0,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => PostDetailPage(
+                                            boardId: postList[index].boardId!,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: Column(
+                                      children: [
+                                        MyLibraryPostForm(
+                                          postId: postList[index].boardId!,
+                                          postTitle: postList[index].boardTitle,
+                                          postCreatedAt:
+                                              postList[index].boardCreatedAt,
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
                             ),
                           ],
                         ),

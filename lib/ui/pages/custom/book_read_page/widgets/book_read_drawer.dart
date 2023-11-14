@@ -8,9 +8,10 @@ import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/ui/pages/custom/book_detail_page/widgets/view_model/book_detail_view_model.dart';
 import 'package:flutter_blog/ui/pages/custom/book_read_page/widgets/view_model/book_read_view_model.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thick_line.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
 
-class BookReadDrawer extends StatefulWidget {
+class BookReadDrawer extends ConsumerStatefulWidget {
   BookReadDrawer(
       {super.key,
       required this.bookModel,
@@ -24,11 +25,12 @@ class BookReadDrawer extends StatefulWidget {
   late List<BookMarkDTO>? bookMarkList;
 
   @override
-  State<BookReadDrawer> createState() => _BookReadDrawerState();
+  _BookReadDrawerState createState() => _BookReadDrawerState();
 }
 
-class _BookReadDrawerState extends State<BookReadDrawer> {
+class _BookReadDrawerState extends ConsumerState<BookReadDrawer> {
   bool isExpanded = false;
+  final refreshKey = GlobalKey<RefreshIndicatorState>();
 
   void toggleDescription() {
     setState(() {
@@ -140,133 +142,149 @@ class _BookReadDrawerState extends State<BookReadDrawer> {
                                   content: Container(
                                     height: getScreenWidth(context),
                                     width: getScreenWidth(context) * 1.2,
-                                    child: CustomScrollView(
-                                      slivers: [
-                                        SliverList(
-                                          delegate: SliverChildBuilderDelegate(
-                                            (context, index) {
-                                              return InkWell(
-                                                onTap: () {
-                                                  // int clickedIndex = index;
-                                                  setState(() {
-                                                    widget.pageController
-                                                        .animateToPage(
-                                                            widget
-                                                                .bookMarkList![
-                                                                    index]
-                                                                .scroll!,
-                                                            duration: Duration(
-                                                                milliseconds:
-                                                                    500),
-                                                            curve: Curves.ease);
-                                                    Logger().d(
-                                                        "인덱스 : ${widget.bookMarkList![index].scroll!}");
-                                                    Navigator.of(context).pop();
-                                                    Navigator.of(context).pop();
-                                                  });
-                                                },
-                                                child: Padding(
-                                                  padding:
-                                                      EdgeInsets.all(gapSmall),
-                                                  child: Container(
-                                                    width: getScreenWidth(
-                                                            context) *
-                                                        0.6,
-                                                    height: getScreenWidth(
-                                                            context) *
-                                                        0.25,
-                                                    decoration: BoxDecoration(
-                                                      color: kBackWhite,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                          color: kFontLightGray,
-                                                          // 그림자의 색상
-                                                          offset: Offset(0, 1),
-                                                          // 그림자의 위치 (x, y)
-                                                          blurRadius: 5.0,
-                                                          // 그림자의 흐림 정도
-                                                          spreadRadius:
-                                                              1.0, // 그림자의 확산 정도
-                                                        )
-                                                      ],
-                                                    ),
-                                                    child: Row(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        IconButton(
-                                                          onPressed: () {
-                                                            // TODO 은혜 : 북마크 삭제 기능 넣기
-                                                          },
-                                                          icon: iconBookMark(
-                                                              mSize: 15,
-                                                              mColor:
-                                                                  kPrimaryColor),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .only(
-                                                                  top: 14),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Text(
-                                                                  "${widget.bookData[widget.bookMarkList![index].scroll!]}",
-                                                                  style: body2(
-                                                                      mFontWeight:
-                                                                          FontWeight
-                                                                              .normal),
-                                                                  overflow:
-                                                                      TextOverflow
-                                                                          .ellipsis,
-                                                                  maxLines: 3),
-                                                              const SizedBox(
-                                                                  height:
-                                                                      gapSmall),
-                                                              RichText(
-                                                                text: TextSpan(
-                                                                  children: [
-                                                                    TextSpan(
-                                                                        text:
-                                                                            "${widget.bookMarkList![index].scroll! + 1}p",
-                                                                        style: body2(
-                                                                            mFontWeight:
-                                                                                FontWeight.w500)),
-                                                                    TextSpan(
-                                                                        text:
-                                                                            "   |   ",
-                                                                        style: body2(
-                                                                            mFontWeight:
-                                                                                FontWeight.normal)),
-                                                                    TextSpan(
-                                                                        text:
-                                                                            "${widget.bookMarkList![index].bookMarkCreatedAt}",
-                                                                        style: body2(
-                                                                            mFontWeight:
-                                                                                FontWeight.normal))
-                                                                  ],
-                                                                ),
-                                                              )
-                                                            ],
+                                    child: RefreshIndicator(
+                                      key: refreshKey,
+                                      onRefresh: () async {
+                                        await ref
+                                            .read(bookReadProvider(
+                                                    widget.bookModel.bookId)
+                                                .notifier)
+                                            .notifyInit2(
+                                                widget.bookModel.bookId);
+                                      },
+                                      child: CustomScrollView(
+                                        slivers: [
+                                          SliverList(
+                                            delegate:
+                                                SliverChildBuilderDelegate(
+                                              (context, index) {
+                                                return InkWell(
+                                                  onTap: () {
+                                                    // int clickedIndex = index;
+                                                    setState(() {
+                                                      widget.pageController
+                                                          .animateToPage(
+                                                              widget
+                                                                  .bookMarkList![
+                                                                      index]
+                                                                  .scroll!,
+                                                              duration: Duration(
+                                                                  milliseconds:
+                                                                      500),
+                                                              curve:
+                                                                  Curves.ease);
+                                                      Logger().d(
+                                                          "인덱스 : ${widget.bookMarkList![index].scroll!}");
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    });
+                                                  },
+                                                  child: Padding(
+                                                    padding: EdgeInsets.all(
+                                                        gapSmall),
+                                                    child: Container(
+                                                      width: getScreenWidth(
+                                                              context) *
+                                                          0.6,
+                                                      height: getScreenWidth(
+                                                              context) *
+                                                          0.25,
+                                                      decoration: BoxDecoration(
+                                                        color: kBackWhite,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                kFontLightGray,
+                                                            // 그림자의 색상
+                                                            offset:
+                                                                Offset(0, 1),
+                                                            // 그림자의 위치 (x, y)
+                                                            blurRadius: 5.0,
+                                                            // 그림자의 흐림 정도
+                                                            spreadRadius:
+                                                                1.0, // 그림자의 확산 정도
+                                                          )
+                                                        ],
+                                                      ),
+                                                      child: Row(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          IconButton(
+                                                            onPressed: () {
+                                                              // TODO 은혜 : 북마크 삭제 기능 넣기
+                                                            },
+                                                            icon: iconBookMark(
+                                                                mSize: 15,
+                                                                mColor:
+                                                                    kPrimaryColor),
                                                           ),
-                                                        )
-                                                      ],
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    top: 14),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                Text(
+                                                                    "${widget.bookData[widget.bookMarkList![index].scroll!]}",
+                                                                    style: body2(
+                                                                        mFontWeight:
+                                                                            FontWeight
+                                                                                .normal),
+                                                                    overflow:
+                                                                        TextOverflow
+                                                                            .ellipsis,
+                                                                    maxLines:
+                                                                        3),
+                                                                const SizedBox(
+                                                                    height:
+                                                                        gapSmall),
+                                                                RichText(
+                                                                  text:
+                                                                      TextSpan(
+                                                                    children: [
+                                                                      TextSpan(
+                                                                          text:
+                                                                              "${widget.bookMarkList![index].scroll! + 1}p",
+                                                                          style:
+                                                                              body2(mFontWeight: FontWeight.w500)),
+                                                                      TextSpan(
+                                                                          text:
+                                                                              "   |   ",
+                                                                          style:
+                                                                              body2(mFontWeight: FontWeight.normal)),
+                                                                      TextSpan(
+                                                                          text:
+                                                                              "${widget.bookMarkList![index].bookMarkCreatedAt}",
+                                                                          style:
+                                                                              body2(mFontWeight: FontWeight.normal))
+                                                                    ],
+                                                                  ),
+                                                                )
+                                                              ],
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              );
-                                            },
-                                            childCount: 5,
+                                                );
+                                              },
+                                              childCount: 5,
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                   contentPadding: EdgeInsets.all(gapXlarge),

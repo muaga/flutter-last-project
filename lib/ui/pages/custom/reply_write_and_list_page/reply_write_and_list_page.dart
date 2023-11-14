@@ -24,7 +24,7 @@ class ReplyWriteAndListPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.read(bookReplyListProvider(bookId).notifier).notifyInit(bookId);
     BookReplyListModel? model = ref.watch(bookReplyListProvider(bookId));
-    int last = model!.bookReplyCount! - 1;
+    int last = model!.bookReplyCount!;
 
     if (model == null) {
       return CircularProgressIndicator();

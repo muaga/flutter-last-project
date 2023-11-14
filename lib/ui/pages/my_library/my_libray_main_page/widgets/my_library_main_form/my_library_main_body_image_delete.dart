@@ -17,7 +17,6 @@ class MyLibraryMainBodyImageDelete extends StatelessWidget {
         showDialog(
           context: context,
           builder: (BuildContext context) {
-            // TODO 은혜 : 대욱이 한테 물어보고 alert 변경하기
             return CustomDeleteAlertDialog(
                 title: "안녕", buttonText: "안녕", content: "안녕");
           },
