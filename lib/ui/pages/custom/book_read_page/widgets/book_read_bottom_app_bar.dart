@@ -56,7 +56,7 @@ class _BookReadBottomAppBarState extends State<BookReadBottomAppBar> {
             },
             min: 0.0, // 최소 값
             max: widget.totalPages.toDouble(), // 최대 값 (전체 페이지 수)
-            divisions: max(1, widget.totalPages - 1), // 분할 수 (1 이상의 값으로 설정
+            divisions: max(1, widget.totalPages), // 분할 수 (1 이상의 값으로 설정
           ),
           Padding(
             padding: EdgeInsets.only(bottom: gapMain),

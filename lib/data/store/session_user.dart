@@ -23,14 +23,15 @@ class SessionUser {
   Future<void> join(JoinReqDTO joinReqDTO) async {
     // 통신 코드
     ResponseDTO responseDTO = await UserRepository().fetchJoin(joinReqDTO);
+    Navigator.pushNamed(mContext!, Move.LoginPage);
 
     // 비즈니스 로직
-    if (responseDTO.code == 1) {
-      Navigator.pushNamed(mContext!, Move.LoginPage);
-    } else {
-      ScaffoldMessenger.of(mContext!)
-          .showSnackBar(SnackBar(content: Text(responseDTO.msg)));
-    }
+    // if (responseDTO.code == 1) {
+    //   Navigator.pushNamed(mContext!, Move.LoginPage);
+    // } else {
+    //   ScaffoldMessenger.of(mContext!)
+    //       .showSnackBar(SnackBar(content: Text(responseDTO.msg)));
+    // }
   }
 
   Future<void> login(LoginReqDTO loginReqDTO) async {
