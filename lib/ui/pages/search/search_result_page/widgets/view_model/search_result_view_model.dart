@@ -57,18 +57,27 @@ class BookKeywordDTO {
 class BoardKeywordDTO {
   int boardId;
   String bookPicUrl;
+  String boardTitle;
+  String userPicUrl;
   String content;
   String nickname;
+  String boardCreatedAt;
 
   BoardKeywordDTO(
       {required this.boardId,
+      required this.boardCreatedAt,
+      required this.userPicUrl,
+      required this.boardTitle,
       required this.bookPicUrl,
       required this.content,
       required this.nickname});
 
   BoardKeywordDTO.fromJson(Map<String, dynamic> json)
       : boardId = json["boardId"],
+        boardCreatedAt = json["boardCreatedAt"],
         bookPicUrl = json["bookPicUrl"],
+        userPicUrl = json["userPicUrl"],
+        boardTitle = json["boardTitle"],
         content = json["content"],
         nickname = json["nickname"];
 }

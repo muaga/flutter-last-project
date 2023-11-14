@@ -29,6 +29,7 @@ class _BookReadBodyState extends State<BookReadBody> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 25),
@@ -51,6 +52,7 @@ class _BookReadBodyState extends State<BookReadBody> {
                   height: getScreenHeight(context) * 0.88,
                   width: getScreenWidth(context),
                   child: Text("${widget.bookData[index]}",
+                      textAlign: TextAlign.start,
                       style: TextStyle(
                           fontFamily: 'D2Coding', fontSize: 21, height: 1.4)),
                 );

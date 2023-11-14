@@ -30,7 +30,7 @@ class MySettingSubSciptionReFundForm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("월 정기 구독", style: subTitle2(mFontWeight: FontWeight.w600)),
+            Text("월 구독", style: subTitle2(mFontWeight: FontWeight.w600)),
             const SizedBox(height: gapSmall),
             Text("취소 완료일 : ${reFundDate}", style: body1(mColor: kFontGray)),
             const SizedBox(height: gapMain),

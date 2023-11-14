@@ -112,7 +112,7 @@ class SearchResultPostListForm extends ConsumerWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("// TOOO 은혜 : 타이틀 들어갈 자리",
+                                  Text("${boardList![index].boardTitle}",
                                       style: subTitle3(),
                                       overflow: TextOverflow.ellipsis),
                                   SizedBox(height: gapSmall),
@@ -128,15 +128,15 @@ class SearchResultPostListForm extends ConsumerWidget {
                             ListTile(
                               contentPadding: EdgeInsets.only(left: 0),
                               leading: CircleAvatar(
-                                backgroundImage: CachedNetworkImageProvider(
-                                  // TODO 은혜 : 사진, 날짜 없음
-                                  dio.options.baseUrl + "/images/user1.png",
-                                ),
+                                backgroundImage: CachedNetworkImageProvider(dio
+                                        .options.baseUrl +
+                                    "/images/${boardList![index].userPicUrl}"),
                               ),
                               title: Text("${boardList?[index].nickname}의 서재"),
                               titleTextStyle:
                                   subTitle3(mFontWeight: FontWeight.w500),
-                              subtitle: Text("TODO 은혜 : 포스트 작성 날짜"),
+                              subtitle:
+                                  Text("${boardList![index].boardCreatedAt}"),
                             ),
                           ],
                         ),
@@ -185,7 +185,7 @@ class SearchResultPostListForm extends ConsumerWidget {
                         child: Padding(
                           padding: const EdgeInsets.all(gapMain),
                           child: Text(
-                            "제목",
+                            "${boardList![index].boardTitle}",
                             style: subTitle2(),
                           ),
                         )),
@@ -229,14 +229,15 @@ class SearchResultPostListForm extends ConsumerWidget {
                               contentPadding: EdgeInsets.only(left: 0),
                               leading: CircleAvatar(
                                 backgroundImage: CachedNetworkImageProvider(
-                                  // TODO 은혜 : 게시글 유저 이미지 넣기
-                                  dio.options.baseUrl + "/images/user1.png",
+                                  dio.options.baseUrl +
+                                      "/images/${boardList![index].userPicUrl}",
                                 ),
                               ),
                               title: Text("${boardList?[index].nickname}의 서재"),
                               titleTextStyle:
                                   subTitle3(mFontWeight: FontWeight.w500),
-                              subtitle: Text("TODO 은혜 : 포스트 작성 날짜"),
+                              subtitle:
+                                  Text("${boardList![index].boardCreatedAt}"),
                             ),
                           ],
                         ),

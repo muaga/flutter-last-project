@@ -27,6 +27,11 @@ class MySettingProfileBody extends ConsumerWidget {
     MySettingProfileModel? model = ref.watch(mySettingProfileProvider);
     Logger().d("model은 $model");
     Logger().d("nickname : ${model?.nickname}");
+
+    if (model == null) {
+      return CircularProgressIndicator();
+    }
+
     return Padding(
       padding: const EdgeInsets.all(gapMain),
       child: Form(

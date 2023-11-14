@@ -89,6 +89,10 @@ class SessionUser {
     await secureStorage.delete(key: "jwt");
     Logger().d("세션 종료 및 디바이스 JWT 삭제");
   }
+
+  Future<void> paymentStateUpdate() async {
+    this.user?.paymentStatus = true;
+  }
 }
 
 /// 창고 관리자

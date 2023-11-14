@@ -7,7 +7,7 @@ class SearchMainSuggestKeyword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> suggestKeyword = ["무라카미", "힐링", "미야자키 하야오", "칠마선문", "최재호"];
+    List<String> suggestKeyword = ["무라카미", "힐링", "트렌드", "칠마선문", "최재호"];
     return SliverToBoxAdapter(
       child: Padding(
         padding: EdgeInsets.all(16),

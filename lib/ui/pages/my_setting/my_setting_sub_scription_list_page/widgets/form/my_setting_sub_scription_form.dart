@@ -36,12 +36,12 @@ class MySettingSubSciptionForm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("월 정기 구독", style: subTitle2(mFontWeight: FontWeight.w600)),
+            Text("월 구독", style: subTitle2(mFontWeight: FontWeight.w600)),
             const SizedBox(height: gapSmall),
             Text("${startDuration} ~ ${endDuration}",
                 style: body1(mColor: kFontGray)),
             Text("결제일 : ${paymentDate}", style: body1(mColor: kFontGray)),
-            Text("정기구독 이용권 : ${subScriptionNumber ?? ""}",
+            Text("구독 이용권 : ${subScriptionNumber ?? ""}",
                 style: body1(mColor: kFontGray)),
             const SizedBox(height: gapMain),
             CustomThinLine(),
