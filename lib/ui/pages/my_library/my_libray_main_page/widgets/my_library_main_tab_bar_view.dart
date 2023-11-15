@@ -10,6 +10,7 @@ import 'package:flutter_blog/ui/pages/my_library/my_libray_main_page/widgets/my_
 import 'package:flutter_blog/ui/widgets/button/custom_category_button.dart';
 import 'package:flutter_blog/ui/widgets/scroll_view/custom_book_grid_view.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logger/logger.dart';
 
 class MyLibraryMainTabBarView extends StatefulWidget {
   final User user;
@@ -24,7 +25,8 @@ class MyLibraryMainTabBarView extends StatefulWidget {
 class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
   int _pageIndex = 0;
 
-  final refreshKey = GlobalKey<RefreshIndicatorState>();
+  final refreshKey1 = GlobalKey<RefreshIndicatorState>();
+  final refreshKey2 = GlobalKey<RefreshIndicatorState>();
 
   void changePage(int index) {
     setState(() {
@@ -159,8 +161,9 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
                                 await ref
                                     .watch(myLibraryProvider.notifier)
                                     .notifyInit();
+                                Logger().d("리플래시");
                               },
-                              key: refreshKey,
+                              key: refreshKey1,
                               child: ListView.builder(
                                 itemCount: model!.postList.replyList
                                         .bookReplyList.length ??
@@ -195,7 +198,7 @@ class _MyLibraryMainTabBarViewState extends State<MyLibraryMainTabBarView> {
                                     .watch(myLibraryProvider.notifier)
                                     .notifyInit();
                               },
-                              key: refreshKey,
+                              key: refreshKey2,
                               child: ListView.builder(
                                 itemCount: postList.length ?? 0,
                                 itemBuilder: (BuildContext context, int index) {
