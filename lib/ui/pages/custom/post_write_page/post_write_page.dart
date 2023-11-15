@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blog/_core/constants/color.dart';
 import 'package:flutter_blog/_core/constants/font.dart';
 import 'package:flutter_blog/_core/constants/icon.dart';
+import 'package:flutter_blog/_core/constants/move.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/_core/utils/validator_util.dart';
 import 'package:flutter_blog/data/dto/request_dto/post_request_dto.dart';
@@ -72,7 +73,8 @@ class _PostWritePageState extends ConsumerState<PostWritePage> {
           actions: [
             TextButton(
               onPressed: () async {
-                Navigator.pop(context);
+                Navigator.popAndPushNamed(
+                    context, Move.MillieIndexStackNavigationBar);
 
                 if (widget.formKey.currentState!.validate()) {
                   PostSaveReqDTO postSaveReqDTO = PostSaveReqDTO(
