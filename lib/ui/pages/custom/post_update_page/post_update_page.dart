@@ -6,9 +6,8 @@ import 'package:flutter_blog/_core/constants/move.dart';
 import 'package:flutter_blog/_core/constants/size.dart';
 import 'package:flutter_blog/_core/utils/validator_util.dart';
 import 'package:flutter_blog/data/dto/request_dto/post_request_dto.dart';
-import 'package:flutter_blog/data/model/board.dart';
-import 'package:flutter_blog/data/model/book.dart';
 import 'package:flutter_blog/data/store/session_user.dart';
+import 'package:flutter_blog/ui/pages/custom/post_detail_page/widgets/view_model/post_detail_page_view_model.dart';
 import 'package:flutter_blog/ui/pages/custom/post_update_page/widgets/post_update_view_model.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_book_recommend_page/post_write_book_recommend_page.dart';
 import 'package:flutter_blog/ui/pages/custom/post_write_book_recommend_page/post_write_recommend-book-card.dart';
@@ -17,16 +16,15 @@ import 'package:flutter_blog/ui/widgets/custom_text_area.dart';
 import 'package:flutter_blog/ui/widgets/custom_title_insert.dart';
 import 'package:flutter_blog/ui/widgets/line/custom_thin_line.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:logger/logger.dart';
 
 class PostUpdatePage extends ConsumerStatefulWidget {
   final formKey = GlobalKey<FormState>();
   final title = TextEditingController();
   final content = TextEditingController();
-  final Book? selectedBook;
-  final Board? board;
+  // final Book? selectedBook;
+  final PostDetailModel? board;
 
-  PostUpdatePage({this.selectedBook, this.board, Key? key}) : super(key: key);
+  PostUpdatePage({this.board, Key? key});
 
   @override
   ConsumerState<PostUpdatePage> createState() => _PostUpdatePageState();
@@ -37,21 +35,17 @@ class _PostUpdatePageState extends ConsumerState<PostUpdatePage> {
   @override
   void initState() {
     super.initState();
-    if (widget.board?.title != null) {
-      widget.title.text = widget.board!.title;
+    if (widget.board?.boardTitle != null) {
+      widget.title.text = widget.board!.boardTitle;
     }
-    if (widget.board?.content != null) {
-      widget.content.text = widget.board!.content;
+    if (widget.board?.boardContent != null) {
+      widget.content.text = widget.board!.boardContent;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     SessionUser sessionUser = ref.read(sessionStore);
-
-    Logger().d("초기화 완료");
-    Logger().d("값 : ${widget.title.text}");
-
     return Form(
       key: widget.formKey,
       child: Scaffold(
@@ -77,7 +71,7 @@ class _PostUpdatePageState extends ConsumerState<PostUpdatePage> {
                       boardTitle: widget.title.text,
                       content: widget.content.text,
                       userId: sessionUser.user!.id,
-                      bookId: widget.selectedBook?.id ?? null);
+                      bookId: widget.board?.bookId ?? null);
                   ref
                       .read(postUpdateProvider.notifier)
                       .updatePost(postSaveReqDTO);
@@ -105,7 +99,7 @@ class _PostUpdatePageState extends ConsumerState<PostUpdatePage> {
                   hint: "내용을 입력하세요",
                   funValidator: validateContent(),
                 ),
-                if (widget.selectedBook != null)
+                if (widget.board?.bookId != null)
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -116,12 +110,12 @@ class _PostUpdatePageState extends ConsumerState<PostUpdatePage> {
                               style: subTitle2(mColor: kFontGray))),
                       Container(
                         width: getScreenWidth(context) / 3,
-                        child: widget.selectedBook != null
+                        child: widget.board?.bookId != null
                             ? PostWriteRecommendBookCard(
-                                bookId: widget.selectedBook!.id,
-                                bookPicUrl: widget.selectedBook!.picUrl,
-                                bookWriter: widget.selectedBook!.writer,
-                                bookTitle: widget.selectedBook!.title,
+                                bookId: widget.board!.bookId!,
+                                bookPicUrl: widget.board!.bookPicUrl!,
+                                bookWriter: widget.board!.bookWriter!,
+                                bookTitle: widget.board!.bookTitle!,
                               )
                             : Text(""),
                       )

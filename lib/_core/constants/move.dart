@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_blog/data/model/board.dart';
 import 'package:flutter_blog/ui/millie_IndexStack_navigation_bar.dart';
 import 'package:flutter_blog/ui/pages/auth/join_page/join_page.dart';
 import 'package:flutter_blog/ui/pages/auth/login_or_join_page/login_or_join_page.dart';
@@ -122,7 +121,7 @@ Map<String, Widget Function(BuildContext)> getRouters() {
     },
     Move.PostWritePage: (context) => PostWritePage(),
     Move.PostListPage: (context) => PostListPage(),
-    Move.PostUpdatePage: (context) => PostUpdatePage(board: board),
+    Move.PostUpdatePage: (context) => PostUpdatePage(),
 
     /// today-now
     // 한달 이내에 출간한 책 목록 페이지

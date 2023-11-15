@@ -37,24 +37,24 @@ class Board {
         createdAt = json["createdAt"];
 }
 
-Board board = Board(
-    id: 1,
-    title: "벤자민 하디의 퓨처셀프",
-    content:
-        "그동안 주춤했던 뇌를 깨우고 싶거나, 나를 성장시키고 싶으신 분들, 또는 자기 계발의 실질적 행동 지침이 필요하신 분들!! 이 책을 추천드립니다",
-    createdAt: "2023-10-10",
-    picUrl: "book7.png",
-    userId: 1,
-    bookId: 2);
-
-List<Board> boards = [
-  Board(
-      id: 1,
-      title: "벤자민 하디의 퓨처셀프",
-      content:
-          "그동안 주춤했던 뇌를 깨우고 싶거나, 나를 성장시키고 싶으신 분들, 또는 자기 계발의 실질적 행동 지침이 필요하신 분들!! 이 책을 추천드립니다",
-      createdAt: "2023-10-10",
-      picUrl: "book7.png",
-      userId: 1,
-      bookId: 2),
-];
+// Board board = Board(
+//     id: 1,
+//     title: "벤자민 하디의 퓨처셀프",
+//     content:
+//         "그동안 주춤했던 뇌를 깨우고 싶거나, 나를 성장시키고 싶으신 분들, 또는 자기 계발의 실질적 행동 지침이 필요하신 분들!! 이 책을 추천드립니다",
+//     createdAt: "2023-10-10",
+//     picUrl: "book7.png",
+//     userId: 1,
+//     bookId: 2);
+//
+// List<Board> boards = [
+//   Board(
+//       id: 1,
+//       title: "벤자민 하디의 퓨처셀프",
+//       content:
+//           "그동안 주춤했던 뇌를 깨우고 싶거나, 나를 성장시키고 싶으신 분들, 또는 자기 계발의 실질적 행동 지침이 필요하신 분들!! 이 책을 추천드립니다",
+//       createdAt: "2023-10-10",
+//       picUrl: "book7.png",
+//       userId: 1,
+//       bookId: 2),
+// ];
