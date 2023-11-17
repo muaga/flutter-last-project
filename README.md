@@ -8,7 +8,7 @@
 - 김언약
 - 진성훈
 
-## 🎥 시연영상 [유튜브 링크] ()
+## 🎥 시연영상 [유튜브 링크] (추가할 예정)
 ## 🔧 기술스택
 
 ### Backend
@@ -94,6 +94,48 @@
 - 댓글 작성 및 포스트 작성
 
 ## 🔗 엔티티 연관관계
+![엔티티](https://github.com/muaga/flutter-last-project/assets/135561511/cf60723f-e415-4f65-8137-37b2f29aa271)
+
+## 사용자 시나리오
+- 회원가입
+  ![image](https://github.com/muaga/flutter-last-project/assets/135561511/60361739-5832-4cfa-b39b-701d927d3147)
+
+- 로그인
+  ![image](https://github.com/muaga/flutter-last-project/assets/135561511/b62a00fb-b017-478c-9c20-6e061ca3f6ae)
+
+- 로그아웃
+  ![image](https://github.com/muaga/flutter-last-project/assets/135561511/b36a6f4c-0a51-4c47-a2eb-6844df83916d)
+
+- 메인 - NOW
+  ![image](https://github.com/muaga/flutter-last-project/assets/135561511/ec7da6e2-be06-41dd-b9a9-3e60b97a5cb7)
+
+- 메인 - 스토리
+  ![image](https://github.com/muaga/flutter-last-project/assets/135561511/11b2be63-6328-433c-ac0e-263964bfa0e8)
+
+- 피드
+  ![image](https://github.com/muaga/flutter-last-project/assets/135561511/634ba7d4-deeb-42c9-a40c-eea1a55ca682)
+
+- 검색
+  ![image](https://github.com/muaga/flutter-last-project/assets/135561511/0c14ed8b-956d-443c-aaa3-9c7a02015cac)
+
+- 내 서재
+  ![image](https://github.com/muaga/flutter-last-project/assets/135561511/6944b773-7fa3-488a-a648-a7dbb1c7cf0a)
+
+- 포스트 작성 및 상세보기
+  ![image](https://github.com/muaga/flutter-last-project/assets/135561511/0f7e10da-5111-4b09-b29e-6c23641afb94)
+
+- 댓글 작성
+  ![image](https://github.com/muaga/flutter-last-project/assets/135561511/54d33d70-8cd0-4e73-a834-0f0cbdceec58)
+
+- 도서 상세보기
+  ![image](https://github.com/muaga/flutter-last-project/assets/135561511/10a97bf9-98c0-4249-af6e-15873fe61298)
+
+- 도서 화면
+  ![image](https://github.com/muaga/flutter-last-project/assets/135561511/6648cde5-c0af-4f6a-9ea1-c717522b830c)
+
+- 관리
+  ![image](https://github.com/muaga/flutter-last-project/assets/135561511/e113d41c-ab0a-497f-9356-ac1926bd5f95)
+  ![image](https://github.com/muaga/flutter-last-project/assets/135561511/a5f55a24-70e6-42ec-8d53-ba3347e8ed47)
 
 ## 📝 노션
 https://chiseled-acoustic-3be.notion.site/2-82dc0df9935b4000afae6183f08a9b6d?pvs=4    
@@ -128,4 +170,3 @@ https://github.com/saki8661/flutter_millie
 - Riverpod의 강력한 기능을 배우고 적용할 수 있었지만 활용하는 부분에 있어서 스스로 많이 부족했다고 느꼈습니다 로직이 조금만 복잡해져도 어디로 접근해야할지 많이 어려웠는데 내가 바꾸고 싶은 상태가 어디에 있는지 행위가 무엇인지 명확하게 알아야 함을 느꼈습니다
 - 통신을 연결함에 있어서 API문서 참고하는 부분이 중요하다고 느꼈고 이 과정에서 백엔드와의 소통의 중요성을 깨달았습니다
 - 앱 그림을 그리는데 컨벤션과 명칭의 중요성을 느꼈습니다 내가 만들어 놓고도 어디에 있는지 찾지 못한 경우가 있었습니다 공통 컴포넌트를 만들었다고 끝나는 것이 아니라 팀원들과 빠르게 공유한다면 협업의 능률을 올릴 수 있을것 같습니다
-- 
