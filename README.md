@@ -1,4 +1,4 @@
-![밀리의 서재](https://github.com/muaga/flutter-last-project/assets/135561511/185d4cf1-4e8a-4b40-aed6-064c08574f57)
+![KakaoTalk_20231124_173356384](https://github.com/muaga/flutter-last-project/assets/135561587/494a577c-5f3c-4a00-a737-0e0a714cc397)
 
 # 밀리의 서재 클론 코딩
 
@@ -8,7 +8,9 @@
 - 김언약
 - 진성훈
 
-## 🎥 시연영상 [유튜브 링크] (추가할 예정)
+## 🎥 시연영상 [유튜브 링크]
+https://youtu.be/5HnM500tUzE
+
 ## 🔧 기술스택
 
 ### Backend
